@@ -71,19 +71,4 @@ public class MCountryGroup extends X_C_CountryGroup {
     super(ctx, rs, trxName);
   } //	MCountryGroup
 
-  public static boolean countryGroupContains(int c_CountryGroup_ID, int c_Country_ID) {
-
-    if (c_CountryGroup_ID == 0 || c_Country_ID == 0) return false;
-
-    final String sql =
-        ""
-            + "SELECT Count(*) "
-            + "FROM   c_countrygroupcountry "
-            + "WHERE  c_country_id = ? "
-            + "       AND c_countrygroup_id = ? "
-            + "       AND isactive = 'Y' ";
-    int cnt = DB.getSQLValue(null, sql, c_Country_ID, c_CountryGroup_ID);
-
-    return cnt > 0;
-  }
 } //	MCountryGroup

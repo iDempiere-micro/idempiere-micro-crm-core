@@ -2,6 +2,8 @@ package org.compiere.crm;
 
 import java.sql.ResultSet;
 import java.util.Properties;
+
+import kotliquery.Row;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.BasePOName;
@@ -33,6 +35,11 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   public X_C_BPartner_Location(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   }
+
+  public X_C_BPartner_Location(Properties ctx, Row row) {
+    super(ctx, row);
+  } // MBPartner_Location
+
 
   /**
    * AccessLevel

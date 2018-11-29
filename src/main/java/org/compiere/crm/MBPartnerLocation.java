@@ -3,6 +3,8 @@ package org.compiere.crm;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
+
+import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.model.I_C_Location;
@@ -93,6 +95,10 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    */
   public MBPartnerLocation(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  } // MBPartner_Location
+
+  public MBPartnerLocation(Properties ctx, Row row) {
+    super(ctx, row);
   } // MBPartner_Location
 
   /** Cached Location */

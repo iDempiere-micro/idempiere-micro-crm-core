@@ -17,6 +17,8 @@ import org.idempiere.common.exceptions.DBException;
 import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Language;
 
+import static software.hsharp.core.util.DBKt.getSQLValue;
+
 /**
  * Language Model
  *
@@ -213,7 +215,7 @@ public class MLanguage extends X_AD_Language {
     if (AD_Language_ID == 0) {
       String sql =
           "SELECT NVL(MAX(AD_Language_ID), 999999) FROM AD_Language WHERE AD_Language_ID > 1000";
-      AD_Language_ID = DB.getSQLValue(get_TrxName(), sql);
+      AD_Language_ID = getSQLValue(get_TrxName(), sql);
       setADLanguage_ID(AD_Language_ID + 1);
     }
   } //	setADLanguage_ID
@@ -269,125 +271,4 @@ public class MLanguage extends X_AD_Language {
     return true;
   } //	afterSave
 
-  /**
-   * ************************************************************************ Maintain Translation
-   *
-   * @param add if true add missing records - otherwise delete
-   * @return number of records deleted/inserted
-   */
-  public int maintain(boolean add) {
-    String sql = "SELECT TableName FROM AD_Table WHERE TableName LIKE '%_Trl' ORDER BY TableName";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    int retNo = 0;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      rs = pstmt.executeQuery();
-      while (rs.next()) {
-        if (add) retNo += addTable(rs.getString(1));
-        else retNo += deleteTable(rs.getString(1));
-      }
-    } catch (SQLException e) {
-      throw new DBException(e, sql);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    return retNo;
-  } //	maintain
-
-  /**
-   * Delete Translation
-   *
-   * @param tableName table name
-   * @return number of records deleted
-   */
-  private int deleteTable(String tableName) {
-    StringBuilder sql =
-        new StringBuilder("DELETE  FROM  ").append(tableName).append(" WHERE AD_Language=?");
-    int no = DB.executeUpdateEx(sql.toString(), new Object[] {getADLanguage()}, get_TrxName());
-    if (log.isLoggable(Level.FINE)) log.fine(tableName + " #" + no);
-    return no;
-  } //	deleteTable
-
-  /**
-   * Add Translation to table
-   *
-   * @param tableName table name
-   * @return number of records inserted
-   */
-  private int addTable(String tableName) {
-    String baseTable = tableName.substring(0, tableName.length() - 4);
-    String sql =
-        "SELECT c.ColumnName "
-            + "FROM AD_Column c"
-            + " INNER JOIN AD_Table t ON (c.AD_Table_ID=t.AD_Table_ID) "
-            + "WHERE t.TableName=?"
-            + "  AND c.IsTranslated='Y' AND c.IsActive='Y' "
-            + "ORDER BY c.ColumnName";
-    ArrayList<String> columns = new ArrayList<String>(5);
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setString(1, baseTable);
-      rs = pstmt.executeQuery();
-      while (rs.next()) {
-        columns.add(rs.getString(1));
-      }
-    } catch (SQLException e) {
-      throw new DBException(e, sql);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    //	Columns
-    if (columns.size() == 0) {
-      log.log(Level.SEVERE, "No Columns found for " + baseTable);
-      return 0;
-    }
-    StringBuilder cols = new StringBuilder();
-    for (int i = 0; i < columns.size(); i++) cols.append(",").append(columns.get(i));
-
-    //	Insert Statement
-    int AD_User_ID = Env.getAD_User_ID(getCtx());
-    StringBuilder keyColumn = new StringBuilder(baseTable).append("_ID");
-    StringBuilder insert =
-        new StringBuilder("INSERT INTO ")
-            .append(tableName)
-            .append("(AD_Language,IsTranslated, AD_Client_ID,AD_Org_ID, ")
-            .append("Createdby,UpdatedBy,Created,Updated, ")
-            .append(keyColumn)
-            .append(cols)
-            .append(") ")
-            .append("SELECT '")
-            .append(getADLanguage())
-            .append("','N', AD_Client_ID,AD_Org_ID, ")
-            .append(AD_User_ID)
-            .append(",")
-            .append(AD_User_ID)
-            .append(", SysDate, SysDate, ")
-            .append(keyColumn)
-            .append(cols)
-            .append(" FROM ")
-            .append(baseTable)
-            .append(" WHERE ")
-            .append(keyColumn)
-            .append(" NOT IN (SELECT ")
-            .append(keyColumn)
-            .append(" FROM ")
-            .append(tableName)
-            .append(" WHERE AD_Language='")
-            .append(getADLanguage())
-            .append("')");
-    //	+ " WHERE (" + keyColumn + ",'" + getADLanguage()+ "') NOT IN (SELECT "
-    //		+ keyColumn + ",AD_Language FROM " + tableName + ")";
-    int no = DB.executeUpdateEx(insert.toString(), null, get_TrxName());
-    //
-    StringBuilder msglog = new StringBuilder().append(tableName).append(" #").append(no);
-    if (log.isLoggable(Level.FINE)) log.fine(msglog.toString());
-    return no;
-  } //	addTable
 } //	MLanguage

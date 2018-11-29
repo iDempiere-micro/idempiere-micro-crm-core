@@ -1,13 +1,22 @@
 package org.compiere.crm
 
 import kotliquery.queryOf
+import org.compiere.model.I_C_BPartner_Location
 import software.hsharp.core.util.DB
+import java.sql.PreparedStatement
 import java.sql.ResultSet
+import java.util.ArrayList
 import java.util.Properties
+import java.util.logging.Level
 
 open class MBaseBPartner : X_C_BPartner {
     constructor(ctx: Properties, rs: ResultSet, trxName: String) : super(ctx, rs, trxName)
     constructor(ctx: Properties, id: Int, trxName: String) : super(ctx, id, trxName)
+
+    /** Users  */
+    private val m_contacts: MutableList<MUser> = mutableListOf()
+    /** Addressed  */
+    private val m_locations: MutableList<I_C_BPartner_Location> = mutableListOf()
 
     /**
      * Load Default BPartner
@@ -38,9 +47,6 @@ open class MBaseBPartner : X_C_BPartner {
         return success
     } // 	getTemplate
 
-    /** Users  */
-    private val m_contacts: MutableList<MUser> = mutableListOf()
-
     /**
      * Get All Contacts
      *
@@ -59,4 +65,24 @@ open class MBaseBPartner : X_C_BPartner {
         }
         return m_contacts.toTypedArray()
     } // 	getContacts
+
+    /**
+     * Get All Locations (only active)
+     *
+     * @param reload if true locations will be requeried
+     * @return locations
+     */
+    fun getLocations(reload: Boolean): Array<I_C_BPartner_Location> {
+        if (reload || m_locations.size == 0) {
+
+            val sql =
+                "SELECT * FROM C_BPartner_Location WHERE C_BPartner_ID=? AND IsActive='Y'" + " ORDER BY C_BPartner_Location_ID"
+            val loadQuery = queryOf(sql, c_BPartner_ID).map { row -> MBPartnerLocation(ctx, row) }.asList
+            val locations = DB.current.run(loadQuery)
+
+            m_locations.clear()
+            m_locations.addAll(locations)
+        }
+        return m_locations.toTypedArray()
+    } //	getLocations
 }

@@ -233,8 +233,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     setC_BP_Group_ID(impBP.getC_BP_Group_ID());
   } //	MBPartner
 
-  /** Addressed */
-  private I_C_BPartner_Location[] m_locations = null;
   /** Prim Address */
   private Integer m_primaryC_BPartner_Location_ID = null;
   /** Prim User */
@@ -248,40 +246,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   public I_C_BPartner_Location[] getLocations() {
     return getLocations(false);
   }
-
-  /**
-   * Get All Locations (only active)
-   *
-   * @param reload if true locations will be requeried
-   * @return locations
-   */
-  public I_C_BPartner_Location[] getLocations(boolean reload) {
-    if (reload || m_locations == null || m_locations.length == 0) ;
-    else return m_locations;
-    //
-    ArrayList<MBPartnerLocation> list = new ArrayList<MBPartnerLocation>();
-    final String sql =
-        "SELECT * FROM C_BPartner_Location WHERE C_BPartner_ID=? AND IsActive='Y'"
-            + " ORDER BY C_BPartner_Location_ID";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, get_TrxName());
-      pstmt.setInt(1, getC_BPartner_ID());
-      rs = pstmt.executeQuery();
-      while (rs.next()) list.add(new MBPartnerLocation(getCtx(), rs, get_TrxName()));
-    } catch (Exception e) {
-      log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-
-    m_locations = new I_C_BPartner_Location[list.size()];
-    list.toArray(m_locations);
-    return m_locations;
-  } //	getLocations
 
   /**
    * Get explicit or first bill Location
@@ -410,74 +374,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   public void setPrimaryAD_User_ID(int AD_User_ID) {
     m_primaryAD_User_ID = new Integer(AD_User_ID);
   } //	setPrimaryAD_User_ID
-
-  /** Calculate Total Open Balance and SO_CreditUsed. (includes drafted invoices) */
-  public void setTotalOpenBalance() {
-    BigDecimal SO_CreditUsed = null;
-    BigDecimal TotalOpenBalance = null;
-    // AZ Goodwill -> BF2041226 : only count completed/closed docs.
-    String sql =
-        "SELECT "
-            //	SO Credit Used
-            + "COALESCE((SELECT SUM(currencyBase(invoiceOpen(i.C_Invoice_ID,i.C_InvoicePaySchedule_ID),i.C_Currency_ID,i.DateInvoiced, i.AD_Client_ID,i.AD_Org_ID)) FROM C_Invoice_v i "
-            + "WHERE i.C_BPartner_ID=bp.C_BPartner_ID AND i.IsSOTrx='Y' AND i.IsPaid='N' AND i.DocStatus IN ('CO','CL')),0), "
-            //	Balance (incl. unallocated payments)
-            + "COALESCE((SELECT SUM(currencyBase(invoiceOpen(i.C_Invoice_ID,i.C_InvoicePaySchedule_ID),i.C_Currency_ID,i.DateInvoiced, i.AD_Client_ID,i.AD_Org_ID)*i.MultiplierAP) FROM C_Invoice_v i "
-            + "WHERE i.C_BPartner_ID=bp.C_BPartner_ID AND i.IsPaid='N' AND i.DocStatus IN ('CO','CL')),0) - "
-            + "COALESCE((SELECT SUM(currencyBase(Paymentavailable(p.C_Payment_ID),p.C_Currency_ID,p.DateTrx,p.AD_Client_ID,p.AD_Org_ID)) FROM C_Payment_v p "
-            + "WHERE p.C_BPartner_ID=bp.C_BPartner_ID AND p.IsAllocated='N'"
-            + " AND p.C_Charge_ID IS NULL AND p.DocStatus IN ('CO','CL')),0) "
-            + "FROM C_BPartner bp "
-            + "WHERE C_BPartner_ID=?";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, get_TrxName());
-      pstmt.setInt(1, getC_BPartner_ID());
-      rs = pstmt.executeQuery();
-      if (rs.next()) {
-        SO_CreditUsed = rs.getBigDecimal(1);
-        TotalOpenBalance = rs.getBigDecimal(2);
-      }
-    } catch (Exception e) {
-      log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    //
-    if (SO_CreditUsed != null) super.setSO_CreditUsed(SO_CreditUsed);
-    if (TotalOpenBalance != null) super.setTotalOpenBalance(TotalOpenBalance);
-    setSOCreditStatus();
-  } //	setTotalOpenBalance
-
-  /** Set Actual Life Time Value from DB */
-  public void setActualLifeTimeValue() {
-    BigDecimal ActualLifeTimeValue = null;
-    // AZ Goodwill -> BF2041226 : only count completed/closed docs.
-    String sql =
-        "SELECT "
-            + "COALESCE ((SELECT SUM(currencyBase(i.GrandTotal,i.C_Currency_ID,i.DateInvoiced, i.AD_Client_ID,i.AD_Org_ID)) FROM C_Invoice_v i "
-            + "WHERE i.C_BPartner_ID=bp.C_BPartner_ID AND i.IsSOTrx='Y' AND i.DocStatus IN ('CO','CL')),0) "
-            + "FROM C_BPartner bp "
-            + "WHERE C_BPartner_ID=?";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, get_TrxName());
-      pstmt.setInt(1, getC_BPartner_ID());
-      rs = pstmt.executeQuery();
-      if (rs.next()) ActualLifeTimeValue = rs.getBigDecimal(1);
-    } catch (Exception e) {
-      log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    if (ActualLifeTimeValue != null) super.setActualLifeTimeValue(ActualLifeTimeValue);
-  } //	setActualLifeTimeValue
 
   /** Set Credit Status */
   public void setSOCreditStatus() {
