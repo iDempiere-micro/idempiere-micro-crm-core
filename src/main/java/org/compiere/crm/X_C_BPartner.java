@@ -20,7 +20,6 @@ import org.compiere.orm.BasePONameValue;
 import org.compiere.orm.MTable;
 import org.idempiere.common.util.Env;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for C_BPartner
@@ -57,12 +56,6 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
    */
   protected int getAccessLevel() {
     return I_C_BPartner.accessLevel.intValue();
-  }
-
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, I_C_BPartner.Table_ID, get_TrxName());
-    return poi;
   }
 
   public String toString() {
@@ -1561,5 +1554,10 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
    */
   public String getURL() {
     return (String) get_Value(I_C_BPartner.COLUMNNAME_URL);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_BPartner.Table_ID;
   }
 }

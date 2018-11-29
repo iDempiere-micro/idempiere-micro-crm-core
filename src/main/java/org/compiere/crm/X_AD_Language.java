@@ -38,15 +38,8 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_AD_Language[").append(getId()).append("]");
-    return sb.toString();
+    return "X_AD_Language[" + getId() + "]";
   }
 
   /**
@@ -186,12 +179,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    * @return The system information is maintained in this language
    */
   public boolean isBaseLanguage() {
-    Object oo = get_Value(COLUMNNAME_IsBaseLanguage);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsBaseLanguage));
   }
 
   /**
@@ -209,12 +197,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    * @return The number notation has a decimal point (no decimal comma)
    */
   public boolean isDecimalPoint() {
-    Object oo = get_Value(COLUMNNAME_IsDecimalPoint);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsDecimalPoint));
   }
 
   /**
@@ -232,12 +215,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    * @return Login Locale
    */
   public boolean isLoginLocale() {
-    Object oo = get_Value(COLUMNNAME_IsLoginLocale);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsLoginLocale));
   }
 
   /**
@@ -255,12 +233,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    * @return The screens, etc. are maintained in this Language
    */
   public boolean isSystemLanguage() {
-    Object oo = get_Value(COLUMNNAME_IsSystemLanguage);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsSystemLanguage));
   }
 
   /**
@@ -316,12 +289,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    * @return Process Now
    */
   public boolean isProcessing() {
-    Object oo = get_Value(COLUMNNAME_Processing);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_Processing));
   }
 
   /**
@@ -340,5 +308,10 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    */
   public String getTimePattern() {
     return (String) get_Value(COLUMNNAME_TimePattern);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_AD_Language.Table_ID;
   }
 }

@@ -26,7 +26,6 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   /** Standard Constructor */
   public X_I_BPartner(Properties ctx, int I_BPartner_ID, String trxName) {
     super(ctx, I_BPartner_ID, trxName);
-    /** if (I_BPartner_ID == 0) { setI_BPartner_ID (0); setI_IsImported (false); // N } */
   }
 
   /** Load Constructor */
@@ -43,15 +42,8 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_I_BPartner[").append(getId()).append("]");
-    return sb.toString();
+    return "X_I_BPartner[" + getId() + "]";
   }
 
   /**
@@ -139,7 +131,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public void setC_BPartner_ID(int C_BPartner_ID) {
     if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
+    else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
   }
 
   /**
@@ -166,7 +158,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
     if (C_BPartner_Location_ID < 1) set_Value(COLUMNNAME_C_BPartner_Location_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_Location_ID, Integer.valueOf(C_BPartner_Location_ID));
+    else set_Value(COLUMNNAME_C_BPartner_Location_ID, C_BPartner_Location_ID);
   }
 
   /**
@@ -193,7 +185,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public void setC_BP_Group_ID(int C_BP_Group_ID) {
     if (C_BP_Group_ID < 1) set_Value(COLUMNNAME_C_BP_Group_ID, null);
-    else set_Value(COLUMNNAME_C_BP_Group_ID, Integer.valueOf(C_BP_Group_ID));
+    else set_Value(COLUMNNAME_C_BP_Group_ID, C_BP_Group_ID);
   }
 
   /**
@@ -220,7 +212,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public void setC_Country_ID(int C_Country_ID) {
     if (C_Country_ID < 1) set_Value(COLUMNNAME_C_Country_ID, null);
-    else set_Value(COLUMNNAME_C_Country_ID, Integer.valueOf(C_Country_ID));
+    else set_Value(COLUMNNAME_C_Country_ID, C_Country_ID);
   }
 
   /**
@@ -247,7 +239,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public void setC_Greeting_ID(int C_Greeting_ID) {
     if (C_Greeting_ID < 1) set_Value(COLUMNNAME_C_Greeting_ID, null);
-    else set_Value(COLUMNNAME_C_Greeting_ID, Integer.valueOf(C_Greeting_ID));
+    else set_Value(COLUMNNAME_C_Greeting_ID, C_Greeting_ID);
   }
 
   /**
@@ -366,7 +358,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public void setC_Region_ID(int C_Region_ID) {
     if (C_Region_ID < 1) set_Value(COLUMNNAME_C_Region_ID, null);
-    else set_Value(COLUMNNAME_C_Region_ID, Integer.valueOf(C_Region_ID));
+    else set_Value(COLUMNNAME_C_Region_ID, C_Region_ID);
   }
 
   /**
@@ -477,7 +469,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public void setI_BPartner_ID(int I_BPartner_ID) {
     if (I_BPartner_ID < 1) set_ValueNoCheck(COLUMNNAME_I_BPartner_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_I_BPartner_ID, Integer.valueOf(I_BPartner_ID));
+    else set_ValueNoCheck(COLUMNNAME_I_BPartner_ID, I_BPartner_ID);
   }
 
   /**
@@ -533,7 +525,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @param I_IsImported Has this import been processed
    */
   public void setI_IsImported(boolean I_IsImported) {
-    set_Value(COLUMNNAME_I_IsImported, Boolean.valueOf(I_IsImported));
+    set_Value(COLUMNNAME_I_IsImported, I_IsImported);
   }
 
   /**
@@ -542,12 +534,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @return Has this import been processed
    */
   public boolean isI_IsImported() {
-    Object oo = get_Value(COLUMNNAME_I_IsImported);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_I_IsImported));
   }
 
   /**
@@ -574,7 +561,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @param IsCustomer Indicates if this Business Partner is a Customer
    */
   public void setIsCustomer(boolean IsCustomer) {
-    set_Value(COLUMNNAME_IsCustomer, Boolean.valueOf(IsCustomer));
+    set_Value(COLUMNNAME_IsCustomer, IsCustomer);
   }
 
   /**
@@ -583,12 +570,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @return Indicates if this Business Partner is a Customer
    */
   public boolean isCustomer() {
-    Object oo = get_Value(COLUMNNAME_IsCustomer);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsCustomer));
   }
 
   /**
@@ -597,7 +579,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @param IsEmployee Indicates if this Business Partner is an employee
    */
   public void setIsEmployee(boolean IsEmployee) {
-    set_Value(COLUMNNAME_IsEmployee, Boolean.valueOf(IsEmployee));
+    set_Value(COLUMNNAME_IsEmployee, IsEmployee);
   }
 
   /**
@@ -606,12 +588,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @return Indicates if this Business Partner is an employee
    */
   public boolean isEmployee() {
-    Object oo = get_Value(COLUMNNAME_IsEmployee);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsEmployee));
   }
 
   /**
@@ -620,7 +597,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @param IsVendor Indicates if this Business Partner is a Vendor
    */
   public void setIsVendor(boolean IsVendor) {
-    set_Value(COLUMNNAME_IsVendor, Boolean.valueOf(IsVendor));
+    set_Value(COLUMNNAME_IsVendor, IsVendor);
   }
 
   /**
@@ -629,12 +606,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @return Indicates if this Business Partner is a Vendor
    */
   public boolean isVendor() {
-    Object oo = get_Value(COLUMNNAME_IsVendor);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsVendor));
   }
 
   /**
@@ -788,7 +760,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @param Processed The document has been processed
    */
   public void setProcessed(boolean Processed) {
-    set_ValueNoCheck(COLUMNNAME_Processed, Boolean.valueOf(Processed));
+    set_ValueNoCheck(COLUMNNAME_Processed, Processed);
   }
 
   /**
@@ -797,12 +769,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @return The document has been processed
    */
   public boolean isProcessed() {
-    Object oo = get_Value(COLUMNNAME_Processed);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_Processed));
   }
 
   /**
@@ -811,7 +778,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @param Processing Process Now
    */
   public void setProcessing(boolean Processing) {
-    set_Value(COLUMNNAME_Processing, Boolean.valueOf(Processing));
+    set_Value(COLUMNNAME_Processing, Processing);
   }
 
   /**
@@ -820,12 +787,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    * @return Process Now
    */
   public boolean isProcessing() {
-    Object oo = get_Value(COLUMNNAME_Processing);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_Processing));
   }
 
   /**
@@ -929,32 +891,22 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
 
   @Override
   public void setIsShipTo(boolean IsShipTo) {
-    set_Value(COLUMNNAME_I_IsShipTo, Boolean.valueOf(IsShipTo));
+    set_Value(COLUMNNAME_I_IsShipTo, IsShipTo);
   }
 
   @Override
   public boolean isShipTo() {
-    Object oo = get_Value(COLUMNNAME_I_IsShipTo);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_I_IsShipTo));
   }
 
   @Override
   public void setIsBillTo(boolean IsBillTo) {
-    set_Value(COLUMNNAME_I_IsBillTo, Boolean.valueOf(IsBillTo));
+    set_Value(COLUMNNAME_I_IsBillTo, IsBillTo);
   }
 
   @Override
   public boolean isBillTo() {
-    Object oo = get_Value(COLUMNNAME_I_IsBillTo);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_I_IsBillTo));
   }
 
   /**
@@ -964,5 +916,10 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public KeyNamePair getKeyNamePair() {
     return new KeyNamePair(getId(), getValue());
+  }
+
+  @Override
+  public int getTableId() {
+    return I_I_BPartner.Table_ID;
   }
 }

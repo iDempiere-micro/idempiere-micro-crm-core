@@ -41,12 +41,6 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_C_Greeting[").append(getId()).append("]");
     return sb.toString();
@@ -126,12 +120,7 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
    * @return Default value
    */
   public boolean isDefault() {
-    Object oo = get_Value(COLUMNNAME_IsDefault);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsDefault));
   }
 
   /**
@@ -149,11 +138,11 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
    * @return Print only the first name in greetings
    */
   public boolean isFirstNameOnly() {
-    Object oo = get_Value(COLUMNNAME_IsFirstNameOnly);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsFirstNameOnly));
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_Greeting.Table_ID;
   }
 }

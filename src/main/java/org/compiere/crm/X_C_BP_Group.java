@@ -44,15 +44,8 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_BP_Group[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_BP_Group[" + getId() + "]";
   }
 
   public org.compiere.model.I_AD_PrintColor getAD_PrintColor() throws RuntimeException {
@@ -201,12 +194,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
    * @return Can enter confidential information
    */
   public boolean isConfidentialInfo() {
-    Object oo = get_Value(COLUMNNAME_IsConfidentialInfo);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsConfidentialInfo));
   }
 
   /**
@@ -224,12 +212,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
    * @return Default value
    */
   public boolean isDefault() {
-    Object oo = get_Value(COLUMNNAME_IsDefault);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsDefault));
   }
 
   public org.compiere.model.I_M_DiscountSchema getM_DiscountSchema() throws RuntimeException {
@@ -403,5 +386,10 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
    */
   public String getValue() {
     return (String) get_Value(COLUMNNAME_Value);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_BP_Group.Table_ID;
   }
 }

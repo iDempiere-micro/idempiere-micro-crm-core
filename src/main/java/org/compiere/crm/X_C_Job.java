@@ -38,15 +38,8 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_Job[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_Job[" + getId() + "]";
   }
 
   public org.compiere.model.I_C_JobCategory getC_JobCategory() throws RuntimeException {
@@ -172,5 +165,10 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
       return "Y".equals(oo);
     }
     return false;
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_Job.Table_ID;
   }
 }

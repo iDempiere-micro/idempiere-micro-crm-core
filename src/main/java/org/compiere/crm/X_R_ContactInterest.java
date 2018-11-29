@@ -44,12 +44,6 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_R_ContactInterest[").append(getId()).append("]");
     return sb.toString();
@@ -113,7 +107,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
    */
   public void setR_InterestArea_ID(int R_InterestArea_ID) {
     if (R_InterestArea_ID < 1) set_ValueNoCheck(COLUMNNAME_R_InterestArea_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_R_InterestArea_ID, Integer.valueOf(R_InterestArea_ID));
+    else set_ValueNoCheck(COLUMNNAME_R_InterestArea_ID, R_InterestArea_ID);
   }
 
   /**
@@ -143,5 +137,10 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
    */
   public Timestamp getSubscribeDate() {
     return (Timestamp) get_Value(COLUMNNAME_SubscribeDate);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_R_ContactInterest.Table_ID;
   }
 }

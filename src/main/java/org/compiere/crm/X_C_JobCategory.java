@@ -37,12 +37,6 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_C_JobCategory[").append(getId()).append("]");
     return sb.toString();
@@ -121,5 +115,10 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
    */
   public String getHelp() {
     return (String) get_Value(COLUMNNAME_Help);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_JobCategory.Table_ID;
   }
 }

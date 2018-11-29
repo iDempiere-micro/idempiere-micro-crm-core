@@ -37,15 +37,8 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_Dunning[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_Dunning[" + getId() + "]";
   }
 
   /**
@@ -102,12 +95,7 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
    * @return Create Dunning Letter by level sequentially
    */
   public boolean isCreateLevelsSequentially() {
-    Object oo = get_Value(COLUMNNAME_CreateLevelsSequentially);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_CreateLevelsSequentially));
   }
 
   /**
@@ -143,12 +131,7 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
    * @return Default value
    */
   public boolean isDefault() {
-    Object oo = get_Value(COLUMNNAME_IsDefault);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsDefault));
   }
 
   /**
@@ -166,11 +149,11 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
    * @return Indicates if dunning letters will be sent
    */
   public boolean isSendDunningLetter() {
-    Object oo = get_Value(COLUMNNAME_SendDunningLetter);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_SendDunningLetter));
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_Dunning.Table_ID;
   }
 }

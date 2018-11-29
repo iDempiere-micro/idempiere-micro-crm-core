@@ -38,11 +38,6 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    return POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-  }
-
   public String toString() {
     return "X_C_Region[" + getId() + "]";
   }
@@ -146,11 +141,11 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
    * @return Default value
    */
   public boolean isDefault() {
-    Object oo = get_Value(COLUMNNAME_IsDefault);
-    if (oo != null) {
-      if (oo instanceof Boolean) return (Boolean) oo;
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsDefault));
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_Region.Table_ID;
   }
 }

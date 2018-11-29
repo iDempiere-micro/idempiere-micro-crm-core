@@ -42,12 +42,6 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess, 
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_AD_UserBPAccess[").append(getId()).append("]");
     return sb.toString();
@@ -230,5 +224,10 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess, 
     Integer ii = (Integer) get_Value(COLUMNNAME_R_RequestType_ID);
     if (ii == null) return 0;
     return ii;
+  }
+
+  @Override
+  public int getTableId() {
+    return I_AD_UserBPAccess.Table_ID;
   }
 }

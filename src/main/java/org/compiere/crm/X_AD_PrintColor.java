@@ -37,12 +37,6 @@ public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor, I_Pe
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_AD_PrintColor[").append(getId()).append("]");
     return sb.toString();
@@ -120,11 +114,11 @@ public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor, I_Pe
    * @return Default value
    */
   public boolean isDefault() {
-    Object oo = get_Value(COLUMNNAME_IsDefault);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsDefault));
+  }
+
+  @Override
+  public int getTableId() {
+    return I_AD_PrintColor.Table_ID;
   }
 }

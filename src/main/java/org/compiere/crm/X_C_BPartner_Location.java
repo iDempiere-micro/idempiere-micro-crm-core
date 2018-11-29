@@ -45,8 +45,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_BPartner_Location[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_BPartner_Location[" + getId() + "]";
   }
 
   public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException {
@@ -356,5 +355,10 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
    */
   public String getPhone2() {
     return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_Phone2);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_BPartner_Location.Table_ID;
   }
 }

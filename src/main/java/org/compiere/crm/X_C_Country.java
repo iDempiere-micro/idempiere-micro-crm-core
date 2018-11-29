@@ -6,7 +6,6 @@ import org.compiere.model.I_C_Country;
 import org.compiere.orm.BasePOName;
 import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for C_Country
@@ -43,15 +42,8 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_Country[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_Country[" + getId() + "]";
   }
 
   /** AD_Language AD_Reference_ID=106 */
@@ -364,12 +356,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    * @return Has Additional Postal Code
    */
   public boolean isHasPostal_Add() {
-    Object oo = get_Value(COLUMNNAME_HasPostal_Add);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_HasPostal_Add));
   }
 
   /**
@@ -387,12 +374,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    * @return Country contains Regions
    */
   public boolean isHasRegion() {
-    Object oo = get_Value(COLUMNNAME_HasRegion);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_HasRegion));
   }
 
   /**
@@ -410,12 +392,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    * @return Print Local Address in reverse Order
    */
   public boolean isAddressLinesLocalReverse() {
-    Object oo = get_Value(COLUMNNAME_IsAddressLinesLocalReverse);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesLocalReverse));
   }
 
   /**
@@ -433,12 +410,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    * @return Print Address in reverse Order
    */
   public boolean isAddressLinesReverse() {
-    Object oo = get_Value(COLUMNNAME_IsAddressLinesReverse);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesReverse));
   }
 
   /**
@@ -456,12 +428,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    * @return Does this country have a post code web service
    */
   public boolean isPostcodeLookup() {
-    Object oo = get_Value(COLUMNNAME_IsPostcodeLookup);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsPostcodeLookup));
   }
 
   /**
@@ -572,5 +539,10 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    */
   public String getRegionName() {
     return (String) get_Value(COLUMNNAME_RegionName);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_Country.Table_ID;
   }
 }

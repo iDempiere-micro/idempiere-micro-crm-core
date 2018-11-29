@@ -23,7 +23,6 @@ public class X_C_Location extends PO implements I_Persistent {
   /** Standard Constructor */
   public X_C_Location(Properties ctx, int C_Location_ID, String trxName) {
     super(ctx, C_Location_ID, trxName);
-    /** if (C_Location_ID == 0) { setC_Country_ID (0); setC_Location_ID (0); } */
   }
 
   /** Load Constructor */
@@ -40,15 +39,8 @@ public class X_C_Location extends PO implements I_Persistent {
     return I_C_Location.accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, I_C_Location.Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_Location[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_Location[" + getId() + "]";
   }
 
   /**
@@ -351,12 +343,7 @@ public class X_C_Location extends PO implements I_Persistent {
    * @return Element is valid
    */
   public boolean isValid() {
-    Object oo = get_Value(I_C_Location.COLUMNNAME_IsValid);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(I_C_Location.COLUMNNAME_IsValid));
   }
 
   /**
@@ -447,5 +434,10 @@ public class X_C_Location extends PO implements I_Persistent {
    */
   public String getValidateAddress() {
     return (String) get_Value(I_C_Location.COLUMNNAME_ValidateAddress);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_Location.Table_ID;
   }
 }
