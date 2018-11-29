@@ -70,5 +70,4 @@ public class MCountryGroup extends X_C_CountryGroup {
   public MCountryGroup(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   } //	MCountryGroup
-
 } //	MCountryGroup

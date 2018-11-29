@@ -1,23 +1,17 @@
 package org.compiere.crm;
 
-import java.sql.PreparedStatement;
+import static software.hsharp.core.util.DBKt.getSQLValue;
+
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-import java.util.logging.Level;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.Query;
 import org.compiere.util.Msg;
-import org.idempiere.common.exceptions.DBException;
-import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Language;
-
-import static software.hsharp.core.util.DBKt.getSQLValue;
 
 /**
  * Language Model
@@ -270,5 +264,4 @@ public class MLanguage extends X_AD_Language {
     if (!success) return success;
     return true;
   } //	afterSave
-
 } //	MLanguage

@@ -3,11 +3,8 @@ package org.compiere.crm
 import kotliquery.queryOf
 import org.compiere.model.I_C_BPartner_Location
 import software.hsharp.core.util.DB
-import java.sql.PreparedStatement
 import java.sql.ResultSet
-import java.util.ArrayList
 import java.util.Properties
-import java.util.logging.Level
 
 open class MBaseBPartner : X_C_BPartner {
     constructor(ctx: Properties, rs: ResultSet, trxName: String) : super(ctx, rs, trxName)
@@ -84,5 +81,5 @@ open class MBaseBPartner : X_C_BPartner {
             m_locations.addAll(locations)
         }
         return m_locations.toTypedArray()
-    } //	getLocations
+    } // 	getLocations
 }
