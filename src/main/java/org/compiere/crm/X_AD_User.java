@@ -3,7 +3,6 @@ package org.compiere.crm;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
 import kotliquery.Row;
 import org.compiere.model.*;
 import org.compiere.orm.BasePONameValue;
@@ -37,6 +36,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   public X_AD_User(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   }
+
   public X_AD_User(Properties ctx, Row row) {
     super(ctx, row);
   } //	MUser

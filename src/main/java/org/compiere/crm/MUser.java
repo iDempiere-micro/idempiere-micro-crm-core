@@ -14,7 +14,6 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-
 import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.I_AD_User;

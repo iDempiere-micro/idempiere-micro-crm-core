@@ -2,14 +2,12 @@ package org.compiere.crm
 
 import kotliquery.queryOf
 import software.hsharp.core.util.DB
-import java.sql.PreparedStatement
 import java.sql.ResultSet
-import java.util.*
-import java.util.logging.Level
+import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner {
-   constructor(ctx: Properties, rs: ResultSet, trxName: String): super(ctx, rs, trxName)
-   constructor(ctx: Properties, id: Int, trxName: String): super(ctx, id, trxName)
+    constructor(ctx: Properties, rs: ResultSet, trxName: String) : super(ctx, rs, trxName)
+    constructor(ctx: Properties, id: Int, trxName: String) : super(ctx, id, trxName)
 
     /**
      * Load Default BPartner
@@ -31,14 +29,14 @@ open class MBaseBPartner : X_C_BPartner {
         }
 
         setStandardDefaults()
-        //	Reset
+        // 	Reset
         set_ValueNoCheck("C_BPartner_ID", I_ZERO)
         setValue("")
         setName("")
         name2 = null
         set_ValueNoCheck("C_BPartner_UU", "")
         return success
-    } //	getTemplate
+    } // 	getTemplate
 
     /** Users  */
     private val m_contacts: MutableList<MUser> = mutableListOf()
@@ -60,7 +58,5 @@ open class MBaseBPartner : X_C_BPartner {
             m_contacts.addAll(result)
         }
         return m_contacts.toTypedArray()
-    } //	getContacts
-
-
+    } // 	getContacts
 }
