@@ -7,7 +7,6 @@ import org.compiere.model.I_C_SalesStage;
 import org.compiere.orm.BasePONameValue;
 import org.idempiere.common.util.Env;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for C_SalesStage
@@ -39,12 +38,6 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_C_SalesStage[").append(getId()).append("]");
     return sb.toString();
@@ -57,7 +50,7 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
    */
   public void setC_SalesStage_ID(int C_SalesStage_ID) {
     if (C_SalesStage_ID < 1) set_ValueNoCheck(COLUMNNAME_C_SalesStage_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_SalesStage_ID, Integer.valueOf(C_SalesStage_ID));
+    else set_ValueNoCheck(COLUMNNAME_C_SalesStage_ID, C_SalesStage_ID);
   }
 
   /**
@@ -113,7 +106,7 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
    * @param IsClosed The status is closed
    */
   public void setIsClosed(boolean IsClosed) {
-    set_Value(COLUMNNAME_IsClosed, Boolean.valueOf(IsClosed));
+    set_Value(COLUMNNAME_IsClosed, IsClosed);
   }
 
   /**
@@ -122,12 +115,7 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
    * @return The status is closed
    */
   public boolean isClosed() {
-    Object oo = get_Value(COLUMNNAME_IsClosed);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsClosed));
   }
 
   /**
@@ -145,12 +133,7 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
    * @return The opportunity was won
    */
   public boolean isWon() {
-    Object oo = get_Value(COLUMNNAME_IsWon);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsWon));
   }
 
   /**
@@ -171,5 +154,10 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
     BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_Probability);
     if (bd == null) return Env.ZERO;
     return bd;
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_SalesStage.Table_ID;
   }
 }

@@ -1,6 +1,5 @@
 package org.compiere.crm;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
@@ -220,7 +219,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_BPName);
   }
 
-  @JsonIgnore
   public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)
@@ -248,7 +246,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
-  @JsonIgnore
   public org.compiere.model.I_C_BPartner_Location getC_BPartner_Location() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner_Location)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner_Location.Table_Name)
@@ -1082,7 +1079,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
-  @JsonIgnore
   public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
         MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
@@ -1146,7 +1142,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_SecurityQuestion);
   }
 
-  @JsonIgnore
   public org.compiere.model.I_AD_User getSupervisor() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
         MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)

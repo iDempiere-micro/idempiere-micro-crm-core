@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import org.compiere.model.I_C_Region;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
-import org.idempiere.common.util.DB;
 
 /**
  * Localtion Region Model (Value Object)
@@ -33,7 +32,7 @@ public class MRegion extends X_C_Region implements Comparator<Object>, Serializa
     Statement stmt = null;
     ResultSet rs = null;
     try {
-      stmt = DB.createStatement();
+      stmt = createStatement();
       rs = stmt.executeQuery(sql);
       while (rs.next()) {
         MRegion r = new MRegion(ctx, rs, null);

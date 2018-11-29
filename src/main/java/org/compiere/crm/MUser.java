@@ -1,6 +1,5 @@
 package org.compiere.crm;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -207,13 +206,13 @@ public class MUser extends X_AD_User implements IUser {
     }
 
     for (MUser user : users) {
-      if (clientsValidated.contains(user.getADClientID())) {
+      if (clientsValidated.contains(user.getClientId())) {
         s_log.severe(
             "Two users with password with the same name/email combination on same tenant: " + name);
         return null;
       }
 
-      clientsValidated.add(user.getADClientID());
+      clientsValidated.add(user.getClientId());
       boolean valid = false;
       if (hash_password) {
         valid = user.authenticateHash(password);
@@ -618,7 +617,6 @@ public class MUser extends X_AD_User implements IUser {
    *
    * @return code
    */
-  @JsonIgnore
   public String getEMailVerifyCode() {
     long code = getAD_User_ID() + getName().hashCode();
     return "C" + String.valueOf(Math.abs(code)) + "C";
@@ -843,7 +841,7 @@ public class MUser extends X_AD_User implements IUser {
                 get_TrxName(),
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND EMail=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 getEMail(),
-                getADClientID(),
+                getClientId(),
                 getAD_User_ID());
         if (cnt > 0) {
           log.saveError(
@@ -861,7 +859,7 @@ public class MUser extends X_AD_User implements IUser {
                 get_TrxName(),
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND COALESCE(LDAPUser,Name)=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 nameToValidate,
-                getADClientID(),
+                getClientId(),
                 getAD_User_ID());
         if (cnt > 0) {
           log.saveError(
@@ -961,17 +959,6 @@ public class MUser extends X_AD_User implements IUser {
   @Override
   public String getEMailUserPW() {
     return super.getEMailUserPW();
-  }
-
-  @Override
-  public int getKey() {
-    return getAD_User_ID();
-  }
-
-  @NotNull
-  @Override
-  public String getID() {
-    return "" + getAD_User_ID();
   }
 
   public void setADClientID(int AD_Client_ID) {

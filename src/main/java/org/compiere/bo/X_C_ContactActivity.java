@@ -51,12 +51,6 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     return I_C_ContactActivity.accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, I_C_ContactActivity.Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_C_ContactActivity[").append(getId()).append("]");
     return sb.toString();
@@ -291,5 +285,10 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
    */
   public Timestamp getStartDate() {
     return (Timestamp) get_Value(I_C_ContactActivity.COLUMNNAME_StartDate);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_ContactActivity.Table_ID;
   }
 }

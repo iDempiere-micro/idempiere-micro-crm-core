@@ -1,6 +1,5 @@
 package org.compiere.crm;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.ResultSet;
 import java.util.Properties;
 import org.compiere.model.I_C_BPartner_Location;
@@ -45,18 +44,11 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
     return I_C_BPartner_Location.accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, I_C_BPartner_Location.Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
     StringBuffer sb = new StringBuffer("X_C_BPartner_Location[").append(getId()).append("]");
     return sb.toString();
   }
 
-  @JsonIgnore
   public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)

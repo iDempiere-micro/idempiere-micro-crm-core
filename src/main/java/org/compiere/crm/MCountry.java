@@ -1,6 +1,5 @@
 package org.compiere.crm;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.text.Collator;
@@ -104,7 +103,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
       s_countries.put(c.getC_Country_ID(), c);
       //	Country code of Client Language
       if (lang != null && lang.getCountryCode().equals(c.getCountryCode()))
-        s_default.put(client.getADClientID(), c);
+        s_default.put(client.getClientId(), c);
     }
     if (s_log.isLoggable(Level.FINE))
       s_log.fine("#" + s_countries.size() + " - Default=" + s_default);
@@ -118,7 +117,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
   private static void loadDefaultCountry(Properties ctx) {
     loadAllCountriesIfNeeded(ctx);
     MClient client = MClient.get(ctx);
-    MCountry found = s_default.get(client.getADClientID());
+    MCountry found = s_default.get(client.getClientId());
     if (found != null) return;
 
     I_AD_Language lang = MLanguage.get(ctx, client.getADLanguage());
@@ -134,8 +133,8 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
       if (c.getC_Country_ID() == SystemIDs.COUNTRY_US) // 	USA
       usa = c;
     }
-    if (found != null) s_default.put(client.getADClientID(), found);
-    else s_default.put(client.getADClientID(), usa);
+    if (found != null) s_default.put(client.getClientId(), found);
+    else s_default.put(client.getClientId(), usa);
     if (s_log.isLoggable(Level.FINE))
       s_log.fine("#" + s_countries.size() + " - Default=" + s_default);
   }
@@ -210,7 +209,6 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
    *
    * @return name
    */
-  @JsonIgnore
   public String getTrlName() {
     return getTrlName(Env.getADLanguage(Env.getCtx()));
   } //	getTrlName

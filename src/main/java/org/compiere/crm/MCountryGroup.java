@@ -18,7 +18,6 @@ import java.util.Properties;
 import org.compiere.model.I_C_CountryGroup;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
-import org.idempiere.common.util.DB;
 
 /** Country Group Model */
 public class MCountryGroup extends X_C_CountryGroup {

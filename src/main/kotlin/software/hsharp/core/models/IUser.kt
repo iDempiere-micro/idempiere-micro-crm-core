@@ -1,3 +1,3 @@
 package software.hsharp.core.models
 
-interface IUser : INameKeyPair
+interface IUser : INamedEntity

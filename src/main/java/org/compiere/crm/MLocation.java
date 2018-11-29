@@ -14,7 +14,6 @@ import org.compiere.orm.PO;
 import org.compiere.util.Msg;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
-import org.idempiere.common.util.DB;
 import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Util;
 
@@ -573,7 +572,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
           DB.getSQLValue(
               get_TrxName(),
               "SELECT C_City_ID FROM C_City WHERE C_Country_ID=? AND COALESCE(C_Region_ID,0)=? AND Name=? AND AD_Client_ID IN (0,?)",
-              new Object[] {getC_Country_ID(), getC_Region_ID(), getCity(), getADClientID()});
+              new Object[] {getC_Country_ID(), getC_Region_ID(), getCity(), getClientId()});
       if (city_id > 0) setC_City_ID(city_id);
     }
 
@@ -632,7 +631,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
         // 4 - City + Address1 + Address2 + Region + ID
         int bplocname =
             MSysConfig.getIntValue(
-                MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getADClientID(), getAD_Org_ID());
+                MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getAD_Org_ID());
         if (bplocname < 0 || bplocname > 4) bplocname = 0;
         if (is_ValueChanged(COLUMNNAME_City)
             || is_ValueChanged(COLUMNNAME_C_City_ID)
