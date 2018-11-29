@@ -134,37 +134,6 @@ public class MBPartner extends X_C_BPartner implements I_C_BPartner {
     return retValue;
   } //	get
 
-  /**
-   * Get Not Invoiced Shipment Value
-   *
-   * @param C_BPartner_ID partner
-   * @return value in accounting currency
-   */
-  public static BigDecimal getNotInvoicedAmt(int C_BPartner_ID) {
-    BigDecimal retValue = null;
-    String sql =
-        "SELECT COALESCE(SUM(COALESCE("
-            + "currencyBase((ol.QtyDelivered-ol.QtyInvoiced)*ol.PriceActual,o.C_Currency_ID,o.DateOrdered, o.AD_Client_ID,o.AD_Org_ID) ,0)),0) "
-            + "FROM C_OrderLine ol"
-            + " INNER JOIN C_Order o ON (ol.C_Order_ID=o.C_Order_ID) "
-            + "WHERE o.IsSOTrx='Y' AND Bill_BPartner_ID=?";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setInt(1, C_BPartner_ID);
-      rs = pstmt.executeQuery();
-      if (rs.next()) retValue = rs.getBigDecimal(1);
-    } catch (Exception e) {
-      s_log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    return retValue;
-  } //	getNotInvoicedAmt
-
   /** Static Logger */
   private static CLogger s_log = CLogger.getCLogger(MBPartner.class);
 

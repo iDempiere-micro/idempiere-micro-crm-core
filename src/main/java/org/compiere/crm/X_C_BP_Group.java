@@ -3,6 +3,7 @@ package org.compiere.crm;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
+import kotliquery.Row;
 import org.compiere.model.I_C_BP_Group;
 import org.compiere.orm.BasePOName;
 import org.compiere.orm.MTable;
@@ -33,6 +34,10 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   public X_C_BP_Group(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   }
+
+  public X_C_BP_Group(Properties ctx, Row row) {
+    super(ctx, row);
+  } //	MBPGroup
 
   /**
    * AccessLevel

@@ -1,10 +1,9 @@
 package org.compiere.crm;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
-import java.util.logging.Level;
+import kotliquery.Row;
 import org.compiere.model.I_C_BP_Group;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
@@ -55,78 +54,12 @@ public class MBPGroup extends X_C_BP_Group {
    * @return MBPGroup
    */
   public static MBPGroup getDefault(Properties ctx) {
-    int AD_Client_ID = Env.getADClientID(ctx);
-    Integer key = new Integer(AD_Client_ID);
-    MBPGroup retValue = (MBPGroup) s_cacheDefault.get(key);
-    if (retValue != null) return retValue;
-
-    String sql =
-        "SELECT * FROM C_BP_Group g "
-            + "WHERE IsDefault='Y' AND AD_Client_ID=? "
-            + "ORDER BY IsActive DESC";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setInt(1, AD_Client_ID);
-      rs = pstmt.executeQuery();
-      if (rs.next()) {
-        retValue = new MBPGroup(ctx, rs, null);
-        if (retValue.getId() != 0) s_cacheDefault.put(key, retValue);
-      }
-    } catch (Exception e) {
-      s_log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    if (retValue == null) s_log.warning("No Default BP Group for AD_Client_ID=" + AD_Client_ID);
-    return retValue;
+    return MBaseBPGroupKt.getDefault(ctx);
   } //	get
-
-  /**
-   * Get MBPGroup from Business Partner
-   *
-   * @param ctx context
-   * @param C_BPartner_ID business partner id
-   * @return MBPGroup
-   */
-  public static MBPGroup getOfBPartner(Properties ctx, int C_BPartner_ID) {
-    MBPGroup retValue = null;
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    String sql =
-        "SELECT * FROM C_BP_Group g "
-            + "WHERE EXISTS (SELECT * FROM C_BPartner p "
-            + "WHERE p.C_BPartner_ID=? AND p.C_BP_Group_ID=g.C_BP_Group_ID)";
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setInt(1, C_BPartner_ID);
-      rs = pstmt.executeQuery();
-      if (rs.next()) {
-        retValue = new MBPGroup(ctx, rs, null);
-        Integer key = new Integer(retValue.getC_BP_Group_ID());
-        if (retValue.getId() != 0) s_cache.put(key, retValue);
-      }
-    } catch (Exception e) {
-      s_log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-
-    return retValue;
-  } //	getOfBPartner
 
   /** Cache */
   private static CCache<Integer, MBPGroup> s_cache =
       new CCache<Integer, MBPGroup>(I_C_BP_Group.Table_Name, 10);
-  /** Default Cache */
-  private static CCache<Integer, MBPGroup> s_cacheDefault =
-      new CCache<Integer, MBPGroup>(
-          I_C_BP_Group.Table_Name, MBPGroup.class.getName() + ".Default", 5);
   /** Logger */
   private static CLogger s_log = CLogger.getCLogger(MBPGroup.class);
 
@@ -157,6 +90,10 @@ public class MBPGroup extends X_C_BP_Group {
    */
   public MBPGroup(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  } //	MBPGroup
+
+  public MBPGroup(Properties ctx, Row row) {
+    super(ctx, row);
   } //	MBPGroup
 
   /**

@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
+
+import kotliquery.Row;
+import org.compiere.model.I_C_BPartner;
 import org.compiere.orm.MClient;
+import org.compiere.orm.MTable;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 
@@ -49,6 +53,10 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
     super(ctx, rs, trxName);
   }
 
+  public MClientInfo(Properties ctx, Row row) {
+    super(ctx, row);
+  }
+
   public MClientInfo(
       MClient client,
       int AD_Tree_Org_ID,
@@ -80,30 +88,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
    * @return Client Info
    */
   public static MClientInfo get(Properties ctx, int AD_Client_ID, String trxName) {
-    Integer key = AD_Client_ID;
-    MClientInfo info = (MClientInfo) s_cache.get(key);
-    if (info != null) return info;
-    //
-    String sql = "SELECT * FROM AD_ClientInfo WHERE AD_Client_ID=?";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, trxName);
-      pstmt.setInt(1, AD_Client_ID);
-      rs = pstmt.executeQuery();
-      if (rs.next()) {
-        info = new MClientInfo(ctx, rs, null);
-        if (trxName == null) s_cache.put(key, info);
-      }
-    } catch (SQLException ex) {
-      s_log.log(Level.SEVERE, sql, ex);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    //
-    return info;
+    return MBaseClientInfoKt.get(ctx, AD_Client_ID, trxName);
   } //	get
 
   /**
@@ -116,4 +101,10 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
   public static MClientInfo get(Properties ctx, int AD_Client_ID) {
     return get(ctx, AD_Client_ID, null);
   } //	get
+
+  public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
+    return (I_C_BPartner)
+            MTable.get(getCtx(), I_C_BPartner.Table_Name)
+                    .getPO(getC_BPartnerCashTrx_ID(), get_TrxName());
+  }
 } //	MClientInfo

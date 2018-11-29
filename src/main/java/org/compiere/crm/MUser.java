@@ -33,6 +33,8 @@ import org.idempiere.common.util.Util;
 import software.hsharp.core.models.IUser;
 import software.hsharp.core.util.DB;
 
+import static software.hsharp.core.util.DBKt.getSQLValue;
+
 /**
  * User Model
  *
@@ -97,37 +99,6 @@ public class MUser extends X_AD_User implements IUser {
     list.toArray(retValue);
     return retValue;
   } //	getOfBPartner
-
-  /**
-   * Get Users with Role
-   *
-   * @param role role
-   * @return array of users
-   */
-  public static MUser[] getWithRole(MRole role) {
-    ArrayList<MUser> list = new ArrayList<MUser>();
-    String sql =
-        "SELECT * FROM AD_User u "
-            + "WHERE u.IsActive='Y'"
-            + " AND EXISTS (SELECT * FROM AD_User_Roles ur "
-            + "WHERE ur.AD_User_ID=u.AD_User_ID AND ur.AD_Role_ID=? AND ur.IsActive='Y')";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setInt(1, role.getAD_Role_ID());
-      rs = pstmt.executeQuery();
-      while (rs.next()) list.add(new MUser(role.getCtx(), rs, null));
-    } catch (Exception e) {
-      s_log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-    }
-
-    MUser[] retValue = new MUser[list.size()];
-    list.toArray(retValue);
-    return retValue;
-  } //	getWithRole
 
   /**
    * Get User (cached) Also loads Admninistrator (0)
@@ -228,47 +199,6 @@ public class MUser extends X_AD_User implements IUser {
 
     return retValue;
   } //	get
-
-  /**
-   * Get Name of AD_User
-   *
-   * @param AD_User_ID System User
-   * @return Name of user or ?
-   */
-  public static String getNameOfUser(int AD_User_ID) {
-    String name = "?";
-    //	Get ID
-    String sql = "SELECT Name FROM AD_User WHERE AD_User_ID=?";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setInt(1, AD_User_ID);
-      rs = pstmt.executeQuery();
-      if (rs.next()) name = rs.getString(1);
-    } catch (SQLException e) {
-      s_log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-    }
-    return name;
-  } //	getNameOfUser
-
-  /**
-   * User is SalesRep
-   *
-   * @param AD_User_ID user
-   * @return true if sales rep
-   */
-  public static boolean isSalesRep(int AD_User_ID) {
-    if (AD_User_ID == 0) return false;
-    String sql =
-        "SELECT MAX(AD_User_ID) FROM AD_User u"
-            + " INNER JOIN C_BPartner bp ON (u.C_BPartner_ID=bp.C_BPartner_ID) "
-            + "WHERE bp.IsSalesRep='Y' AND AD_User_ID=?";
-    int no = DB.getSQLValue(null, sql, AD_User_ID);
-    return no == AD_User_ID;
-  } //	isSalesRep
 
   /** Cache */
   private static CCache<Integer, MUser> s_cache =
@@ -673,128 +603,6 @@ public class MUser extends X_AD_User implements IUser {
   } //	isNotificationNote
 
   /**
-   * ************************************************************************ Get User Roles for Org
-   *
-   * @param AD_Org_ID org
-   * @return array of roles
-   */
-  public MRole[] getRoles(int AD_Org_ID) {
-    if (m_roles != null && m_rolesAD_Org_ID == AD_Org_ID) return m_roles;
-
-    ArrayList<MRole> list = new ArrayList<MRole>();
-    // 2007-06-08, matthiasO.
-    // Extension of sql query so that not only roles with org acces for this user
-    // are found but also roles which delegate org access to the user level where
-    // this user has access to the org in question
-    String sql =
-        "SELECT * FROM AD_Role r "
-            + "WHERE r.IsActive='Y'"
-            + " AND EXISTS (SELECT * FROM AD_User_Roles ur"
-            + " WHERE r.AD_Role_ID=ur.AD_Role_ID AND ur.IsActive='Y' AND ur.AD_User_ID=?) "
-            + " AND ( ( r.isaccessallorgs = 'Y' ) OR "
-            + " ("
-            + " r.IsUseUserOrgAccess <> 'Y'"
-            + " AND EXISTS (SELECT * FROM AD_Role_OrgAccess ro"
-            + " WHERE r.AD_Role_ID=ro.AD_Role_ID AND ro.IsActive='Y' AND ro.AD_Org_ID=?)"
-            + " ) OR "
-            + " ("
-            + " r.IsUseUserOrgAccess = 'Y'"
-            + " AND EXISTS (SELECT * FROM AD_User_OrgAccess uo"
-            + " WHERE uo.AD_User_ID=? AND uo.IsActive='Y' AND uo.AD_Org_ID=?)"
-            + " )"
-            + " ) "
-            + "ORDER BY AD_Role_ID";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, get_TrxName());
-      pstmt.setInt(1, getAD_User_ID());
-      pstmt.setInt(2, AD_Org_ID);
-      pstmt.setInt(3, getAD_User_ID());
-      pstmt.setInt(4, AD_Org_ID);
-      rs = pstmt.executeQuery();
-      while (rs.next()) list.add(new MRole(getCtx(), rs, get_TrxName()));
-    } catch (Exception e) {
-      log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    //
-    m_rolesAD_Org_ID = AD_Org_ID;
-    m_roles = new MRole[list.size()];
-    list.toArray(m_roles);
-    return m_roles;
-  } //	getRoles
-
-  /**
-   * Is User an Administrator?
-   *
-   * @return true id Admin
-   */
-  public boolean isAdministrator() {
-    if (m_isAdministrator == null) {
-      m_isAdministrator = Boolean.FALSE;
-      MRole[] roles = getRoles(0);
-      for (int i = 0; i < roles.length; i++) {
-        if (roles[i].getAD_Role_ID() == 0) {
-          m_isAdministrator = Boolean.TRUE;
-          break;
-        }
-      }
-    }
-    return m_isAdministrator.booleanValue();
-  } //	isAdministrator
-
-  /**
-   * Has the user Access to BP info and resources
-   *
-   * @param BPAccessType access type
-   * @param params opt parameter
-   * @return true if access
-   */
-  public boolean hasBPAccess(String BPAccessType, Object[] params) {
-    if (isFullBPAccess()) return true;
-    getBPAccess(false);
-    for (int i = 0; i < m_bpAccess.length; i++) {
-      if (m_bpAccess[i].getBPAccessType().equals(BPAccessType)) {
-        return true;
-      }
-    }
-    return false;
-  } //	hasBPAccess
-
-  /**
-   * Get active BP Access records
-   *
-   * @param requery requery
-   * @return access list
-   */
-  public X_AD_UserBPAccess[] getBPAccess(boolean requery) {
-    if (m_bpAccess != null && !requery) return m_bpAccess;
-    String sql = "SELECT * FROM AD_UserBPAccess WHERE AD_User_ID=? AND IsActive='Y'";
-    ArrayList<X_AD_UserBPAccess> list = new ArrayList<X_AD_UserBPAccess>();
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setInt(1, getAD_User_ID());
-      rs = pstmt.executeQuery();
-      while (rs.next()) {
-        list.add(new X_AD_UserBPAccess(getCtx(), rs, null));
-      }
-    } catch (Exception e) {
-      log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-    }
-    m_bpAccess = new X_AD_UserBPAccess[list.size()];
-    list.toArray(m_bpAccess);
-    return m_bpAccess;
-  } //	getBPAccess
-
-  /**
    * Before Save
    *
    * @param newRecord new
@@ -836,7 +644,7 @@ public class MUser extends X_AD_User implements IUser {
         }
         // email with password must be unique on the same tenant
         int cnt =
-            DB.getSQLValue(
+            getSQLValue(
                 get_TrxName(),
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND EMail=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 getEMail(),
@@ -854,7 +662,7 @@ public class MUser extends X_AD_User implements IUser {
         String nameToValidate = getLDAPUser();
         if (Util.isEmpty(nameToValidate)) nameToValidate = getName();
         int cnt =
-            DB.getSQLValue(
+            getSQLValue(
                 get_TrxName(),
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND COALESCE(LDAPUser,Name)=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 nameToValidate,
@@ -897,56 +705,6 @@ public class MUser extends X_AD_User implements IUser {
       isMenuAutoExpand = X_AD_User.ISMENUAUTOEXPAND_Yes.equals(getIsMenuAutoExpand());
     else isMenuAutoExpand = MRole.getDefault().isMenuAutoExpand();
     return isMenuAutoExpand;
-  }
-
-  /**
-   * Get User that has roles (already authenticated)
-   *
-   * @param ctx context
-   * @param name name
-   * @return user or null
-   */
-  public static MUser get(Properties ctx, String name) {
-    if (name == null || name.length() == 0) {
-      s_log.warning("Invalid Name = " + name);
-      return null;
-    }
-    MUser retValue = null;
-    int AD_Client_ID = Env.getADClientID(ctx);
-
-    StringBuffer sql =
-        new StringBuffer("SELECT DISTINCT u.AD_User_ID ")
-            .append("FROM AD_User u")
-            .append(
-                " INNER JOIN AD_User_Roles ur ON (u.AD_User_ID=ur.AD_User_ID AND ur.IsActive='Y')")
-            .append(" INNER JOIN AD_Role r ON (ur.AD_Role_ID=r.AD_Role_ID AND r.IsActive='Y') ");
-    sql.append("WHERE u.Password IS NOT NULL AND ur.AD_Client_ID=? AND "); // 	#1/2
-    boolean email_login = MSysConfig.getBooleanValue(MSysConfig.USE_EMAIL_FOR_LOGIN, false);
-    if (email_login) sql.append("u.EMail=?");
-    else sql.append("COALESCE(u.LDAPUser,u.Name)=?");
-    sql.append(" AND u.IsActive='Y'")
-        .append(
-            " AND EXISTS (SELECT * FROM AD_Client c WHERE u.AD_Client_ID=c.AD_Client_ID AND c.IsActive='Y')");
-
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql.toString(), null);
-      pstmt.setInt(1, AD_Client_ID);
-      pstmt.setString(2, name);
-      rs = pstmt.executeQuery();
-      if (rs.next()) {
-        retValue = MUser.get(ctx, rs.getInt(1));
-        if (rs.next()) s_log.warning("More then one user with Name/Password = " + name);
-      } else s_log.fine("No record");
-    } catch (Exception e) {
-      s_log.log(Level.SEVERE, sql.toString(), e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    return retValue;
   }
 
   @Override

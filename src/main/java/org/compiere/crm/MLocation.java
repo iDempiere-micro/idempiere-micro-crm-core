@@ -17,6 +17,9 @@ import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Util;
 
+import static software.hsharp.core.util.DBKt.getSQLValue;
+import static software.hsharp.core.util.DBKt.getSQLValueEx;
+
 /**
  * Location (Address)
  *
@@ -67,41 +70,6 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     }
     return null; //	not found
   } //	get
-
-  /**
-   * Load Location with ID if Business Partner Location
-   *
-   * @param ctx context
-   * @param C_BPartner_Location_ID Business Partner Location
-   * @param trxName transaction
-   * @return location or null
-   */
-  public static MLocation getBPLocation(
-      Properties ctx, int C_BPartner_Location_ID, String trxName) {
-    if (C_BPartner_Location_ID == 0) // 	load default
-    return null;
-
-    MLocation loc = null;
-    String sql =
-        "SELECT * FROM C_Location l "
-            + "WHERE C_Location_ID IN (SELECT C_Location_ID FROM C_BPartner_Location WHERE C_BPartner_Location_ID=?)";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, trxName);
-      pstmt.setInt(1, C_BPartner_Location_ID);
-      rs = pstmt.executeQuery();
-      if (rs.next()) loc = new MLocation(ctx, rs, trxName);
-    } catch (SQLException e) {
-      s_log.log(Level.SEVERE, sql + " - " + C_BPartner_Location_ID, e);
-      loc = null;
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    return loc;
-  } //	getBPLocation
 
   /** Cache */
   private static CCache<Integer, MLocation> s_cache =
@@ -569,7 +537,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     }
     if (getC_City_ID() <= 0 && getCity() != null && getCity().length() > 0) {
       int city_id =
-          DB.getSQLValue(
+          getSQLValue(
               get_TrxName(),
               "SELECT C_City_ID FROM C_City WHERE C_Country_ID=? AND COALESCE(C_Region_ID,0)=? AND Name=? AND AD_Client_ID IN (0,?)",
               new Object[] {getC_Country_ID(), getC_Region_ID(), getCity(), getClientId()});
@@ -585,7 +553,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     // check city id
     if (m_c != null && !m_c.isAllowCitiesOutOfList() && getC_City_ID() > 0) {
       int city_id =
-          DB.getSQLValue(
+          getSQLValue(
               get_TrxName(),
               "SELECT C_City_ID "
                   + "  FROM C_City "
@@ -617,7 +585,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     // Update BP_Location name IDEMPIERE 417
     if (get_TrxName().startsWith(PO.LOCAL_TRX_PREFIX)) { // saved without trx
       int bplID =
-          DB.getSQLValueEx(
+          getSQLValueEx(
               get_TrxName(),
               "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = "
                   + getC_Location_ID());
