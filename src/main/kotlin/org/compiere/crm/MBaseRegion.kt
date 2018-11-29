@@ -6,13 +6,10 @@ import org.compiere.model.I_C_Region
 import org.idempiere.common.util.CCache
 import software.hsharp.core.util.DB
 import java.sql.ResultSet
-import java.sql.SQLException
-import java.sql.Statement
-import java.util.*
-import java.util.logging.Level
+import java.util.Properties
 
 internal val regionsCache = CCache<String, MRegion>(I_C_Region.Table_Name, 100)
-internal var defaultRegion : MRegion? = null
+internal var defaultRegion: MRegion? = null
 
 internal fun loadAllRegions(ctx: Properties) {
     regionsCache.clear()
@@ -20,8 +17,8 @@ internal fun loadAllRegions(ctx: Properties) {
     val loadQuery = queryOf(sql).map { row -> MRegion(ctx, row) }.asList
     val regions = DB.current.run(loadQuery)
     regions.forEach { regionsCache[it.c_Region_ID.toString()] = it }
-    defaultRegion = regions.firstOrNull{ it.isDefault }
-} //	loadAllRegions
+    defaultRegion = regions.firstOrNull { it.isDefault }
+} // 	loadAllRegions
 
 open class MBaseRegion : X_C_Region {
     constructor(ctx: Properties, ID: Int, trxName: String?) : super(ctx, ID, trxName)

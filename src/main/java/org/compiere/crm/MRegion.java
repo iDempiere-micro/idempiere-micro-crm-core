@@ -2,14 +2,9 @@ package org.compiere.crm;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.Collator;
 import java.util.*;
-import java.util.logging.Level;
-
 import kotliquery.Row;
-import org.compiere.model.I_C_Region;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
 
