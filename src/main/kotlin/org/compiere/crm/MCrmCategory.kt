@@ -2,7 +2,6 @@ package org.compiere.crm
 
 import org.compiere.orm.BasePONameValue
 import org.idempiere.orm.I_Persistent
-import org.idempiere.orm.POInfo
 import java.sql.ResultSet
 import java.util.Properties
 

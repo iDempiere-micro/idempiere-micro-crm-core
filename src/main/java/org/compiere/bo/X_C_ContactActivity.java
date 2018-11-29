@@ -8,7 +8,6 @@ import org.compiere.orm.BasePOUser;
 import org.compiere.orm.MTable;
 import org.idempiere.common.util.KeyNamePair;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for C_ContactActivity

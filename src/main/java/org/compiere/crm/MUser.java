@@ -30,7 +30,6 @@ import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Secure;
 import org.idempiere.common.util.SecureEngine;
 import org.idempiere.common.util.Util;
-import org.jetbrains.annotations.NotNull;
 import software.hsharp.core.models.IUser;
 import software.hsharp.core.util.DB;
 

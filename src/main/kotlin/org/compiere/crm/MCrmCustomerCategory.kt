@@ -3,7 +3,6 @@ package org.compiere.crm
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.BasePOName
 import org.idempiere.orm.I_Persistent
-import org.idempiere.orm.POInfo
 import java.sql.ResultSet
 import java.util.Properties
 

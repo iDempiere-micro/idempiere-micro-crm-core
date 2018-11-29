@@ -9,7 +9,6 @@ import org.compiere.orm.MTable;
 import org.compiere.orm.PO;
 import org.idempiere.common.util.KeyNamePair;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for C_AddressTransaction
@@ -193,8 +192,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    */
   public void setC_AddressValidation_ID(int C_AddressValidation_ID) {
     if (C_AddressValidation_ID < 1) set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, null);
-    else
-      set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
+    else set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
   }
 
   /**

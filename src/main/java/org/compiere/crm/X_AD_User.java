@@ -3,7 +3,6 @@ package org.compiere.crm;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
 import org.compiere.model.*;
 import org.compiere.orm.BasePONameValue;
 import org.compiere.orm.MTable;
@@ -47,7 +46,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   public String toString() {
-      return "X_AD_User[" + getId() + "]";
+    return "X_AD_User[" + getId() + "]";
   }
 
   /**
@@ -213,8 +212,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_BPartner getC_BPartner() throws RuntimeException {
     return (I_C_BPartner)
-        MTable.get(getCtx(), I_C_BPartner.Table_Name)
-            .getPO(getC_BPartner_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartner_ID(), get_TrxName());
   }
 
   /**
@@ -267,8 +265,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_Campaign getC_Campaign() throws RuntimeException {
     return (I_C_Campaign)
-        MTable.get(getCtx(), I_C_Campaign.Table_Name)
-            .getPO(getC_Campaign_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Campaign.Table_Name).getPO(getC_Campaign_ID(), get_TrxName());
   }
 
   /**
@@ -294,8 +291,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_Greeting getC_Greeting() throws RuntimeException {
     return (I_C_Greeting)
-        MTable.get(getCtx(), I_C_Greeting.Table_Name)
-            .getPO(getC_Greeting_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Greeting.Table_Name).getPO(getC_Greeting_ID(), get_TrxName());
   }
 
   /**
@@ -320,9 +316,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   public I_C_Job getC_Job() throws RuntimeException {
-    return (I_C_Job)
-        MTable.get(getCtx(), I_C_Job.Table_Name)
-            .getPO(getC_Job_ID(), get_TrxName());
+    return (I_C_Job) MTable.get(getCtx(), I_C_Job.Table_Name).getPO(getC_Job_ID(), get_TrxName());
   }
 
   /**
@@ -606,7 +600,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return The selected mail template will be automatically inserted when creating an email
    */
   public boolean isAddMailTextAutomatically() {
-      return charToBoolean( get_Value(COLUMNNAME_IsAddMailTextAutomatically));
+    return charToBoolean(get_Value(COLUMNNAME_IsAddMailTextAutomatically));
   }
 
   /**
@@ -624,7 +618,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return Expired
    */
   public boolean isExpired() {
-      return charToBoolean(get_Value(COLUMNNAME_IsExpired));
+    return charToBoolean(get_Value(COLUMNNAME_IsExpired));
   }
 
   /**
@@ -643,7 +637,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return The user/contact has full access to Business Partner information and resources
    */
   public boolean isFullBPAccess() {
-      return charToBoolean(get_Value(COLUMNNAME_IsFullBPAccess));
+    return charToBoolean(get_Value(COLUMNNAME_IsFullBPAccess));
   }
 
   /**
@@ -1096,8 +1090,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_AD_User getSupervisor() throws RuntimeException {
     return (I_AD_User)
-        MTable.get(getCtx(), I_AD_User.Table_Name)
-            .getPO(getSupervisor_ID(), get_TrxName());
+        MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSupervisor_ID(), get_TrxName());
   }
 
   /**
@@ -1157,8 +1150,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_UserPIN);
   }
 
-    @Override
-    public int getTableId() {
-        return I_AD_User.Table_ID;
-    }
+  @Override
+  public int getTableId() {
+    return I_AD_User.Table_ID;
+  }
 }

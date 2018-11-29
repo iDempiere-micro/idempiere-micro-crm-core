@@ -6,7 +6,6 @@ import java.util.Properties;
 import org.compiere.model.I_C_CountryGroup;
 import org.compiere.orm.BasePONameValue;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for C_CountryGroup

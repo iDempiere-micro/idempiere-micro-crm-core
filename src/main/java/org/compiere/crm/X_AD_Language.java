@@ -6,7 +6,6 @@ import org.compiere.model.I_AD_Language;
 import org.compiere.orm.BasePOName;
 import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for AD_Language
