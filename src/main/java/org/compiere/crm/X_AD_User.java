@@ -3,12 +3,11 @@ package org.compiere.crm;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-import org.compiere.model.I_AD_User;
-import org.compiere.model.I_C_Location;
+
+import org.compiere.model.*;
 import org.compiere.orm.BasePONameValue;
 import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
-import org.idempiere.orm.POInfo;
 
 /**
  * Generated Model for AD_User
@@ -47,15 +46,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_AD_User[").append(getId()).append("]");
-    return sb.toString();
+      return "X_AD_User[" + getId() + "]";
   }
 
   /**
@@ -65,7 +57,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setAD_Image_ID(int AD_Image_ID) {
     if (AD_Image_ID < 1) set_Value(COLUMNNAME_AD_Image_ID, null);
-    else set_Value(COLUMNNAME_AD_Image_ID, Integer.valueOf(AD_Image_ID));
+    else set_Value(COLUMNNAME_AD_Image_ID, AD_Image_ID);
   }
 
   /**
@@ -86,7 +78,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setAD_OrgTrx_ID(int AD_OrgTrx_ID) {
     if (AD_OrgTrx_ID < 1) set_Value(COLUMNNAME_AD_OrgTrx_ID, null);
-    else set_Value(COLUMNNAME_AD_OrgTrx_ID, Integer.valueOf(AD_OrgTrx_ID));
+    else set_Value(COLUMNNAME_AD_OrgTrx_ID, AD_OrgTrx_ID);
   }
 
   /**
@@ -107,7 +99,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setAD_User_ID(int AD_User_ID) {
     if (AD_User_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_User_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_AD_User_ID, Integer.valueOf(AD_User_ID));
+    else set_ValueNoCheck(COLUMNNAME_AD_User_ID, AD_User_ID);
   }
 
   /**
@@ -187,7 +179,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setBP_Location_ID(int BP_Location_ID) {
     if (BP_Location_ID < 1) set_Value(COLUMNNAME_BP_Location_ID, null);
-    else set_Value(COLUMNNAME_BP_Location_ID, Integer.valueOf(BP_Location_ID));
+    else set_Value(COLUMNNAME_BP_Location_ID, BP_Location_ID);
   }
 
   /**
@@ -219,9 +211,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_BPName);
   }
 
-  public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException {
-    return (org.compiere.model.I_C_BPartner)
-        MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)
+  public I_C_BPartner getC_BPartner() throws RuntimeException {
+    return (I_C_BPartner)
+        MTable.get(getCtx(), I_C_BPartner.Table_Name)
             .getPO(getC_BPartner_ID(), get_TrxName());
   }
 
@@ -232,7 +224,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setC_BPartner_ID(int C_BPartner_ID) {
     if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
+    else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
   }
 
   /**
@@ -246,9 +238,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
-  public org.compiere.model.I_C_BPartner_Location getC_BPartner_Location() throws RuntimeException {
-    return (org.compiere.model.I_C_BPartner_Location)
-        MTable.get(getCtx(), org.compiere.model.I_C_BPartner_Location.Table_Name)
+  public I_C_BPartner_Location getC_BPartner_Location() throws RuntimeException {
+    return (I_C_BPartner_Location)
+        MTable.get(getCtx(), I_C_BPartner_Location.Table_Name)
             .getPO(getC_BPartner_Location_ID(), get_TrxName());
   }
 
@@ -259,7 +251,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
     if (C_BPartner_Location_ID < 1) set_Value(COLUMNNAME_C_BPartner_Location_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_Location_ID, Integer.valueOf(C_BPartner_Location_ID));
+    else set_Value(COLUMNNAME_C_BPartner_Location_ID, C_BPartner_Location_ID);
   }
 
   /**
@@ -273,9 +265,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
-  public org.compiere.model.I_C_Campaign getC_Campaign() throws RuntimeException {
-    return (org.compiere.model.I_C_Campaign)
-        MTable.get(getCtx(), org.compiere.model.I_C_Campaign.Table_Name)
+  public I_C_Campaign getC_Campaign() throws RuntimeException {
+    return (I_C_Campaign)
+        MTable.get(getCtx(), I_C_Campaign.Table_Name)
             .getPO(getC_Campaign_ID(), get_TrxName());
   }
 
@@ -286,7 +278,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setC_Campaign_ID(int C_Campaign_ID) {
     if (C_Campaign_ID < 1) set_Value(COLUMNNAME_C_Campaign_ID, null);
-    else set_Value(COLUMNNAME_C_Campaign_ID, Integer.valueOf(C_Campaign_ID));
+    else set_Value(COLUMNNAME_C_Campaign_ID, C_Campaign_ID);
   }
 
   /**
@@ -300,9 +292,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
-  public org.compiere.model.I_C_Greeting getC_Greeting() throws RuntimeException {
-    return (org.compiere.model.I_C_Greeting)
-        MTable.get(getCtx(), org.compiere.model.I_C_Greeting.Table_Name)
+  public I_C_Greeting getC_Greeting() throws RuntimeException {
+    return (I_C_Greeting)
+        MTable.get(getCtx(), I_C_Greeting.Table_Name)
             .getPO(getC_Greeting_ID(), get_TrxName());
   }
 
@@ -313,7 +305,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setC_Greeting_ID(int C_Greeting_ID) {
     if (C_Greeting_ID < 1) set_Value(COLUMNNAME_C_Greeting_ID, null);
-    else set_Value(COLUMNNAME_C_Greeting_ID, Integer.valueOf(C_Greeting_ID));
+    else set_Value(COLUMNNAME_C_Greeting_ID, C_Greeting_ID);
   }
 
   /**
@@ -327,9 +319,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
-  public org.compiere.model.I_C_Job getC_Job() throws RuntimeException {
-    return (org.compiere.model.I_C_Job)
-        MTable.get(getCtx(), org.compiere.model.I_C_Job.Table_Name)
+  public I_C_Job getC_Job() throws RuntimeException {
+    return (I_C_Job)
+        MTable.get(getCtx(), I_C_Job.Table_Name)
             .getPO(getC_Job_ID(), get_TrxName());
   }
 
@@ -340,7 +332,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setC_Job_ID(int C_Job_ID) {
     if (C_Job_ID < 1) set_Value(COLUMNNAME_C_Job_ID, null);
-    else set_Value(COLUMNNAME_C_Job_ID, Integer.valueOf(C_Job_ID));
+    else set_Value(COLUMNNAME_C_Job_ID, C_Job_ID);
   }
 
   /**
@@ -366,7 +358,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setC_Location_ID(int C_Location_ID) {
     if (C_Location_ID < 1) set_Value(COLUMNNAME_C_Location_ID, null);
-    else set_Value(COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
+    else set_Value(COLUMNNAME_C_Location_ID, C_Location_ID);
   }
 
   /**
@@ -566,7 +558,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @param FailedLoginCount Failed Login Count
    */
   public void setFailedLoginCount(int FailedLoginCount) {
-    set_Value(COLUMNNAME_FailedLoginCount, Integer.valueOf(FailedLoginCount));
+    set_Value(COLUMNNAME_FailedLoginCount, FailedLoginCount);
   }
 
   /**
@@ -605,7 +597,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    *     when creating an email
    */
   public void setIsAddMailTextAutomatically(boolean IsAddMailTextAutomatically) {
-    set_Value(COLUMNNAME_IsAddMailTextAutomatically, Boolean.valueOf(IsAddMailTextAutomatically));
+    set_Value(COLUMNNAME_IsAddMailTextAutomatically, IsAddMailTextAutomatically);
   }
 
   /**
@@ -614,12 +606,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return The selected mail template will be automatically inserted when creating an email
    */
   public boolean isAddMailTextAutomatically() {
-    Object oo = get_Value(COLUMNNAME_IsAddMailTextAutomatically);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+      return charToBoolean( get_Value(COLUMNNAME_IsAddMailTextAutomatically));
   }
 
   /**
@@ -628,7 +615,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @param IsExpired Expired
    */
   public void setIsExpired(boolean IsExpired) {
-    set_Value(COLUMNNAME_IsExpired, Boolean.valueOf(IsExpired));
+    set_Value(COLUMNNAME_IsExpired, IsExpired);
   }
 
   /**
@@ -637,12 +624,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return Expired
    */
   public boolean isExpired() {
-    Object oo = get_Value(COLUMNNAME_IsExpired);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+      return charToBoolean(get_Value(COLUMNNAME_IsExpired));
   }
 
   /**
@@ -652,7 +634,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    *     resources
    */
   public void setIsFullBPAccess(boolean IsFullBPAccess) {
-    set_Value(COLUMNNAME_IsFullBPAccess, Boolean.valueOf(IsFullBPAccess));
+    set_Value(COLUMNNAME_IsFullBPAccess, IsFullBPAccess);
   }
 
   /**
@@ -661,12 +643,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return The user/contact has full access to Business Partner information and resources
    */
   public boolean isFullBPAccess() {
-    Object oo = get_Value(COLUMNNAME_IsFullBPAccess);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+      return charToBoolean(get_Value(COLUMNNAME_IsFullBPAccess));
   }
 
   /**
@@ -675,7 +652,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @param IsInPayroll Defined if any User Contact will be used for Calculate Payroll
    */
   public void setIsInPayroll(boolean IsInPayroll) {
-    set_Value(COLUMNNAME_IsInPayroll, Boolean.valueOf(IsInPayroll));
+    set_Value(COLUMNNAME_IsInPayroll, IsInPayroll);
   }
 
   /**
@@ -684,12 +661,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return Defined if any User Contact will be used for Calculate Payroll
    */
   public boolean isInPayroll() {
-    Object oo = get_Value(COLUMNNAME_IsInPayroll);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsInPayroll));
   }
 
   /**
@@ -698,7 +670,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @param IsLocked Locked
    */
   public void setIsLocked(boolean IsLocked) {
-    set_Value(COLUMNNAME_IsLocked, Boolean.valueOf(IsLocked));
+    set_Value(COLUMNNAME_IsLocked, IsLocked);
   }
 
   /**
@@ -707,12 +679,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return Locked
    */
   public boolean isLocked() {
-    Object oo = get_Value(COLUMNNAME_IsLocked);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsLocked));
   }
 
   /** IsMenuAutoExpand AD_Reference_ID=319 */
@@ -746,7 +713,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @param IsNoPasswordReset No Password Reset
    */
   public void setIsNoPasswordReset(boolean IsNoPasswordReset) {
-    set_Value(COLUMNNAME_IsNoPasswordReset, Boolean.valueOf(IsNoPasswordReset));
+    set_Value(COLUMNNAME_IsNoPasswordReset, IsNoPasswordReset);
   }
 
   /**
@@ -755,12 +722,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return No Password Reset
    */
   public boolean isNoPasswordReset() {
-    Object oo = get_Value(COLUMNNAME_IsNoPasswordReset);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsNoPasswordReset));
   }
 
   /**
@@ -769,7 +731,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @param IsSalesLead This contact is a sales lead
    */
   public void setIsSalesLead(boolean IsSalesLead) {
-    set_Value(COLUMNNAME_IsSalesLead, Boolean.valueOf(IsSalesLead));
+    set_Value(COLUMNNAME_IsSalesLead, IsSalesLead);
   }
 
   /**
@@ -778,12 +740,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return This contact is a sales lead
    */
   public boolean isSalesLead() {
-    Object oo = get_Value(COLUMNNAME_IsSalesLead);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsSalesLead));
   }
 
   /**
@@ -1035,7 +992,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @param Processing Process Now
    */
   public void setProcessing(boolean Processing) {
-    set_Value(COLUMNNAME_Processing, Boolean.valueOf(Processing));
+    set_Value(COLUMNNAME_Processing, Processing);
   }
 
   /**
@@ -1044,17 +1001,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    * @return Process Now
    */
   public boolean isProcessing() {
-    Object oo = get_Value(COLUMNNAME_Processing);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_Processing));
   }
 
-  public org.compiere.model.I_R_MailText getR_DefaultMailText() throws RuntimeException {
-    return (org.compiere.model.I_R_MailText)
-        MTable.get(getCtx(), org.compiere.model.I_R_MailText.Table_Name)
+  public I_R_MailText getR_DefaultMailText() throws RuntimeException {
+    return (I_R_MailText)
+        MTable.get(getCtx(), I_R_MailText.Table_Name)
             .getPO(getR_DefaultMailText_ID(), get_TrxName());
   }
 
@@ -1065,7 +1017,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setR_DefaultMailText_ID(int R_DefaultMailText_ID) {
     if (R_DefaultMailText_ID < 1) set_Value(COLUMNNAME_R_DefaultMailText_ID, null);
-    else set_Value(COLUMNNAME_R_DefaultMailText_ID, Integer.valueOf(R_DefaultMailText_ID));
+    else set_Value(COLUMNNAME_R_DefaultMailText_ID, R_DefaultMailText_ID);
   }
 
   /**
@@ -1092,7 +1044,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setSalesRep_ID(int SalesRep_ID) {
     if (SalesRep_ID < 1) set_Value(COLUMNNAME_SalesRep_ID, null);
-    else set_Value(COLUMNNAME_SalesRep_ID, Integer.valueOf(SalesRep_ID));
+    else set_Value(COLUMNNAME_SalesRep_ID, SalesRep_ID);
   }
 
   /**
@@ -1142,9 +1094,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_SecurityQuestion);
   }
 
-  public org.compiere.model.I_AD_User getSupervisor() throws RuntimeException {
-    return (org.compiere.model.I_AD_User)
-        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
+  public I_AD_User getSupervisor() throws RuntimeException {
+    return (I_AD_User)
+        MTable.get(getCtx(), I_AD_User.Table_Name)
             .getPO(getSupervisor_ID(), get_TrxName());
   }
 
@@ -1155,7 +1107,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public void setSupervisor_ID(int Supervisor_ID) {
     if (Supervisor_ID < 1) set_Value(COLUMNNAME_Supervisor_ID, null);
-    else set_Value(COLUMNNAME_Supervisor_ID, Integer.valueOf(Supervisor_ID));
+    else set_Value(COLUMNNAME_Supervisor_ID, Supervisor_ID);
   }
 
   /**
@@ -1204,4 +1156,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   public String getUserPIN() {
     return (String) get_Value(COLUMNNAME_UserPIN);
   }
+
+    @Override
+    public int getTableId() {
+        return I_AD_User.Table_ID;
+    }
 }

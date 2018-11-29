@@ -33,8 +33,8 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
    * @return true if saved
    */
   public boolean save() {
-    if (getAD_Org_ID() != 0) setAD_Org_ID(0);
-    if (m_createNew) return super.save();
+    if (getOrgId() != 0) setAD_Org_ID(0);
+    if (getCreateNew()) return super.save();
     return saveUpdate();
   } //	save
 
@@ -80,7 +80,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
    * @return Client Info
    */
   public static MClientInfo get(Properties ctx, int AD_Client_ID, String trxName) {
-    Integer key = new Integer(AD_Client_ID);
+    Integer key = AD_Client_ID;
     MClientInfo info = (MClientInfo) s_cache.get(key);
     if (info != null) return info;
     //

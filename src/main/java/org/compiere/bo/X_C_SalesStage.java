@@ -124,7 +124,7 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
    * @param IsWon The opportunity was won
    */
   public void setIsWon(boolean IsWon) {
-    set_Value(COLUMNNAME_IsWon, Boolean.valueOf(IsWon));
+    set_Value(COLUMNNAME_IsWon, IsWon);
   }
 
   /**

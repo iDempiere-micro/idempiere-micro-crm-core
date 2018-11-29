@@ -3,6 +3,7 @@ package org.compiere.crm;
 import java.sql.ResultSet;
 import java.util.Properties;
 import org.compiere.model.I_C_AddressTransaction;
+import org.compiere.model.I_C_AddressValidation;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.MTable;
 import org.compiere.orm.PO;
@@ -44,15 +45,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_AddressTransaction[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_AddressTransaction[" + getId() + "]";
   }
 
   /**
@@ -186,9 +180,9 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     return (String) get_Value(COLUMNNAME_C_AddressTransaction_UU);
   }
 
-  public org.compiere.model.I_C_AddressValidation getC_AddressValidation() throws RuntimeException {
-    return (org.compiere.model.I_C_AddressValidation)
-        MTable.get(getCtx(), org.compiere.model.I_C_AddressValidation.Table_Name)
+  public I_C_AddressValidation getC_AddressValidation() throws RuntimeException {
+    return (I_C_AddressValidation)
+        MTable.get(getCtx(), I_C_AddressValidation.Table_Name)
             .getPO(getC_AddressValidation_ID(), get_TrxName());
   }
 
@@ -200,7 +194,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   public void setC_AddressValidation_ID(int C_AddressValidation_ID) {
     if (C_AddressValidation_ID < 1) set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, null);
     else
-      set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, Integer.valueOf(C_AddressValidation_ID));
+      set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
   }
 
   /**
@@ -253,7 +247,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    */
   public void setC_Location_ID(int C_Location_ID) {
     if (C_Location_ID < 1) set_Value(COLUMNNAME_C_Location_ID, null);
-    else set_Value(COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
+    else set_Value(COLUMNNAME_C_Location_ID, C_Location_ID);
   }
 
   /**
@@ -318,12 +312,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    * @return Element is valid
    */
   public boolean isValid() {
-    Object oo = get_Value(COLUMNNAME_IsValid);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_IsValid));
   }
 
   /**
@@ -350,7 +339,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    * @param Processed The document has been processed
    */
   public void setProcessed(boolean Processed) {
-    set_Value(COLUMNNAME_Processed, Boolean.valueOf(Processed));
+    set_Value(COLUMNNAME_Processed, Processed);
   }
 
   /**
@@ -359,12 +348,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    * @return The document has been processed
    */
   public boolean isProcessed() {
-    Object oo = get_Value(COLUMNNAME_Processed);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
+    return charToBoolean(get_Value(COLUMNNAME_Processed));
   }
 
   /**
@@ -401,5 +385,10 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    */
   public String getResult() {
     return (String) get_Value(COLUMNNAME_Result);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_AddressTransaction.Table_ID;
   }
 }

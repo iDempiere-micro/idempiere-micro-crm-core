@@ -38,15 +38,8 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
     return accessLevel.intValue();
   }
 
-  /** Load Meta Data */
-  protected POInfo initPO(Properties ctx) {
-    POInfo poi = POInfo.getPOInfo(ctx, Table_ID, get_TrxName());
-    return poi;
-  }
-
   public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_CountryGroup[").append(getId()).append("]");
-    return sb.toString();
+    return "X_C_CountryGroup[" + getId() + "]";
   }
 
   /**
@@ -56,7 +49,7 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
    */
   public void setC_CountryGroup_ID(int C_CountryGroup_ID) {
     if (C_CountryGroup_ID < 1) set_ValueNoCheck(COLUMNNAME_C_CountryGroup_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_CountryGroup_ID, Integer.valueOf(C_CountryGroup_ID));
+    else set_ValueNoCheck(COLUMNNAME_C_CountryGroup_ID, C_CountryGroup_ID);
   }
 
   /**
@@ -158,5 +151,10 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
    */
   public String getHelp() {
     return (String) get_Value(COLUMNNAME_Help);
+  }
+
+  @Override
+  public int getTableId() {
+    return I_C_CountryGroup.Table_ID;
   }
 }
