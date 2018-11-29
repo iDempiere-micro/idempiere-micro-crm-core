@@ -1,11 +1,7 @@
 package org.compiere.crm;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.Level;
-
 import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.orm.MClient;
@@ -104,7 +100,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
 
   public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
     return (I_C_BPartner)
-            MTable.get(getCtx(), I_C_BPartner.Table_Name)
-                    .getPO(getC_BPartnerCashTrx_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_BPartner.Table_Name)
+            .getPO(getC_BPartnerCashTrx_ID(), get_TrxName());
   }
 } //	MClientInfo

@@ -1,8 +1,9 @@
 package org.compiere.crm;
 
-import java.sql.PreparedStatement;
+import static software.hsharp.core.util.DBKt.getSQLValue;
+import static software.hsharp.core.util.DBKt.getSQLValueEx;
+
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -16,9 +17,6 @@ import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Util;
-
-import static software.hsharp.core.util.DBKt.getSQLValue;
-import static software.hsharp.core.util.DBKt.getSQLValueEx;
 
 /**
  * Location (Address)

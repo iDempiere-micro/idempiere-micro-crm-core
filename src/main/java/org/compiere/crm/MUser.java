@@ -1,18 +1,17 @@
 package org.compiere.crm;
 
+import static software.hsharp.core.util.DBKt.getSQLValue;
+
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import org.compiere.model.HasName;
@@ -31,9 +30,6 @@ import org.idempiere.common.util.Secure;
 import org.idempiere.common.util.SecureEngine;
 import org.idempiere.common.util.Util;
 import software.hsharp.core.models.IUser;
-import software.hsharp.core.util.DB;
-
-import static software.hsharp.core.util.DBKt.getSQLValue;
 
 /**
  * User Model
