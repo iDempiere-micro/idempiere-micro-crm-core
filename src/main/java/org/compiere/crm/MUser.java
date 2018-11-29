@@ -14,6 +14,8 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+
+import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.I_AD_User;
 import org.compiere.model.I_C_BPartner;
@@ -238,6 +240,10 @@ public class MUser extends X_AD_User implements IUser {
    */
   public MUser(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  } //	MUser
+
+  public MUser(Properties ctx, Row row) {
+    super(ctx, row);
   } //	MUser
 
   /** Roles of User with Org */

@@ -15,7 +15,7 @@ import org.compiere.util.Msg;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 
-public class MBPartner extends X_C_BPartner implements I_C_BPartner {
+public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   /** */
   private static final long serialVersionUID = -803727877324075871L;
 
@@ -233,8 +233,6 @@ public class MBPartner extends X_C_BPartner implements I_C_BPartner {
     setC_BP_Group_ID(impBP.getC_BP_Group_ID());
   } //	MBPartner
 
-  /** Users */
-  private MUser[] m_contacts = null;
   /** Addressed */
   private I_C_BPartner_Location[] m_locations = null;
   /** Prim Address */
@@ -242,98 +240,9 @@ public class MBPartner extends X_C_BPartner implements I_C_BPartner {
   /** Prim User */
   private Integer m_primaryAD_User_ID = null;
 
-  /**
-   * Load Default BPartner
-   *
-   * @param AD_Client_ID client
-   * @return true if loaded
-   */
-  private boolean initTemplate(int AD_Client_ID) {
-    if (AD_Client_ID == 0) throw new IllegalArgumentException("Client_ID=0");
-
-    boolean success = true;
-    String sql =
-        "SELECT * FROM C_BPartner "
-            + "WHERE C_BPartner_ID IN (SELECT C_BPartnerCashTrx_ID FROM AD_ClientInfo WHERE AD_Client_ID=?)";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, null);
-      pstmt.setInt(1, AD_Client_ID);
-      rs = pstmt.executeQuery();
-      if (rs.next()) success = load(rs);
-      else {
-        load(0, null);
-        success = false;
-        log.severe("None found");
-      }
-    } catch (Exception e) {
-      log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-    setStandardDefaults();
-    //	Reset
-    set_ValueNoCheck("C_BPartner_ID", I_ZERO);
-    setValue("");
-    setName("");
-    setName2(null);
-    set_ValueNoCheck("C_BPartner_UU", "");
-    return success;
-  } //	getTemplate
-
   public MUser[] getContacts() {
     return getContacts(false);
   }
-
-  /**
-   * Get All Contacts
-   *
-   * @param reload if true users will be requeried
-   * @return contacts
-   */
-  public MUser[] getContacts(boolean reload) {
-    if (reload || m_contacts == null || m_contacts.length == 0) ;
-    else return m_contacts;
-    //
-    ArrayList<MUser> list = new ArrayList<MUser>();
-    final String sql = "SELECT * FROM AD_User WHERE C_BPartner_ID=? ORDER BY AD_User_ID";
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    try {
-      pstmt = DB.prepareStatement(sql, get_TrxName());
-      pstmt.setInt(1, getC_BPartner_ID());
-      rs = pstmt.executeQuery();
-      while (rs.next()) list.add(new MUser(getCtx(), rs, get_TrxName()));
-    } catch (Exception e) {
-      log.log(Level.SEVERE, sql, e);
-    } finally {
-      DB.close(rs, pstmt);
-      rs = null;
-      pstmt = null;
-    }
-
-    m_contacts = new MUser[list.size()];
-    list.toArray(m_contacts);
-    return m_contacts;
-  } //	getContacts
-
-  /**
-   * Get specified or first Contact
-   *
-   * @param AD_User_ID optional user
-   * @return contact or null
-   */
-  public MUser getContact(int AD_User_ID) {
-    MUser[] users = getContacts(false);
-    if (users.length == 0) return null;
-    for (int i = 0; AD_User_ID != 0 && i < users.length; i++) {
-      if (users[i].getAD_User_ID() == AD_User_ID) return users[i];
-    }
-    return users[0];
-  } //	getContact
 
   @Override
   public I_C_BPartner_Location[] getLocations() {
@@ -483,24 +392,6 @@ public class MBPartner extends X_C_BPartner implements I_C_BPartner {
     if (m_primaryC_BPartner_Location_ID == null) return null;
     return new MBPartnerLocation(getCtx(), m_primaryC_BPartner_Location_ID, null);
   } //	getPrimaryC_BPartner_Location
-
-  /**
-   * Get Primary AD_User_ID
-   *
-   * @return AD_User_ID
-   */
-  public int getPrimaryAD_User_ID() {
-    if (m_primaryAD_User_ID == null) {
-      MUser[] users = getContacts(false);
-      //	for (int i = 0; i < users.length; i++)
-      //	{
-      //	}
-      if (m_primaryAD_User_ID == null && users.length > 0)
-        setPrimaryAD_User_ID(users[0].getAD_User_ID());
-    }
-    if (m_primaryAD_User_ID == null) return 0;
-    return m_primaryAD_User_ID.intValue();
-  } //	getPrimaryAD_User_ID
 
   /**
    * Set Primary C_BPartner_Location_ID
