@@ -559,7 +559,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
    * @return true
    */
   protected boolean beforeSave(boolean newRecord) {
-    if (getAD_Org_ID() != 0) setAD_Org_ID(0);
+    if (getOrgId() != 0) setAD_Org_ID(0);
     //	Region Check
     if (getC_Region_ID() != 0) {
       if (m_c == null || m_c.getC_Country_ID() != getC_Country_ID()) getCountry();
@@ -631,7 +631,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
         // 4 - City + Address1 + Address2 + Region + ID
         int bplocname =
             MSysConfig.getIntValue(
-                MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getAD_Org_ID());
+                MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getOrgId());
         if (bplocname < 0 || bplocname > 4) bplocname = 0;
         if (is_ValueChanged(COLUMNNAME_City)
             || is_ValueChanged(COLUMNNAME_C_City_ID)
@@ -709,7 +709,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
   private static MAddressTransaction createAddressTransaction(
       Properties ctx, MLocation location, int C_AddressValidation_ID, String trxName) {
     MAddressTransaction at = new MAddressTransaction(ctx, 0, trxName);
-    at.setAD_Org_ID(location.getAD_Org_ID());
+    at.setAD_Org_ID(location.getOrgId());
     at.setAddress1(location.getAddress1());
     at.setAddress2(location.getAddress2());
     at.setAddress3(location.getAddress3());

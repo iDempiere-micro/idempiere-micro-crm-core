@@ -204,7 +204,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
     m_uniqueName = getName();
     m_unique =
         MSysConfig.getIntValue(
-            MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getAD_Org_ID());
+            MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getOrgId());
     if (m_unique < 0 || m_unique > 4) m_unique = 0;
     if (m_uniqueName != null) { // && m_uniqueName.equals(".")) {
       // default
