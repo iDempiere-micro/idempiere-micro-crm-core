@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
-
 import kotliquery.Row;
 import org.compiere.model.HasName2;
 import org.compiere.model.I_AD_PrintFormat;

@@ -4,12 +4,9 @@ import company.bigger.test.support.BaseTest
 import kotliquery.queryOf
 import kotliquery.using
 import org.compiere.model.I_C_BPartner
-import org.compiere.model.I_C_ContactActivity
 import org.compiere.orm.DefaultModelFactory
 import org.compiere.orm.IModelFactory
-import org.idempiere.common.util.CLogger
 import org.idempiere.common.util.Env
-import org.junit.Ignore
 import org.junit.Test
 import software.hsharp.core.util.DB
 import kotlin.test.assertEquals
@@ -40,13 +37,13 @@ class FactoryTest : BaseTest() {
 
         using(DB.current) { session ->
             val result = session.run(query)
-            //val result2 = modelFactory.getPO("M_PriceList", rs, null)
+            // val result2 = modelFactory.getPO("M_PriceList", rs, null)
             println(result)
-            //println(result2)
+            // println(result2)
             assertNotNull(result)
-            //assertNotNull(result2)
+            // assertNotNull(result2)
             assertEquals(id, result.id)
-            //assertEquals(101, result2.id)
+            // assertEquals(101, result2.id)
         }
     }
 }
