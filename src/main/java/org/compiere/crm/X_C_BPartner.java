@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
+
+import kotliquery.Row;
 import org.compiere.model.HasName2;
 import org.compiere.model.I_AD_PrintFormat;
 import org.compiere.model.I_AD_User;
@@ -47,6 +49,10 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   /** Load Constructor */
   public X_C_BPartner(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  }
+
+  public X_C_BPartner(Properties ctx, Row row) {
+    super(ctx, row);
   }
 
   /**

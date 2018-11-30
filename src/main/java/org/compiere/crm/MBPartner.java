@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.logging.Level;
+
+import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.orm.MTree_Base;
@@ -154,6 +156,9 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    */
   public MBPartner(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  } //	MBPartner
+  public MBPartner(Properties ctx, Row row) {
+    super(ctx, row);
   } //	MBPartner
 
   /**

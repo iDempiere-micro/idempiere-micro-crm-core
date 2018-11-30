@@ -1,5 +1,6 @@
 package org.compiere.crm
 
+import kotliquery.Row
 import kotliquery.queryOf
 import org.compiere.model.I_C_BPartner_Location
 import software.hsharp.core.util.DB
@@ -8,6 +9,7 @@ import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner {
     constructor(ctx: Properties, rs: ResultSet, trxName: String) : super(ctx, rs, trxName)
+    constructor(ctx: Properties, row: Row) : super(ctx, row)
     constructor(ctx: Properties, id: Int, trxName: String) : super(ctx, id, trxName)
 
     /** Users  */

@@ -61,6 +61,13 @@
             <version>1.4.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.iDempiere-micro</groupId>
+            <artifactId>idempiere-micro-test-support</artifactId>
+            <version>0.0.2</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
