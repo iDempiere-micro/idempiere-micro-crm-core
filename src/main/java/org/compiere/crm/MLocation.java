@@ -570,6 +570,9 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     return true;
   } //	beforeSave
 
+  public static final String updateBPLocName =
+          "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = ? AND IsPreserveCustomName = 'N'";
+
   /**
    * After Save
    *

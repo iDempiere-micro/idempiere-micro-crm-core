@@ -4,6 +4,7 @@ import company.bigger.test.support.BaseTest
 import kotliquery.queryOf
 import kotliquery.using
 import org.compiere.model.I_C_BPartner
+import org.compiere.model.I_C_BPartner_Location
 import org.compiere.orm.DefaultModelFactory
 import org.compiere.orm.IModelFactory
 import org.idempiere.common.util.Env
@@ -27,23 +28,27 @@ class FactoryTest : BaseTest() {
 
         val sql =
             ("""
-                SELECT * FROM adempiere."$tableName", adempiere.M_PriceList WHERE ("$tableName".ad_client_id = ? OR "$tableName".ad_client_id=0) AND ("$tableName".ad_org_id = ? OR "$tableName".ad_org_id=0) AND ("${tableName}_ID"=?) AND (M_PriceList.M_PriceList_ID = C_BPartner.M_PriceList_ID);
+                SELECT adempiere."$tableName".*,
+                c_bpartner_location_id, isbillto, isshipto, ispayfrom, isremitto, phone, phone2, fax, isdn, c_salesregion_id, c_location_id, c_bpartner_location_uu, customeraddressid, ispreservecustomname
+                FROM adempiere."$tableName", adempiere.c_bpartner_location WHERE ("$tableName".ad_client_id = ? OR "$tableName".ad_client_id=0) AND ("$tableName".ad_org_id = ? OR "$tableName".ad_org_id=0) AND (adempiere."$tableName"."${tableName}_ID"=?) AND (c_bpartner_location.c_bpartner_id = C_BPartner.c_bpartner_id);
                 """.trimIndent()
                     ).toLowerCase()
         println("SQL:$sql")
 
         val modelFactory: IModelFactory = DefaultModelFactory()
-        val query = queryOf(sql, AD_CLIENT_ID, AD_ORG_ID, id).map { modelFactory.getPO<I_C_BPartner>(tableName, it) }.asSingle
+        val query =
+            queryOf(sql, AD_CLIENT_ID, AD_ORG_ID, id).map {
+                Pair(modelFactory.getPO<I_C_BPartner>(tableName, it), modelFactory.getPO<I_C_BPartner_Location>(I_C_BPartner_Location.Table_Name, it))
+            }.asSingle
 
         using(DB.current) { session ->
-            val result = session.run(query)
-            // val result2 = modelFactory.getPO("M_PriceList", rs, null)
-            println(result)
-            // println(result2)
-            assertNotNull(result)
-            // assertNotNull(result2)
+            val row = session.run(query)
+            assertNotNull(row)
+            val result = row.first
+            val result2 = row.second
+
             assertEquals(id, result.id)
-            // assertEquals(101, result2.id)
+            assertEquals(113, result2.c_BPartner_Location_ID)
         }
     }
 }

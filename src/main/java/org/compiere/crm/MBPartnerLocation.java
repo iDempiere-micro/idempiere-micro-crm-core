@@ -153,7 +153,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
     if (getC_Location_ID() == 0) return false;
 
     // Set New Name
-    if (".".equals(getName())) {
+    if (".".equals(getName()) && !isPreserveCustomName()) {
       MLocation address = getLocation(true);
       setName(getBPLocName(address));
     }
@@ -206,6 +206,9 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
   } // makeUnique
 
   public String getBPLocName(MLocation address) {
+
+    if (isPreserveCustomName()) return getName();
+
     m_uniqueName = getName();
     m_unique =
         MSysConfig.getIntValue(
