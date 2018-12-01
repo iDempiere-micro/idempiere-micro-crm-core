@@ -8,9 +8,9 @@ import java.sql.ResultSet
 import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner {
-    constructor(ctx: Properties, rs: ResultSet, trxName: String) : super(ctx, rs, trxName)
+    constructor(ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
     constructor(ctx: Properties, row: Row) : super(ctx, row)
-    constructor(ctx: Properties, id: Int, trxName: String) : super(ctx, id, trxName)
+    constructor(ctx: Properties, id: Int, trxName: String?) : super(ctx, id, trxName)
 
     /** Users  */
     private val m_contacts: MutableList<MUser> = mutableListOf()

@@ -2,12 +2,22 @@ package org.compiere.crm
 
 import company.bigger.test.support.BaseTest
 import company.bigger.test.support.randomString
+import kotliquery.HikariCP
 import org.compiere.model.I_C_BPartner
 import org.idempiere.common.util.Env
 import org.junit.Test
+import software.hsharp.core.orm.DummyEventManager
 import kotlin.test.assertEquals
 
+internal val sessionUrl = System.getenv("SESSION_URL") ?: "jdbc:postgresql://localhost:5433/idempiere"
+
 class BPartnerTest: BaseTest() {
+
+    init {
+        HikariCP.default(sessionUrl, "adempiere", "adempiere")
+        DummyEventManager()
+    }
+
     @Test
     fun `loading saving finding business partner work`() {
         val ctx = Env.getCtx()
