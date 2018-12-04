@@ -62,6 +62,9 @@ class BPartnerTest: BaseTest() {
         val defaultCountry = MCountry.getDefault(ctx)
         val defaultRegion = MRegion.getDefault(ctx)
         val location = MLocation(defaultCountry, defaultRegion)
+        location.address1 = "Address 1"
+        location.address2 = "Address 2"
+        location.city = "City"
         location.save()
         val partnerLocation = MBPartnerLocation(newPartner)
         partnerLocation.c_Location_ID = location.c_Location_ID
