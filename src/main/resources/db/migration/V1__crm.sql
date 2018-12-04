@@ -91,3 +91,7 @@ COPY adempiere.ad_column (ad_column_id, ad_client_id, ad_org_id, isactive, creat
 1000022	0	0	Y	2018-10-27 14:28:39.523	2018-10-27 14:28:39.523	0	0	CRM Category	\N	\N	0.0	C	Crm_Category_ID	1000001	19	\N	\N	131089	\N	N	N	Y	N	\N	N	\N	N	N	\N	\N	\N	\N	N	1000000	\N	N	N	\N	\N	\N	N	Y	\N	141db155-2130-4302-97f5-b124d12aeb45	Y	\N	N	N	\N	\N	N	\N
 \.
 
+COPY adempiere.ad_sequence (ad_sequence_id, ad_client_id, ad_org_id, isactive, created, createdby, updated, updatedby, name, description, vformat, isautosequence, incrementno, startno, currentnext, currentnextsys, isaudited, istableid, prefix, suffix, startnewyear, datecolumn, decimalpattern, ad_sequence_uu, startnewmonth, isorglevelsequence, orgcolumn) FROM stdin;
+1000000	0	0	Y	2018-10-27 14:27:13.535	0	2018-10-27 14:27:13.535	0	Crm_Category	Table Crm_Category	\N	Y	1	1000000	1000000	200000	N	Y	\N	\N	N	\N	\N	6a5e43bb-bbe0-4778-b016-110e6e022fba	N	N	\N
+1000001	0	0	Y	2018-10-27 14:28:34.879	0	2018-10-27 14:28:34.879	0	Crm_Customer_Category	Table Crm_Customer_Category	\N	Y	1	1000000	1000000	200000	N	Y	\N	\N	N	\N	\N	07461929-e9e1-4359-972f-f385f22f9b5f	N	N	\N
+\.
