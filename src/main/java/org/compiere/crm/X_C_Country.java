@@ -2,6 +2,8 @@ package org.compiere.crm;
 
 import java.sql.ResultSet;
 import java.util.Properties;
+
+import kotliquery.Row;
 import org.compiere.model.I_C_Country;
 import org.compiere.orm.BasePOName;
 import org.compiere.orm.MTable;
@@ -32,7 +34,9 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   public X_C_Country(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   }
-
+  public X_C_Country(Properties ctx, Row row) {
+    super(ctx, row);
+  }
   /**
    * AccessLevel
    *

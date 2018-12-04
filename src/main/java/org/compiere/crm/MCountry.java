@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.logging.Level;
+
+import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.I_AD_Language;
 import org.compiere.model.I_C_Country;
@@ -194,6 +196,9 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
   public MCountry(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   } //	MCountry
+  public MCountry(Properties ctx, Row row) {
+    super(ctx, row);
+  }
 
   /**
    * Return Name - translated if DisplayLanguage is set.

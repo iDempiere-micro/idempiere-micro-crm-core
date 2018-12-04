@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+
+import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.Query;
 import org.compiere.util.Msg;
@@ -89,6 +91,9 @@ public class MLanguage extends X_AD_Language {
   public MLanguage(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   } //	MLanguage
+  public MLanguage(Properties ctx, Row row) {
+    super(ctx, row);
+  }
 
   /**
    * Create Language

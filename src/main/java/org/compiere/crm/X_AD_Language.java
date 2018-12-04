@@ -2,6 +2,8 @@ package org.compiere.crm;
 
 import java.sql.ResultSet;
 import java.util.Properties;
+
+import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.BasePOName;
 import org.compiere.orm.MTable;
@@ -26,6 +28,9 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   /** Load Constructor */
   public X_AD_Language(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  }
+  public X_AD_Language(Properties ctx, Row row) {
+    super(ctx, row);
   }
 
   /**
