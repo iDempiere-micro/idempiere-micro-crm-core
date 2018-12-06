@@ -1,6 +1,5 @@
 package org.compiere.crm
 
-import company.bigger.test.support.BaseTest
 import company.bigger.test.support.randomString
 import kotliquery.HikariCP
 import org.compiere.model.I_C_BPartner

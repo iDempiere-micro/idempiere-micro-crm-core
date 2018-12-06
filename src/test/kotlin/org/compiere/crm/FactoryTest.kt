@@ -1,6 +1,5 @@
 package org.compiere.crm
 
-import company.bigger.test.support.BaseTest
 import kotliquery.queryOf
 import kotliquery.using
 import org.compiere.model.I_C_BPartner

@@ -1,6 +1,5 @@
 package org.compiere.crm
 
-import company.bigger.test.support.BaseTest
 import kotliquery.HikariCP
 import org.compiere.orm.DefaultModelFactory
 import org.compiere.orm.IModelFactory
