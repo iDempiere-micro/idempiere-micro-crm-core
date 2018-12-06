@@ -13,7 +13,7 @@ import software.hsharp.core.util.DB
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-class FactoryTest : BaseTest() {
+class FactoryTest : BaseCrmTest() {
     @Test
     fun `get business partner from complex SQL`() {
         val ctx = Env.getCtx()
