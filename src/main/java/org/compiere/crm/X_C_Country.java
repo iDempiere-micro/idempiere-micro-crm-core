@@ -17,536 +17,546 @@ import org.idempiere.orm.I_Persistent;
  */
 public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent {
 
-  /** */
-  private static final long serialVersionUID = 20171031L;
-
-  /** Standard Constructor */
-  public X_C_Country(Properties ctx, int C_Country_ID, String trxName) {
-    super(ctx, C_Country_ID, trxName);
     /**
-     * if (C_Country_ID == 0) { setC_Country_ID (0); setCountryCode (null); setDisplaySequence
-     * (null); // @C@, @R@ @P@ setHasPostal_Add (false); setHasRegion (false);
-     * setIsAddressLinesLocalReverse (false); setIsAddressLinesReverse (false); setName (null); }
+     * AD_Language AD_Reference_ID=106
      */
-  }
+    public static final int AD_LANGUAGE_AD_Reference_ID = 106;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 20171031L;
 
-  /** Load Constructor */
-  public X_C_Country(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
-  }
-  public X_C_Country(Properties ctx, Row row) {
-    super(ctx, row);
-  }
-  /**
-   * AccessLevel
-   *
-   * @return 6 - System - Client
-   */
-  protected int getAccessLevel() {
-    return accessLevel.intValue();
-  }
-
-  public String toString() {
-    return "X_C_Country[" + getId() + "]";
-  }
-
-  /** AD_Language AD_Reference_ID=106 */
-  public static final int AD_LANGUAGE_AD_Reference_ID = 106;
-  /**
-   * Set Language.
-   *
-   * @param AD_Language Language for this entity
-   */
-  public void setADLanguage(String AD_Language) {
-
-    set_Value(COLUMNNAME_AD_Language, AD_Language);
-  }
-
-  /**
-   * Get Language.
-   *
-   * @return Language for this entity
-   */
-  public String getADLanguage() {
-    return (String) get_Value(COLUMNNAME_AD_Language);
-  }
-
-  /**
-   * Set Allow Cities out of List.
-   *
-   * @param AllowCitiesOutOfList A flag to allow cities, currently not in the list, to be entered
-   */
-  public void setAllowCitiesOutOfList(boolean AllowCitiesOutOfList) {
-    set_Value(COLUMNNAME_AllowCitiesOutOfList, Boolean.valueOf(AllowCitiesOutOfList));
-  }
-
-  /**
-   * Get Allow Cities out of List.
-   *
-   * @return A flag to allow cities, currently not in the list, to be entered
-   */
-  public boolean isAllowCitiesOutOfList() {
-    Object oo = get_Value(COLUMNNAME_AllowCitiesOutOfList);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
+    /**
+     * Standard Constructor
+     */
+    public X_C_Country(Properties ctx, int C_Country_ID, String trxName) {
+        super(ctx, C_Country_ID, trxName);
+        /**
+         * if (C_Country_ID == 0) { setC_Country_ID (0); setCountryCode (null); setDisplaySequence
+         * (null); // @C@, @R@ @P@ setHasPostal_Add (false); setHasRegion (false);
+         * setIsAddressLinesLocalReverse (false); setIsAddressLinesReverse (false); setName (null); }
+         */
     }
-    return false;
-  }
 
-  /**
-   * Set Capture Sequence.
-   *
-   * @param CaptureSequence Capture Sequence
-   */
-  public void setCaptureSequence(String CaptureSequence) {
-    set_Value(COLUMNNAME_CaptureSequence, CaptureSequence);
-  }
+    /**
+     * Load Constructor
+     */
+    public X_C_Country(Properties ctx, ResultSet rs, String trxName) {
+        super(ctx, rs, trxName);
+    }
 
-  /**
-   * Get Capture Sequence.
-   *
-   * @return Capture Sequence
-   */
-  public String getCaptureSequence() {
-    return (String) get_Value(COLUMNNAME_CaptureSequence);
-  }
+    public X_C_Country(Properties ctx, Row row) {
+        super(ctx, row);
+    }
 
-  /**
-   * Set Country.
-   *
-   * @param C_Country_ID Country
-   */
-  public void setC_Country_ID(int C_Country_ID) {
-    if (C_Country_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Country_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_Country_ID, Integer.valueOf(C_Country_ID));
-  }
+    /**
+     * AccessLevel
+     *
+     * @return 6 - System - Client
+     */
+    protected int getAccessLevel() {
+        return accessLevel.intValue();
+    }
 
-  /**
-   * Get Country.
-   *
-   * @return Country
-   */
-  public int getC_Country_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_Country_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+    public String toString() {
+        return "X_C_Country[" + getId() + "]";
+    }
 
-  /**
-   * Set C_Country_UU.
-   *
-   * @param C_Country_UU C_Country_UU
-   */
-  public void setC_Country_UU(String C_Country_UU) {
-    set_Value(COLUMNNAME_C_Country_UU, C_Country_UU);
-  }
+    /**
+     * Get Language.
+     *
+     * @return Language for this entity
+     */
+    public String getADLanguage() {
+        return (String) get_Value(COLUMNNAME_AD_Language);
+    }
 
-  /**
-   * Get C_Country_UU.
-   *
-   * @return C_Country_UU
-   */
-  public String getC_Country_UU() {
-    return (String) get_Value(COLUMNNAME_C_Country_UU);
-  }
+    /**
+     * Set Language.
+     *
+     * @param AD_Language Language for this entity
+     */
+    public void setADLanguage(String AD_Language) {
 
-  public org.compiere.model.I_C_Currency getC_Currency() throws RuntimeException {
-    return (org.compiere.model.I_C_Currency)
-        MTable.get(getCtx(), org.compiere.model.I_C_Currency.Table_Name)
-            .getPO(getC_Currency_ID(), get_TrxName());
-  }
+        set_Value(COLUMNNAME_AD_Language, AD_Language);
+    }
 
-  /**
-   * Set Currency.
-   *
-   * @param C_Currency_ID The Currency for this record
-   */
-  public void setC_Currency_ID(int C_Currency_ID) {
-    if (C_Currency_ID < 1) set_Value(COLUMNNAME_C_Currency_ID, null);
-    else set_Value(COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID));
-  }
+    /**
+     * Get Allow Cities out of List.
+     *
+     * @return A flag to allow cities, currently not in the list, to be entered
+     */
+    public boolean isAllowCitiesOutOfList() {
+        Object oo = get_Value(COLUMNNAME_AllowCitiesOutOfList);
+        if (oo != null) {
+            if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
+            return "Y".equals(oo);
+        }
+        return false;
+    }
 
-  /**
-   * Get Currency.
-   *
-   * @return The Currency for this record
-   */
-  public int getC_Currency_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_Currency_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+    /**
+     * Set Allow Cities out of List.
+     *
+     * @param AllowCitiesOutOfList A flag to allow cities, currently not in the list, to be entered
+     */
+    public void setAllowCitiesOutOfList(boolean AllowCitiesOutOfList) {
+        set_Value(COLUMNNAME_AllowCitiesOutOfList, Boolean.valueOf(AllowCitiesOutOfList));
+    }
 
-  /**
-   * Set ISO Country Code.
-   *
-   * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
-   *     - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
-   */
-  public void setCountryCode(String CountryCode) {
-    set_Value(COLUMNNAME_CountryCode, CountryCode);
-  }
+    /**
+     * Get Capture Sequence.
+     *
+     * @return Capture Sequence
+     */
+    public String getCaptureSequence() {
+        return (String) get_Value(COLUMNNAME_CaptureSequence);
+    }
 
-  /**
-   * Get ISO Country Code.
-   *
-   * @return Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 -
-   *     http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
-   */
-  public String getCountryCode() {
-    return (String) get_Value(COLUMNNAME_CountryCode);
-  }
+    /**
+     * Set Capture Sequence.
+     *
+     * @param CaptureSequence Capture Sequence
+     */
+    public void setCaptureSequence(String CaptureSequence) {
+        set_Value(COLUMNNAME_CaptureSequence, CaptureSequence);
+    }
 
-  /**
-   * Set Description.
-   *
-   * @param Description Optional short description of the record
-   */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
-  }
+    /**
+     * Get Country.
+     *
+     * @return Country
+     */
+    public int getC_Country_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_C_Country_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
-  /**
-   * Get Description.
-   *
-   * @return Optional short description of the record
-   */
-  public String getDescription() {
-    return (String) get_Value(COLUMNNAME_Description);
-  }
+    /**
+     * Set Country.
+     *
+     * @param C_Country_ID Country
+     */
+    public void setC_Country_ID(int C_Country_ID) {
+        if (C_Country_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Country_ID, null);
+        else set_ValueNoCheck(COLUMNNAME_C_Country_ID, Integer.valueOf(C_Country_ID));
+    }
 
-  /**
-   * Set Address Print Format.
-   *
-   * @param DisplaySequence Format for printing this Address
-   */
-  public void setDisplaySequence(String DisplaySequence) {
-    set_Value(COLUMNNAME_DisplaySequence, DisplaySequence);
-  }
+    /**
+     * Get C_Country_UU.
+     *
+     * @return C_Country_UU
+     */
+    public String getC_Country_UU() {
+        return (String) get_Value(COLUMNNAME_C_Country_UU);
+    }
 
-  /**
-   * Get Address Print Format.
-   *
-   * @return Format for printing this Address
-   */
-  public String getDisplaySequence() {
-    return (String) get_Value(COLUMNNAME_DisplaySequence);
-  }
+    /**
+     * Set C_Country_UU.
+     *
+     * @param C_Country_UU C_Country_UU
+     */
+    public void setC_Country_UU(String C_Country_UU) {
+        set_Value(COLUMNNAME_C_Country_UU, C_Country_UU);
+    }
 
-  /**
-   * Set Local Address Format.
-   *
-   * @param DisplaySequenceLocal Format for printing this Address locally
-   */
-  public void setDisplaySequenceLocal(String DisplaySequenceLocal) {
-    set_Value(COLUMNNAME_DisplaySequenceLocal, DisplaySequenceLocal);
-  }
+    public org.compiere.model.I_C_Currency getC_Currency() throws RuntimeException {
+        return (org.compiere.model.I_C_Currency)
+                MTable.get(getCtx(), org.compiere.model.I_C_Currency.Table_Name)
+                        .getPO(getC_Currency_ID(), get_TrxName());
+    }
 
-  /**
-   * Get Local Address Format.
-   *
-   * @return Format for printing this Address locally
-   */
-  public String getDisplaySequenceLocal() {
-    return (String) get_Value(COLUMNNAME_DisplaySequenceLocal);
-  }
+    /**
+     * Get Currency.
+     *
+     * @return The Currency for this record
+     */
+    public int getC_Currency_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_C_Currency_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
-  /**
-   * Set Bank Account No Format.
-   *
-   * @param ExpressionBankAccountNo Format of the Bank Account
-   */
-  public void setExpressionBankAccountNo(String ExpressionBankAccountNo) {
-    set_Value(COLUMNNAME_ExpressionBankAccountNo, ExpressionBankAccountNo);
-  }
+    /**
+     * Set Currency.
+     *
+     * @param C_Currency_ID The Currency for this record
+     */
+    public void setC_Currency_ID(int C_Currency_ID) {
+        if (C_Currency_ID < 1) set_Value(COLUMNNAME_C_Currency_ID, null);
+        else set_Value(COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID));
+    }
 
-  /**
-   * Get Bank Account No Format.
-   *
-   * @return Format of the Bank Account
-   */
-  public String getExpressionBankAccountNo() {
-    return (String) get_Value(COLUMNNAME_ExpressionBankAccountNo);
-  }
+    /**
+     * Get ISO Country Code.
+     *
+     * @return Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 -
+     * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+     */
+    public String getCountryCode() {
+        return (String) get_Value(COLUMNNAME_CountryCode);
+    }
 
-  /**
-   * Set Bank Routing No Format.
-   *
-   * @param ExpressionBankRoutingNo Format of the Bank Routing Number
-   */
-  public void setExpressionBankRoutingNo(String ExpressionBankRoutingNo) {
-    set_Value(COLUMNNAME_ExpressionBankRoutingNo, ExpressionBankRoutingNo);
-  }
+    /**
+     * Set ISO Country Code.
+     *
+     * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
+     *                    - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+     */
+    public void setCountryCode(String CountryCode) {
+        set_Value(COLUMNNAME_CountryCode, CountryCode);
+    }
 
-  /**
-   * Get Bank Routing No Format.
-   *
-   * @return Format of the Bank Routing Number
-   */
-  public String getExpressionBankRoutingNo() {
-    return (String) get_Value(COLUMNNAME_ExpressionBankRoutingNo);
-  }
+    /**
+     * Get Description.
+     *
+     * @return Optional short description of the record
+     */
+    public String getDescription() {
+        return (String) get_Value(COLUMNNAME_Description);
+    }
 
-  /**
-   * Set Phone Format.
-   *
-   * @param ExpressionPhone Format of the phone; Can contain fixed format elements, Variables:
-   *     "_lLoOaAcCa09"
-   */
-  public void setExpressionPhone(String ExpressionPhone) {
-    set_Value(COLUMNNAME_ExpressionPhone, ExpressionPhone);
-  }
+    /**
+     * Set Description.
+     *
+     * @param Description Optional short description of the record
+     */
+    public void setDescription(String Description) {
+        set_Value(COLUMNNAME_Description, Description);
+    }
 
-  /**
-   * Get Phone Format.
-   *
-   * @return Format of the phone; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
-   */
-  public String getExpressionPhone() {
-    return (String) get_Value(COLUMNNAME_ExpressionPhone);
-  }
+    /**
+     * Get Address Print Format.
+     *
+     * @return Format for printing this Address
+     */
+    public String getDisplaySequence() {
+        return (String) get_Value(COLUMNNAME_DisplaySequence);
+    }
 
-  /**
-   * Set Postal Code Format.
-   *
-   * @param ExpressionPostal Format of the postal code; Can contain fixed format elements,
-   *     Variables: "_lLoOaAcCa09"
-   */
-  public void setExpressionPostal(String ExpressionPostal) {
-    set_Value(COLUMNNAME_ExpressionPostal, ExpressionPostal);
-  }
+    /**
+     * Set Address Print Format.
+     *
+     * @param DisplaySequence Format for printing this Address
+     */
+    public void setDisplaySequence(String DisplaySequence) {
+        set_Value(COLUMNNAME_DisplaySequence, DisplaySequence);
+    }
 
-  /**
-   * Get Postal Code Format.
-   *
-   * @return Format of the postal code; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
-   */
-  public String getExpressionPostal() {
-    return (String) get_Value(COLUMNNAME_ExpressionPostal);
-  }
+    /**
+     * Get Local Address Format.
+     *
+     * @return Format for printing this Address locally
+     */
+    public String getDisplaySequenceLocal() {
+        return (String) get_Value(COLUMNNAME_DisplaySequenceLocal);
+    }
 
-  /**
-   * Set Additional Postal Format.
-   *
-   * @param ExpressionPostal_Add Format of the value; Can contain fixed format elements, Variables:
-   *     "_lLoOaAcCa09"
-   */
-  public void setExpressionPostal_Add(String ExpressionPostal_Add) {
-    set_Value(COLUMNNAME_ExpressionPostal_Add, ExpressionPostal_Add);
-  }
+    /**
+     * Set Local Address Format.
+     *
+     * @param DisplaySequenceLocal Format for printing this Address locally
+     */
+    public void setDisplaySequenceLocal(String DisplaySequenceLocal) {
+        set_Value(COLUMNNAME_DisplaySequenceLocal, DisplaySequenceLocal);
+    }
 
-  /**
-   * Get Additional Postal Format.
-   *
-   * @return Format of the value; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
-   */
-  public String getExpressionPostal_Add() {
-    return (String) get_Value(COLUMNNAME_ExpressionPostal_Add);
-  }
+    /**
+     * Get Bank Account No Format.
+     *
+     * @return Format of the Bank Account
+     */
+    public String getExpressionBankAccountNo() {
+        return (String) get_Value(COLUMNNAME_ExpressionBankAccountNo);
+    }
 
-  /**
-   * Set Additional Postal code.
-   *
-   * @param HasPostal_Add Has Additional Postal Code
-   */
-  public void setHasPostal_Add(boolean HasPostal_Add) {
-    set_Value(COLUMNNAME_HasPostal_Add, Boolean.valueOf(HasPostal_Add));
-  }
+    /**
+     * Set Bank Account No Format.
+     *
+     * @param ExpressionBankAccountNo Format of the Bank Account
+     */
+    public void setExpressionBankAccountNo(String ExpressionBankAccountNo) {
+        set_Value(COLUMNNAME_ExpressionBankAccountNo, ExpressionBankAccountNo);
+    }
 
-  /**
-   * Get Additional Postal code.
-   *
-   * @return Has Additional Postal Code
-   */
-  public boolean isHasPostal_Add() {
-    return charToBoolean(get_Value(COLUMNNAME_HasPostal_Add));
-  }
+    /**
+     * Get Bank Routing No Format.
+     *
+     * @return Format of the Bank Routing Number
+     */
+    public String getExpressionBankRoutingNo() {
+        return (String) get_Value(COLUMNNAME_ExpressionBankRoutingNo);
+    }
 
-  /**
-   * Set Country has Region.
-   *
-   * @param HasRegion Country contains Regions
-   */
-  public void setHasRegion(boolean HasRegion) {
-    set_Value(COLUMNNAME_HasRegion, Boolean.valueOf(HasRegion));
-  }
+    /**
+     * Set Bank Routing No Format.
+     *
+     * @param ExpressionBankRoutingNo Format of the Bank Routing Number
+     */
+    public void setExpressionBankRoutingNo(String ExpressionBankRoutingNo) {
+        set_Value(COLUMNNAME_ExpressionBankRoutingNo, ExpressionBankRoutingNo);
+    }
 
-  /**
-   * Get Country has Region.
-   *
-   * @return Country contains Regions
-   */
-  public boolean isHasRegion() {
-    return charToBoolean(get_Value(COLUMNNAME_HasRegion));
-  }
+    /**
+     * Get Phone Format.
+     *
+     * @return Format of the phone; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
+     */
+    public String getExpressionPhone() {
+        return (String) get_Value(COLUMNNAME_ExpressionPhone);
+    }
 
-  /**
-   * Set Reverse Local Address Lines.
-   *
-   * @param IsAddressLinesLocalReverse Print Local Address in reverse Order
-   */
-  public void setIsAddressLinesLocalReverse(boolean IsAddressLinesLocalReverse) {
-    set_Value(COLUMNNAME_IsAddressLinesLocalReverse, Boolean.valueOf(IsAddressLinesLocalReverse));
-  }
+    /**
+     * Set Phone Format.
+     *
+     * @param ExpressionPhone Format of the phone; Can contain fixed format elements, Variables:
+     *                        "_lLoOaAcCa09"
+     */
+    public void setExpressionPhone(String ExpressionPhone) {
+        set_Value(COLUMNNAME_ExpressionPhone, ExpressionPhone);
+    }
 
-  /**
-   * Get Reverse Local Address Lines.
-   *
-   * @return Print Local Address in reverse Order
-   */
-  public boolean isAddressLinesLocalReverse() {
-    return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesLocalReverse));
-  }
+    /**
+     * Get Postal Code Format.
+     *
+     * @return Format of the postal code; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
+     */
+    public String getExpressionPostal() {
+        return (String) get_Value(COLUMNNAME_ExpressionPostal);
+    }
 
-  /**
-   * Set Reverse Address Lines.
-   *
-   * @param IsAddressLinesReverse Print Address in reverse Order
-   */
-  public void setIsAddressLinesReverse(boolean IsAddressLinesReverse) {
-    set_Value(COLUMNNAME_IsAddressLinesReverse, Boolean.valueOf(IsAddressLinesReverse));
-  }
+    /**
+     * Set Postal Code Format.
+     *
+     * @param ExpressionPostal Format of the postal code; Can contain fixed format elements,
+     *                         Variables: "_lLoOaAcCa09"
+     */
+    public void setExpressionPostal(String ExpressionPostal) {
+        set_Value(COLUMNNAME_ExpressionPostal, ExpressionPostal);
+    }
 
-  /**
-   * Get Reverse Address Lines.
-   *
-   * @return Print Address in reverse Order
-   */
-  public boolean isAddressLinesReverse() {
-    return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesReverse));
-  }
+    /**
+     * Get Additional Postal Format.
+     *
+     * @return Format of the value; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
+     */
+    public String getExpressionPostal_Add() {
+        return (String) get_Value(COLUMNNAME_ExpressionPostal_Add);
+    }
 
-  /**
-   * Set Use Postcode Lookup.
-   *
-   * @param IsPostcodeLookup Does this country have a post code web service
-   */
-  public void setIsPostcodeLookup(boolean IsPostcodeLookup) {
-    set_Value(COLUMNNAME_IsPostcodeLookup, Boolean.valueOf(IsPostcodeLookup));
-  }
+    /**
+     * Set Additional Postal Format.
+     *
+     * @param ExpressionPostal_Add Format of the value; Can contain fixed format elements, Variables:
+     *                             "_lLoOaAcCa09"
+     */
+    public void setExpressionPostal_Add(String ExpressionPostal_Add) {
+        set_Value(COLUMNNAME_ExpressionPostal_Add, ExpressionPostal_Add);
+    }
 
-  /**
-   * Get Use Postcode Lookup.
-   *
-   * @return Does this country have a post code web service
-   */
-  public boolean isPostcodeLookup() {
-    return charToBoolean(get_Value(COLUMNNAME_IsPostcodeLookup));
-  }
+    /**
+     * Get Additional Postal code.
+     *
+     * @return Has Additional Postal Code
+     */
+    public boolean isHasPostal_Add() {
+        return charToBoolean(get_Value(COLUMNNAME_HasPostal_Add));
+    }
 
-  /**
-   * Set Lookup ClassName.
-   *
-   * @param LookupClassName The class name of the postcode lookup plugin
-   */
-  public void setLookupClassName(String LookupClassName) {
-    set_Value(COLUMNNAME_LookupClassName, LookupClassName);
-  }
+    /**
+     * Set Additional Postal code.
+     *
+     * @param HasPostal_Add Has Additional Postal Code
+     */
+    public void setHasPostal_Add(boolean HasPostal_Add) {
+        set_Value(COLUMNNAME_HasPostal_Add, Boolean.valueOf(HasPostal_Add));
+    }
 
-  /**
-   * Get Lookup ClassName.
-   *
-   * @return The class name of the postcode lookup plugin
-   */
-  public String getLookupClassName() {
-    return (String) get_Value(COLUMNNAME_LookupClassName);
-  }
+    /**
+     * Get Country has Region.
+     *
+     * @return Country contains Regions
+     */
+    public boolean isHasRegion() {
+        return charToBoolean(get_Value(COLUMNNAME_HasRegion));
+    }
 
-  /**
-   * Set Lookup Client ID.
-   *
-   * @param LookupClientID The ClientID or Login submitted to the Lookup URL
-   */
-  public void setLookupClientID(String LookupClientID) {
-    set_Value(COLUMNNAME_LookupClientID, LookupClientID);
-  }
+    /**
+     * Set Country has Region.
+     *
+     * @param HasRegion Country contains Regions
+     */
+    public void setHasRegion(boolean HasRegion) {
+        set_Value(COLUMNNAME_HasRegion, Boolean.valueOf(HasRegion));
+    }
 
-  /**
-   * Get Lookup Client ID.
-   *
-   * @return The ClientID or Login submitted to the Lookup URL
-   */
-  public String getLookupClientID() {
-    return (String) get_Value(COLUMNNAME_LookupClientID);
-  }
+    /**
+     * Set Reverse Local Address Lines.
+     *
+     * @param IsAddressLinesLocalReverse Print Local Address in reverse Order
+     */
+    public void setIsAddressLinesLocalReverse(boolean IsAddressLinesLocalReverse) {
+        set_Value(COLUMNNAME_IsAddressLinesLocalReverse, Boolean.valueOf(IsAddressLinesLocalReverse));
+    }
 
-  /**
-   * Set Lookup Password.
-   *
-   * @param LookupPassword The password submitted to the Lookup URL
-   */
-  public void setLookupPassword(String LookupPassword) {
-    set_Value(COLUMNNAME_LookupPassword, LookupPassword);
-  }
+    /**
+     * Get Reverse Local Address Lines.
+     *
+     * @return Print Local Address in reverse Order
+     */
+    public boolean isAddressLinesLocalReverse() {
+        return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesLocalReverse));
+    }
 
-  /**
-   * Get Lookup Password.
-   *
-   * @return The password submitted to the Lookup URL
-   */
-  public String getLookupPassword() {
-    return (String) get_Value(COLUMNNAME_LookupPassword);
-  }
+    /**
+     * Set Reverse Address Lines.
+     *
+     * @param IsAddressLinesReverse Print Address in reverse Order
+     */
+    public void setIsAddressLinesReverse(boolean IsAddressLinesReverse) {
+        set_Value(COLUMNNAME_IsAddressLinesReverse, Boolean.valueOf(IsAddressLinesReverse));
+    }
 
-  /**
-   * Set Lookup URL.
-   *
-   * @param LookupUrl The URL of the web service that the plugin connects to in order to retrieve
-   *     postcode data
-   */
-  public void setLookupUrl(String LookupUrl) {
-    set_Value(COLUMNNAME_LookupUrl, LookupUrl);
-  }
+    /**
+     * Get Reverse Address Lines.
+     *
+     * @return Print Address in reverse Order
+     */
+    public boolean isAddressLinesReverse() {
+        return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesReverse));
+    }
 
-  /**
-   * Get Lookup URL.
-   *
-   * @return The URL of the web service that the plugin connects to in order to retrieve postcode
-   *     data
-   */
-  public String getLookupUrl() {
-    return (String) get_Value(COLUMNNAME_LookupUrl);
-  }
+    /**
+     * Set Use Postcode Lookup.
+     *
+     * @param IsPostcodeLookup Does this country have a post code web service
+     */
+    public void setIsPostcodeLookup(boolean IsPostcodeLookup) {
+        set_Value(COLUMNNAME_IsPostcodeLookup, Boolean.valueOf(IsPostcodeLookup));
+    }
 
-  /**
-   * Set Media Size.
-   *
-   * @param MediaSize Java Media Size
-   */
-  public void setMediaSize(String MediaSize) {
-    set_Value(COLUMNNAME_MediaSize, MediaSize);
-  }
+    /**
+     * Get Use Postcode Lookup.
+     *
+     * @return Does this country have a post code web service
+     */
+    public boolean isPostcodeLookup() {
+        return charToBoolean(get_Value(COLUMNNAME_IsPostcodeLookup));
+    }
 
-  /**
-   * Get Media Size.
-   *
-   * @return Java Media Size
-   */
-  public String getMediaSize() {
-    return (String) get_Value(COLUMNNAME_MediaSize);
-  }
+    /**
+     * Get Lookup ClassName.
+     *
+     * @return The class name of the postcode lookup plugin
+     */
+    public String getLookupClassName() {
+        return (String) get_Value(COLUMNNAME_LookupClassName);
+    }
 
-  /**
-   * Set Region.
-   *
-   * @param RegionName Name of the Region
-   */
-  public void setRegionName(String RegionName) {
-    set_Value(COLUMNNAME_RegionName, RegionName);
-  }
+    /**
+     * Set Lookup ClassName.
+     *
+     * @param LookupClassName The class name of the postcode lookup plugin
+     */
+    public void setLookupClassName(String LookupClassName) {
+        set_Value(COLUMNNAME_LookupClassName, LookupClassName);
+    }
 
-  /**
-   * Get Region.
-   *
-   * @return Name of the Region
-   */
-  public String getRegionName() {
-    return (String) get_Value(COLUMNNAME_RegionName);
-  }
+    /**
+     * Get Lookup Client ID.
+     *
+     * @return The ClientID or Login submitted to the Lookup URL
+     */
+    public String getLookupClientID() {
+        return (String) get_Value(COLUMNNAME_LookupClientID);
+    }
 
-  @Override
-  public int getTableId() {
-    return I_C_Country.Table_ID;
-  }
+    /**
+     * Set Lookup Client ID.
+     *
+     * @param LookupClientID The ClientID or Login submitted to the Lookup URL
+     */
+    public void setLookupClientID(String LookupClientID) {
+        set_Value(COLUMNNAME_LookupClientID, LookupClientID);
+    }
+
+    /**
+     * Get Lookup Password.
+     *
+     * @return The password submitted to the Lookup URL
+     */
+    public String getLookupPassword() {
+        return (String) get_Value(COLUMNNAME_LookupPassword);
+    }
+
+    /**
+     * Set Lookup Password.
+     *
+     * @param LookupPassword The password submitted to the Lookup URL
+     */
+    public void setLookupPassword(String LookupPassword) {
+        set_Value(COLUMNNAME_LookupPassword, LookupPassword);
+    }
+
+    /**
+     * Get Lookup URL.
+     *
+     * @return The URL of the web service that the plugin connects to in order to retrieve postcode
+     * data
+     */
+    public String getLookupUrl() {
+        return (String) get_Value(COLUMNNAME_LookupUrl);
+    }
+
+    /**
+     * Set Lookup URL.
+     *
+     * @param LookupUrl The URL of the web service that the plugin connects to in order to retrieve
+     *                  postcode data
+     */
+    public void setLookupUrl(String LookupUrl) {
+        set_Value(COLUMNNAME_LookupUrl, LookupUrl);
+    }
+
+    /**
+     * Get Media Size.
+     *
+     * @return Java Media Size
+     */
+    public String getMediaSize() {
+        return (String) get_Value(COLUMNNAME_MediaSize);
+    }
+
+    /**
+     * Set Media Size.
+     *
+     * @param MediaSize Java Media Size
+     */
+    public void setMediaSize(String MediaSize) {
+        set_Value(COLUMNNAME_MediaSize, MediaSize);
+    }
+
+    /**
+     * Get Region.
+     *
+     * @return Name of the Region
+     */
+    public String getRegionName() {
+        return (String) get_Value(COLUMNNAME_RegionName);
+    }
+
+    /**
+     * Set Region.
+     *
+     * @param RegionName Name of the Region
+     */
+    public void setRegionName(String RegionName) {
+        set_Value(COLUMNNAME_RegionName, RegionName);
+    }
+
+    @Override
+    public int getTableId() {
+        return I_C_Country.Table_ID;
+    }
 }
