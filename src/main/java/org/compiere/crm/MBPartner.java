@@ -17,124 +17,14 @@ import org.idempiere.common.util.Env;
 public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   /** */
   private static final long serialVersionUID = -803727877324075871L;
-
-  /** BP Group */
-  private MBPGroup m_group = null;
-
-  /**
-   * Get Empty Template Business Partner
-   *
-   * @param ctx context
-   * @param AD_Client_ID client
-   * @return Template Business Partner or null
-   */
-  public static I_C_BPartner getTemplate(Properties ctx, int AD_Client_ID) {
-    I_C_BPartner template = getBPartnerCashTrx(ctx, AD_Client_ID);
-    if (template == null) template = new MBPartner(ctx, 0, null);
-    //	Reset
-    if (template != null) {
-      template.set_ValueNoCheck("C_BPartner_ID", new Integer(0));
-      template.set_ValueNoCheck("C_BPartner_UU", (String) null);
-      template.setValue("");
-      template.setName("");
-      template.setName2(null);
-      template.setDUNS("");
-      template.setFirstSale(null);
-      //
-      template.setSO_CreditLimit(Env.ZERO);
-      template.setSO_CreditUsed(Env.ZERO);
-      template.setTotalOpenBalance(Env.ZERO);
-      //	s_template.setRating(null);
-      //
-      template.setActualLifeTimeValue(Env.ZERO);
-      template.setPotentialLifeTimeValue(Env.ZERO);
-      template.setAcqusitionCost(Env.ZERO);
-      template.setShareOfCustomer(0);
-      template.setSalesVolume(0);
-      // Reset Created, Updated to current system time ( teo_sarca )
-      Timestamp ts = new Timestamp(System.currentTimeMillis());
-      template.set_ValueNoCheck("Created", ts);
-      template.set_ValueNoCheck("Updated", ts);
-      template.set_ValueNoCheck("CreatedBy", Env.getAD_User_ID(ctx));
-      template.set_ValueNoCheck("UpdatedBy", Env.getAD_User_ID(ctx));
-    }
-    return template;
-  } //	getTemplate
-
-  /**
-   * Get Cash Trx Business Partner
-   *
-   * @param ctx context
-   * @param AD_Client_ID client
-   * @return Cash Trx Business Partner or null
-   */
-  public static I_C_BPartner getBPartnerCashTrx(Properties ctx, int AD_Client_ID) {
-    I_C_BPartner retValue =
-        (I_C_BPartner) MClientInfo.get(ctx, AD_Client_ID).getC_BPartnerCashTrx();
-    if (retValue == null) s_log.log(Level.SEVERE, "Not found for AD_Client_ID=" + AD_Client_ID);
-
-    return retValue;
-  } //	getBPartnerCashTrx
-
-  /**
-   * Get BPartner with Value
-   *
-   * @param ctx context
-   * @param Value value
-   * @return BPartner or null
-   */
-  public static MBPartner get(Properties ctx, String Value) {
-    return get(ctx, Value, null);
-  }
-
-  /**
-   * Get BPartner with Value in a transaction
-   *
-   * @param ctx context
-   * @param Value value
-   * @param trxName transaction
-   * @return BPartner or null
-   */
-  public static MBPartner get(Properties ctx, String Value, String trxName) {
-    if (Value == null || Value.length() == 0) return null;
-    final String whereClause = "Value=? AND AD_Client_ID=?";
-    MBPartner retValue =
-        new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
-            .setParameters(Value, Env.getADClientID(ctx))
-            .firstOnly();
-    return retValue;
-  } //	get
-
-  /**
-   * Get BPartner with Value
-   *
-   * @param ctx context
-   * @param Value value
-   * @return BPartner or null
-   */
-  public static I_C_BPartner get(Properties ctx, int C_BPartner_ID) {
-    return get(ctx, C_BPartner_ID, null);
-  }
-
-  /**
-   * Get BPartner with Value in a transaction
-   *
-   * @param ctx context
-   * @param Value value
-   * @param trxName transaction
-   * @return BPartner or null
-   */
-  public static I_C_BPartner get(Properties ctx, int C_BPartner_ID, String trxName) {
-    final String whereClause = "C_BPartner_ID=? AND AD_Client_ID=?";
-    I_C_BPartner retValue =
-        new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
-            .setParameters(C_BPartner_ID, Env.getADClientID(ctx))
-            .firstOnly();
-    return retValue;
-  } //	get
-
   /** Static Logger */
   private static CLogger s_log = CLogger.getCLogger(MBPartner.class);
+  /** BP Group */
+  private MBPGroup m_group = null;
+  /** Prim Address */
+  private Integer m_primaryC_BPartner_Location_ID = null;
+  /** Prim User */
+  private Integer m_primaryAD_User_ID = null;
 
   /**
    * ************************************************************************ Constructor for new
@@ -236,10 +126,116 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     setC_BP_Group_ID(impBP.getC_BP_Group_ID());
   } //	MBPartner
 
-  /** Prim Address */
-  private Integer m_primaryC_BPartner_Location_ID = null;
-  /** Prim User */
-  private Integer m_primaryAD_User_ID = null;
+  /**
+   * Get Empty Template Business Partner
+   *
+   * @param ctx context
+   * @param AD_Client_ID client
+   * @return Template Business Partner or null
+   */
+  public static I_C_BPartner getTemplate(Properties ctx, int AD_Client_ID) {
+    I_C_BPartner template = getBPartnerCashTrx(ctx, AD_Client_ID);
+    if (template == null) template = new MBPartner(ctx, 0, null);
+    //	Reset
+    if (template != null) {
+      template.set_ValueNoCheck("C_BPartner_ID", new Integer(0));
+      template.set_ValueNoCheck("C_BPartner_UU", null);
+      template.setValue("");
+      template.setName("");
+      template.setName2(null);
+      template.setDUNS("");
+      template.setFirstSale(null);
+      //
+      template.setSO_CreditLimit(Env.ZERO);
+      template.setSO_CreditUsed(Env.ZERO);
+      template.setTotalOpenBalance(Env.ZERO);
+      //	s_template.setRating(null);
+      //
+      template.setActualLifeTimeValue(Env.ZERO);
+      template.setPotentialLifeTimeValue(Env.ZERO);
+      template.setAcqusitionCost(Env.ZERO);
+      template.setShareOfCustomer(0);
+      template.setSalesVolume(0);
+      // Reset Created, Updated to current system time ( teo_sarca )
+      Timestamp ts = new Timestamp(System.currentTimeMillis());
+      template.set_ValueNoCheck("Created", ts);
+      template.set_ValueNoCheck("Updated", ts);
+      template.set_ValueNoCheck("CreatedBy", Env.getAD_User_ID(ctx));
+      template.set_ValueNoCheck("UpdatedBy", Env.getAD_User_ID(ctx));
+    }
+    return template;
+  } //	getTemplate
+
+  /**
+   * Get Cash Trx Business Partner
+   *
+   * @param ctx context
+   * @param AD_Client_ID client
+   * @return Cash Trx Business Partner or null
+   */
+  public static I_C_BPartner getBPartnerCashTrx(Properties ctx, int AD_Client_ID) {
+    I_C_BPartner retValue = MClientInfo.get(ctx, AD_Client_ID).getC_BPartnerCashTrx();
+    if (retValue == null) s_log.log(Level.SEVERE, "Not found for AD_Client_ID=" + AD_Client_ID);
+
+    return retValue;
+  } //	getBPartnerCashTrx
+
+  /**
+   * Get BPartner with Value
+   *
+   * @param ctx context
+   * @param Value value
+   * @return BPartner or null
+   */
+  public static MBPartner get(Properties ctx, String Value) {
+    return get(ctx, Value, null);
+  }
+
+  /**
+   * Get BPartner with Value in a transaction
+   *
+   * @param ctx context
+   * @param Value value
+   * @param trxName transaction
+   * @return BPartner or null
+   */
+  public static MBPartner get(Properties ctx, String Value, String trxName) {
+    if (Value == null || Value.length() == 0) return null;
+    final String whereClause = "Value=? AND AD_Client_ID=?";
+    MBPartner retValue =
+        new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
+            .setParameters(Value, Env.getADClientID(ctx))
+            .firstOnly();
+    return retValue;
+  } //	get
+
+  /**
+   * Get BPartner with Value
+   *
+   * @param ctx context
+   * @param Value value
+   * @return BPartner or null
+   */
+  public static I_C_BPartner get(Properties ctx, int C_BPartner_ID) {
+    return get(ctx, C_BPartner_ID, null);
+  }
+
+  /**
+   * Get BPartner with Value in a transaction
+   *
+   * @param ctx context
+   * @param Value value
+   * @param trxName transaction
+   * @return BPartner or null
+   */
+  public static I_C_BPartner get(Properties ctx, int C_BPartner_ID, String trxName) {
+    final String whereClause = "C_BPartner_ID=? AND AD_Client_ID=?";
+    I_C_BPartner retValue =
+        new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
+            .setParameters(C_BPartner_ID, Env.getADClientID(ctx))
+            .firstOnly();
+    return retValue;
+  } //	get
 
   public MUser[] getContacts() {
     return getContacts(false);
@@ -348,6 +344,15 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   } //	getPrimaryC_BPartner_Location_ID
 
   /**
+   * Set Primary C_BPartner_Location_ID
+   *
+   * @param C_BPartner_Location_ID id
+   */
+  public void setPrimaryC_BPartner_Location_ID(int C_BPartner_Location_ID) {
+    m_primaryC_BPartner_Location_ID = new Integer(C_BPartner_Location_ID);
+  } //	setPrimaryC_BPartner_Location_ID
+
+  /**
    * Get Primary C_BPartner_Location
    *
    * @return C_BPartner_Location
@@ -359,15 +364,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     if (m_primaryC_BPartner_Location_ID == null) return null;
     return new MBPartnerLocation(getCtx(), m_primaryC_BPartner_Location_ID, null);
   } //	getPrimaryC_BPartner_Location
-
-  /**
-   * Set Primary C_BPartner_Location_ID
-   *
-   * @param C_BPartner_Location_ID id
-   */
-  public void setPrimaryC_BPartner_Location_ID(int C_BPartner_Location_ID) {
-    m_primaryC_BPartner_Location_ID = new Integer(C_BPartner_Location_ID);
-  } //	setPrimaryC_BPartner_Location_ID
 
   /**
    * Set Primary AD_User_ID
@@ -444,6 +440,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     String status = getSOCreditStatus();
     return SOCREDITSTATUS_CreditStop.equals(status) || SOCREDITSTATUS_CreditHold.equals(status);
   } //	isCreditStopHold
+
   /**
    * Get BP Group
    *

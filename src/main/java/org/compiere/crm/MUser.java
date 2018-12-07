@@ -36,14 +36,70 @@ import software.hsharp.core.models.IUser;
  * User Model
  *
  * @author Jorg Janke
- * @version $Id: MUser.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  * @author Teo Sarca, www.arhipac.ro
  *     <li>FR [ 2788430 ] MUser.getOfBPartner add trxName parameter
  *         https://sourceforge.net/tracker/index.php?func=detail&aid=2788430&group_id=176962&atid=879335
+ * @version $Id: MUser.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  */
 public class MUser extends X_AD_User implements IUser {
   /** */
   private static final long serialVersionUID = 9027688865361175114L;
+  /** Cache */
+  private static CCache<Integer, MUser> s_cache =
+      new CCache<Integer, MUser>(I_AD_User.Table_Name, 30, 60);
+  /** Static Logger */
+  private static CLogger s_log = CLogger.getCLogger(MUser.class);
+  /** Roles of User with Org */
+  private MRole[] m_roles = null;
+  /** Roles of User with Org */
+  private int m_rolesAD_Org_ID = -1;
+  /** Is Administrator */
+  private Boolean m_isAdministrator = null;
+  /** User Access Rights */
+  private X_AD_UserBPAccess[] m_bpAccess = null;
+  /** Password Hashed * */
+  private boolean being_hashed = false;
+  /**
+   * ************************************************************************ Default Constructor
+   *
+   * @param ctx context
+   * @param AD_User_ID id
+   * @param trxName transaction
+   */
+  public MUser(Properties ctx, int AD_User_ID, String trxName) {
+    super(ctx, AD_User_ID, trxName); // 	0 is also System
+    if (AD_User_ID == 0) {
+      setIsFullBPAccess(true);
+      setNotificationType(X_AD_User.NOTIFICATIONTYPE_EMail);
+    }
+  } //	MUser
+
+  /**
+   * Parent Constructor
+   *
+   * @param partner partner
+   */
+  public MUser(I_C_BPartner partner) {
+    this(partner.getCtx(), 0, partner.get_TrxName());
+    setClientOrg(partner);
+    setC_BPartner_ID(partner.getC_BPartner_ID());
+    setName(partner.getName());
+  } //	MUser
+
+  /**
+   * Load Constructor
+   *
+   * @param ctx context
+   * @param rs current row of result set to be loaded
+   * @param trxName transaction
+   */
+  public MUser(Properties ctx, ResultSet rs, String trxName) {
+    super(ctx, rs, trxName);
+  } //	MUser
+
+  public MUser(Properties ctx, Row row) {
+    super(ctx, row);
+  } //	MUser
 
   /**
    * Get active Users of BPartner
@@ -106,7 +162,7 @@ public class MUser extends X_AD_User implements IUser {
    */
   public static MUser get(Properties ctx, int AD_User_ID) {
     Integer key = new Integer(AD_User_ID);
-    MUser retValue = (MUser) s_cache.get(key);
+    MUser retValue = s_cache.get(key);
     if (retValue == null) {
       retValue = new MUser(ctx, AD_User_ID, null);
       if (AD_User_ID == 0) {
@@ -196,65 +252,6 @@ public class MUser extends X_AD_User implements IUser {
 
     return retValue;
   } //	get
-
-  /** Cache */
-  private static CCache<Integer, MUser> s_cache =
-      new CCache<Integer, MUser>(I_AD_User.Table_Name, 30, 60);
-  /** Static Logger */
-  private static CLogger s_log = CLogger.getCLogger(MUser.class);
-
-  /**
-   * ************************************************************************ Default Constructor
-   *
-   * @param ctx context
-   * @param AD_User_ID id
-   * @param trxName transaction
-   */
-  public MUser(Properties ctx, int AD_User_ID, String trxName) {
-    super(ctx, AD_User_ID, trxName); // 	0 is also System
-    if (AD_User_ID == 0) {
-      setIsFullBPAccess(true);
-      setNotificationType(X_AD_User.NOTIFICATIONTYPE_EMail);
-    }
-  } //	MUser
-
-  /**
-   * Parent Constructor
-   *
-   * @param partner partner
-   */
-  public MUser(I_C_BPartner partner) {
-    this(partner.getCtx(), 0, partner.get_TrxName());
-    setClientOrg(partner);
-    setC_BPartner_ID(partner.getC_BPartner_ID());
-    setName(partner.getName());
-  } //	MUser
-
-  /**
-   * Load Constructor
-   *
-   * @param ctx context
-   * @param rs current row of result set to be loaded
-   * @param trxName transaction
-   */
-  public MUser(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
-  } //	MUser
-
-  public MUser(Properties ctx, Row row) {
-    super(ctx, row);
-  } //	MUser
-
-  /** Roles of User with Org */
-  private MRole[] m_roles = null;
-  /** Roles of User with Org */
-  private int m_rolesAD_Org_ID = -1;
-  /** Is Administrator */
-  private Boolean m_isAdministrator = null;
-  /** User Access Rights */
-  private X_AD_UserBPAccess[] m_bpAccess = null;
-  /** Password Hashed * */
-  private boolean being_hashed = false;
 
   /**
    * Get Value - 7 bit lower case alpha numerics max length 8
@@ -449,8 +446,7 @@ public class MUser extends X_AD_User implements IUser {
    * @return true if it has an email and password
    */
   public boolean isOnline() {
-    if (getEMail() == null || getPassword() == null) return false;
-    return true;
+    return getEMail() != null && getPassword() != null;
   } //	isOnline
 
   /**
@@ -549,7 +545,7 @@ public class MUser extends X_AD_User implements IUser {
    */
   public String getEMailVerifyCode() {
     long code = getAD_User_ID() + getName().hashCode();
-    return "C" + String.valueOf(Math.abs(code)) + "C";
+    return "C" + Math.abs(code) + "C";
   } //	getEMailValidationCode
 
   /**

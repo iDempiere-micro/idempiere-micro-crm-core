@@ -46,15 +46,6 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Address 1.
-   *
-   * @param Address1 Address line 1 for this location
-   */
-  public void setAddress1(String Address1) {
-    set_Value(COLUMNNAME_Address1, Address1);
-  }
-
-  /**
    * Get Address 1.
    *
    * @return Address line 1 for this location
@@ -64,12 +55,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Address 2.
+   * Set Address 1.
    *
-   * @param Address2 Address line 2 for this location
+   * @param Address1 Address line 1 for this location
    */
-  public void setAddress2(String Address2) {
-    set_Value(COLUMNNAME_Address2, Address2);
+  public void setAddress1(String Address1) {
+    set_Value(COLUMNNAME_Address1, Address1);
   }
 
   /**
@@ -82,12 +73,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Birthday.
+   * Set Address 2.
    *
-   * @param Birthday Birthday or Anniversary day
+   * @param Address2 Address line 2 for this location
    */
-  public void setBirthday(Timestamp Birthday) {
-    set_Value(COLUMNNAME_Birthday, Birthday);
+  public void setAddress2(String Address2) {
+    set_Value(COLUMNNAME_Address2, Address2);
   }
 
   /**
@@ -100,12 +91,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set BP Contact Greeting.
+   * Set Birthday.
    *
-   * @param BPContactGreeting Greeting for Business Partner Contact
+   * @param Birthday Birthday or Anniversary day
    */
-  public void setBPContactGreeting(String BPContactGreeting) {
-    set_Value(COLUMNNAME_BPContactGreeting, BPContactGreeting);
+  public void setBirthday(Timestamp Birthday) {
+    set_Value(COLUMNNAME_Birthday, Birthday);
   }
 
   /**
@@ -117,20 +108,19 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return (String) get_Value(COLUMNNAME_BPContactGreeting);
   }
 
+  /**
+   * Set BP Contact Greeting.
+   *
+   * @param BPContactGreeting Greeting for Business Partner Contact
+   */
+  public void setBPContactGreeting(String BPContactGreeting) {
+    set_Value(COLUMNNAME_BPContactGreeting, BPContactGreeting);
+  }
+
   public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)
             .getPO(getC_BPartner_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Business Partner .
-   *
-   * @param C_BPartner_ID Identifies a Business Partner
-   */
-  public void setC_BPartner_ID(int C_BPartner_ID) {
-    if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
   }
 
   /**
@@ -144,20 +134,20 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return ii;
   }
 
+  /**
+   * Set Business Partner .
+   *
+   * @param C_BPartner_ID Identifies a Business Partner
+   */
+  public void setC_BPartner_ID(int C_BPartner_ID) {
+    if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
+    else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
+  }
+
   public org.compiere.model.I_C_BPartner_Location getC_BPartner_Location() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner_Location)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner_Location.Table_Name)
             .getPO(getC_BPartner_Location_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Partner Location.
-   *
-   * @param C_BPartner_Location_ID Identifies the (ship to) address for this Business Partner
-   */
-  public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
-    if (C_BPartner_Location_ID < 1) set_Value(COLUMNNAME_C_BPartner_Location_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_Location_ID, C_BPartner_Location_ID);
   }
 
   /**
@@ -171,20 +161,20 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return ii;
   }
 
+  /**
+   * Set Partner Location.
+   *
+   * @param C_BPartner_Location_ID Identifies the (ship to) address for this Business Partner
+   */
+  public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
+    if (C_BPartner_Location_ID < 1) set_Value(COLUMNNAME_C_BPartner_Location_ID, null);
+    else set_Value(COLUMNNAME_C_BPartner_Location_ID, C_BPartner_Location_ID);
+  }
+
   public org.compiere.model.I_C_BP_Group getC_BP_Group() throws RuntimeException {
     return (org.compiere.model.I_C_BP_Group)
         MTable.get(getCtx(), org.compiere.model.I_C_BP_Group.Table_Name)
             .getPO(getC_BP_Group_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Business Partner Group.
-   *
-   * @param C_BP_Group_ID Business Partner Group
-   */
-  public void setC_BP_Group_ID(int C_BP_Group_ID) {
-    if (C_BP_Group_ID < 1) set_Value(COLUMNNAME_C_BP_Group_ID, null);
-    else set_Value(COLUMNNAME_C_BP_Group_ID, C_BP_Group_ID);
   }
 
   /**
@@ -198,20 +188,20 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return ii;
   }
 
+  /**
+   * Set Business Partner Group.
+   *
+   * @param C_BP_Group_ID Business Partner Group
+   */
+  public void setC_BP_Group_ID(int C_BP_Group_ID) {
+    if (C_BP_Group_ID < 1) set_Value(COLUMNNAME_C_BP_Group_ID, null);
+    else set_Value(COLUMNNAME_C_BP_Group_ID, C_BP_Group_ID);
+  }
+
   public org.compiere.model.I_C_Country getC_Country() throws RuntimeException {
     return (org.compiere.model.I_C_Country)
         MTable.get(getCtx(), org.compiere.model.I_C_Country.Table_Name)
             .getPO(getC_Country_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Country.
-   *
-   * @param C_Country_ID Country
-   */
-  public void setC_Country_ID(int C_Country_ID) {
-    if (C_Country_ID < 1) set_Value(COLUMNNAME_C_Country_ID, null);
-    else set_Value(COLUMNNAME_C_Country_ID, C_Country_ID);
   }
 
   /**
@@ -225,20 +215,20 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return ii;
   }
 
+  /**
+   * Set Country.
+   *
+   * @param C_Country_ID Country
+   */
+  public void setC_Country_ID(int C_Country_ID) {
+    if (C_Country_ID < 1) set_Value(COLUMNNAME_C_Country_ID, null);
+    else set_Value(COLUMNNAME_C_Country_ID, C_Country_ID);
+  }
+
   public org.compiere.model.I_C_Greeting getC_Greeting() throws RuntimeException {
     return (org.compiere.model.I_C_Greeting)
         MTable.get(getCtx(), org.compiere.model.I_C_Greeting.Table_Name)
             .getPO(getC_Greeting_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Greeting.
-   *
-   * @param C_Greeting_ID Greeting to print on correspondence
-   */
-  public void setC_Greeting_ID(int C_Greeting_ID) {
-    if (C_Greeting_ID < 1) set_Value(COLUMNNAME_C_Greeting_ID, null);
-    else set_Value(COLUMNNAME_C_Greeting_ID, C_Greeting_ID);
   }
 
   /**
@@ -253,12 +243,13 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set City.
+   * Set Greeting.
    *
-   * @param City Identifies a City
+   * @param C_Greeting_ID Greeting to print on correspondence
    */
-  public void setCity(String City) {
-    set_Value(COLUMNNAME_City, City);
+  public void setC_Greeting_ID(int C_Greeting_ID) {
+    if (C_Greeting_ID < 1) set_Value(COLUMNNAME_C_Greeting_ID, null);
+    else set_Value(COLUMNNAME_C_Greeting_ID, C_Greeting_ID);
   }
 
   /**
@@ -271,12 +262,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Comments.
+   * Set City.
    *
-   * @param Comments Comments or additional information
+   * @param City Identifies a City
    */
-  public void setComments(String Comments) {
-    set_Value(COLUMNNAME_Comments, Comments);
+  public void setCity(String City) {
+    set_Value(COLUMNNAME_City, City);
   }
 
   /**
@@ -289,12 +280,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Contact Description.
+   * Set Comments.
    *
-   * @param ContactDescription Description of Contact
+   * @param Comments Comments or additional information
    */
-  public void setContactDescription(String ContactDescription) {
-    set_Value(COLUMNNAME_ContactDescription, ContactDescription);
+  public void setComments(String Comments) {
+    set_Value(COLUMNNAME_Comments, Comments);
   }
 
   /**
@@ -307,12 +298,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Contact Name.
+   * Set Contact Description.
    *
-   * @param ContactName Business Partner Contact Name
+   * @param ContactDescription Description of Contact
    */
-  public void setContactName(String ContactName) {
-    set_Value(COLUMNNAME_ContactName, ContactName);
+  public void setContactDescription(String ContactDescription) {
+    set_Value(COLUMNNAME_ContactDescription, ContactDescription);
   }
 
   /**
@@ -325,13 +316,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set ISO Country Code.
+   * Set Contact Name.
    *
-   * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
-   *     - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+   * @param ContactName Business Partner Contact Name
    */
-  public void setCountryCode(String CountryCode) {
-    set_Value(COLUMNNAME_CountryCode, CountryCode);
+  public void setContactName(String ContactName) {
+    set_Value(COLUMNNAME_ContactName, ContactName);
   }
 
   /**
@@ -344,20 +334,20 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return (String) get_Value(COLUMNNAME_CountryCode);
   }
 
+  /**
+   * Set ISO Country Code.
+   *
+   * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
+   *     - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+   */
+  public void setCountryCode(String CountryCode) {
+    set_Value(COLUMNNAME_CountryCode, CountryCode);
+  }
+
   public org.compiere.model.I_C_Region getC_Region() throws RuntimeException {
     return (org.compiere.model.I_C_Region)
         MTable.get(getCtx(), org.compiere.model.I_C_Region.Table_Name)
             .getPO(getC_Region_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Region.
-   *
-   * @param C_Region_ID Identifies a geographical Region
-   */
-  public void setC_Region_ID(int C_Region_ID) {
-    if (C_Region_ID < 1) set_Value(COLUMNNAME_C_Region_ID, null);
-    else set_Value(COLUMNNAME_C_Region_ID, C_Region_ID);
   }
 
   /**
@@ -372,12 +362,13 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Description.
+   * Set Region.
    *
-   * @param Description Optional short description of the record
+   * @param C_Region_ID Identifies a geographical Region
    */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
+  public void setC_Region_ID(int C_Region_ID) {
+    if (C_Region_ID < 1) set_Value(COLUMNNAME_C_Region_ID, null);
+    else set_Value(COLUMNNAME_C_Region_ID, C_Region_ID);
   }
 
   /**
@@ -390,12 +381,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set D-U-N-S.
+   * Set Description.
    *
-   * @param DUNS Dun & Bradstreet Number
+   * @param Description Optional short description of the record
    */
-  public void setDUNS(String DUNS) {
-    set_Value(COLUMNNAME_DUNS, DUNS);
+  public void setDescription(String Description) {
+    set_Value(COLUMNNAME_Description, Description);
   }
 
   /**
@@ -408,12 +399,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set EMail Address.
+   * Set D-U-N-S.
    *
-   * @param EMail Electronic Mail Address
+   * @param DUNS Dun & Bradstreet Number
    */
-  public void setEMail(String EMail) {
-    set_Value(COLUMNNAME_EMail, EMail);
+  public void setDUNS(String DUNS) {
+    set_Value(COLUMNNAME_DUNS, DUNS);
   }
 
   /**
@@ -426,12 +417,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Fax.
+   * Set EMail Address.
    *
-   * @param Fax Facsimile number
+   * @param EMail Electronic Mail Address
    */
-  public void setFax(String Fax) {
-    set_Value(COLUMNNAME_Fax, Fax);
+  public void setEMail(String EMail) {
+    set_Value(COLUMNNAME_EMail, EMail);
   }
 
   /**
@@ -444,12 +435,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Group Key.
+   * Set Fax.
    *
-   * @param GroupValue Business Partner Group Key
+   * @param Fax Facsimile number
    */
-  public void setGroupValue(String GroupValue) {
-    set_Value(COLUMNNAME_GroupValue, GroupValue);
+  public void setFax(String Fax) {
+    set_Value(COLUMNNAME_Fax, Fax);
   }
 
   /**
@@ -462,13 +453,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Import Business Partner.
+   * Set Group Key.
    *
-   * @param I_BPartner_ID Import Business Partner
+   * @param GroupValue Business Partner Group Key
    */
-  public void setI_BPartner_ID(int I_BPartner_ID) {
-    if (I_BPartner_ID < 1) set_ValueNoCheck(COLUMNNAME_I_BPartner_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_I_BPartner_ID, I_BPartner_ID);
+  public void setGroupValue(String GroupValue) {
+    set_Value(COLUMNNAME_GroupValue, GroupValue);
   }
 
   /**
@@ -483,12 +473,13 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set I_BPartner_UU.
+   * Set Import Business Partner.
    *
-   * @param I_BPartner_UU I_BPartner_UU
+   * @param I_BPartner_ID Import Business Partner
    */
-  public void setI_BPartner_UU(String I_BPartner_UU) {
-    set_Value(COLUMNNAME_I_BPartner_UU, I_BPartner_UU);
+  public void setI_BPartner_ID(int I_BPartner_ID) {
+    if (I_BPartner_ID < 1) set_ValueNoCheck(COLUMNNAME_I_BPartner_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_I_BPartner_ID, I_BPartner_ID);
   }
 
   /**
@@ -501,12 +492,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Import Error Message.
+   * Set I_BPartner_UU.
    *
-   * @param I_ErrorMsg Messages generated from import process
+   * @param I_BPartner_UU I_BPartner_UU
    */
-  public void setI_ErrorMsg(String I_ErrorMsg) {
-    set_Value(COLUMNNAME_I_ErrorMsg, I_ErrorMsg);
+  public void setI_BPartner_UU(String I_BPartner_UU) {
+    set_Value(COLUMNNAME_I_BPartner_UU, I_BPartner_UU);
   }
 
   /**
@@ -519,12 +510,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Imported.
+   * Set Import Error Message.
    *
-   * @param I_IsImported Has this import been processed
+   * @param I_ErrorMsg Messages generated from import process
    */
-  public void setI_IsImported(boolean I_IsImported) {
-    set_Value(COLUMNNAME_I_IsImported, I_IsImported);
+  public void setI_ErrorMsg(String I_ErrorMsg) {
+    set_Value(COLUMNNAME_I_ErrorMsg, I_ErrorMsg);
   }
 
   /**
@@ -537,12 +528,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Interest Area.
+   * Set Imported.
    *
-   * @param InterestAreaName Name of the Interest Area
+   * @param I_IsImported Has this import been processed
    */
-  public void setInterestAreaName(String InterestAreaName) {
-    set_Value(COLUMNNAME_InterestAreaName, InterestAreaName);
+  public void setI_IsImported(boolean I_IsImported) {
+    set_Value(COLUMNNAME_I_IsImported, I_IsImported);
   }
 
   /**
@@ -552,6 +543,15 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public String getInterestAreaName() {
     return (String) get_Value(COLUMNNAME_InterestAreaName);
+  }
+
+  /**
+   * Set Interest Area.
+   *
+   * @param InterestAreaName Name of the Interest Area
+   */
+  public void setInterestAreaName(String InterestAreaName) {
+    set_Value(COLUMNNAME_InterestAreaName, InterestAreaName);
   }
 
   /**
@@ -609,16 +609,6 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set NAICS/SIC.
-   *
-   * @param NAICS Standard Industry Code or its successor NAIC -
-   *     http://www.osha.gov/oshstats/sicser.html
-   */
-  public void setNAICS(String NAICS) {
-    set_Value(COLUMNNAME_NAICS, NAICS);
-  }
-
-  /**
    * Get NAICS/SIC.
    *
    * @return Standard Industry Code or its successor NAIC - http://www.osha.gov/oshstats/sicser.html
@@ -628,12 +618,13 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Name.
+   * Set NAICS/SIC.
    *
-   * @param Name Alphanumeric identifier of the entity
+   * @param NAICS Standard Industry Code or its successor NAIC -
+   *     http://www.osha.gov/oshstats/sicser.html
    */
-  public void setName(String Name) {
-    set_Value(HasName.Companion.getCOLUMNNAME_Name(), Name);
+  public void setNAICS(String NAICS) {
+    set_Value(COLUMNNAME_NAICS, NAICS);
   }
 
   /**
@@ -646,12 +637,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Name 2.
+   * Set Name.
    *
-   * @param Name2 Additional Name
+   * @param Name Alphanumeric identifier of the entity
    */
-  public void setName2(String Name2) {
-    set_Value(HasName2.Companion.getCOLUMNNAME_Name2(), Name2);
+  public void setName(String Name) {
+    set_Value(HasName.Companion.getCOLUMNNAME_Name(), Name);
   }
 
   /**
@@ -664,12 +655,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Password.
+   * Set Name 2.
    *
-   * @param Password Password of any length (case sensitive)
+   * @param Name2 Additional Name
    */
-  public void setPassword(String Password) {
-    set_Value(COLUMNNAME_Password, Password);
+  public void setName2(String Name2) {
+    set_Value(HasName2.Companion.getCOLUMNNAME_Name2(), Name2);
   }
 
   /**
@@ -682,12 +673,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Phone.
+   * Set Password.
    *
-   * @param Phone Identifies a telephone number
+   * @param Password Password of any length (case sensitive)
    */
-  public void setPhone(String Phone) {
-    set_Value(COLUMNNAME_Phone, Phone);
+  public void setPassword(String Password) {
+    set_Value(COLUMNNAME_Password, Password);
   }
 
   /**
@@ -700,12 +691,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set 2nd Phone.
+   * Set Phone.
    *
-   * @param Phone2 Identifies an alternate telephone number.
+   * @param Phone Identifies a telephone number
    */
-  public void setPhone2(String Phone2) {
-    set_Value(COLUMNNAME_Phone2, Phone2);
+  public void setPhone(String Phone) {
+    set_Value(COLUMNNAME_Phone, Phone);
   }
 
   /**
@@ -718,12 +709,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set ZIP.
+   * Set 2nd Phone.
    *
-   * @param Postal Postal code
+   * @param Phone2 Identifies an alternate telephone number.
    */
-  public void setPostal(String Postal) {
-    set_Value(COLUMNNAME_Postal, Postal);
+  public void setPhone2(String Phone2) {
+    set_Value(COLUMNNAME_Phone2, Phone2);
   }
 
   /**
@@ -736,12 +727,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Additional Zip.
+   * Set ZIP.
    *
-   * @param Postal_Add Additional ZIP or Postal code
+   * @param Postal Postal code
    */
-  public void setPostal_Add(String Postal_Add) {
-    set_Value(COLUMNNAME_Postal_Add, Postal_Add);
+  public void setPostal(String Postal) {
+    set_Value(COLUMNNAME_Postal, Postal);
   }
 
   /**
@@ -754,12 +745,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Processed.
+   * Set Additional Zip.
    *
-   * @param Processed The document has been processed
+   * @param Postal_Add Additional ZIP or Postal code
    */
-  public void setProcessed(boolean Processed) {
-    set_ValueNoCheck(COLUMNNAME_Processed, Processed);
+  public void setPostal_Add(String Postal_Add) {
+    set_Value(COLUMNNAME_Postal_Add, Postal_Add);
   }
 
   /**
@@ -772,12 +763,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Process Now.
+   * Set Processed.
    *
-   * @param Processing Process Now
+   * @param Processed The document has been processed
    */
-  public void setProcessing(boolean Processing) {
-    set_Value(COLUMNNAME_Processing, Processing);
+  public void setProcessed(boolean Processed) {
+    set_ValueNoCheck(COLUMNNAME_Processed, Processed);
   }
 
   /**
@@ -790,12 +781,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Region.
+   * Set Process Now.
    *
-   * @param RegionName Name of the Region
+   * @param Processing Process Now
    */
-  public void setRegionName(String RegionName) {
-    set_Value(COLUMNNAME_RegionName, RegionName);
+  public void setProcessing(boolean Processing) {
+    set_Value(COLUMNNAME_Processing, Processing);
   }
 
   /**
@@ -807,20 +798,19 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     return (String) get_Value(COLUMNNAME_RegionName);
   }
 
+  /**
+   * Set Region.
+   *
+   * @param RegionName Name of the Region
+   */
+  public void setRegionName(String RegionName) {
+    set_Value(COLUMNNAME_RegionName, RegionName);
+  }
+
   public org.compiere.model.I_R_InterestArea getR_InterestArea() throws RuntimeException {
     return (org.compiere.model.I_R_InterestArea)
         MTable.get(getCtx(), org.compiere.model.I_R_InterestArea.Table_Name)
             .getPO(getR_InterestArea_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Interest Area.
-   *
-   * @param R_InterestArea_ID Interest Area or Topic
-   */
-  public void setR_InterestArea_ID(int R_InterestArea_ID) {
-    if (R_InterestArea_ID < 1) set_Value(COLUMNNAME_R_InterestArea_ID, null);
-    else set_Value(COLUMNNAME_R_InterestArea_ID, Integer.valueOf(R_InterestArea_ID));
   }
 
   /**
@@ -835,12 +825,13 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Tax ID.
+   * Set Interest Area.
    *
-   * @param TaxID Tax Identification
+   * @param R_InterestArea_ID Interest Area or Topic
    */
-  public void setTaxID(String TaxID) {
-    set_Value(COLUMNNAME_TaxID, TaxID);
+  public void setR_InterestArea_ID(int R_InterestArea_ID) {
+    if (R_InterestArea_ID < 1) set_Value(COLUMNNAME_R_InterestArea_ID, null);
+    else set_Value(COLUMNNAME_R_InterestArea_ID, Integer.valueOf(R_InterestArea_ID));
   }
 
   /**
@@ -853,12 +844,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Title.
+   * Set Tax ID.
    *
-   * @param Title Name this entity is referred to as
+   * @param TaxID Tax Identification
    */
-  public void setTitle(String Title) {
-    set_Value(COLUMNNAME_Title, Title);
+  public void setTaxID(String TaxID) {
+    set_Value(COLUMNNAME_TaxID, TaxID);
   }
 
   /**
@@ -871,12 +862,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   }
 
   /**
-   * Set Search Key.
+   * Set Title.
    *
-   * @param Value Search key for the record in the format required - must be unique
+   * @param Title Name this entity is referred to as
    */
-  public void setValue(String Value) {
-    set_Value(COLUMNNAME_Value, Value);
+  public void setTitle(String Title) {
+    set_Value(COLUMNNAME_Title, Title);
   }
 
   /**
@@ -886,6 +877,15 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
    */
   public String getValue() {
     return (String) get_Value(COLUMNNAME_Value);
+  }
+
+  /**
+   * Set Search Key.
+   *
+   * @param Value Search key for the record in the format required - must be unique
+   */
+  public void setValue(String Value) {
+    set_Value(COLUMNNAME_Value, Value);
   }
 
   @Override

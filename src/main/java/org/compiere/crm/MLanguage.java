@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-
 import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.Query;
@@ -19,13 +18,72 @@ import org.idempiere.common.util.Language;
  * Language Model
  *
  * @author Jorg Janke
- * @version $Id: MLanguage.java,v 1.4 2006/07/30 00:58:36 jjanke Exp $
  * @author Teo Sarca, www.arhipac.ro
  *     <li>BF [ 2444851 ] MLanguage should throw an exception if there is an error
+ * @version $Id: MLanguage.java,v 1.4 2006/07/30 00:58:36 jjanke Exp $
  */
 public class MLanguage extends X_AD_Language {
   /** */
   private static final long serialVersionUID = 6415602943484245447L;
+  /** Locale */
+  private Locale m_locale = null;
+  /** Date Format */
+  private SimpleDateFormat m_dateFormat = null;
+
+  /**
+   * ************************************************************************ Standard Constructor
+   *
+   * @param ctx context
+   * @param AD_Language_ID id
+   * @param trxName transaction
+   */
+  public MLanguage(Properties ctx, int AD_Language_ID, String trxName) {
+    super(ctx, AD_Language_ID, trxName);
+  } //	MLanguage
+
+  //	/**	Logger						*/
+  //	private static CLogger		s_log = CLogger.getCLogger (MLanguage.class);
+
+  /**
+   * Load Constructor
+   *
+   * @param ctx context
+   * @param rs result set
+   * @param trxName transaction
+   */
+  public MLanguage(Properties ctx, ResultSet rs, String trxName) {
+    super(ctx, rs, trxName);
+  } //	MLanguage
+
+  public MLanguage(Properties ctx, Row row) {
+    super(ctx, row);
+  }
+
+  /**
+   * Create Language
+   *
+   * @param ctx context
+   * @param AD_Language language code
+   * @param Name name
+   * @param CountryCode country code
+   * @param LanguageISO language code
+   * @param trxName transaction
+   */
+  private MLanguage(
+      Properties ctx,
+      String AD_Language,
+      String Name,
+      String CountryCode,
+      String LanguageISO,
+      String trxName) {
+    super(ctx, 0, trxName);
+    setADLanguage(AD_Language); // 	en_US
+    setIsBaseLanguage(false);
+    setIsSystemLanguage(false);
+    setName(Name);
+    setCountryCode(CountryCode); // 	US
+    setLanguageISO(LanguageISO); // 	en
+  } //	MLanguage
 
   /**
    * Get Language Model from Language
@@ -66,65 +124,6 @@ public class MLanguage extends X_AD_Language {
             .list();
     return list.toArray(new MLanguage[list.size()]);
   } //	get
-
-  //	/**	Logger						*/
-  //	private static CLogger		s_log = CLogger.getCLogger (MLanguage.class);
-
-  /**
-   * ************************************************************************ Standard Constructor
-   *
-   * @param ctx context
-   * @param AD_Language_ID id
-   * @param trxName transaction
-   */
-  public MLanguage(Properties ctx, int AD_Language_ID, String trxName) {
-    super(ctx, AD_Language_ID, trxName);
-  } //	MLanguage
-
-  /**
-   * Load Constructor
-   *
-   * @param ctx context
-   * @param rs result set
-   * @param trxName transaction
-   */
-  public MLanguage(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
-  } //	MLanguage
-  public MLanguage(Properties ctx, Row row) {
-    super(ctx, row);
-  }
-
-  /**
-   * Create Language
-   *
-   * @param ctx context
-   * @param AD_Language language code
-   * @param Name name
-   * @param CountryCode country code
-   * @param LanguageISO language code
-   * @param trxName transaction
-   */
-  private MLanguage(
-      Properties ctx,
-      String AD_Language,
-      String Name,
-      String CountryCode,
-      String LanguageISO,
-      String trxName) {
-    super(ctx, 0, trxName);
-    setADLanguage(AD_Language); // 	en_US
-    setIsBaseLanguage(false);
-    setIsSystemLanguage(false);
-    setName(Name);
-    setCountryCode(CountryCode); // 	US
-    setLanguageISO(LanguageISO); // 	en
-  } //	MLanguage
-
-  /** Locale */
-  private Locale m_locale = null;
-  /** Date Format */
-  private SimpleDateFormat m_dateFormat = null;
 
   /**
    * String Representation

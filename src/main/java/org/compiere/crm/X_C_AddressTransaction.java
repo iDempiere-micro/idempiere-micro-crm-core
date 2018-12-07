@@ -49,15 +49,6 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Address 1.
-   *
-   * @param Address1 Address line 1 for this location
-   */
-  public void setAddress1(String Address1) {
-    set_Value(COLUMNNAME_Address1, Address1);
-  }
-
-  /**
    * Get Address 1.
    *
    * @return Address line 1 for this location
@@ -67,12 +58,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Address 2.
+   * Set Address 1.
    *
-   * @param Address2 Address line 2 for this location
+   * @param Address1 Address line 1 for this location
    */
-  public void setAddress2(String Address2) {
-    set_Value(COLUMNNAME_Address2, Address2);
+  public void setAddress1(String Address1) {
+    set_Value(COLUMNNAME_Address1, Address1);
   }
 
   /**
@@ -85,12 +76,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Address 3.
+   * Set Address 2.
    *
-   * @param Address3 Address Line 3 for the location
+   * @param Address2 Address line 2 for this location
    */
-  public void setAddress3(String Address3) {
-    set_Value(COLUMNNAME_Address3, Address3);
+  public void setAddress2(String Address2) {
+    set_Value(COLUMNNAME_Address2, Address2);
   }
 
   /**
@@ -103,12 +94,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Address 4.
+   * Set Address 3.
    *
-   * @param Address4 Address Line 4 for the location
+   * @param Address3 Address Line 3 for the location
    */
-  public void setAddress4(String Address4) {
-    set_Value(COLUMNNAME_Address4, Address4);
+  public void setAddress3(String Address3) {
+    set_Value(COLUMNNAME_Address3, Address3);
   }
 
   /**
@@ -121,12 +112,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Address 5.
+   * Set Address 4.
    *
-   * @param Address5 Address Line 5 for the location
+   * @param Address4 Address Line 4 for the location
    */
-  public void setAddress5(String Address5) {
-    set_Value(COLUMNNAME_Address5, Address5);
+  public void setAddress4(String Address4) {
+    set_Value(COLUMNNAME_Address4, Address4);
   }
 
   /**
@@ -136,6 +127,26 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    */
   public String getAddress5() {
     return (String) get_Value(COLUMNNAME_Address5);
+  }
+
+  /**
+   * Set Address 5.
+   *
+   * @param Address5 Address Line 5 for the location
+   */
+  public void setAddress5(String Address5) {
+    set_Value(COLUMNNAME_Address5, Address5);
+  }
+
+  /**
+   * Get Address Transaction.
+   *
+   * @return Address Transaction
+   */
+  public int getC_AddressTransaction_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_C_AddressTransaction_ID);
+    if (ii == null) return 0;
+    return ii;
   }
 
   /**
@@ -151,14 +162,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Get Address Transaction.
+   * Get C_AddressTransaction_UU.
    *
-   * @return Address Transaction
+   * @return C_AddressTransaction_UU
    */
-  public int getC_AddressTransaction_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_AddressTransaction_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getC_AddressTransaction_UU() {
+    return (String) get_Value(COLUMNNAME_C_AddressTransaction_UU);
   }
 
   /**
@@ -170,29 +179,10 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     set_Value(COLUMNNAME_C_AddressTransaction_UU, C_AddressTransaction_UU);
   }
 
-  /**
-   * Get C_AddressTransaction_UU.
-   *
-   * @return C_AddressTransaction_UU
-   */
-  public String getC_AddressTransaction_UU() {
-    return (String) get_Value(COLUMNNAME_C_AddressTransaction_UU);
-  }
-
   public I_C_AddressValidation getC_AddressValidation() throws RuntimeException {
     return (I_C_AddressValidation)
         MTable.get(getCtx(), I_C_AddressValidation.Table_Name)
             .getPO(getC_AddressValidation_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Address Validation.
-   *
-   * @param C_AddressValidation_ID Address Validation
-   */
-  public void setC_AddressValidation_ID(int C_AddressValidation_ID) {
-    if (C_AddressValidation_ID < 1) set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
   }
 
   /**
@@ -207,12 +197,13 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set City.
+   * Set Address Validation.
    *
-   * @param City Identifies a City
+   * @param C_AddressValidation_ID Address Validation
    */
-  public void setCity(String City) {
-    set_Value(COLUMNNAME_City, City);
+  public void setC_AddressValidation_ID(int C_AddressValidation_ID) {
+    if (C_AddressValidation_ID < 1) set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
   }
 
   /**
@@ -222,6 +213,15 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    */
   public String getCity() {
     return (String) get_Value(COLUMNNAME_City);
+  }
+
+  /**
+   * Set City.
+   *
+   * @param City Identifies a City
+   */
+  public void setCity(String City) {
+    set_Value(COLUMNNAME_City, City);
   }
 
   /**
@@ -239,16 +239,6 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Address.
-   *
-   * @param C_Location_ID Location or Address
-   */
-  public void setC_Location_ID(int C_Location_ID) {
-    if (C_Location_ID < 1) set_Value(COLUMNNAME_C_Location_ID, null);
-    else set_Value(COLUMNNAME_C_Location_ID, C_Location_ID);
-  }
-
-  /**
    * Get Address.
    *
    * @return Location or Address
@@ -260,12 +250,13 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Comments.
+   * Set Address.
    *
-   * @param Comments Comments or additional information
+   * @param C_Location_ID Location or Address
    */
-  public void setComments(String Comments) {
-    set_Value(COLUMNNAME_Comments, Comments);
+  public void setC_Location_ID(int C_Location_ID) {
+    if (C_Location_ID < 1) set_Value(COLUMNNAME_C_Location_ID, null);
+    else set_Value(COLUMNNAME_C_Location_ID, C_Location_ID);
   }
 
   /**
@@ -278,12 +269,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Country.
+   * Set Comments.
    *
-   * @param Country Country
+   * @param Comments Comments or additional information
    */
-  public void setCountry(String Country) {
-    set_ValueNoCheck(COLUMNNAME_Country, Country);
+  public void setComments(String Comments) {
+    set_Value(COLUMNNAME_Comments, Comments);
   }
 
   /**
@@ -293,6 +284,15 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    */
   public String getCountry() {
     return (String) get_Value(COLUMNNAME_Country);
+  }
+
+  /**
+   * Set Country.
+   *
+   * @param Country Country
+   */
+  public void setCountry(String Country) {
+    set_ValueNoCheck(COLUMNNAME_Country, Country);
   }
 
   /**
@@ -314,15 +314,6 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set ZIP.
-   *
-   * @param Postal Postal code
-   */
-  public void setPostal(String Postal) {
-    set_Value(COLUMNNAME_Postal, Postal);
-  }
-
-  /**
    * Get ZIP.
    *
    * @return Postal code
@@ -332,12 +323,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Processed.
+   * Set ZIP.
    *
-   * @param Processed The document has been processed
+   * @param Postal Postal code
    */
-  public void setProcessed(boolean Processed) {
-    set_Value(COLUMNNAME_Processed, Processed);
+  public void setPostal(String Postal) {
+    set_Value(COLUMNNAME_Postal, Postal);
   }
 
   /**
@@ -350,12 +341,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Region.
+   * Set Processed.
    *
-   * @param Region Region
+   * @param Processed The document has been processed
    */
-  public void setRegion(String Region) {
-    set_ValueNoCheck(COLUMNNAME_Region, Region);
+  public void setProcessed(boolean Processed) {
+    set_Value(COLUMNNAME_Processed, Processed);
   }
 
   /**
@@ -368,12 +359,12 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /**
-   * Set Result.
+   * Set Region.
    *
-   * @param Result Result of the action taken
+   * @param Region Region
    */
-  public void setResult(String Result) {
-    set_ValueNoCheck(COLUMNNAME_Result, Result);
+  public void setRegion(String Region) {
+    set_ValueNoCheck(COLUMNNAME_Region, Region);
   }
 
   /**
@@ -383,6 +374,15 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
    */
   public String getResult() {
     return (String) get_Value(COLUMNNAME_Result);
+  }
+
+  /**
+   * Set Result.
+   *
+   * @param Result Result of the action taken
+   */
+  public void setResult(String Result) {
+    set_ValueNoCheck(COLUMNNAME_Result, Result);
   }
 
   @Override

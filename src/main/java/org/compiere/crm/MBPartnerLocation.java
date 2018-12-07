@@ -14,14 +14,66 @@ import org.compiere.orm.Query;
  * Partner Location Model
  *
  * @author Jorg Janke
- * @version $Id: MBPartnerLocation.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  * @author Teo Sarca, www.arhipac.ro
  *     <li>FR [ 2788465 ] MBPartnerLocation.getForBPartner method add trxName https://sourceforge
  *         .net/tracker/index.php?func=detail&aid=2788465&group_id =176962&atid=879335
+ * @version $Id: MBPartnerLocation.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
 public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPartner_Location {
   /** */
   private static final long serialVersionUID = -8412652367051443276L;
+  /** Cached Location */
+  private MLocation m_location = null;
+  /** Unique Name */
+  private String m_uniqueName = null;
+
+  private int m_unique = 0;
+
+  /**
+   * ************************************************************************ Default Constructor
+   *
+   * @param ctx context
+   * @param C_BPartner_Location_ID id
+   * @param trxName transaction
+   */
+  public MBPartnerLocation(Properties ctx, int C_BPartner_Location_ID, String trxName) {
+    super(ctx, C_BPartner_Location_ID, trxName);
+    if (C_BPartner_Location_ID == 0) {
+      setName(".");
+      //
+      setIsShipTo(true);
+      setIsRemitTo(true);
+      setIsPayFrom(true);
+      setIsBillTo(true);
+    }
+  } // MBPartner_Location
+
+  /**
+   * BP Parent Constructor
+   *
+   * @param bp partner
+   */
+  public MBPartnerLocation(I_C_BPartner bp) {
+    this(bp.getCtx(), 0, bp.get_TrxName());
+    setClientOrg(bp);
+    // may (still) be 0
+    set_ValueNoCheck("C_BPartner_ID", new Integer(bp.getC_BPartner_ID()));
+  } // MBPartner_Location
+
+  /**
+   * Constructor from ResultSet row
+   *
+   * @param ctx context
+   * @param rs current row of result set to be loaded
+   * @param trxName transaction
+   */
+  public MBPartnerLocation(Properties ctx, ResultSet rs, String trxName) {
+    super(ctx, rs, trxName);
+  } // MBPartner_Location
+
+  public MBPartnerLocation(Properties ctx, Row row) {
+    super(ctx, row);
+  } // MBPartner_Location
 
   /**
    * Get Locations for BPartner
@@ -53,59 +105,6 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
     list.toArray(retValue);
     return retValue;
   } // getForBPartner
-
-  /**
-   * ************************************************************************ Default Constructor
-   *
-   * @param ctx context
-   * @param C_BPartner_Location_ID id
-   * @param trxName transaction
-   */
-  public MBPartnerLocation(Properties ctx, int C_BPartner_Location_ID, String trxName) {
-    super(ctx, C_BPartner_Location_ID, trxName);
-    if (C_BPartner_Location_ID == 0) {
-      setName(".");
-      //
-      setIsShipTo(true);
-      setIsRemitTo(true);
-      setIsPayFrom(true);
-      setIsBillTo(true);
-    }
-  } // MBPartner_Location
-
-  /**
-   * BP Parent Constructor
-   *
-   * @param bp partner
-   */
-  public MBPartnerLocation(I_C_BPartner bp) {
-    this(bp.getCtx(), 0, bp.get_TrxName());
-    setClientOrg((org.idempiere.orm.PO) bp);
-    // may (still) be 0
-    set_ValueNoCheck("C_BPartner_ID", new Integer(bp.getC_BPartner_ID()));
-  } // MBPartner_Location
-
-  /**
-   * Constructor from ResultSet row
-   *
-   * @param ctx context
-   * @param rs current row of result set to be loaded
-   * @param trxName transaction
-   */
-  public MBPartnerLocation(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
-  } // MBPartner_Location
-
-  public MBPartnerLocation(Properties ctx, Row row) {
-    super(ctx, row);
-  } // MBPartner_Location
-
-  /** Cached Location */
-  private MLocation m_location = null;
-  /** Unique Name */
-  private String m_uniqueName = null;
-
-  private int m_unique = 0;
 
   @Override
   public I_C_Location getLocation() {
@@ -237,6 +236,6 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         }
       }
     }
-    return m_uniqueName.toString();
+    return m_uniqueName;
   }
 } // MBPartnerLocation

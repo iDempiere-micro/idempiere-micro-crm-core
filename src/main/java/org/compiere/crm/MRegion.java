@@ -17,6 +17,49 @@ import org.idempiere.common.util.CLogger;
 public class MRegion extends MBaseRegion implements Comparator<Object>, Serializable {
   /** */
   private static final long serialVersionUID = 1124865777747582617L;
+  /** Default Region */
+  private static MRegion s_default = null;
+  /** Static Logger */
+  private static CLogger s_log = CLogger.getCLogger(MRegion.class);
+
+  /**
+   * ************************************************************************ Create empty Region
+   *
+   * @param ctx context
+   * @param C_Region_ID id
+   * @param trxName transaction
+   */
+  public MRegion(Properties ctx, int C_Region_ID, String trxName) {
+    super(ctx, C_Region_ID, trxName);
+    if (C_Region_ID == 0) {}
+  } //  MRegion
+
+  /**
+   * Create Region from current row in ResultSet
+   *
+   * @param ctx context
+   * @param rs result set
+   * @param trxName transaction
+   */
+  public MRegion(Properties ctx, ResultSet rs, String trxName) {
+    super(ctx, rs, trxName);
+  } //	MRegion
+
+  public MRegion(Properties ctx, Row row) {
+    super(ctx, row);
+  } //	MRegion
+
+  /**
+   * Parent Constructor
+   *
+   * @param country country
+   * @param regionName Region Name
+   */
+  public MRegion(MCountry country, String regionName) {
+    super(country.getCtx(), 0, country.get_TrxName());
+    setC_Country_ID(country.getC_Country_ID());
+    setName(regionName);
+  } //  MRegion
 
   /**
    * Load Regions (cached)
@@ -38,7 +81,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
     CCache<String, MRegion> s_regions = MBaseRegionKt.getRegionsCache();
     if (s_regions == null || s_regions.size() == 0) loadAllRegions(ctx);
     String key = String.valueOf(C_Region_ID);
-    MRegion r = (MRegion) s_regions.get(key);
+    MRegion r = s_regions.get(key);
     if (r != null) return r;
     r = new MRegion(ctx, C_Region_ID, null);
     if (r.getC_Region_ID() == C_Region_ID) {
@@ -97,50 +140,6 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
     Arrays.sort(retValue, new MRegion(ctx, 0, null));
     return retValue;
   } //	getRegions
-
-  /** Default Region */
-  private static MRegion s_default = null;
-  /** Static Logger */
-  private static CLogger s_log = CLogger.getCLogger(MRegion.class);
-
-  /**
-   * ************************************************************************ Create empty Region
-   *
-   * @param ctx context
-   * @param C_Region_ID id
-   * @param trxName transaction
-   */
-  public MRegion(Properties ctx, int C_Region_ID, String trxName) {
-    super(ctx, C_Region_ID, trxName);
-    if (C_Region_ID == 0) {}
-  } //  MRegion
-
-  /**
-   * Create Region from current row in ResultSet
-   *
-   * @param ctx context
-   * @param rs result set
-   * @param trxName transaction
-   */
-  public MRegion(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
-  } //	MRegion
-
-  public MRegion(Properties ctx, Row row) {
-    super(ctx, row);
-  } //	MRegion
-
-  /**
-   * Parent Constructor
-   *
-   * @param country country
-   * @param regionName Region Name
-   */
-  public MRegion(MCountry country, String regionName) {
-    super(country.getCtx(), 0, country.get_TrxName());
-    setC_Country_ID(country.getC_Country_ID());
-    setName(regionName);
-  } //  MRegion
 
   /**
    * Return Name

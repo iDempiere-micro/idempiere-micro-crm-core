@@ -30,9 +30,96 @@ import org.idempiere.orm.I_Persistent;
  */
 public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
+  /** AD_Language AD_Reference_ID=327 */
+  public static final int AD_LANGUAGE_AD_Reference_ID = 327;
+  /** DeliveryRule AD_Reference_ID=151 */
+  public static final int DELIVERYRULE_AD_Reference_ID = 151;
+  /** After Receipt = R */
+  public static final String DELIVERYRULE_AfterReceipt = "R";
+  /** Availability = A */
+  public static final String DELIVERYRULE_Availability = "A";
+  /** Complete Line = L */
+  public static final String DELIVERYRULE_CompleteLine = "L";
+  /** Complete Order = O */
+  public static final String DELIVERYRULE_CompleteOrder = "O";
+  /** Force = F */
+  public static final String DELIVERYRULE_Force = "F";
+  /** Manual = M */
+  public static final String DELIVERYRULE_Manual = "M";
+  /** DeliveryViaRule AD_Reference_ID=152 */
+  public static final int DELIVERYVIARULE_AD_Reference_ID = 152;
+  /** Pickup = P */
+  public static final String DELIVERYVIARULE_Pickup = "P";
+  /** Delivery = D */
+  public static final String DELIVERYVIARULE_Delivery = "D";
+  /** Shipper = S */
+  public static final String DELIVERYVIARULE_Shipper = "S";
+  /** FreightCostRule AD_Reference_ID=153 */
+  public static final int FREIGHTCOSTRULE_AD_Reference_ID = 153;
+  /** Freight included = I */
+  public static final String FREIGHTCOSTRULE_FreightIncluded = "I";
+  /** Fix price = F */
+  public static final String FREIGHTCOSTRULE_FixPrice = "F";
+  /** Calculated = C */
+  public static final String FREIGHTCOSTRULE_Calculated = "C";
+  /** Line = L */
+  public static final String FREIGHTCOSTRULE_Line = "L";
+  /** InvoiceRule AD_Reference_ID=150 */
+  public static final int INVOICERULE_AD_Reference_ID = 150;
+  /** After Order delivered = O */
+  public static final String INVOICERULE_AfterOrderDelivered = "O";
+  /** After Delivery = D */
+  public static final String INVOICERULE_AfterDelivery = "D";
+  /** Customer Schedule after Delivery = S */
+  public static final String INVOICERULE_CustomerScheduleAfterDelivery = "S";
+  /** Immediate = I */
+  public static final String INVOICERULE_Immediate = "I";
+  /** PaymentRule AD_Reference_ID=195 */
+  public static final int PAYMENTRULE_AD_Reference_ID = 195;
+  /** Cash = B */
+  public static final String PAYMENTRULE_Cash = "B";
+  /** Credit Card = K */
+  public static final String PAYMENTRULE_CreditCard = "K";
+  /** Direct Deposit = T */
+  public static final String PAYMENTRULE_DirectDeposit = "T";
+  /** Check = S */
+  public static final String PAYMENTRULE_Check = "S";
+  /** On Credit = P */
+  public static final String PAYMENTRULE_OnCredit = "P";
+  /** Direct Debit = D */
+  public static final String PAYMENTRULE_DirectDebit = "D";
+  /** Mixed POS Payment = M */
+  public static final String PAYMENTRULE_MixedPOSPayment = "M";
+  /** PaymentRulePO AD_Reference_ID=195 */
+  public static final int PAYMENTRULEPO_AD_Reference_ID = 195;
+  /** Cash = B */
+  public static final String PAYMENTRULEPO_Cash = "B";
+  /** Credit Card = K */
+  public static final String PAYMENTRULEPO_CreditCard = "K";
+  /** Direct Deposit = T */
+  public static final String PAYMENTRULEPO_DirectDeposit = "T";
+  /** Check = S */
+  public static final String PAYMENTRULEPO_Check = "S";
+  /** On Credit = P */
+  public static final String PAYMENTRULEPO_OnCredit = "P";
+  /** Direct Debit = D */
+  public static final String PAYMENTRULEPO_DirectDebit = "D";
+  /** Mixed POS Payment = M */
+  public static final String PAYMENTRULEPO_MixedPOSPayment = "M";
+  /** SOCreditStatus AD_Reference_ID=289 */
+  public static final int SOCREDITSTATUS_AD_Reference_ID = 289;
+  /** Credit Stop = S */
+  public static final String SOCREDITSTATUS_CreditStop = "S";
+  /** Credit Hold = H */
+  public static final String SOCREDITSTATUS_CreditHold = "H";
+  /** Credit Watch = W */
+  public static final String SOCREDITSTATUS_CreditWatch = "W";
+  /** No Credit Check = X */
+  public static final String SOCREDITSTATUS_NoCreditCheck = "X";
+  /** Credit OK = O */
+  public static final String SOCREDITSTATUS_CreditOK = "O";
   /** */
   private static final long serialVersionUID = 20171031L;
-
   /** Standard Constructor */
   public X_C_BPartner(Properties ctx, int C_BPartner_ID, String trxName) {
     super(ctx, C_BPartner_ID, trxName);
@@ -44,7 +131,6 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
      * setSO_CreditLimit (Env.ZERO); setSO_CreditUsed (Env.ZERO); setValue (null); }
      */
   }
-
   /** Load Constructor */
   public X_C_BPartner(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
@@ -69,6 +155,17 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
+   * Get Acquisition Cost.
+   *
+   * @return The cost of gaining the prospect as a customer
+   */
+  public BigDecimal getAcqusitionCost() {
+    BigDecimal bd = (BigDecimal) get_Value(I_C_BPartner.COLUMNNAME_AcqusitionCost);
+    if (bd == null) return Env.ZERO;
+    return bd;
+  }
+
+  /**
    * Set Acquisition Cost.
    *
    * @param AcqusitionCost The cost of gaining the prospect as a customer
@@ -78,12 +175,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Get Acquisition Cost.
+   * Get Actual Life Time Value.
    *
-   * @return The cost of gaining the prospect as a customer
+   * @return Actual Life Time Revenue
    */
-  public BigDecimal getAcqusitionCost() {
-    BigDecimal bd = (BigDecimal) get_Value(I_C_BPartner.COLUMNNAME_AcqusitionCost);
+  public BigDecimal getActualLifeTimeValue() {
+    BigDecimal bd = (BigDecimal) get_Value(I_C_BPartner.COLUMNNAME_ActualLifeTimeValue);
     if (bd == null) return Env.ZERO;
     return bd;
   }
@@ -98,18 +195,14 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Get Actual Life Time Value.
+   * Get Language.
    *
-   * @return Actual Life Time Revenue
+   * @return Language for this entity
    */
-  public BigDecimal getActualLifeTimeValue() {
-    BigDecimal bd = (BigDecimal) get_Value(I_C_BPartner.COLUMNNAME_ActualLifeTimeValue);
-    if (bd == null) return Env.ZERO;
-    return bd;
+  public String getADLanguage() {
+    return (String) get_Value(I_C_BPartner.COLUMNNAME_AD_Language);
   }
 
-  /** AD_Language AD_Reference_ID=327 */
-  public static final int AD_LANGUAGE_AD_Reference_ID = 327;
   /**
    * Set Language.
    *
@@ -121,12 +214,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Get Language.
+   * Get Linked Organization.
    *
-   * @return Language for this entity
+   * @return The Business Partner is another Organization for explicit Inter-Org transactions
    */
-  public String getADLanguage() {
-    return (String) get_Value(I_C_BPartner.COLUMNNAME_AD_Language);
+  public String getAD_OrgBP_ID() {
+    return (String) get_Value(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID);
   }
 
   /**
@@ -140,12 +233,14 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Get Linked Organization.
+   * Get Partner Parent.
    *
-   * @return The Business Partner is another Organization for explicit Inter-Org transactions
+   * @return Business Partner Parent
    */
-  public String getAD_OrgBP_ID() {
-    return (String) get_Value(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID);
+  public int getBPartner_Parent_ID() {
+    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_BPartner_Parent_ID);
+    if (ii == null) return 0;
+    return ii;
   }
 
   /**
@@ -159,12 +254,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Get Partner Parent.
+   * Get Business Partner .
    *
-   * @return Business Partner Parent
+   * @return Identifies a Business Partner
    */
-  public int getBPartner_Parent_ID() {
-    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_BPartner_Parent_ID);
+  public int getC_BPartner_ID() {
+    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_C_BPartner_ID);
     if (ii == null) return 0;
     return ii;
   }
@@ -180,14 +275,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Get Business Partner .
+   * Get C_BPartner_UU.
    *
-   * @return Identifies a Business Partner
+   * @return C_BPartner_UU
    */
-  public int getC_BPartner_ID() {
-    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_C_BPartner_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getC_BPartner_UU() {
+    return (String) get_Value(I_C_BPartner.COLUMNNAME_C_BPartner_UU);
   }
 
   /**
@@ -199,28 +292,9 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     set_Value(I_C_BPartner.COLUMNNAME_C_BPartner_UU, C_BPartner_UU);
   }
 
-  /**
-   * Get C_BPartner_UU.
-   *
-   * @return C_BPartner_UU
-   */
-  public String getC_BPartner_UU() {
-    return (String) get_Value(I_C_BPartner.COLUMNNAME_C_BPartner_UU);
-  }
-
   public I_C_BP_Group getC_BP_Group() throws RuntimeException {
     return (I_C_BP_Group)
         MTable.get(getCtx(), I_C_BP_Group.Table_Name).getPO(getC_BP_Group_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Business Partner Group.
-   *
-   * @param C_BP_Group_ID Business Partner Group
-   */
-  public void setC_BP_Group_ID(int C_BP_Group_ID) {
-    if (C_BP_Group_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, Integer.valueOf(C_BP_Group_ID));
   }
 
   /**
@@ -234,19 +308,19 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set Business Partner Group.
+   *
+   * @param C_BP_Group_ID Business Partner Group
+   */
+  public void setC_BP_Group_ID(int C_BP_Group_ID) {
+    if (C_BP_Group_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, Integer.valueOf(C_BP_Group_ID));
+  }
+
   public I_C_Dunning getC_Dunning() throws RuntimeException {
     return (I_C_Dunning)
         MTable.get(getCtx(), I_C_Dunning.Table_Name).getPO(getC_Dunning_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Dunning.
-   *
-   * @param C_Dunning_ID Dunning Rules for overdue invoices
-   */
-  public void setC_Dunning_ID(int C_Dunning_ID) {
-    if (C_Dunning_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_Dunning_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_C_Dunning_ID, Integer.valueOf(C_Dunning_ID));
   }
 
   /**
@@ -260,19 +334,19 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set Dunning.
+   *
+   * @param C_Dunning_ID Dunning Rules for overdue invoices
+   */
+  public void setC_Dunning_ID(int C_Dunning_ID) {
+    if (C_Dunning_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_Dunning_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_C_Dunning_ID, Integer.valueOf(C_Dunning_ID));
+  }
+
   public I_C_Greeting getC_Greeting() throws RuntimeException {
     return (I_C_Greeting)
         MTable.get(getCtx(), I_C_Greeting.Table_Name).getPO(getC_Greeting_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Greeting.
-   *
-   * @param C_Greeting_ID Greeting to print on correspondence
-   */
-  public void setC_Greeting_ID(int C_Greeting_ID) {
-    if (C_Greeting_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_Greeting_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_C_Greeting_ID, Integer.valueOf(C_Greeting_ID));
   }
 
   /**
@@ -286,10 +360,31 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set Greeting.
+   *
+   * @param C_Greeting_ID Greeting to print on correspondence
+   */
+  public void setC_Greeting_ID(int C_Greeting_ID) {
+    if (C_Greeting_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_Greeting_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_C_Greeting_ID, Integer.valueOf(C_Greeting_ID));
+  }
+
   public I_C_InvoiceSchedule getC_InvoiceSchedule() throws RuntimeException {
     return (I_C_InvoiceSchedule)
         MTable.get(getCtx(), I_C_InvoiceSchedule.Table_Name)
             .getPO(getC_InvoiceSchedule_ID(), get_TrxName());
+  }
+
+  /**
+   * Get Invoice Schedule.
+   *
+   * @return Schedule for generating Invoices
+   */
+  public int getC_InvoiceSchedule_ID() {
+    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_C_InvoiceSchedule_ID);
+    if (ii == null) return 0;
+    return ii;
   }
 
   /**
@@ -304,31 +399,10 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
           I_C_BPartner.COLUMNNAME_C_InvoiceSchedule_ID, Integer.valueOf(C_InvoiceSchedule_ID));
   }
 
-  /**
-   * Get Invoice Schedule.
-   *
-   * @return Schedule for generating Invoices
-   */
-  public int getC_InvoiceSchedule_ID() {
-    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_C_InvoiceSchedule_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
-
   public I_C_PaymentTerm getC_PaymentTerm() throws RuntimeException {
     return (I_C_PaymentTerm)
         MTable.get(getCtx(), I_C_PaymentTerm.Table_Name)
             .getPO(getC_PaymentTerm_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Payment Term.
-   *
-   * @param C_PaymentTerm_ID The terms of Payment (timing, discount)
-   */
-  public void setC_PaymentTerm_ID(int C_PaymentTerm_ID) {
-    if (C_PaymentTerm_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID, Integer.valueOf(C_PaymentTerm_ID));
   }
 
   /**
@@ -342,20 +416,20 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set Payment Term.
+   *
+   * @param C_PaymentTerm_ID The terms of Payment (timing, discount)
+   */
+  public void setC_PaymentTerm_ID(int C_PaymentTerm_ID) {
+    if (C_PaymentTerm_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID, Integer.valueOf(C_PaymentTerm_ID));
+  }
+
   public org.eevolution.model.I_C_TaxGroup getC_TaxGroup() throws RuntimeException {
     return (org.eevolution.model.I_C_TaxGroup)
         MTable.get(getCtx(), org.eevolution.model.I_C_TaxGroup.Table_Name)
             .getPO(getC_TaxGroup_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Tax Group.
-   *
-   * @param C_TaxGroup_ID Tax Group
-   */
-  public void setC_TaxGroup_ID(int C_TaxGroup_ID) {
-    if (C_TaxGroup_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_TaxGroup_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_C_TaxGroup_ID, Integer.valueOf(C_TaxGroup_ID));
   }
 
   /**
@@ -370,12 +444,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Customer Profile ID.
+   * Set Tax Group.
    *
-   * @param CustomerProfileID Customer Profile ID
+   * @param C_TaxGroup_ID Tax Group
    */
-  public void setCustomerProfileID(String CustomerProfileID) {
-    set_Value(I_C_BPartner.COLUMNNAME_CustomerProfileID, CustomerProfileID);
+  public void setC_TaxGroup_ID(int C_TaxGroup_ID) {
+    if (C_TaxGroup_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_C_TaxGroup_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_C_TaxGroup_ID, Integer.valueOf(C_TaxGroup_ID));
   }
 
   /**
@@ -387,19 +462,18 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return (String) get_Value(I_C_BPartner.COLUMNNAME_CustomerProfileID);
   }
 
+  /**
+   * Set Customer Profile ID.
+   *
+   * @param CustomerProfileID Customer Profile ID
+   */
+  public void setCustomerProfileID(String CustomerProfileID) {
+    set_Value(I_C_BPartner.COLUMNNAME_CustomerProfileID, CustomerProfileID);
+  }
+
   public I_C_1099Box getDefault1099Box() throws RuntimeException {
     return (I_C_1099Box)
         MTable.get(getCtx(), I_C_1099Box.Table_Name).getPO(getDefault1099Box_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Default 1099 Box.
-   *
-   * @param Default1099Box_ID Default 1099 Box
-   */
-  public void setDefault1099Box_ID(int Default1099Box_ID) {
-    if (Default1099Box_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_Default1099Box_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_Default1099Box_ID, Integer.valueOf(Default1099Box_ID));
   }
 
   /**
@@ -413,28 +487,14 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
-  /** DeliveryRule AD_Reference_ID=151 */
-  public static final int DELIVERYRULE_AD_Reference_ID = 151;
-  /** After Receipt = R */
-  public static final String DELIVERYRULE_AfterReceipt = "R";
-  /** Availability = A */
-  public static final String DELIVERYRULE_Availability = "A";
-  /** Complete Line = L */
-  public static final String DELIVERYRULE_CompleteLine = "L";
-  /** Complete Order = O */
-  public static final String DELIVERYRULE_CompleteOrder = "O";
-  /** Force = F */
-  public static final String DELIVERYRULE_Force = "F";
-  /** Manual = M */
-  public static final String DELIVERYRULE_Manual = "M";
   /**
-   * Set Delivery Rule.
+   * Set Default 1099 Box.
    *
-   * @param DeliveryRule Defines the timing of Delivery
+   * @param Default1099Box_ID Default 1099 Box
    */
-  public void setDeliveryRule(String DeliveryRule) {
-
-    set_Value(I_C_BPartner.COLUMNNAME_DeliveryRule, DeliveryRule);
+  public void setDefault1099Box_ID(int Default1099Box_ID) {
+    if (Default1099Box_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_Default1099Box_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_Default1099Box_ID, Integer.valueOf(Default1099Box_ID));
   }
 
   /**
@@ -446,22 +506,14 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return (String) get_Value(I_C_BPartner.COLUMNNAME_DeliveryRule);
   }
 
-  /** DeliveryViaRule AD_Reference_ID=152 */
-  public static final int DELIVERYVIARULE_AD_Reference_ID = 152;
-  /** Pickup = P */
-  public static final String DELIVERYVIARULE_Pickup = "P";
-  /** Delivery = D */
-  public static final String DELIVERYVIARULE_Delivery = "D";
-  /** Shipper = S */
-  public static final String DELIVERYVIARULE_Shipper = "S";
   /**
-   * Set Delivery Via.
+   * Set Delivery Rule.
    *
-   * @param DeliveryViaRule How the order will be delivered
+   * @param DeliveryRule Defines the timing of Delivery
    */
-  public void setDeliveryViaRule(String DeliveryViaRule) {
+  public void setDeliveryRule(String DeliveryRule) {
 
-    set_Value(I_C_BPartner.COLUMNNAME_DeliveryViaRule, DeliveryViaRule);
+    set_Value(I_C_BPartner.COLUMNNAME_DeliveryRule, DeliveryRule);
   }
 
   /**
@@ -474,12 +526,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Description.
+   * Set Delivery Via.
    *
-   * @param Description Optional short description of the record
+   * @param DeliveryViaRule How the order will be delivered
    */
-  public void setDescription(String Description) {
-    set_Value(I_C_BPartner.COLUMNNAME_Description, Description);
+  public void setDeliveryViaRule(String DeliveryViaRule) {
+
+    set_Value(I_C_BPartner.COLUMNNAME_DeliveryViaRule, DeliveryViaRule);
   }
 
   /**
@@ -492,12 +545,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Document Copies.
+   * Set Description.
    *
-   * @param DocumentCopies Number of copies to be printed
+   * @param Description Optional short description of the record
    */
-  public void setDocumentCopies(int DocumentCopies) {
-    set_Value(I_C_BPartner.COLUMNNAME_DocumentCopies, Integer.valueOf(DocumentCopies));
+  public void setDescription(String Description) {
+    set_Value(I_C_BPartner.COLUMNNAME_Description, Description);
   }
 
   /**
@@ -512,12 +565,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Dunning Grace Date.
+   * Set Document Copies.
    *
-   * @param DunningGrace Dunning Grace Date
+   * @param DocumentCopies Number of copies to be printed
    */
-  public void setDunningGrace(Timestamp DunningGrace) {
-    set_Value(I_C_BPartner.COLUMNNAME_DunningGrace, DunningGrace);
+  public void setDocumentCopies(int DocumentCopies) {
+    set_Value(I_C_BPartner.COLUMNNAME_DocumentCopies, Integer.valueOf(DocumentCopies));
   }
 
   /**
@@ -530,12 +583,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set D-U-N-S.
+   * Set Dunning Grace Date.
    *
-   * @param DUNS Dun & Bradstreet Number
+   * @param DunningGrace Dunning Grace Date
    */
-  public void setDUNS(String DUNS) {
-    set_Value(I_C_BPartner.COLUMNNAME_DUNS, DUNS);
+  public void setDunningGrace(Timestamp DunningGrace) {
+    set_Value(I_C_BPartner.COLUMNNAME_DunningGrace, DunningGrace);
   }
 
   /**
@@ -548,12 +601,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set First Sale.
+   * Set D-U-N-S.
    *
-   * @param FirstSale Date of First Sale
+   * @param DUNS Dun & Bradstreet Number
    */
-  public void setFirstSale(Timestamp FirstSale) {
-    set_Value(I_C_BPartner.COLUMNNAME_FirstSale, FirstSale);
+  public void setDUNS(String DUNS) {
+    set_Value(I_C_BPartner.COLUMNNAME_DUNS, DUNS);
   }
 
   /**
@@ -566,12 +619,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Flat Discount %.
+   * Set First Sale.
    *
-   * @param FlatDiscount Flat discount percentage
+   * @param FirstSale Date of First Sale
    */
-  public void setFlatDiscount(BigDecimal FlatDiscount) {
-    set_Value(I_C_BPartner.COLUMNNAME_FlatDiscount, FlatDiscount);
+  public void setFirstSale(Timestamp FirstSale) {
+    set_Value(I_C_BPartner.COLUMNNAME_FirstSale, FirstSale);
   }
 
   /**
@@ -585,24 +638,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return bd;
   }
 
-  /** FreightCostRule AD_Reference_ID=153 */
-  public static final int FREIGHTCOSTRULE_AD_Reference_ID = 153;
-  /** Freight included = I */
-  public static final String FREIGHTCOSTRULE_FreightIncluded = "I";
-  /** Fix price = F */
-  public static final String FREIGHTCOSTRULE_FixPrice = "F";
-  /** Calculated = C */
-  public static final String FREIGHTCOSTRULE_Calculated = "C";
-  /** Line = L */
-  public static final String FREIGHTCOSTRULE_Line = "L";
   /**
-   * Set Freight Cost Rule.
+   * Set Flat Discount %.
    *
-   * @param FreightCostRule Method for charging Freight
+   * @param FlatDiscount Flat discount percentage
    */
-  public void setFreightCostRule(String FreightCostRule) {
-
-    set_Value(I_C_BPartner.COLUMNNAME_FreightCostRule, FreightCostRule);
+  public void setFlatDiscount(BigDecimal FlatDiscount) {
+    set_Value(I_C_BPartner.COLUMNNAME_FlatDiscount, FlatDiscount);
   }
 
   /**
@@ -614,10 +656,31 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return (String) get_Value(I_C_BPartner.COLUMNNAME_FreightCostRule);
   }
 
+  /**
+   * Set Freight Cost Rule.
+   *
+   * @param FreightCostRule Method for charging Freight
+   */
+  public void setFreightCostRule(String FreightCostRule) {
+
+    set_Value(I_C_BPartner.COLUMNNAME_FreightCostRule, FreightCostRule);
+  }
+
   public I_AD_PrintFormat getInvoice_PrintFormat() throws RuntimeException {
     return (I_AD_PrintFormat)
         MTable.get(getCtx(), I_AD_PrintFormat.Table_Name)
             .getPO(getInvoice_PrintFormat_ID(), get_TrxName());
+  }
+
+  /**
+   * Get Invoice Print Format.
+   *
+   * @return Print Format for printing Invoices
+   */
+  public int getInvoice_PrintFormat_ID() {
+    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_Invoice_PrintFormat_ID);
+    if (ii == null) return 0;
+    return ii;
   }
 
   /**
@@ -633,26 +696,14 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Get Invoice Print Format.
+   * Get Invoice Rule.
    *
-   * @return Print Format for printing Invoices
+   * @return Frequency and method of invoicing
    */
-  public int getInvoice_PrintFormat_ID() {
-    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_Invoice_PrintFormat_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getInvoiceRule() {
+    return (String) get_Value(I_C_BPartner.COLUMNNAME_InvoiceRule);
   }
 
-  /** InvoiceRule AD_Reference_ID=150 */
-  public static final int INVOICERULE_AD_Reference_ID = 150;
-  /** After Order delivered = O */
-  public static final String INVOICERULE_AfterOrderDelivered = "O";
-  /** After Delivery = D */
-  public static final String INVOICERULE_AfterDelivery = "D";
-  /** Customer Schedule after Delivery = S */
-  public static final String INVOICERULE_CustomerScheduleAfterDelivery = "S";
-  /** Immediate = I */
-  public static final String INVOICERULE_Immediate = "I";
   /**
    * Set Invoice Rule.
    *
@@ -661,15 +712,6 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public void setInvoiceRule(String InvoiceRule) {
 
     set_Value(I_C_BPartner.COLUMNNAME_InvoiceRule, InvoiceRule);
-  }
-
-  /**
-   * Get Invoice Rule.
-   *
-   * @return Frequency and method of invoicing
-   */
-  public String getInvoiceRule() {
-    return (String) get_Value(I_C_BPartner.COLUMNNAME_InvoiceRule);
   }
 
   /**
@@ -949,16 +991,6 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Logo.
-   *
-   * @param Logo_ID Logo
-   */
-  public void setLogo_ID(int Logo_ID) {
-    if (Logo_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_Logo_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_Logo_ID, Integer.valueOf(Logo_ID));
-  }
-
-  /**
    * Get Logo.
    *
    * @return Logo
@@ -969,21 +1001,20 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set Logo.
+   *
+   * @param Logo_ID Logo
+   */
+  public void setLogo_ID(int Logo_ID) {
+    if (Logo_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_Logo_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_Logo_ID, Integer.valueOf(Logo_ID));
+  }
+
   public I_M_DiscountSchema getM_DiscountSchema() throws RuntimeException {
     return (I_M_DiscountSchema)
         MTable.get(getCtx(), I_M_DiscountSchema.Table_Name)
             .getPO(getM_DiscountSchema_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Discount Schema.
-   *
-   * @param M_DiscountSchema_ID Schema to calculate the trade discount percentage
-   */
-  public void setM_DiscountSchema_ID(int M_DiscountSchema_ID) {
-    if (M_DiscountSchema_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, null);
-    else
-      set_Value(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, Integer.valueOf(M_DiscountSchema_ID));
   }
 
   /**
@@ -997,19 +1028,20 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set Discount Schema.
+   *
+   * @param M_DiscountSchema_ID Schema to calculate the trade discount percentage
+   */
+  public void setM_DiscountSchema_ID(int M_DiscountSchema_ID) {
+    if (M_DiscountSchema_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, null);
+    else
+      set_Value(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, Integer.valueOf(M_DiscountSchema_ID));
+  }
+
   public I_M_PriceList getM_PriceList() throws RuntimeException {
     return (I_M_PriceList)
         MTable.get(getCtx(), I_M_PriceList.Table_Name).getPO(getM_PriceList_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Price List.
-   *
-   * @param M_PriceList_ID Unique identifier of a Price List
-   */
-  public void setM_PriceList_ID(int M_PriceList_ID) {
-    if (M_PriceList_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_M_PriceList_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_M_PriceList_ID, Integer.valueOf(M_PriceList_ID));
   }
 
   /**
@@ -1024,13 +1056,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set NAICS/SIC.
+   * Set Price List.
    *
-   * @param NAICS Standard Industry Code or its successor NAIC -
-   *     http://www.osha.gov/oshstats/sicser.html
+   * @param M_PriceList_ID Unique identifier of a Price List
    */
-  public void setNAICS(String NAICS) {
-    set_Value(I_C_BPartner.COLUMNNAME_NAICS, NAICS);
+  public void setM_PriceList_ID(int M_PriceList_ID) {
+    if (M_PriceList_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_M_PriceList_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_M_PriceList_ID, Integer.valueOf(M_PriceList_ID));
   }
 
   /**
@@ -1043,12 +1075,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Name 2.
+   * Set NAICS/SIC.
    *
-   * @param Name2 Additional Name
+   * @param NAICS Standard Industry Code or its successor NAIC -
+   *     http://www.osha.gov/oshstats/sicser.html
    */
-  public void setName2(String Name2) {
-    set_Value(HasName2.Companion.getCOLUMNNAME_Name2(), Name2);
+  public void setNAICS(String NAICS) {
+    set_Value(I_C_BPartner.COLUMNNAME_NAICS, NAICS);
   }
 
   /**
@@ -1061,12 +1094,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Employees.
+   * Set Name 2.
    *
-   * @param NumberEmployees Number of employees
+   * @param Name2 Additional Name
    */
-  public void setNumberEmployees(int NumberEmployees) {
-    set_Value(I_C_BPartner.COLUMNNAME_NumberEmployees, Integer.valueOf(NumberEmployees));
+  public void setName2(String Name2) {
+    set_Value(HasName2.Companion.getCOLUMNNAME_Name2(), Name2);
   }
 
   /**
@@ -1080,22 +1113,24 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
-  /** PaymentRule AD_Reference_ID=195 */
-  public static final int PAYMENTRULE_AD_Reference_ID = 195;
-  /** Cash = B */
-  public static final String PAYMENTRULE_Cash = "B";
-  /** Credit Card = K */
-  public static final String PAYMENTRULE_CreditCard = "K";
-  /** Direct Deposit = T */
-  public static final String PAYMENTRULE_DirectDeposit = "T";
-  /** Check = S */
-  public static final String PAYMENTRULE_Check = "S";
-  /** On Credit = P */
-  public static final String PAYMENTRULE_OnCredit = "P";
-  /** Direct Debit = D */
-  public static final String PAYMENTRULE_DirectDebit = "D";
-  /** Mixed POS Payment = M */
-  public static final String PAYMENTRULE_MixedPOSPayment = "M";
+  /**
+   * Set Employees.
+   *
+   * @param NumberEmployees Number of employees
+   */
+  public void setNumberEmployees(int NumberEmployees) {
+    set_Value(I_C_BPartner.COLUMNNAME_NumberEmployees, Integer.valueOf(NumberEmployees));
+  }
+
+  /**
+   * Get Payment Rule.
+   *
+   * @return How you pay the invoice
+   */
+  public String getPaymentRule() {
+    return (String) get_Value(I_C_BPartner.COLUMNNAME_PaymentRule);
+  }
+
   /**
    * Set Payment Rule.
    *
@@ -1109,28 +1144,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   /**
    * Get Payment Rule.
    *
-   * @return How you pay the invoice
+   * @return Purchase payment option
    */
-  public String getPaymentRule() {
-    return (String) get_Value(I_C_BPartner.COLUMNNAME_PaymentRule);
+  public String getPaymentRulePO() {
+    return (String) get_Value(I_C_BPartner.COLUMNNAME_PaymentRulePO);
   }
 
-  /** PaymentRulePO AD_Reference_ID=195 */
-  public static final int PAYMENTRULEPO_AD_Reference_ID = 195;
-  /** Cash = B */
-  public static final String PAYMENTRULEPO_Cash = "B";
-  /** Credit Card = K */
-  public static final String PAYMENTRULEPO_CreditCard = "K";
-  /** Direct Deposit = T */
-  public static final String PAYMENTRULEPO_DirectDeposit = "T";
-  /** Check = S */
-  public static final String PAYMENTRULEPO_Check = "S";
-  /** On Credit = P */
-  public static final String PAYMENTRULEPO_OnCredit = "P";
-  /** Direct Debit = D */
-  public static final String PAYMENTRULEPO_DirectDebit = "D";
-  /** Mixed POS Payment = M */
-  public static final String PAYMENTRULEPO_MixedPOSPayment = "M";
   /**
    * Set Payment Rule.
    *
@@ -1141,19 +1160,21 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     set_Value(I_C_BPartner.COLUMNNAME_PaymentRulePO, PaymentRulePO);
   }
 
-  /**
-   * Get Payment Rule.
-   *
-   * @return Purchase payment option
-   */
-  public String getPaymentRulePO() {
-    return (String) get_Value(I_C_BPartner.COLUMNNAME_PaymentRulePO);
-  }
-
   public I_M_DiscountSchema getPO_DiscountSchema() throws RuntimeException {
     return (I_M_DiscountSchema)
         MTable.get(getCtx(), I_M_DiscountSchema.Table_Name)
             .getPO(getPO_DiscountSchema_ID(), get_TrxName());
+  }
+
+  /**
+   * Get PO Discount Schema.
+   *
+   * @return Schema to calculate the purchase trade discount percentage
+   */
+  public int getPO_DiscountSchema_ID() {
+    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_PO_DiscountSchema_ID);
+    if (ii == null) return 0;
+    return ii;
   }
 
   /**
@@ -1168,31 +1189,10 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
           I_C_BPartner.COLUMNNAME_PO_DiscountSchema_ID, Integer.valueOf(PO_DiscountSchema_ID));
   }
 
-  /**
-   * Get PO Discount Schema.
-   *
-   * @return Schema to calculate the purchase trade discount percentage
-   */
-  public int getPO_DiscountSchema_ID() {
-    Integer ii = (Integer) get_Value(I_C_BPartner.COLUMNNAME_PO_DiscountSchema_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
-
   public I_C_PaymentTerm getPO_PaymentTerm() throws RuntimeException {
     return (I_C_PaymentTerm)
         MTable.get(getCtx(), I_C_PaymentTerm.Table_Name)
             .getPO(getPO_PaymentTerm_ID(), get_TrxName());
-  }
-
-  /**
-   * Set PO Payment Term.
-   *
-   * @param PO_PaymentTerm_ID Payment rules for a purchase order
-   */
-  public void setPO_PaymentTerm_ID(int PO_PaymentTerm_ID) {
-    if (PO_PaymentTerm_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID, Integer.valueOf(PO_PaymentTerm_ID));
   }
 
   /**
@@ -1206,19 +1206,19 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set PO Payment Term.
+   *
+   * @param PO_PaymentTerm_ID Payment rules for a purchase order
+   */
+  public void setPO_PaymentTerm_ID(int PO_PaymentTerm_ID) {
+    if (PO_PaymentTerm_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID, Integer.valueOf(PO_PaymentTerm_ID));
+  }
+
   public I_M_PriceList getPO_PriceList() throws RuntimeException {
     return (I_M_PriceList)
         MTable.get(getCtx(), I_M_PriceList.Table_Name).getPO(getPO_PriceList_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Purchase Pricelist.
-   *
-   * @param PO_PriceList_ID Price List used by this Business Partner
-   */
-  public void setPO_PriceList_ID(int PO_PriceList_ID) {
-    if (PO_PriceList_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_PO_PriceList_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_PO_PriceList_ID, Integer.valueOf(PO_PriceList_ID));
   }
 
   /**
@@ -1233,13 +1233,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Order Reference.
+   * Set Purchase Pricelist.
    *
-   * @param POReference Transaction Reference Number (Sales Order, Purchase Order) of your Business
-   *     Partner
+   * @param PO_PriceList_ID Price List used by this Business Partner
    */
-  public void setPOReference(String POReference) {
-    set_Value(I_C_BPartner.COLUMNNAME_POReference, POReference);
+  public void setPO_PriceList_ID(int PO_PriceList_ID) {
+    if (PO_PriceList_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_PO_PriceList_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_PO_PriceList_ID, Integer.valueOf(PO_PriceList_ID));
   }
 
   /**
@@ -1252,12 +1252,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Potential Life Time Value.
+   * Set Order Reference.
    *
-   * @param PotentialLifeTimeValue Total Revenue expected
+   * @param POReference Transaction Reference Number (Sales Order, Purchase Order) of your Business
+   *     Partner
    */
-  public void setPotentialLifeTimeValue(BigDecimal PotentialLifeTimeValue) {
-    set_Value(I_C_BPartner.COLUMNNAME_PotentialLifeTimeValue, PotentialLifeTimeValue);
+  public void setPOReference(String POReference) {
+    set_Value(I_C_BPartner.COLUMNNAME_POReference, POReference);
   }
 
   /**
@@ -1272,12 +1273,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Rating.
+   * Set Potential Life Time Value.
    *
-   * @param Rating Classification or Importance
+   * @param PotentialLifeTimeValue Total Revenue expected
    */
-  public void setRating(String Rating) {
-    set_Value(I_C_BPartner.COLUMNNAME_Rating, Rating);
+  public void setPotentialLifeTimeValue(BigDecimal PotentialLifeTimeValue) {
+    set_Value(I_C_BPartner.COLUMNNAME_PotentialLifeTimeValue, PotentialLifeTimeValue);
   }
 
   /**
@@ -1290,12 +1291,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Reference No.
+   * Set Rating.
    *
-   * @param ReferenceNo Your customer or vendor number at the Business Partner's site
+   * @param Rating Classification or Importance
    */
-  public void setReferenceNo(String ReferenceNo) {
-    set_Value(I_C_BPartner.COLUMNNAME_ReferenceNo, ReferenceNo);
+  public void setRating(String Rating) {
+    set_Value(I_C_BPartner.COLUMNNAME_Rating, Rating);
   }
 
   /**
@@ -1307,19 +1308,18 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return (String) get_Value(I_C_BPartner.COLUMNNAME_ReferenceNo);
   }
 
+  /**
+   * Set Reference No.
+   *
+   * @param ReferenceNo Your customer or vendor number at the Business Partner's site
+   */
+  public void setReferenceNo(String ReferenceNo) {
+    set_Value(I_C_BPartner.COLUMNNAME_ReferenceNo, ReferenceNo);
+  }
+
   public I_AD_User getSalesRep() throws RuntimeException {
     return (I_AD_User)
         MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSalesRep_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Sales Representative.
-   *
-   * @param SalesRep_ID Sales Representative or Company Agent
-   */
-  public void setSalesRep_ID(int SalesRep_ID) {
-    if (SalesRep_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_SalesRep_ID, null);
-    else set_Value(I_C_BPartner.COLUMNNAME_SalesRep_ID, Integer.valueOf(SalesRep_ID));
   }
 
   /**
@@ -1334,12 +1334,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Sales Volume in 1.000.
+   * Set Sales Representative.
    *
-   * @param SalesVolume Total Volume of Sales in Thousands of Currency
+   * @param SalesRep_ID Sales Representative or Company Agent
    */
-  public void setSalesVolume(int SalesVolume) {
-    set_Value(I_C_BPartner.COLUMNNAME_SalesVolume, Integer.valueOf(SalesVolume));
+  public void setSalesRep_ID(int SalesRep_ID) {
+    if (SalesRep_ID < 1) set_Value(I_C_BPartner.COLUMNNAME_SalesRep_ID, null);
+    else set_Value(I_C_BPartner.COLUMNNAME_SalesRep_ID, Integer.valueOf(SalesRep_ID));
   }
 
   /**
@@ -1354,12 +1355,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Send EMail.
+   * Set Sales Volume in 1.000.
    *
-   * @param SendEMail Enable sending Document EMail
+   * @param SalesVolume Total Volume of Sales in Thousands of Currency
    */
-  public void setSendEMail(boolean SendEMail) {
-    set_Value(I_C_BPartner.COLUMNNAME_SendEMail, Boolean.valueOf(SendEMail));
+  public void setSalesVolume(int SalesVolume) {
+    set_Value(I_C_BPartner.COLUMNNAME_SalesVolume, Integer.valueOf(SalesVolume));
   }
 
   /**
@@ -1377,12 +1378,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Share.
+   * Set Send EMail.
    *
-   * @param ShareOfCustomer Share of Customer's business as a percentage
+   * @param SendEMail Enable sending Document EMail
    */
-  public void setShareOfCustomer(int ShareOfCustomer) {
-    set_Value(I_C_BPartner.COLUMNNAME_ShareOfCustomer, Integer.valueOf(ShareOfCustomer));
+  public void setSendEMail(boolean SendEMail) {
+    set_Value(I_C_BPartner.COLUMNNAME_SendEMail, Boolean.valueOf(SendEMail));
   }
 
   /**
@@ -1397,12 +1398,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Min Shelf Life %.
+   * Set Share.
    *
-   * @param ShelfLifeMinPct Minimum Shelf Life in percent based on Product Instance Guarantee Date
+   * @param ShareOfCustomer Share of Customer's business as a percentage
    */
-  public void setShelfLifeMinPct(int ShelfLifeMinPct) {
-    set_Value(I_C_BPartner.COLUMNNAME_ShelfLifeMinPct, Integer.valueOf(ShelfLifeMinPct));
+  public void setShareOfCustomer(int ShareOfCustomer) {
+    set_Value(I_C_BPartner.COLUMNNAME_ShareOfCustomer, Integer.valueOf(ShareOfCustomer));
   }
 
   /**
@@ -1417,12 +1418,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Credit Limit.
+   * Set Min Shelf Life %.
    *
-   * @param SO_CreditLimit Total outstanding invoice amounts allowed
+   * @param ShelfLifeMinPct Minimum Shelf Life in percent based on Product Instance Guarantee Date
    */
-  public void setSO_CreditLimit(BigDecimal SO_CreditLimit) {
-    set_Value(I_C_BPartner.COLUMNNAME_SO_CreditLimit, SO_CreditLimit);
+  public void setShelfLifeMinPct(int ShelfLifeMinPct) {
+    set_Value(I_C_BPartner.COLUMNNAME_ShelfLifeMinPct, Integer.valueOf(ShelfLifeMinPct));
   }
 
   /**
@@ -1436,26 +1437,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
     return bd;
   }
 
-  /** SOCreditStatus AD_Reference_ID=289 */
-  public static final int SOCREDITSTATUS_AD_Reference_ID = 289;
-  /** Credit Stop = S */
-  public static final String SOCREDITSTATUS_CreditStop = "S";
-  /** Credit Hold = H */
-  public static final String SOCREDITSTATUS_CreditHold = "H";
-  /** Credit Watch = W */
-  public static final String SOCREDITSTATUS_CreditWatch = "W";
-  /** No Credit Check = X */
-  public static final String SOCREDITSTATUS_NoCreditCheck = "X";
-  /** Credit OK = O */
-  public static final String SOCREDITSTATUS_CreditOK = "O";
   /**
-   * Set Credit Status.
+   * Set Credit Limit.
    *
-   * @param SOCreditStatus Business Partner Credit Status
+   * @param SO_CreditLimit Total outstanding invoice amounts allowed
    */
-  public void setSOCreditStatus(String SOCreditStatus) {
-
-    set_Value(I_C_BPartner.COLUMNNAME_SOCreditStatus, SOCreditStatus);
+  public void setSO_CreditLimit(BigDecimal SO_CreditLimit) {
+    set_Value(I_C_BPartner.COLUMNNAME_SO_CreditLimit, SO_CreditLimit);
   }
 
   /**
@@ -1468,12 +1456,13 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Credit Used.
+   * Set Credit Status.
    *
-   * @param SO_CreditUsed Current open balance
+   * @param SOCreditStatus Business Partner Credit Status
    */
-  public void setSO_CreditUsed(BigDecimal SO_CreditUsed) {
-    set_ValueNoCheck(I_C_BPartner.COLUMNNAME_SO_CreditUsed, SO_CreditUsed);
+  public void setSOCreditStatus(String SOCreditStatus) {
+
+    set_Value(I_C_BPartner.COLUMNNAME_SOCreditStatus, SOCreditStatus);
   }
 
   /**
@@ -1488,12 +1477,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Order Description.
+   * Set Credit Used.
    *
-   * @param SO_Description Description to be used on orders
+   * @param SO_CreditUsed Current open balance
    */
-  public void setSO_Description(String SO_Description) {
-    set_Value(I_C_BPartner.COLUMNNAME_SO_Description, SO_Description);
+  public void setSO_CreditUsed(BigDecimal SO_CreditUsed) {
+    set_ValueNoCheck(I_C_BPartner.COLUMNNAME_SO_CreditUsed, SO_CreditUsed);
   }
 
   /**
@@ -1506,12 +1495,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Tax ID.
+   * Set Order Description.
    *
-   * @param TaxID Tax Identification
+   * @param SO_Description Description to be used on orders
    */
-  public void setTaxID(String TaxID) {
-    set_Value(I_C_BPartner.COLUMNNAME_TaxID, TaxID);
+  public void setSO_Description(String SO_Description) {
+    set_Value(I_C_BPartner.COLUMNNAME_SO_Description, SO_Description);
   }
 
   /**
@@ -1524,12 +1513,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set Open Balance.
+   * Set Tax ID.
    *
-   * @param TotalOpenBalance Total Open Balance Amount in primary Accounting Currency
+   * @param TaxID Tax Identification
    */
-  public void setTotalOpenBalance(BigDecimal TotalOpenBalance) {
-    set_Value(I_C_BPartner.COLUMNNAME_TotalOpenBalance, TotalOpenBalance);
+  public void setTaxID(String TaxID) {
+    set_Value(I_C_BPartner.COLUMNNAME_TaxID, TaxID);
   }
 
   /**
@@ -1544,12 +1533,12 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   }
 
   /**
-   * Set URL.
+   * Set Open Balance.
    *
-   * @param URL Full URL address - e.g. http://www.idempiere.org
+   * @param TotalOpenBalance Total Open Balance Amount in primary Accounting Currency
    */
-  public void setURL(String URL) {
-    set_Value(I_C_BPartner.COLUMNNAME_URL, URL);
+  public void setTotalOpenBalance(BigDecimal TotalOpenBalance) {
+    set_Value(I_C_BPartner.COLUMNNAME_TotalOpenBalance, TotalOpenBalance);
   }
 
   /**
@@ -1559,6 +1548,15 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
    */
   public String getURL() {
     return (String) get_Value(I_C_BPartner.COLUMNNAME_URL);
+  }
+
+  /**
+   * Set URL.
+   *
+   * @param URL Full URL address - e.g. http://www.idempiere.org
+   */
+  public void setURL(String URL) {
+    set_Value(I_C_BPartner.COLUMNNAME_URL, URL);
   }
 
   @Override

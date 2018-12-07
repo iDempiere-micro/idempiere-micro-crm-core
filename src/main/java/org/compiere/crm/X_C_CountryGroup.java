@@ -42,16 +42,6 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
   }
 
   /**
-   * Set Country Group.
-   *
-   * @param C_CountryGroup_ID Country Group
-   */
-  public void setC_CountryGroup_ID(int C_CountryGroup_ID) {
-    if (C_CountryGroup_ID < 1) set_ValueNoCheck(COLUMNNAME_C_CountryGroup_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_CountryGroup_ID, C_CountryGroup_ID);
-  }
-
-  /**
    * Get Country Group.
    *
    * @return Country Group
@@ -63,12 +53,13 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
   }
 
   /**
-   * Set C_CountryGroup_UU.
+   * Set Country Group.
    *
-   * @param C_CountryGroup_UU C_CountryGroup_UU
+   * @param C_CountryGroup_ID Country Group
    */
-  public void setC_CountryGroup_UU(String C_CountryGroup_UU) {
-    set_Value(COLUMNNAME_C_CountryGroup_UU, C_CountryGroup_UU);
+  public void setC_CountryGroup_ID(int C_CountryGroup_ID) {
+    if (C_CountryGroup_ID < 1) set_ValueNoCheck(COLUMNNAME_C_CountryGroup_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_C_CountryGroup_ID, C_CountryGroup_ID);
   }
 
   /**
@@ -81,12 +72,12 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
   }
 
   /**
-   * Set Date From.
+   * Set C_CountryGroup_UU.
    *
-   * @param DateFrom Starting date for a range
+   * @param C_CountryGroup_UU C_CountryGroup_UU
    */
-  public void setDateFrom(Timestamp DateFrom) {
-    set_Value(COLUMNNAME_DateFrom, DateFrom);
+  public void setC_CountryGroup_UU(String C_CountryGroup_UU) {
+    set_Value(COLUMNNAME_C_CountryGroup_UU, C_CountryGroup_UU);
   }
 
   /**
@@ -99,12 +90,12 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
   }
 
   /**
-   * Set Date To.
+   * Set Date From.
    *
-   * @param DateTo End date of a date range
+   * @param DateFrom Starting date for a range
    */
-  public void setDateTo(Timestamp DateTo) {
-    set_Value(COLUMNNAME_DateTo, DateTo);
+  public void setDateFrom(Timestamp DateFrom) {
+    set_Value(COLUMNNAME_DateFrom, DateFrom);
   }
 
   /**
@@ -117,12 +108,12 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
   }
 
   /**
-   * Set Description.
+   * Set Date To.
    *
-   * @param Description Optional short description of the record
+   * @param DateTo End date of a date range
    */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
+  public void setDateTo(Timestamp DateTo) {
+    set_Value(COLUMNNAME_DateTo, DateTo);
   }
 
   /**
@@ -135,12 +126,12 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
   }
 
   /**
-   * Set Comment/Help.
+   * Set Description.
    *
-   * @param Help Comment or Hint
+   * @param Description Optional short description of the record
    */
-  public void setHelp(String Help) {
-    set_Value(COLUMNNAME_Help, Help);
+  public void setDescription(String Description) {
+    set_Value(COLUMNNAME_Description, Description);
   }
 
   /**
@@ -150,6 +141,15 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
    */
   public String getHelp() {
     return (String) get_Value(COLUMNNAME_Help);
+  }
+
+  /**
+   * Set Comment/Help.
+   *
+   * @param Help Comment or Hint
+   */
+  public void setHelp(String Help) {
+    set_Value(COLUMNNAME_Help, Help);
   }
 
   @Override

@@ -1,5 +1,7 @@
 package org.compiere.crm;
 
+import static org.compiere.model.I_C_BPartner_Location.COLUMNNAME_IsPreserveCustomName;
+
 import java.sql.ResultSet;
 import java.util.Properties;
 import kotliquery.Row;
@@ -8,8 +10,6 @@ import org.compiere.model.I_C_Location;
 import org.compiere.orm.BasePOName;
 import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
-
-import static org.compiere.model.I_C_BPartner_Location.COLUMNNAME_IsPreserveCustomName;
 
 /**
  * Generated Model for C_BPartner_Location
@@ -61,18 +61,6 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Set Business Partner .
-   *
-   * @param C_BPartner_ID Identifies a Business Partner
-   */
-  public void setC_BPartner_ID(int C_BPartner_ID) {
-    if (C_BPartner_ID < 1) set_ValueNoCheck(I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID, null);
-    else
-      set_ValueNoCheck(
-          I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
-  }
-
-  /**
    * Get Business Partner .
    *
    * @return Identifies a Business Partner
@@ -84,17 +72,15 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Set Partner Location.
+   * Set Business Partner .
    *
-   * @param C_BPartner_Location_ID Identifies the (ship to) address for this Business Partner
+   * @param C_BPartner_ID Identifies a Business Partner
    */
-  public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
-    if (C_BPartner_Location_ID < 1)
-      set_ValueNoCheck(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID, null);
+  public void setC_BPartner_ID(int C_BPartner_ID) {
+    if (C_BPartner_ID < 1) set_ValueNoCheck(I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID, null);
     else
       set_ValueNoCheck(
-          I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID,
-              C_BPartner_Location_ID);
+          I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID));
   }
 
   /**
@@ -109,12 +95,16 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Set C_BPartner_Location_UU.
+   * Set Partner Location.
    *
-   * @param C_BPartner_Location_UU C_BPartner_Location_UU
+   * @param C_BPartner_Location_ID Identifies the (ship to) address for this Business Partner
    */
-  public void setC_BPartner_Location_UU(String C_BPartner_Location_UU) {
-    set_Value(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_UU, C_BPartner_Location_UU);
+  public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
+    if (C_BPartner_Location_ID < 1)
+      set_ValueNoCheck(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID, null);
+    else
+      set_ValueNoCheck(
+          I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID, C_BPartner_Location_ID);
   }
 
   /**
@@ -126,19 +116,18 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
     return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_UU);
   }
 
+  /**
+   * Set C_BPartner_Location_UU.
+   *
+   * @param C_BPartner_Location_UU C_BPartner_Location_UU
+   */
+  public void setC_BPartner_Location_UU(String C_BPartner_Location_UU) {
+    set_Value(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_UU, C_BPartner_Location_UU);
+  }
+
   public I_C_Location getC_Location() throws RuntimeException {
     return (I_C_Location)
         MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Address.
-   *
-   * @param C_Location_ID Location or Address
-   */
-  public void setC_Location_ID(int C_Location_ID) {
-    if (C_Location_ID < 1) set_Value(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, null);
-    else set_Value(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
   }
 
   /**
@@ -152,10 +141,31 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
     return ii;
   }
 
+  /**
+   * Set Address.
+   *
+   * @param C_Location_ID Location or Address
+   */
+  public void setC_Location_ID(int C_Location_ID) {
+    if (C_Location_ID < 1) set_Value(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, null);
+    else set_Value(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
+  }
+
   public org.compiere.model.I_C_SalesRegion getC_SalesRegion() throws RuntimeException {
     return (org.compiere.model.I_C_SalesRegion)
         MTable.get(getCtx(), org.compiere.model.I_C_SalesRegion.Table_Name)
             .getPO(getC_SalesRegion_ID(), get_TrxName());
+  }
+
+  /**
+   * Get Sales Region.
+   *
+   * @return Sales coverage region
+   */
+  public int getC_SalesRegion_ID() {
+    Integer ii = (Integer) get_Value(I_C_BPartner_Location.COLUMNNAME_C_SalesRegion_ID);
+    if (ii == null) return 0;
+    return ii;
   }
 
   /**
@@ -171,14 +181,12 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Get Sales Region.
+   * Get Customer Address ID.
    *
-   * @return Sales coverage region
+   * @return Customer Address ID
    */
-  public int getC_SalesRegion_ID() {
-    Integer ii = (Integer) get_Value(I_C_BPartner_Location.COLUMNNAME_C_SalesRegion_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getCustomerAddressID() {
+    return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_CustomerAddressID);
   }
 
   /**
@@ -191,12 +199,12 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Get Customer Address ID.
+   * Get Fax.
    *
-   * @return Customer Address ID
+   * @return Facsimile number
    */
-  public String getCustomerAddressID() {
-    return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_CustomerAddressID);
+  public String getFax() {
+    return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_Fax);
   }
 
   /**
@@ -206,15 +214,6 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
    */
   public void setFax(String Fax) {
     set_Value(I_C_BPartner_Location.COLUMNNAME_Fax, Fax);
-  }
-
-  /**
-   * Get Fax.
-   *
-   * @return Facsimile number
-   */
-  public String getFax() {
-    return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_Fax);
   }
 
   /**
@@ -241,21 +240,21 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Set ISDN.
-   *
-   * @param ISDN ISDN or modem line
-   */
-  public void setISDN(String ISDN) {
-    set_Value(I_C_BPartner_Location.COLUMNNAME_ISDN, ISDN);
-  }
-
-  /**
    * Get ISDN.
    *
    * @return ISDN or modem line
    */
   public String getISDN() {
     return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_ISDN);
+  }
+
+  /**
+   * Set ISDN.
+   *
+   * @param ISDN ISDN or modem line
+   */
+  public void setISDN(String ISDN) {
+    set_Value(I_C_BPartner_Location.COLUMNNAME_ISDN, ISDN);
   }
 
   /**
@@ -294,7 +293,6 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
     return charToBoolean(get_Value(COLUMNNAME_IsPreserveCustomName));
   }
 
-
   /**
    * Set Remit-To Address.
    *
@@ -332,15 +330,6 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Set Phone.
-   *
-   * @param Phone Identifies a telephone number
-   */
-  public void setPhone(String Phone) {
-    set_Value(I_C_BPartner_Location.COLUMNNAME_Phone, Phone);
-  }
-
-  /**
    * Get Phone.
    *
    * @return Identifies a telephone number
@@ -350,12 +339,12 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   }
 
   /**
-   * Set 2nd Phone.
+   * Set Phone.
    *
-   * @param Phone2 Identifies an alternate telephone number.
+   * @param Phone Identifies a telephone number
    */
-  public void setPhone2(String Phone2) {
-    set_Value(I_C_BPartner_Location.COLUMNNAME_Phone2, Phone2);
+  public void setPhone(String Phone) {
+    set_Value(I_C_BPartner_Location.COLUMNNAME_Phone, Phone);
   }
 
   /**
@@ -365,6 +354,15 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
    */
   public String getPhone2() {
     return (String) get_Value(I_C_BPartner_Location.COLUMNNAME_Phone2);
+  }
+
+  /**
+   * Set 2nd Phone.
+   *
+   * @param Phone2 Identifies an alternate telephone number.
+   */
+  public void setPhone2(String Phone2) {
+    set_Value(I_C_BPartner_Location.COLUMNNAME_Phone2, Phone2);
   }
 
   @Override

@@ -19,44 +19,6 @@ import org.idempiere.common.util.Util;
 public class MBPGroup extends X_C_BP_Group {
   /** */
   private static final long serialVersionUID = 8897399796117872715L;
-
-  /**
-   * Get MBPGroup from Cache
-   *
-   * @param ctx context
-   * @param C_BP_Group_ID id
-   * @return MBPGroup
-   */
-  public static MBPGroup get(Properties ctx, int C_BP_Group_ID) {
-    Integer key = new Integer(C_BP_Group_ID);
-    MBPGroup retValue = (MBPGroup) s_cache.get(key);
-    if (retValue != null) return retValue;
-    retValue = new MBPGroup(ctx, C_BP_Group_ID, null);
-    if (retValue.getId() != 0) s_cache.put(key, retValue);
-    return retValue;
-  } //	get
-
-  /**
-   * @param ctx
-   * @param C_BP_Group_ID
-   * @param trxName
-   * @return MBPGroup
-   */
-  public static MBPGroup get(Properties ctx, int C_BP_Group_ID, String trxName) {
-    if (Util.isEmpty(trxName, true)) return get(ctx, C_BP_Group_ID);
-    else return new MBPGroup(ctx, C_BP_Group_ID, trxName);
-  }
-
-  /**
-   * Get Default MBPGroup
-   *
-   * @param ctx context
-   * @return MBPGroup
-   */
-  public static MBPGroup getDefault(Properties ctx) {
-    return MBaseBPGroupKt.getDefault(ctx);
-  } //	get
-
   /** Cache */
   private static CCache<Integer, MBPGroup> s_cache =
       new CCache<Integer, MBPGroup>(I_C_BP_Group.Table_Name, 10);
@@ -95,6 +57,43 @@ public class MBPGroup extends X_C_BP_Group {
   public MBPGroup(Properties ctx, Row row) {
     super(ctx, row);
   } //	MBPGroup
+
+  /**
+   * Get MBPGroup from Cache
+   *
+   * @param ctx context
+   * @param C_BP_Group_ID id
+   * @return MBPGroup
+   */
+  public static MBPGroup get(Properties ctx, int C_BP_Group_ID) {
+    Integer key = new Integer(C_BP_Group_ID);
+    MBPGroup retValue = s_cache.get(key);
+    if (retValue != null) return retValue;
+    retValue = new MBPGroup(ctx, C_BP_Group_ID, null);
+    if (retValue.getId() != 0) s_cache.put(key, retValue);
+    return retValue;
+  } //	get
+
+  /**
+   * @param ctx
+   * @param C_BP_Group_ID
+   * @param trxName
+   * @return MBPGroup
+   */
+  public static MBPGroup get(Properties ctx, int C_BP_Group_ID, String trxName) {
+    if (Util.isEmpty(trxName, true)) return get(ctx, C_BP_Group_ID);
+    else return new MBPGroup(ctx, C_BP_Group_ID, trxName);
+  }
+
+  /**
+   * Get Default MBPGroup
+   *
+   * @param ctx context
+   * @return MBPGroup
+   */
+  public static MBPGroup getDefault(Properties ctx) {
+    return MBaseBPGroupKt.getDefault(ctx);
+  } //	get
 
   /**
    * Get Credit Watch Percent

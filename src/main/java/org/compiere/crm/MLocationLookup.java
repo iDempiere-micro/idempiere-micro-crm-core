@@ -18,6 +18,8 @@ import org.idempiere.orm.Lookup;
 public final class MLocationLookup extends Lookup implements Serializable {
   /** */
   private static final long serialVersionUID = 7238110708451510319L;
+  /** Context */
+  private Properties m_ctx;
 
   /**
    * Constructor
@@ -29,9 +31,6 @@ public final class MLocationLookup extends Lookup implements Serializable {
     super(DisplayType.TableDir, WindowNo);
     m_ctx = ctx;
   } //	MLocation
-
-  /** Context */
-  private Properties m_ctx;
 
   /**
    * Get Display for Value (not cached)

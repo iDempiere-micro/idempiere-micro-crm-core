@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import java.sql.ResultSet;
 import java.util.Properties;
-
 import kotliquery.Row;
 import org.compiere.model.I_C_Country;
 import org.compiere.orm.BasePOName;
@@ -17,6 +16,8 @@ import org.idempiere.orm.I_Persistent;
  */
 public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent {
 
+  /** AD_Language AD_Reference_ID=106 */
+  public static final int AD_LANGUAGE_AD_Reference_ID = 106;
   /** */
   private static final long serialVersionUID = 20171031L;
 
@@ -34,9 +35,11 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   public X_C_Country(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   }
+
   public X_C_Country(Properties ctx, Row row) {
     super(ctx, row);
   }
+
   /**
    * AccessLevel
    *
@@ -50,18 +53,6 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
     return "X_C_Country[" + getId() + "]";
   }
 
-  /** AD_Language AD_Reference_ID=106 */
-  public static final int AD_LANGUAGE_AD_Reference_ID = 106;
-  /**
-   * Set Language.
-   *
-   * @param AD_Language Language for this entity
-   */
-  public void setADLanguage(String AD_Language) {
-
-    set_Value(COLUMNNAME_AD_Language, AD_Language);
-  }
-
   /**
    * Get Language.
    *
@@ -72,12 +63,13 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Allow Cities out of List.
+   * Set Language.
    *
-   * @param AllowCitiesOutOfList A flag to allow cities, currently not in the list, to be entered
+   * @param AD_Language Language for this entity
    */
-  public void setAllowCitiesOutOfList(boolean AllowCitiesOutOfList) {
-    set_Value(COLUMNNAME_AllowCitiesOutOfList, Boolean.valueOf(AllowCitiesOutOfList));
+  public void setADLanguage(String AD_Language) {
+
+    set_Value(COLUMNNAME_AD_Language, AD_Language);
   }
 
   /**
@@ -95,12 +87,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Capture Sequence.
+   * Set Allow Cities out of List.
    *
-   * @param CaptureSequence Capture Sequence
+   * @param AllowCitiesOutOfList A flag to allow cities, currently not in the list, to be entered
    */
-  public void setCaptureSequence(String CaptureSequence) {
-    set_Value(COLUMNNAME_CaptureSequence, CaptureSequence);
+  public void setAllowCitiesOutOfList(boolean AllowCitiesOutOfList) {
+    set_Value(COLUMNNAME_AllowCitiesOutOfList, Boolean.valueOf(AllowCitiesOutOfList));
   }
 
   /**
@@ -113,13 +105,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Country.
+   * Set Capture Sequence.
    *
-   * @param C_Country_ID Country
+   * @param CaptureSequence Capture Sequence
    */
-  public void setC_Country_ID(int C_Country_ID) {
-    if (C_Country_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Country_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_Country_ID, Integer.valueOf(C_Country_ID));
+  public void setCaptureSequence(String CaptureSequence) {
+    set_Value(COLUMNNAME_CaptureSequence, CaptureSequence);
   }
 
   /**
@@ -134,12 +125,13 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set C_Country_UU.
+   * Set Country.
    *
-   * @param C_Country_UU C_Country_UU
+   * @param C_Country_ID Country
    */
-  public void setC_Country_UU(String C_Country_UU) {
-    set_Value(COLUMNNAME_C_Country_UU, C_Country_UU);
+  public void setC_Country_ID(int C_Country_ID) {
+    if (C_Country_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Country_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_C_Country_ID, Integer.valueOf(C_Country_ID));
   }
 
   /**
@@ -151,20 +143,19 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
     return (String) get_Value(COLUMNNAME_C_Country_UU);
   }
 
+  /**
+   * Set C_Country_UU.
+   *
+   * @param C_Country_UU C_Country_UU
+   */
+  public void setC_Country_UU(String C_Country_UU) {
+    set_Value(COLUMNNAME_C_Country_UU, C_Country_UU);
+  }
+
   public org.compiere.model.I_C_Currency getC_Currency() throws RuntimeException {
     return (org.compiere.model.I_C_Currency)
         MTable.get(getCtx(), org.compiere.model.I_C_Currency.Table_Name)
             .getPO(getC_Currency_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Currency.
-   *
-   * @param C_Currency_ID The Currency for this record
-   */
-  public void setC_Currency_ID(int C_Currency_ID) {
-    if (C_Currency_ID < 1) set_Value(COLUMNNAME_C_Currency_ID, null);
-    else set_Value(COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID));
   }
 
   /**
@@ -179,13 +170,13 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set ISO Country Code.
+   * Set Currency.
    *
-   * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
-   *     - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+   * @param C_Currency_ID The Currency for this record
    */
-  public void setCountryCode(String CountryCode) {
-    set_Value(COLUMNNAME_CountryCode, CountryCode);
+  public void setC_Currency_ID(int C_Currency_ID) {
+    if (C_Currency_ID < 1) set_Value(COLUMNNAME_C_Currency_ID, null);
+    else set_Value(COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID));
   }
 
   /**
@@ -199,12 +190,13 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Description.
+   * Set ISO Country Code.
    *
-   * @param Description Optional short description of the record
+   * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
+   *     - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
    */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
+  public void setCountryCode(String CountryCode) {
+    set_Value(COLUMNNAME_CountryCode, CountryCode);
   }
 
   /**
@@ -217,12 +209,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Address Print Format.
+   * Set Description.
    *
-   * @param DisplaySequence Format for printing this Address
+   * @param Description Optional short description of the record
    */
-  public void setDisplaySequence(String DisplaySequence) {
-    set_Value(COLUMNNAME_DisplaySequence, DisplaySequence);
+  public void setDescription(String Description) {
+    set_Value(COLUMNNAME_Description, Description);
   }
 
   /**
@@ -235,12 +227,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Local Address Format.
+   * Set Address Print Format.
    *
-   * @param DisplaySequenceLocal Format for printing this Address locally
+   * @param DisplaySequence Format for printing this Address
    */
-  public void setDisplaySequenceLocal(String DisplaySequenceLocal) {
-    set_Value(COLUMNNAME_DisplaySequenceLocal, DisplaySequenceLocal);
+  public void setDisplaySequence(String DisplaySequence) {
+    set_Value(COLUMNNAME_DisplaySequence, DisplaySequence);
   }
 
   /**
@@ -253,12 +245,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Bank Account No Format.
+   * Set Local Address Format.
    *
-   * @param ExpressionBankAccountNo Format of the Bank Account
+   * @param DisplaySequenceLocal Format for printing this Address locally
    */
-  public void setExpressionBankAccountNo(String ExpressionBankAccountNo) {
-    set_Value(COLUMNNAME_ExpressionBankAccountNo, ExpressionBankAccountNo);
+  public void setDisplaySequenceLocal(String DisplaySequenceLocal) {
+    set_Value(COLUMNNAME_DisplaySequenceLocal, DisplaySequenceLocal);
   }
 
   /**
@@ -271,12 +263,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Bank Routing No Format.
+   * Set Bank Account No Format.
    *
-   * @param ExpressionBankRoutingNo Format of the Bank Routing Number
+   * @param ExpressionBankAccountNo Format of the Bank Account
    */
-  public void setExpressionBankRoutingNo(String ExpressionBankRoutingNo) {
-    set_Value(COLUMNNAME_ExpressionBankRoutingNo, ExpressionBankRoutingNo);
+  public void setExpressionBankAccountNo(String ExpressionBankAccountNo) {
+    set_Value(COLUMNNAME_ExpressionBankAccountNo, ExpressionBankAccountNo);
   }
 
   /**
@@ -286,6 +278,24 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    */
   public String getExpressionBankRoutingNo() {
     return (String) get_Value(COLUMNNAME_ExpressionBankRoutingNo);
+  }
+
+  /**
+   * Set Bank Routing No Format.
+   *
+   * @param ExpressionBankRoutingNo Format of the Bank Routing Number
+   */
+  public void setExpressionBankRoutingNo(String ExpressionBankRoutingNo) {
+    set_Value(COLUMNNAME_ExpressionBankRoutingNo, ExpressionBankRoutingNo);
+  }
+
+  /**
+   * Get Phone Format.
+   *
+   * @return Format of the phone; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
+   */
+  public String getExpressionPhone() {
+    return (String) get_Value(COLUMNNAME_ExpressionPhone);
   }
 
   /**
@@ -299,12 +309,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Get Phone Format.
+   * Get Postal Code Format.
    *
-   * @return Format of the phone; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
+   * @return Format of the postal code; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
    */
-  public String getExpressionPhone() {
-    return (String) get_Value(COLUMNNAME_ExpressionPhone);
+  public String getExpressionPostal() {
+    return (String) get_Value(COLUMNNAME_ExpressionPostal);
   }
 
   /**
@@ -318,12 +328,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Get Postal Code Format.
+   * Get Additional Postal Format.
    *
-   * @return Format of the postal code; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
+   * @return Format of the value; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
    */
-  public String getExpressionPostal() {
-    return (String) get_Value(COLUMNNAME_ExpressionPostal);
+  public String getExpressionPostal_Add() {
+    return (String) get_Value(COLUMNNAME_ExpressionPostal_Add);
   }
 
   /**
@@ -337,12 +347,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Get Additional Postal Format.
+   * Get Additional Postal code.
    *
-   * @return Format of the value; Can contain fixed format elements, Variables: "_lLoOaAcCa09"
+   * @return Has Additional Postal Code
    */
-  public String getExpressionPostal_Add() {
-    return (String) get_Value(COLUMNNAME_ExpressionPostal_Add);
+  public boolean isHasPostal_Add() {
+    return charToBoolean(get_Value(COLUMNNAME_HasPostal_Add));
   }
 
   /**
@@ -355,12 +365,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Get Additional Postal code.
+   * Get Country has Region.
    *
-   * @return Has Additional Postal Code
+   * @return Country contains Regions
    */
-  public boolean isHasPostal_Add() {
-    return charToBoolean(get_Value(COLUMNNAME_HasPostal_Add));
+  public boolean isHasRegion() {
+    return charToBoolean(get_Value(COLUMNNAME_HasRegion));
   }
 
   /**
@@ -370,15 +380,6 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    */
   public void setHasRegion(boolean HasRegion) {
     set_Value(COLUMNNAME_HasRegion, Boolean.valueOf(HasRegion));
-  }
-
-  /**
-   * Get Country has Region.
-   *
-   * @return Country contains Regions
-   */
-  public boolean isHasRegion() {
-    return charToBoolean(get_Value(COLUMNNAME_HasRegion));
   }
 
   /**
@@ -436,15 +437,6 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Lookup ClassName.
-   *
-   * @param LookupClassName The class name of the postcode lookup plugin
-   */
-  public void setLookupClassName(String LookupClassName) {
-    set_Value(COLUMNNAME_LookupClassName, LookupClassName);
-  }
-
-  /**
    * Get Lookup ClassName.
    *
    * @return The class name of the postcode lookup plugin
@@ -454,12 +446,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Lookup Client ID.
+   * Set Lookup ClassName.
    *
-   * @param LookupClientID The ClientID or Login submitted to the Lookup URL
+   * @param LookupClassName The class name of the postcode lookup plugin
    */
-  public void setLookupClientID(String LookupClientID) {
-    set_Value(COLUMNNAME_LookupClientID, LookupClientID);
+  public void setLookupClassName(String LookupClassName) {
+    set_Value(COLUMNNAME_LookupClassName, LookupClassName);
   }
 
   /**
@@ -472,12 +464,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Lookup Password.
+   * Set Lookup Client ID.
    *
-   * @param LookupPassword The password submitted to the Lookup URL
+   * @param LookupClientID The ClientID or Login submitted to the Lookup URL
    */
-  public void setLookupPassword(String LookupPassword) {
-    set_Value(COLUMNNAME_LookupPassword, LookupPassword);
+  public void setLookupClientID(String LookupClientID) {
+    set_Value(COLUMNNAME_LookupClientID, LookupClientID);
   }
 
   /**
@@ -490,13 +482,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Lookup URL.
+   * Set Lookup Password.
    *
-   * @param LookupUrl The URL of the web service that the plugin connects to in order to retrieve
-   *     postcode data
+   * @param LookupPassword The password submitted to the Lookup URL
    */
-  public void setLookupUrl(String LookupUrl) {
-    set_Value(COLUMNNAME_LookupUrl, LookupUrl);
+  public void setLookupPassword(String LookupPassword) {
+    set_Value(COLUMNNAME_LookupPassword, LookupPassword);
   }
 
   /**
@@ -510,12 +501,13 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Media Size.
+   * Set Lookup URL.
    *
-   * @param MediaSize Java Media Size
+   * @param LookupUrl The URL of the web service that the plugin connects to in order to retrieve
+   *     postcode data
    */
-  public void setMediaSize(String MediaSize) {
-    set_Value(COLUMNNAME_MediaSize, MediaSize);
+  public void setLookupUrl(String LookupUrl) {
+    set_Value(COLUMNNAME_LookupUrl, LookupUrl);
   }
 
   /**
@@ -528,12 +520,12 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /**
-   * Set Region.
+   * Set Media Size.
    *
-   * @param RegionName Name of the Region
+   * @param MediaSize Java Media Size
    */
-  public void setRegionName(String RegionName) {
-    set_Value(COLUMNNAME_RegionName, RegionName);
+  public void setMediaSize(String MediaSize) {
+    set_Value(COLUMNNAME_MediaSize, MediaSize);
   }
 
   /**
@@ -543,6 +535,15 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
    */
   public String getRegionName() {
     return (String) get_Value(COLUMNNAME_RegionName);
+  }
+
+  /**
+   * Set Region.
+   *
+   * @param RegionName Name of the Region
+   */
+  public void setRegionName(String RegionName) {
+    set_Value(COLUMNNAME_RegionName, RegionName);
   }
 
   @Override

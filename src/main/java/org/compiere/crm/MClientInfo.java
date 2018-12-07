@@ -12,31 +12,8 @@ import org.idempiere.common.util.Env;
 public class MClientInfo extends org.compiere.orm.MClientInfo {
   /** */
   private static final long serialVersionUID = 4861006368856890116L;
-
-  /**
-   * Get optionally cached client
-   *
-   * @param ctx context
-   * @return client
-   */
-  public static MClientInfo get(Properties ctx) {
-    return get(ctx, Env.getADClientID(ctx), null);
-  } //	get
-
   /** Logger */
   private static CLogger s_log = CLogger.getCLogger(MClientInfo.class);
-
-  /**
-   * Overwrite Save
-   *
-   * @overwrite
-   * @return true if saved
-   */
-  public boolean save() {
-    if (getOrgId() != 0) setAD_Org_ID(0);
-    if (getCreateNew()) return super.save();
-    return saveUpdate();
-  } //	save
 
   /**
    * Load Constructor
@@ -76,6 +53,16 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
   }
 
   /**
+   * Get optionally cached client
+   *
+   * @param ctx context
+   * @return client
+   */
+  public static MClientInfo get(Properties ctx) {
+    return get(ctx, Env.getADClientID(ctx), null);
+  } //	get
+
+  /**
    * Get Client Info
    *
    * @param ctx context
@@ -97,6 +84,18 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
   public static MClientInfo get(Properties ctx, int AD_Client_ID) {
     return get(ctx, AD_Client_ID, null);
   } //	get
+
+  /**
+   * Overwrite Save
+   *
+   * @return true if saved
+   * @overwrite
+   */
+  public boolean save() {
+    if (getOrgId() != 0) setAD_Org_ID(0);
+    if (getCreateNew()) return super.save();
+    return saveUpdate();
+  } //	save
 
   public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
     return (I_C_BPartner)

@@ -48,6 +48,17 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
   }
 
   /**
+   * Get Position Category.
+   *
+   * @return Job Position Category
+   */
+  public int getC_JobCategory_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_C_JobCategory_ID);
+    if (ii == null) return 0;
+    return ii;
+  }
+
+  /**
    * Set Position Category.
    *
    * @param C_JobCategory_ID Job Position Category
@@ -58,12 +69,12 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
   }
 
   /**
-   * Get Position Category.
+   * Get Position.
    *
-   * @return Job Position Category
+   * @return Job Position
    */
-  public int getC_JobCategory_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_JobCategory_ID);
+  public int getC_Job_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_C_Job_ID);
     if (ii == null) return 0;
     return ii;
   }
@@ -79,14 +90,12 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
   }
 
   /**
-   * Get Position.
+   * Get C_Job_UU.
    *
-   * @return Job Position
+   * @return C_Job_UU
    */
-  public int getC_Job_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_Job_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getC_Job_UU() {
+    return (String) get_Value(COLUMNNAME_C_Job_UU);
   }
 
   /**
@@ -99,12 +108,12 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
   }
 
   /**
-   * Get C_Job_UU.
+   * Get Description.
    *
-   * @return C_Job_UU
+   * @return Optional short description of the record
    */
-  public String getC_Job_UU() {
-    return (String) get_Value(COLUMNNAME_C_Job_UU);
+  public String getDescription() {
+    return (String) get_Value(COLUMNNAME_Description);
   }
 
   /**
@@ -117,12 +126,12 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
   }
 
   /**
-   * Get Description.
+   * Get Comment/Help.
    *
-   * @return Optional short description of the record
+   * @return Comment or Hint
    */
-  public String getDescription() {
-    return (String) get_Value(COLUMNNAME_Description);
+  public String getHelp() {
+    return (String) get_Value(COLUMNNAME_Help);
   }
 
   /**
@@ -132,15 +141,6 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
    */
   public void setHelp(String Help) {
     set_Value(COLUMNNAME_Help, Help);
-  }
-
-  /**
-   * Get Comment/Help.
-   *
-   * @return Comment or Hint
-   */
-  public String getHelp() {
-    return (String) get_Value(COLUMNNAME_Help);
   }
 
   /**

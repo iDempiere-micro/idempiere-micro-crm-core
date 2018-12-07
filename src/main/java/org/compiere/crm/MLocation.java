@@ -22,18 +22,19 @@ import org.idempiere.common.util.Util;
  * Location (Address)
  *
  * @author Jorg Janke
- * @version $Id: MLocation.java,v 1.3 2006/07/30 00:54:54 jjanke Exp $
  * @author Michael Judd (Akuna Ltd)
  *     <li>BF [ 2695078 ] Country is not translated on invoice
  *     <li>FR [2794312 ] Location AutoComplete - check if allow cities out of list
  * @author Teo Sarca, teo.sarca@gmail.com
  *     <li>BF [ 3002736 ] MLocation.get cache all MLocations
  *         https://sourceforge.net/tracker/?func=detail&aid=3002736&group_id=176962&atid=879332
+ * @version $Id: MLocation.java,v 1.3 2006/07/30 00:54:54 jjanke Exp $
  */
 public class MLocation extends X_C_Location implements I_C_Location, Comparator<Object> {
+  public static final String updateBPLocName =
+      "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = ? AND IsPreserveCustomName = 'N'";
   /** */
   private static final long serialVersionUID = -8462972029898383163L;
-
   // http://jira.idempiere.com/browse/IDEMPIERE-147
   public static String LOCATION_MAPS_URL_PREFIX =
       MSysConfig.getValue(MSysConfig.LOCATION_MAPS_URL_PREFIX);
@@ -43,37 +44,16 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
       MSysConfig.getValue(MSysConfig.LOCATION_MAPS_SOURCE_ADDRESS);
   public static String LOCATION_MAPS_DESTINATION_ADDRESS =
       MSysConfig.getValue(MSysConfig.LOCATION_MAPS_DESTINATION_ADDRESS);
-
-  /**
-   * Get Location from Cache
-   *
-   * @param ctx context
-   * @param C_Location_ID id
-   * @param trxName transaction
-   * @return MLocation
-   */
-  public static MLocation get(Properties ctx, int C_Location_ID, String trxName) {
-    //	New
-    if (C_Location_ID == 0) return new MLocation(ctx, C_Location_ID, trxName);
-    //
-    Integer key = new Integer(C_Location_ID);
-    MLocation retValue = null;
-    if (trxName == null) retValue = (MLocation) s_cache.get(key);
-    if (retValue != null) return retValue;
-    retValue = new MLocation(ctx, C_Location_ID, trxName);
-    if (retValue.getId() != 0) // 	found
-    {
-      if (trxName == null) s_cache.put(key, retValue);
-      return retValue;
-    }
-    return null; //	not found
-  } //	get
-
   /** Cache */
   private static CCache<Integer, MLocation> s_cache =
       new CCache<Integer, MLocation>(Table_Name, 100, 30);
   /** Static Logger */
   private static CLogger s_log = CLogger.getCLogger(MLocation.class);
+
+  private MCountry m_c = null;
+  private MRegion m_r = null;
+  /** Error Message */
+  private String m_errorMessage = null;
 
   /**
    * ************************************************************************ Standard Constructor
@@ -105,7 +85,6 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     setCountry(country);
     setRegion(region);
   } //	MLocation
-
   /**
    * Full Constructor
    *
@@ -133,19 +112,68 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     super(ctx, rs, trxName);
   } //	MLocation
 
-  private MCountry m_c = null;
-  private MRegion m_r = null;
+  /**
+   * Get Location from Cache
+   *
+   * @param ctx context
+   * @param C_Location_ID id
+   * @param trxName transaction
+   * @return MLocation
+   */
+  public static MLocation get(Properties ctx, int C_Location_ID, String trxName) {
+    //	New
+    if (C_Location_ID == 0) return new MLocation(ctx, C_Location_ID, trxName);
+    //
+    Integer key = new Integer(C_Location_ID);
+    MLocation retValue = null;
+    if (trxName == null) retValue = s_cache.get(key);
+    if (retValue != null) return retValue;
+    retValue = new MLocation(ctx, C_Location_ID, trxName);
+    if (retValue.getId() != 0) // 	found
+    {
+      if (trxName == null) s_cache.put(key, retValue);
+      return retValue;
+    }
+    return null; //	not found
+  } //	get
+
+  public static int getFieldLength(String columnName) {
+    MTable loctable = MTable.get(Env.getCtx(), Table_ID);
+    MColumn column = loctable.getColumn(columnName);
+    if (column == null) return -1;
+    else return column.getFieldLength();
+  }
 
   /**
-   * Set Country
+   * Create address transaction instance
    *
-   * @param country
+   * @param ctx
+   * @param location
+   * @param C_AddressValidation_ID
+   * @param trxName
+   * @return address transaction instance
    */
-  public void setCountry(MCountry country) {
-    if (country != null) m_c = country;
-    else m_c = MCountry.getDefault(getCtx());
-    super.setC_Country_ID(m_c.getC_Country_ID());
-  } //	setCountry
+  private static MAddressTransaction createAddressTransaction(
+      Properties ctx, MLocation location, int C_AddressValidation_ID, String trxName) {
+    MAddressTransaction at = new MAddressTransaction(ctx, 0, trxName);
+    at.setAD_Org_ID(location.getOrgId());
+    at.setAddress1(location.getAddress1());
+    at.setAddress2(location.getAddress2());
+    at.setAddress3(location.getAddress3());
+    at.setAddress4(location.getAddress4());
+    at.setAddress5(location.getAddress5());
+    at.setComments(location.getComments());
+    at.setC_AddressValidation_ID(C_AddressValidation_ID);
+    at.setC_Location_ID(location.getC_Location_ID());
+    at.setCity(location.getCity());
+    if (location.getCountry() != null) at.setCountry(location.getCountry().getCountryCode());
+    at.setIsActive(location.isActive());
+    at.setPostal(location.getPostal());
+    if (location.getRegion() != null) at.setRegion(location.getRegion().getName());
+    else at.setRegion(location.getRegionName());
+    at.saveEx();
+    return at;
+  }
 
   /**
    * Set C_Country_ID
@@ -174,6 +202,17 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
   } //	getCountry
 
   /**
+   * Set Country
+   *
+   * @param country
+   */
+  public void setCountry(MCountry country) {
+    if (country != null) m_c = country;
+    else m_c = MCountry.getDefault(getCtx());
+    super.setC_Country_ID(m_c.getC_Country_ID());
+  } //	setCountry
+
+  /**
    * Get Country Name
    *
    * @return Country Name
@@ -192,6 +231,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     if (local && getC_Country_ID() == MCountry.getDefault(getCtx()).getC_Country_ID()) return null;
     return getCountryName();
   } //	getCountry
+
   /**
    * Get Country Line
    *
@@ -203,33 +243,6 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     MCountry mc = getCountry();
     return mc.getTrlName(language);
   } //	getCountry
-
-  /**
-   * Set Region
-   *
-   * @param region
-   */
-  public void setRegion(MRegion region) {
-    m_r = region;
-    if (region == null) {
-      super.setC_Region_ID(0);
-      setRegionName(null);
-    } else {
-      super.setC_Region_ID(m_r.getC_Region_ID());
-      setRegionName(m_r.getName());
-      if (m_r.getC_Country_ID() != getC_Country_ID()) {
-        if (log.isLoggable(Level.INFO))
-          log.info(
-              "Region("
-                  + region
-                  + ") C_Country_ID="
-                  + region.getC_Country_ID()
-                  + " - From  C_Country_ID="
-                  + getC_Country_ID());
-        setC_Country_ID(region.getC_Country_ID());
-      }
-    }
-  } //	setRegion
 
   /**
    * Set C_Region_ID
@@ -258,6 +271,33 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     if (m_r == null && getC_Region_ID() != 0) m_r = MRegion.get(getCtx(), getC_Region_ID());
     return m_r;
   } //	getRegion
+
+  /**
+   * Set Region
+   *
+   * @param region
+   */
+  public void setRegion(MRegion region) {
+    m_r = region;
+    if (region == null) {
+      super.setC_Region_ID(0);
+      setRegionName(null);
+    } else {
+      super.setC_Region_ID(m_r.getC_Region_ID());
+      setRegionName(m_r.getName());
+      if (m_r.getC_Country_ID() != getC_Country_ID()) {
+        if (log.isLoggable(Level.INFO))
+          log.info(
+              "Region("
+                  + region
+                  + ") C_Country_ID="
+                  + region.getC_Country_ID()
+                  + " - From  C_Country_ID="
+                  + getC_Country_ID());
+        setC_Country_ID(region.getC_Country_ID());
+      }
+    }
+  } //	setRegion
 
   /**
    * Get (local) Region Name
@@ -312,8 +352,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     if (!equalsNull(Postal_Add, getPostal_Add())) return false;
     if (!equalsNull(City, getCity())) return false;
     if (!equalsNull(Address1, getAddress1())) return false;
-    if (!equalsNull(Address2, getAddress2())) return false;
-    return true;
+    return equalsNull(Address2, getAddress2());
   } //	equals
 
   /**
@@ -387,8 +426,8 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     String token;
     int i = inStr.indexOf('@');
     while (i != -1) {
-      outStr.append(inStr.substring(0, i)); // up to @
-      inStr = inStr.substring(i + 1, inStr.length()); // from first @
+      outStr.append(inStr, 0, i); // up to @
+      inStr = inStr.substring(i + 1); // from first @
 
       int j = inStr.indexOf('@'); // next @
       if (j < 0) {
@@ -410,7 +449,7 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
         if (add != null && add.length() > 0) outStr.append("-").append(add);
       } else outStr.append("@").append(token).append("@");
 
-      inStr = inStr.substring(j + 1, inStr.length()); // from second @
+      inStr = inStr.substring(j + 1); // from second @
       i = inStr.indexOf('@');
     }
     outStr.append(inStr); // add the rest of the string
@@ -538,7 +577,10 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
           getSQLValue(
               get_TrxName(),
               "SELECT C_City_ID FROM C_City WHERE C_Country_ID=? AND COALESCE(C_Region_ID,0)=? AND Name=? AND AD_Client_ID IN (0,?)",
-              new Object[] {getC_Country_ID(), getC_Region_ID(), getCity(), getClientId()});
+              getC_Country_ID(),
+              getC_Region_ID(),
+              getCity(),
+              getClientId());
       if (city_id > 0) setC_City_ID(city_id);
     }
 
@@ -558,7 +600,9 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
                   + " WHERE C_Country_ID=? "
                   + "   AND COALESCE(C_Region_ID,0)=? "
                   + "   AND C_City_ID =?",
-              new Object[] {getC_Country_ID(), getC_Region_ID(), getC_City_ID()});
+              getC_Country_ID(),
+              getC_Region_ID(),
+              getC_City_ID());
 
       if (city_id < 0) {
         log.saveError(
@@ -569,9 +613,6 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     }
     return true;
   } //	beforeSave
-
-  public static final String updateBPLocName =
-          "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = ? AND IsPreserveCustomName = 'N'";
 
   /**
    * After Save
@@ -638,25 +679,6 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
     return address.toString().replace(" ", "+");
   }
 
-  public static int getFieldLength(String columnName) {
-    MTable loctable = MTable.get(Env.getCtx(), Table_ID);
-    MColumn column = loctable.getColumn(columnName);
-    if (column == null) return -1;
-    else return column.getFieldLength();
-  }
-
-  /** Error Message */
-  private String m_errorMessage = null;
-
-  /**
-   * Set error message
-   *
-   * @param errorMessage
-   */
-  public void setErrorMessage(String errorMessage) {
-    m_errorMessage = errorMessage;
-  }
-
   /**
    * Get error message
    *
@@ -667,33 +689,11 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
   }
 
   /**
-   * Create address transaction instance
+   * Set error message
    *
-   * @param ctx
-   * @param location
-   * @param C_AddressValidation_ID
-   * @param trxName
-   * @return address transaction instance
+   * @param errorMessage
    */
-  private static MAddressTransaction createAddressTransaction(
-      Properties ctx, MLocation location, int C_AddressValidation_ID, String trxName) {
-    MAddressTransaction at = new MAddressTransaction(ctx, 0, trxName);
-    at.setAD_Org_ID(location.getOrgId());
-    at.setAddress1(location.getAddress1());
-    at.setAddress2(location.getAddress2());
-    at.setAddress3(location.getAddress3());
-    at.setAddress4(location.getAddress4());
-    at.setAddress5(location.getAddress5());
-    at.setComments(location.getComments());
-    at.setC_AddressValidation_ID(C_AddressValidation_ID);
-    at.setC_Location_ID(location.getC_Location_ID());
-    at.setCity(location.getCity());
-    if (location.getCountry() != null) at.setCountry(location.getCountry().getCountryCode());
-    at.setIsActive(location.isActive());
-    at.setPostal(location.getPostal());
-    if (location.getRegion() != null) at.setRegion(location.getRegion().getName());
-    else at.setRegion(location.getRegionName());
-    at.saveEx();
-    return at;
+  public void setErrorMessage(String errorMessage) {
+    m_errorMessage = errorMessage;
   }
 } //	MLocation

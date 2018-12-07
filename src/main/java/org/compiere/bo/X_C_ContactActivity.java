@@ -17,6 +17,16 @@ import org.idempiere.orm.I_Persistent;
  */
 public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivity, I_Persistent {
 
+  /** ContactActivityType AD_Reference_ID=53423 */
+  public static final int CONTACTACTIVITYTYPE_AD_Reference_ID = 53423;
+  /** Email = EM */
+  public static final String CONTACTACTIVITYTYPE_Email = "EM";
+  /** Phone call = PC */
+  public static final String CONTACTACTIVITYTYPE_PhoneCall = "PC";
+  /** Meeting = ME */
+  public static final String CONTACTACTIVITYTYPE_Meeting = "ME";
+  /** Task = TA */
+  public static final String CONTACTACTIVITYTYPE_Task = "TA";
   /** */
   private static final long serialVersionUID = 20171031L;
 
@@ -56,6 +66,17 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
+   * Get Contact Activity.
+   *
+   * @return Events, tasks, communications related to a contact
+   */
+  public int getC_ContactActivity_ID() {
+    Integer ii = (Integer) get_Value(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID);
+    if (ii == null) return 0;
+    return ii;
+  }
+
+  /**
    * Set Contact Activity.
    *
    * @param C_ContactActivity_ID Events, tasks, communications related to a contact
@@ -70,14 +91,12 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
-   * Get Contact Activity.
+   * Get C_ContactActivity_UU.
    *
-   * @return Events, tasks, communications related to a contact
+   * @return C_ContactActivity_UU
    */
-  public int getC_ContactActivity_ID() {
-    Integer ii = (Integer) get_Value(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getC_ContactActivity_UU() {
+    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_UU);
   }
 
   /**
@@ -90,12 +109,12 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
-   * Get C_ContactActivity_UU.
+   * Get Comments.
    *
-   * @return C_ContactActivity_UU
+   * @return Comments or additional information
    */
-  public String getC_ContactActivity_UU() {
-    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_UU);
+  public String getComments() {
+    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_Comments);
   }
 
   /**
@@ -108,24 +127,14 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
-   * Get Comments.
+   * Get Activity Type.
    *
-   * @return Comments or additional information
+   * @return Type of activity, e.g. task, email, phone call
    */
-  public String getComments() {
-    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_Comments);
+  public String getContactActivityType() {
+    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_ContactActivityType);
   }
 
-  /** ContactActivityType AD_Reference_ID=53423 */
-  public static final int CONTACTACTIVITYTYPE_AD_Reference_ID = 53423;
-  /** Email = EM */
-  public static final String CONTACTACTIVITYTYPE_Email = "EM";
-  /** Phone call = PC */
-  public static final String CONTACTACTIVITYTYPE_PhoneCall = "PC";
-  /** Meeting = ME */
-  public static final String CONTACTACTIVITYTYPE_Meeting = "ME";
-  /** Task = TA */
-  public static final String CONTACTACTIVITYTYPE_Task = "TA";
   /**
    * Set Activity Type.
    *
@@ -136,30 +145,10 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     set_ValueNoCheck(I_C_ContactActivity.COLUMNNAME_ContactActivityType, ContactActivityType);
   }
 
-  /**
-   * Get Activity Type.
-   *
-   * @return Type of activity, e.g. task, email, phone call
-   */
-  public String getContactActivityType() {
-    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_ContactActivityType);
-  }
-
   public org.compiere.model.I_C_Opportunity getC_Opportunity() throws RuntimeException {
     return (org.compiere.model.I_C_Opportunity)
         MTable.get(getCtx(), org.compiere.model.I_C_Opportunity.Table_Name)
             .getPO(getC_Opportunity_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Sales Opportunity.
-   *
-   * @param C_Opportunity_ID Sales Opportunity
-   */
-  public void setC_Opportunity_ID(int C_Opportunity_ID) {
-    if (C_Opportunity_ID < 1) set_Value(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, null);
-    else
-      set_Value(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, Integer.valueOf(C_Opportunity_ID));
   }
 
   /**
@@ -174,12 +163,14 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
-   * Set Description.
+   * Set Sales Opportunity.
    *
-   * @param Description Optional short description of the record
+   * @param C_Opportunity_ID Sales Opportunity
    */
-  public void setDescription(String Description) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_Description, Description);
+  public void setC_Opportunity_ID(int C_Opportunity_ID) {
+    if (C_Opportunity_ID < 1) set_Value(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, null);
+    else
+      set_Value(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, Integer.valueOf(C_Opportunity_ID));
   }
 
   /**
@@ -192,6 +183,15 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
+   * Set Description.
+   *
+   * @param Description Optional short description of the record
+   */
+  public void setDescription(String Description) {
+    set_Value(I_C_ContactActivity.COLUMNNAME_Description, Description);
+  }
+
+  /**
    * Get Record ID/ColumnName
    *
    * @return ID/ColumnName pair
@@ -201,21 +201,21 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
-   * Set End Date.
-   *
-   * @param EndDate Last effective date (inclusive)
-   */
-  public void setEndDate(Timestamp EndDate) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_EndDate, EndDate);
-  }
-
-  /**
    * Get End Date.
    *
    * @return Last effective date (inclusive)
    */
   public Timestamp getEndDate() {
     return (Timestamp) get_Value(I_C_ContactActivity.COLUMNNAME_EndDate);
+  }
+
+  /**
+   * Set End Date.
+   *
+   * @param EndDate Last effective date (inclusive)
+   */
+  public void setEndDate(Timestamp EndDate) {
+    set_Value(I_C_ContactActivity.COLUMNNAME_EndDate, EndDate);
   }
 
   /**
@@ -248,16 +248,6 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
-   * Set Sales Representative.
-   *
-   * @param SalesRep_ID Sales Representative or Company Agent
-   */
-  public void setSalesRep_ID(int SalesRep_ID) {
-    if (SalesRep_ID < 1) set_Value(I_C_ContactActivity.COLUMNNAME_SalesRep_ID, null);
-    else set_Value(I_C_ContactActivity.COLUMNNAME_SalesRep_ID, Integer.valueOf(SalesRep_ID));
-  }
-
-  /**
    * Get Sales Representative.
    *
    * @return Sales Representative or Company Agent
@@ -269,12 +259,13 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /**
-   * Set Start Date.
+   * Set Sales Representative.
    *
-   * @param StartDate First effective day (inclusive)
+   * @param SalesRep_ID Sales Representative or Company Agent
    */
-  public void setStartDate(Timestamp StartDate) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_StartDate, StartDate);
+  public void setSalesRep_ID(int SalesRep_ID) {
+    if (SalesRep_ID < 1) set_Value(I_C_ContactActivity.COLUMNNAME_SalesRep_ID, null);
+    else set_Value(I_C_ContactActivity.COLUMNNAME_SalesRep_ID, Integer.valueOf(SalesRep_ID));
   }
 
   /**
@@ -284,6 +275,15 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
    */
   public Timestamp getStartDate() {
     return (Timestamp) get_Value(I_C_ContactActivity.COLUMNNAME_StartDate);
+  }
+
+  /**
+   * Set Start Date.
+   *
+   * @param StartDate First effective day (inclusive)
+   */
+  public void setStartDate(Timestamp StartDate) {
+    set_Value(I_C_ContactActivity.COLUMNNAME_StartDate, StartDate);
   }
 
   @Override

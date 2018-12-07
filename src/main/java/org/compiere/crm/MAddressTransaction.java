@@ -11,6 +11,8 @@ import java.util.Properties;
 public class MAddressTransaction extends X_C_AddressTransaction {
   /** */
   private static final long serialVersionUID = 8572809249265680649L;
+  /** Error Message */
+  private String m_errorMessage = null;
 
   public MAddressTransaction(Properties ctx, int C_AddressTransaction_ID, String trxName) {
     super(ctx, C_AddressTransaction_ID, trxName);
@@ -20,8 +22,14 @@ public class MAddressTransaction extends X_C_AddressTransaction {
     super(ctx, rs, trxName);
   }
 
-  /** Error Message */
-  private String m_errorMessage = null;
+  /**
+   * Get error message
+   *
+   * @return error message
+   */
+  public String getErrorMessage() {
+    return m_errorMessage;
+  }
 
   /**
    * Set error message
@@ -30,14 +38,5 @@ public class MAddressTransaction extends X_C_AddressTransaction {
    */
   public void setErrorMessage(String errorMessage) {
     m_errorMessage = errorMessage;
-  }
-
-  /**
-   * Get error message
-   *
-   * @return error message
-   */
-  public String getErrorMessage() {
-    return m_errorMessage;
   }
 }

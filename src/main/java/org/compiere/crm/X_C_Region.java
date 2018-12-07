@@ -53,6 +53,17 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
   }
 
   /**
+   * Get Country.
+   *
+   * @return Country
+   */
+  public int getC_Country_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_C_Country_ID);
+    if (ii == null) return 0;
+    return ii;
+  }
+
+  /**
    * Set Country.
    *
    * @param C_Country_ID Country
@@ -63,12 +74,12 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
   }
 
   /**
-   * Get Country.
+   * Get Region.
    *
-   * @return Country
+   * @return Identifies a geographical Region
    */
-  public int getC_Country_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_Country_ID);
+  public int getC_Region_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_C_Region_ID);
     if (ii == null) return 0;
     return ii;
   }
@@ -84,14 +95,12 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
   }
 
   /**
-   * Get Region.
+   * Get C_Region_UU.
    *
-   * @return Identifies a geographical Region
+   * @return C_Region_UU
    */
-  public int getC_Region_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_Region_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getC_Region_UU() {
+    return (String) get_Value(COLUMNNAME_C_Region_UU);
   }
 
   /**
@@ -104,12 +113,12 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
   }
 
   /**
-   * Get C_Region_UU.
+   * Get Description.
    *
-   * @return C_Region_UU
+   * @return Optional short description of the record
    */
-  public String getC_Region_UU() {
-    return (String) get_Value(COLUMNNAME_C_Region_UU);
+  public String getDescription() {
+    return (String) get_Value(COLUMNNAME_Description);
   }
 
   /**
@@ -119,15 +128,6 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
    */
   public void setDescription(String Description) {
     set_Value(COLUMNNAME_Description, Description);
-  }
-
-  /**
-   * Get Description.
-   *
-   * @return Optional short description of the record
-   */
-  public String getDescription() {
-    return (String) get_Value(COLUMNNAME_Description);
   }
 
   /**

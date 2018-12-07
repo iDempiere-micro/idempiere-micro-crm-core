@@ -41,16 +41,6 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
   }
 
   /**
-   * Set Dunning.
-   *
-   * @param C_Dunning_ID Dunning Rules for overdue invoices
-   */
-  public void setC_Dunning_ID(int C_Dunning_ID) {
-    if (C_Dunning_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Dunning_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_Dunning_ID, Integer.valueOf(C_Dunning_ID));
-  }
-
-  /**
    * Get Dunning.
    *
    * @return Dunning Rules for overdue invoices
@@ -62,12 +52,13 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
   }
 
   /**
-   * Set C_Dunning_UU.
+   * Set Dunning.
    *
-   * @param C_Dunning_UU C_Dunning_UU
+   * @param C_Dunning_ID Dunning Rules for overdue invoices
    */
-  public void setC_Dunning_UU(String C_Dunning_UU) {
-    set_Value(COLUMNNAME_C_Dunning_UU, C_Dunning_UU);
+  public void setC_Dunning_ID(int C_Dunning_ID) {
+    if (C_Dunning_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Dunning_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_C_Dunning_ID, Integer.valueOf(C_Dunning_ID));
   }
 
   /**
@@ -80,12 +71,12 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
   }
 
   /**
-   * Set Create levels sequentially.
+   * Set C_Dunning_UU.
    *
-   * @param CreateLevelsSequentially Create Dunning Letter by level sequentially
+   * @param C_Dunning_UU C_Dunning_UU
    */
-  public void setCreateLevelsSequentially(boolean CreateLevelsSequentially) {
-    set_Value(COLUMNNAME_CreateLevelsSequentially, Boolean.valueOf(CreateLevelsSequentially));
+  public void setC_Dunning_UU(String C_Dunning_UU) {
+    set_Value(COLUMNNAME_C_Dunning_UU, C_Dunning_UU);
   }
 
   /**
@@ -98,12 +89,12 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
   }
 
   /**
-   * Set Description.
+   * Set Create levels sequentially.
    *
-   * @param Description Optional short description of the record
+   * @param CreateLevelsSequentially Create Dunning Letter by level sequentially
    */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
+  public void setCreateLevelsSequentially(boolean CreateLevelsSequentially) {
+    set_Value(COLUMNNAME_CreateLevelsSequentially, Boolean.valueOf(CreateLevelsSequentially));
   }
 
   /**
@@ -113,6 +104,15 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
    */
   public String getDescription() {
     return (String) get_Value(COLUMNNAME_Description);
+  }
+
+  /**
+   * Set Description.
+   *
+   * @param Description Optional short description of the record
+   */
+  public void setDescription(String Description) {
+    set_Value(COLUMNNAME_Description, Description);
   }
 
   /**
@@ -134,21 +134,21 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning, I_Persistent
   }
 
   /**
-   * Set Send dunning letters.
-   *
-   * @param SendDunningLetter Indicates if dunning letters will be sent
-   */
-  public void setSendDunningLetter(boolean SendDunningLetter) {
-    set_Value(COLUMNNAME_SendDunningLetter, Boolean.valueOf(SendDunningLetter));
-  }
-
-  /**
    * Get Send dunning letters.
    *
    * @return Indicates if dunning letters will be sent
    */
   public boolean isSendDunningLetter() {
     return charToBoolean(get_Value(COLUMNNAME_SendDunningLetter));
+  }
+
+  /**
+   * Set Send dunning letters.
+   *
+   * @param SendDunningLetter Indicates if dunning letters will be sent
+   */
+  public void setSendDunningLetter(boolean SendDunningLetter) {
+    set_Value(COLUMNNAME_SendDunningLetter, Boolean.valueOf(SendDunningLetter));
   }
 
   @Override

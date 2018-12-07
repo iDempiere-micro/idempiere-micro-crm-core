@@ -44,16 +44,6 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
   }
 
   /**
-   * Set Sales Stage.
-   *
-   * @param C_SalesStage_ID Stages of the sales process
-   */
-  public void setC_SalesStage_ID(int C_SalesStage_ID) {
-    if (C_SalesStage_ID < 1) set_ValueNoCheck(COLUMNNAME_C_SalesStage_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_SalesStage_ID, C_SalesStage_ID);
-  }
-
-  /**
    * Get Sales Stage.
    *
    * @return Stages of the sales process
@@ -65,12 +55,13 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
   }
 
   /**
-   * Set C_SalesStage_UU.
+   * Set Sales Stage.
    *
-   * @param C_SalesStage_UU C_SalesStage_UU
+   * @param C_SalesStage_ID Stages of the sales process
    */
-  public void setC_SalesStage_UU(String C_SalesStage_UU) {
-    set_Value(COLUMNNAME_C_SalesStage_UU, C_SalesStage_UU);
+  public void setC_SalesStage_ID(int C_SalesStage_ID) {
+    if (C_SalesStage_ID < 1) set_ValueNoCheck(COLUMNNAME_C_SalesStage_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_C_SalesStage_ID, C_SalesStage_ID);
   }
 
   /**
@@ -83,12 +74,12 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
   }
 
   /**
-   * Set Description.
+   * Set C_SalesStage_UU.
    *
-   * @param Description Optional short description of the record
+   * @param C_SalesStage_UU C_SalesStage_UU
    */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
+  public void setC_SalesStage_UU(String C_SalesStage_UU) {
+    set_Value(COLUMNNAME_C_SalesStage_UU, C_SalesStage_UU);
   }
 
   /**
@@ -98,6 +89,15 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
    */
   public String getDescription() {
     return (String) get_Value(COLUMNNAME_Description);
+  }
+
+  /**
+   * Set Description.
+   *
+   * @param Description Optional short description of the record
+   */
+  public void setDescription(String Description) {
+    set_Value(COLUMNNAME_Description, Description);
   }
 
   /**
@@ -137,15 +137,6 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
   }
 
   /**
-   * Set Probability.
-   *
-   * @param Probability Probability
-   */
-  public void setProbability(BigDecimal Probability) {
-    set_Value(COLUMNNAME_Probability, Probability);
-  }
-
-  /**
    * Get Probability.
    *
    * @return Probability
@@ -154,6 +145,15 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I
     BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_Probability);
     if (bd == null) return Env.ZERO;
     return bd;
+  }
+
+  /**
+   * Set Probability.
+   *
+   * @param Probability Probability
+   */
+  public void setProbability(BigDecimal Probability) {
+    set_Value(COLUMNNAME_Probability, Probability);
   }
 
   @Override

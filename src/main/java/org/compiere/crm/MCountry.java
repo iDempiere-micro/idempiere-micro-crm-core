@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.logging.Level;
-
 import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.I_AD_Language;
@@ -33,6 +32,53 @@ import org.idempiere.common.util.Language;
 public class MCountry extends X_C_Country implements Comparator<Object>, Serializable {
   /** */
   private static final long serialVersionUID = -4966707939803861163L;
+  /** Display Language */
+  @SuppressWarnings("unused")
+  private static String s_AD_Language = null;
+  /** Country Cache */
+  private static CCache<Integer, MCountry> s_countries = null;
+  /** Default Country */
+  private static CCache<Integer, MCountry> s_default =
+      new CCache<Integer, MCountry>(I_C_Country.Table_Name, 3);
+  /** Static Logger */
+  private static CLogger s_log = CLogger.getCLogger(MCountry.class);
+  //	Default DisplaySequence	*/
+  private static String DISPLAYSEQUENCE = "@C@, @P@";
+
+  /**
+   * *********************************************************************** Create empty Country
+   *
+   * @param ctx context
+   * @param C_Country_ID ID
+   * @param trxName transaction
+   */
+  public MCountry(Properties ctx, int C_Country_ID, String trxName) {
+    super(ctx, C_Country_ID, trxName);
+    if (C_Country_ID == 0) {
+      //	setName (null);
+      //	setCountryCode (null);
+      setDisplaySequence(DISPLAYSEQUENCE);
+      setHasRegion(false);
+      setHasPostal_Add(false);
+      setIsAddressLinesLocalReverse(false);
+      setIsAddressLinesReverse(false);
+    }
+  } //  MCountry
+
+  /**
+   * Create Country from current row in ResultSet
+   *
+   * @param ctx context
+   * @param rs ResultSet
+   * @param trxName transaction
+   */
+  public MCountry(Properties ctx, ResultSet rs, String trxName) {
+    super(ctx, rs, trxName);
+  } //	MCountry
+
+  public MCountry(Properties ctx, Row row) {
+    super(ctx, row);
+  }
 
   /**
    * Get Country (cached)
@@ -151,54 +197,6 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
     s_AD_Language = AD_Language;
     if (Language.isBaseLanguage(AD_Language)) s_AD_Language = null;
   } //	setDisplayLanguage
-
-  /** Display Language */
-  @SuppressWarnings("unused")
-  private static String s_AD_Language = null;
-
-  /** Country Cache */
-  private static CCache<Integer, MCountry> s_countries = null;
-  /** Default Country */
-  private static CCache<Integer, MCountry> s_default =
-      new CCache<Integer, MCountry>(I_C_Country.Table_Name, 3);
-  /** Static Logger */
-  private static CLogger s_log = CLogger.getCLogger(MCountry.class);
-  //	Default DisplaySequence	*/
-  private static String DISPLAYSEQUENCE = "@C@, @P@";
-
-  /**
-   * *********************************************************************** Create empty Country
-   *
-   * @param ctx context
-   * @param C_Country_ID ID
-   * @param trxName transaction
-   */
-  public MCountry(Properties ctx, int C_Country_ID, String trxName) {
-    super(ctx, C_Country_ID, trxName);
-    if (C_Country_ID == 0) {
-      //	setName (null);
-      //	setCountryCode (null);
-      setDisplaySequence(DISPLAYSEQUENCE);
-      setHasRegion(false);
-      setHasPostal_Add(false);
-      setIsAddressLinesLocalReverse(false);
-      setIsAddressLinesReverse(false);
-    }
-  } //  MCountry
-
-  /**
-   * Create Country from current row in ResultSet
-   *
-   * @param ctx context
-   * @param rs ResultSet
-   * @param trxName transaction
-   */
-  public MCountry(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
-  } //	MCountry
-  public MCountry(Properties ctx, Row row) {
-    super(ctx, row);
-  }
 
   /**
    * Return Name - translated if DisplayLanguage is set.

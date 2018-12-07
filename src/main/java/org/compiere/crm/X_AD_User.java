@@ -17,6 +17,54 @@ import org.idempiere.orm.I_Persistent;
  */
 public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persistent {
 
+  /** IsMenuAutoExpand AD_Reference_ID=319 */
+  public static final int ISMENUAUTOEXPAND_AD_Reference_ID = 319;
+  /** Yes = Y */
+  public static final String ISMENUAUTOEXPAND_Yes = "Y";
+  /** No = N */
+  public static final String ISMENUAUTOEXPAND_No = "N";
+  /** LeadSource AD_Reference_ID=53415 */
+  public static final int LEADSOURCE_AD_Reference_ID = 53415;
+  /** Cold Call = CC */
+  public static final String LEADSOURCE_ColdCall = "CC";
+  /** Existing Customer = EC */
+  public static final String LEADSOURCE_ExistingCustomer = "EC";
+  /** Employee = EM */
+  public static final String LEADSOURCE_Employee = "EM";
+  /** Partner = PT */
+  public static final String LEADSOURCE_Partner = "PT";
+  /** Conference = CN */
+  public static final String LEADSOURCE_Conference = "CN";
+  /** Trade Show = TS */
+  public static final String LEADSOURCE_TradeShow = "TS";
+  /** Web Site = WS */
+  public static final String LEADSOURCE_WebSite = "WS";
+  /** Word of Mouth = WM */
+  public static final String LEADSOURCE_WordOfMouth = "WM";
+  /** Email = EL */
+  public static final String LEADSOURCE_Email = "EL";
+  /** LeadStatus AD_Reference_ID=53416 */
+  public static final int LEADSTATUS_AD_Reference_ID = 53416;
+  /** New = N */
+  public static final String LEADSTATUS_New = "N";
+  /** Working = W */
+  public static final String LEADSTATUS_Working = "W";
+  /** Expired = E */
+  public static final String LEADSTATUS_Expired = "E";
+  /** Recycled = R */
+  public static final String LEADSTATUS_Recycled = "R";
+  /** Converted = C */
+  public static final String LEADSTATUS_Converted = "C";
+  /** NotificationType AD_Reference_ID=344 */
+  public static final int NOTIFICATIONTYPE_AD_Reference_ID = 344;
+  /** EMail = E */
+  public static final String NOTIFICATIONTYPE_EMail = "E";
+  /** Notice = N */
+  public static final String NOTIFICATIONTYPE_Notice = "N";
+  /** None = X */
+  public static final String NOTIFICATIONTYPE_None = "X";
+  /** EMail+Notice = B */
+  public static final String NOTIFICATIONTYPE_EMailPlusNotice = "B";
   /** */
   private static final long serialVersionUID = 20171031L;
 
@@ -55,6 +103,17 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
+   * Get Image.
+   *
+   * @return Image or Icon
+   */
+  public int getAD_Image_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_AD_Image_ID);
+    if (ii == null) return 0;
+    return ii;
+  }
+
+  /**
    * Set Image.
    *
    * @param AD_Image_ID Image or Icon
@@ -65,12 +124,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Get Image.
+   * Get Trx Organization.
    *
-   * @return Image or Icon
+   * @return Performing or initiating organization
    */
-  public int getAD_Image_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_AD_Image_ID);
+  public int getAD_OrgTrx_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_AD_OrgTrx_ID);
     if (ii == null) return 0;
     return ii;
   }
@@ -86,12 +145,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Get Trx Organization.
+   * Get User/Contact.
    *
-   * @return Performing or initiating organization
+   * @return User within the system - Internal or Business Partner Contact
    */
-  public int getAD_OrgTrx_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_AD_OrgTrx_ID);
+  public int getAD_User_ID() {
+    Integer ii = (Integer) get_Value(COLUMNNAME_AD_User_ID);
     if (ii == null) return 0;
     return ii;
   }
@@ -107,14 +166,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Get User/Contact.
+   * Get AD_User_UU.
    *
-   * @return User within the system - Internal or Business Partner Contact
+   * @return AD_User_UU
    */
-  public int getAD_User_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_AD_User_ID);
-    if (ii == null) return 0;
-    return ii;
+  public String getAD_User_UU() {
+    return (String) get_Value(COLUMNNAME_AD_User_UU);
   }
 
   /**
@@ -127,12 +184,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Get AD_User_UU.
+   * Get Answer.
    *
-   * @return AD_User_UU
+   * @return Answer
    */
-  public String getAD_User_UU() {
-    return (String) get_Value(COLUMNNAME_AD_User_UU);
+  public String getAnswer() {
+    return (String) get_Value(COLUMNNAME_Answer);
   }
 
   /**
@@ -145,12 +202,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Get Answer.
+   * Get Birthday.
    *
-   * @return Answer
+   * @return Birthday or Anniversary day
    */
-  public String getAnswer() {
-    return (String) get_Value(COLUMNNAME_Answer);
+  public Timestamp getBirthday() {
+    return (Timestamp) get_Value(COLUMNNAME_Birthday);
   }
 
   /**
@@ -162,28 +219,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     set_Value(COLUMNNAME_Birthday, Birthday);
   }
 
-  /**
-   * Get Birthday.
-   *
-   * @return Birthday or Anniversary day
-   */
-  public Timestamp getBirthday() {
-    return (Timestamp) get_Value(COLUMNNAME_Birthday);
-  }
-
   public I_C_Location getBP_Location() throws RuntimeException {
     return (I_C_Location)
         MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getBP_Location_ID(), get_TrxName());
-  }
-
-  /**
-   * Set BP Address.
-   *
-   * @param BP_Location_ID Address of the Business Partner
-   */
-  public void setBP_Location_ID(int BP_Location_ID) {
-    if (BP_Location_ID < 1) set_Value(COLUMNNAME_BP_Location_ID, null);
-    else set_Value(COLUMNNAME_BP_Location_ID, BP_Location_ID);
   }
 
   /**
@@ -198,12 +236,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set BP Name.
+   * Set BP Address.
    *
-   * @param BPName BP Name
+   * @param BP_Location_ID Address of the Business Partner
    */
-  public void setBPName(String BPName) {
-    set_Value(COLUMNNAME_BPName, BPName);
+  public void setBP_Location_ID(int BP_Location_ID) {
+    if (BP_Location_ID < 1) set_Value(COLUMNNAME_BP_Location_ID, null);
+    else set_Value(COLUMNNAME_BP_Location_ID, BP_Location_ID);
   }
 
   /**
@@ -215,19 +254,18 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_BPName);
   }
 
+  /**
+   * Set BP Name.
+   *
+   * @param BPName BP Name
+   */
+  public void setBPName(String BPName) {
+    set_Value(COLUMNNAME_BPName, BPName);
+  }
+
   public I_C_BPartner getC_BPartner() throws RuntimeException {
     return (I_C_BPartner)
         MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartner_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Business Partner .
-   *
-   * @param C_BPartner_ID Identifies a Business Partner
-   */
-  public void setC_BPartner_ID(int C_BPartner_ID) {
-    if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
   }
 
   /**
@@ -241,20 +279,20 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
+  /**
+   * Set Business Partner .
+   *
+   * @param C_BPartner_ID Identifies a Business Partner
+   */
+  public void setC_BPartner_ID(int C_BPartner_ID) {
+    if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
+    else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
+  }
+
   public I_C_BPartner_Location getC_BPartner_Location() throws RuntimeException {
     return (I_C_BPartner_Location)
         MTable.get(getCtx(), I_C_BPartner_Location.Table_Name)
             .getPO(getC_BPartner_Location_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Partner Location.
-   *
-   * @param C_BPartner_Location_ID Identifies the (ship to) address for this Business Partner
-   */
-  public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
-    if (C_BPartner_Location_ID < 1) set_Value(COLUMNNAME_C_BPartner_Location_ID, null);
-    else set_Value(COLUMNNAME_C_BPartner_Location_ID, C_BPartner_Location_ID);
   }
 
   /**
@@ -268,19 +306,19 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
+  /**
+   * Set Partner Location.
+   *
+   * @param C_BPartner_Location_ID Identifies the (ship to) address for this Business Partner
+   */
+  public void setC_BPartner_Location_ID(int C_BPartner_Location_ID) {
+    if (C_BPartner_Location_ID < 1) set_Value(COLUMNNAME_C_BPartner_Location_ID, null);
+    else set_Value(COLUMNNAME_C_BPartner_Location_ID, C_BPartner_Location_ID);
+  }
+
   public I_C_Campaign getC_Campaign() throws RuntimeException {
     return (I_C_Campaign)
         MTable.get(getCtx(), I_C_Campaign.Table_Name).getPO(getC_Campaign_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Campaign.
-   *
-   * @param C_Campaign_ID Marketing Campaign
-   */
-  public void setC_Campaign_ID(int C_Campaign_ID) {
-    if (C_Campaign_ID < 1) set_Value(COLUMNNAME_C_Campaign_ID, null);
-    else set_Value(COLUMNNAME_C_Campaign_ID, C_Campaign_ID);
   }
 
   /**
@@ -294,19 +332,19 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
+  /**
+   * Set Campaign.
+   *
+   * @param C_Campaign_ID Marketing Campaign
+   */
+  public void setC_Campaign_ID(int C_Campaign_ID) {
+    if (C_Campaign_ID < 1) set_Value(COLUMNNAME_C_Campaign_ID, null);
+    else set_Value(COLUMNNAME_C_Campaign_ID, C_Campaign_ID);
+  }
+
   public I_C_Greeting getC_Greeting() throws RuntimeException {
     return (I_C_Greeting)
         MTable.get(getCtx(), I_C_Greeting.Table_Name).getPO(getC_Greeting_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Greeting.
-   *
-   * @param C_Greeting_ID Greeting to print on correspondence
-   */
-  public void setC_Greeting_ID(int C_Greeting_ID) {
-    if (C_Greeting_ID < 1) set_Value(COLUMNNAME_C_Greeting_ID, null);
-    else set_Value(COLUMNNAME_C_Greeting_ID, C_Greeting_ID);
   }
 
   /**
@@ -320,18 +358,18 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
-  public I_C_Job getC_Job() throws RuntimeException {
-    return (I_C_Job) MTable.get(getCtx(), I_C_Job.Table_Name).getPO(getC_Job_ID(), get_TrxName());
+  /**
+   * Set Greeting.
+   *
+   * @param C_Greeting_ID Greeting to print on correspondence
+   */
+  public void setC_Greeting_ID(int C_Greeting_ID) {
+    if (C_Greeting_ID < 1) set_Value(COLUMNNAME_C_Greeting_ID, null);
+    else set_Value(COLUMNNAME_C_Greeting_ID, C_Greeting_ID);
   }
 
-  /**
-   * Set Position.
-   *
-   * @param C_Job_ID Job Position
-   */
-  public void setC_Job_ID(int C_Job_ID) {
-    if (C_Job_ID < 1) set_Value(COLUMNNAME_C_Job_ID, null);
-    else set_Value(COLUMNNAME_C_Job_ID, C_Job_ID);
+  public I_C_Job getC_Job() throws RuntimeException {
+    return (I_C_Job) MTable.get(getCtx(), I_C_Job.Table_Name).getPO(getC_Job_ID(), get_TrxName());
   }
 
   /**
@@ -345,19 +383,19 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
+  /**
+   * Set Position.
+   *
+   * @param C_Job_ID Job Position
+   */
+  public void setC_Job_ID(int C_Job_ID) {
+    if (C_Job_ID < 1) set_Value(COLUMNNAME_C_Job_ID, null);
+    else set_Value(COLUMNNAME_C_Job_ID, C_Job_ID);
+  }
+
   public I_C_Location getC_Location() throws RuntimeException {
     return (I_C_Location)
         MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Address.
-   *
-   * @param C_Location_ID Location or Address
-   */
-  public void setC_Location_ID(int C_Location_ID) {
-    if (C_Location_ID < 1) set_Value(COLUMNNAME_C_Location_ID, null);
-    else set_Value(COLUMNNAME_C_Location_ID, C_Location_ID);
   }
 
   /**
@@ -372,12 +410,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Comments.
+   * Set Address.
    *
-   * @param Comments Comments or additional information
+   * @param C_Location_ID Location or Address
    */
-  public void setComments(String Comments) {
-    set_Value(COLUMNNAME_Comments, Comments);
+  public void setC_Location_ID(int C_Location_ID) {
+    if (C_Location_ID < 1) set_Value(COLUMNNAME_C_Location_ID, null);
+    else set_Value(COLUMNNAME_C_Location_ID, C_Location_ID);
   }
 
   /**
@@ -390,12 +429,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Date Account Locked.
+   * Set Comments.
    *
-   * @param DateAccountLocked Date Account Locked
+   * @param Comments Comments or additional information
    */
-  public void setDateAccountLocked(Timestamp DateAccountLocked) {
-    set_Value(COLUMNNAME_DateAccountLocked, DateAccountLocked);
+  public void setComments(String Comments) {
+    set_Value(COLUMNNAME_Comments, Comments);
   }
 
   /**
@@ -408,12 +447,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Date Last Login.
+   * Set Date Account Locked.
    *
-   * @param DateLastLogin Date Last Login
+   * @param DateAccountLocked Date Account Locked
    */
-  public void setDateLastLogin(Timestamp DateLastLogin) {
-    set_Value(COLUMNNAME_DateLastLogin, DateLastLogin);
+  public void setDateAccountLocked(Timestamp DateAccountLocked) {
+    set_Value(COLUMNNAME_DateAccountLocked, DateAccountLocked);
   }
 
   /**
@@ -426,12 +465,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Date Password Changed.
+   * Set Date Last Login.
    *
-   * @param DatePasswordChanged Date Password Changed
+   * @param DateLastLogin Date Last Login
    */
-  public void setDatePasswordChanged(Timestamp DatePasswordChanged) {
-    set_Value(COLUMNNAME_DatePasswordChanged, DatePasswordChanged);
+  public void setDateLastLogin(Timestamp DateLastLogin) {
+    set_Value(COLUMNNAME_DateLastLogin, DateLastLogin);
   }
 
   /**
@@ -444,12 +483,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Description.
+   * Set Date Password Changed.
    *
-   * @param Description Optional short description of the record
+   * @param DatePasswordChanged Date Password Changed
    */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
+  public void setDatePasswordChanged(Timestamp DatePasswordChanged) {
+    set_Value(COLUMNNAME_DatePasswordChanged, DatePasswordChanged);
   }
 
   /**
@@ -462,12 +501,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set EMail Address.
+   * Set Description.
    *
-   * @param EMail Electronic Mail Address
+   * @param Description Optional short description of the record
    */
-  public void setEMail(String EMail) {
-    set_Value(COLUMNNAME_EMail, EMail);
+  public void setDescription(String Description) {
+    set_Value(COLUMNNAME_Description, Description);
   }
 
   /**
@@ -480,12 +519,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set EMail User ID.
+   * Set EMail Address.
    *
-   * @param EMailUser User Name (ID) in the Mail System
+   * @param EMail Electronic Mail Address
    */
-  public void setEMailUser(String EMailUser) {
-    set_Value(COLUMNNAME_EMailUser, EMailUser);
+  public void setEMail(String EMail) {
+    set_Value(COLUMNNAME_EMail, EMail);
   }
 
   /**
@@ -498,12 +537,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set EMail User Password.
+   * Set EMail User ID.
    *
-   * @param EMailUserPW Password of your email user id
+   * @param EMailUser User Name (ID) in the Mail System
    */
-  public void setEMailUserPW(String EMailUserPW) {
-    set_Value(COLUMNNAME_EMailUserPW, EMailUserPW);
+  public void setEMailUser(String EMailUser) {
+    set_Value(COLUMNNAME_EMailUser, EMailUser);
   }
 
   /**
@@ -516,12 +555,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Verification Info.
+   * Set EMail User Password.
    *
-   * @param EMailVerify Verification information of EMail Address
+   * @param EMailUserPW Password of your email user id
    */
-  public void setEMailVerify(String EMailVerify) {
-    set_ValueNoCheck(COLUMNNAME_EMailVerify, EMailVerify);
+  public void setEMailUserPW(String EMailUserPW) {
+    set_Value(COLUMNNAME_EMailUserPW, EMailUserPW);
   }
 
   /**
@@ -534,12 +573,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set EMail Verify.
+   * Set Verification Info.
    *
-   * @param EMailVerifyDate Date Email was verified
+   * @param EMailVerify Verification information of EMail Address
    */
-  public void setEMailVerifyDate(Timestamp EMailVerifyDate) {
-    set_ValueNoCheck(COLUMNNAME_EMailVerifyDate, EMailVerifyDate);
+  public void setEMailVerify(String EMailVerify) {
+    set_ValueNoCheck(COLUMNNAME_EMailVerify, EMailVerify);
   }
 
   /**
@@ -552,12 +591,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Failed Login Count.
+   * Set EMail Verify.
    *
-   * @param FailedLoginCount Failed Login Count
+   * @param EMailVerifyDate Date Email was verified
    */
-  public void setFailedLoginCount(int FailedLoginCount) {
-    set_Value(COLUMNNAME_FailedLoginCount, FailedLoginCount);
+  public void setEMailVerifyDate(Timestamp EMailVerifyDate) {
+    set_ValueNoCheck(COLUMNNAME_EMailVerifyDate, EMailVerifyDate);
   }
 
   /**
@@ -572,12 +611,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Fax.
+   * Set Failed Login Count.
    *
-   * @param Fax Facsimile number
+   * @param FailedLoginCount Failed Login Count
    */
-  public void setFax(String Fax) {
-    set_Value(COLUMNNAME_Fax, Fax);
+  public void setFailedLoginCount(int FailedLoginCount) {
+    set_Value(COLUMNNAME_FailedLoginCount, FailedLoginCount);
   }
 
   /**
@@ -587,6 +626,15 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public String getFax() {
     return (String) get_Value(COLUMNNAME_Fax);
+  }
+
+  /**
+   * Set Fax.
+   *
+   * @param Fax Facsimile number
+   */
+  public void setFax(String Fax) {
+    set_Value(COLUMNNAME_Fax, Fax);
   }
 
   /**
@@ -681,12 +729,15 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return charToBoolean(get_Value(COLUMNNAME_IsLocked));
   }
 
-  /** IsMenuAutoExpand AD_Reference_ID=319 */
-  public static final int ISMENUAUTOEXPAND_AD_Reference_ID = 319;
-  /** Yes = Y */
-  public static final String ISMENUAUTOEXPAND_Yes = "Y";
-  /** No = N */
-  public static final String ISMENUAUTOEXPAND_No = "N";
+  /**
+   * Get Auto expand menu.
+   *
+   * @return If ticked, the menu is automatically expanded
+   */
+  public String getIsMenuAutoExpand() {
+    return (String) get_Value(COLUMNNAME_IsMenuAutoExpand);
+  }
+
   /**
    * Set Auto expand menu.
    *
@@ -695,15 +746,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   public void setIsMenuAutoExpand(String IsMenuAutoExpand) {
 
     set_Value(COLUMNNAME_IsMenuAutoExpand, IsMenuAutoExpand);
-  }
-
-  /**
-   * Get Auto expand menu.
-   *
-   * @return If ticked, the menu is automatically expanded
-   */
-  public String getIsMenuAutoExpand() {
-    return (String) get_Value(COLUMNNAME_IsMenuAutoExpand);
   }
 
   /**
@@ -743,15 +785,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Last Contact.
-   *
-   * @param LastContact Date this individual was last contacted
-   */
-  public void setLastContact(Timestamp LastContact) {
-    set_Value(COLUMNNAME_LastContact, LastContact);
-  }
-
-  /**
    * Get Last Contact.
    *
    * @return Date this individual was last contacted
@@ -761,12 +794,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Last Result.
+   * Set Last Contact.
    *
-   * @param LastResult Result of last contact
+   * @param LastContact Date this individual was last contacted
    */
-  public void setLastResult(String LastResult) {
-    set_Value(COLUMNNAME_LastResult, LastResult);
+  public void setLastContact(Timestamp LastContact) {
+    set_Value(COLUMNNAME_LastContact, LastContact);
   }
 
   /**
@@ -779,12 +812,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set LDAP User Name.
+   * Set Last Result.
    *
-   * @param LDAPUser User Name used for authorization via LDAP (directory) services
+   * @param LastResult Result of last contact
    */
-  public void setLDAPUser(String LDAPUser) {
-    set_Value(COLUMNNAME_LDAPUser, LDAPUser);
+  public void setLastResult(String LastResult) {
+    set_Value(COLUMNNAME_LastResult, LastResult);
   }
 
   /**
@@ -796,34 +829,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_LDAPUser);
   }
 
-  /** LeadSource AD_Reference_ID=53415 */
-  public static final int LEADSOURCE_AD_Reference_ID = 53415;
-  /** Cold Call = CC */
-  public static final String LEADSOURCE_ColdCall = "CC";
-  /** Existing Customer = EC */
-  public static final String LEADSOURCE_ExistingCustomer = "EC";
-  /** Employee = EM */
-  public static final String LEADSOURCE_Employee = "EM";
-  /** Partner = PT */
-  public static final String LEADSOURCE_Partner = "PT";
-  /** Conference = CN */
-  public static final String LEADSOURCE_Conference = "CN";
-  /** Trade Show = TS */
-  public static final String LEADSOURCE_TradeShow = "TS";
-  /** Web Site = WS */
-  public static final String LEADSOURCE_WebSite = "WS";
-  /** Word of Mouth = WM */
-  public static final String LEADSOURCE_WordOfMouth = "WM";
-  /** Email = EL */
-  public static final String LEADSOURCE_Email = "EL";
   /**
-   * Set Lead Source.
+   * Set LDAP User Name.
    *
-   * @param LeadSource The source of this lead/opportunity
+   * @param LDAPUser User Name used for authorization via LDAP (directory) services
    */
-  public void setLeadSource(String LeadSource) {
-
-    set_Value(COLUMNNAME_LeadSource, LeadSource);
+  public void setLDAPUser(String LDAPUser) {
+    set_Value(COLUMNNAME_LDAPUser, LDAPUser);
   }
 
   /**
@@ -836,12 +848,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Lead Source Description.
+   * Set Lead Source.
    *
-   * @param LeadSourceDescription Additional information on the source of this lead/opportunity
+   * @param LeadSource The source of this lead/opportunity
    */
-  public void setLeadSourceDescription(String LeadSourceDescription) {
-    set_Value(COLUMNNAME_LeadSourceDescription, LeadSourceDescription);
+  public void setLeadSource(String LeadSource) {
+
+    set_Value(COLUMNNAME_LeadSource, LeadSource);
   }
 
   /**
@@ -853,26 +866,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_LeadSourceDescription);
   }
 
-  /** LeadStatus AD_Reference_ID=53416 */
-  public static final int LEADSTATUS_AD_Reference_ID = 53416;
-  /** New = N */
-  public static final String LEADSTATUS_New = "N";
-  /** Working = W */
-  public static final String LEADSTATUS_Working = "W";
-  /** Expired = E */
-  public static final String LEADSTATUS_Expired = "E";
-  /** Recycled = R */
-  public static final String LEADSTATUS_Recycled = "R";
-  /** Converted = C */
-  public static final String LEADSTATUS_Converted = "C";
   /**
-   * Set Lead Status.
+   * Set Lead Source Description.
    *
-   * @param LeadStatus The status of this lead/opportunity in the sales cycle
+   * @param LeadSourceDescription Additional information on the source of this lead/opportunity
    */
-  public void setLeadStatus(String LeadStatus) {
-
-    set_Value(COLUMNNAME_LeadStatus, LeadStatus);
+  public void setLeadSourceDescription(String LeadSourceDescription) {
+    set_Value(COLUMNNAME_LeadSourceDescription, LeadSourceDescription);
   }
 
   /**
@@ -885,12 +885,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Lead Status Description.
+   * Set Lead Status.
    *
-   * @param LeadStatusDescription Additional information on the status of this lead/opportunity
+   * @param LeadStatus The status of this lead/opportunity in the sales cycle
    */
-  public void setLeadStatusDescription(String LeadStatusDescription) {
-    set_Value(COLUMNNAME_LeadStatusDescription, LeadStatusDescription);
+  public void setLeadStatus(String LeadStatus) {
+
+    set_Value(COLUMNNAME_LeadStatus, LeadStatus);
   }
 
   /**
@@ -902,24 +903,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_LeadStatusDescription);
   }
 
-  /** NotificationType AD_Reference_ID=344 */
-  public static final int NOTIFICATIONTYPE_AD_Reference_ID = 344;
-  /** EMail = E */
-  public static final String NOTIFICATIONTYPE_EMail = "E";
-  /** Notice = N */
-  public static final String NOTIFICATIONTYPE_Notice = "N";
-  /** None = X */
-  public static final String NOTIFICATIONTYPE_None = "X";
-  /** EMail+Notice = B */
-  public static final String NOTIFICATIONTYPE_EMailPlusNotice = "B";
   /**
-   * Set Notification Type.
+   * Set Lead Status Description.
    *
-   * @param NotificationType Type of Notifications
+   * @param LeadStatusDescription Additional information on the status of this lead/opportunity
    */
-  public void setNotificationType(String NotificationType) {
-
-    set_Value(COLUMNNAME_NotificationType, NotificationType);
+  public void setLeadStatusDescription(String LeadStatusDescription) {
+    set_Value(COLUMNNAME_LeadStatusDescription, LeadStatusDescription);
   }
 
   /**
@@ -932,12 +922,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Password.
+   * Set Notification Type.
    *
-   * @param Password Password of any length (case sensitive)
+   * @param NotificationType Type of Notifications
    */
-  public void setPassword(String Password) {
-    set_Value(COLUMNNAME_Password, Password);
+  public void setNotificationType(String NotificationType) {
+
+    set_Value(COLUMNNAME_NotificationType, NotificationType);
   }
 
   /**
@@ -950,12 +941,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Phone.
+   * Set Password.
    *
-   * @param Phone Identifies a telephone number
+   * @param Password Password of any length (case sensitive)
    */
-  public void setPhone(String Phone) {
-    set_Value(COLUMNNAME_Phone, Phone);
+  public void setPassword(String Password) {
+    set_Value(COLUMNNAME_Password, Password);
   }
 
   /**
@@ -968,12 +959,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set 2nd Phone.
+   * Set Phone.
    *
-   * @param Phone2 Identifies an alternate telephone number.
+   * @param Phone Identifies a telephone number
    */
-  public void setPhone2(String Phone2) {
-    set_Value(COLUMNNAME_Phone2, Phone2);
+  public void setPhone(String Phone) {
+    set_Value(COLUMNNAME_Phone, Phone);
   }
 
   /**
@@ -986,12 +977,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Process Now.
+   * Set 2nd Phone.
    *
-   * @param Processing Process Now
+   * @param Phone2 Identifies an alternate telephone number.
    */
-  public void setProcessing(boolean Processing) {
-    set_Value(COLUMNNAME_Processing, Processing);
+  public void setPhone2(String Phone2) {
+    set_Value(COLUMNNAME_Phone2, Phone2);
   }
 
   /**
@@ -1003,20 +994,19 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return charToBoolean(get_Value(COLUMNNAME_Processing));
   }
 
+  /**
+   * Set Process Now.
+   *
+   * @param Processing Process Now
+   */
+  public void setProcessing(boolean Processing) {
+    set_Value(COLUMNNAME_Processing, Processing);
+  }
+
   public I_R_MailText getR_DefaultMailText() throws RuntimeException {
     return (I_R_MailText)
         MTable.get(getCtx(), I_R_MailText.Table_Name)
             .getPO(getR_DefaultMailText_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Default mail template.
-   *
-   * @param R_DefaultMailText_ID Default mail template
-   */
-  public void setR_DefaultMailText_ID(int R_DefaultMailText_ID) {
-    if (R_DefaultMailText_ID < 1) set_Value(COLUMNNAME_R_DefaultMailText_ID, null);
-    else set_Value(COLUMNNAME_R_DefaultMailText_ID, R_DefaultMailText_ID);
   }
 
   /**
@@ -1030,20 +1020,20 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return ii;
   }
 
+  /**
+   * Set Default mail template.
+   *
+   * @param R_DefaultMailText_ID Default mail template
+   */
+  public void setR_DefaultMailText_ID(int R_DefaultMailText_ID) {
+    if (R_DefaultMailText_ID < 1) set_Value(COLUMNNAME_R_DefaultMailText_ID, null);
+    else set_Value(COLUMNNAME_R_DefaultMailText_ID, R_DefaultMailText_ID);
+  }
+
   public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
         MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
             .getPO(getSalesRep_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Sales Representative.
-   *
-   * @param SalesRep_ID Sales Representative or Company Agent
-   */
-  public void setSalesRep_ID(int SalesRep_ID) {
-    if (SalesRep_ID < 1) set_Value(COLUMNNAME_SalesRep_ID, null);
-    else set_Value(COLUMNNAME_SalesRep_ID, SalesRep_ID);
   }
 
   /**
@@ -1058,12 +1048,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Salt.
+   * Set Sales Representative.
    *
-   * @param Salt Random data added to improve password hash effectiveness
+   * @param SalesRep_ID Sales Representative or Company Agent
    */
-  public void setSalt(String Salt) {
-    set_ValueNoCheck(COLUMNNAME_Salt, Salt);
+  public void setSalesRep_ID(int SalesRep_ID) {
+    if (SalesRep_ID < 1) set_Value(COLUMNNAME_SalesRep_ID, null);
+    else set_Value(COLUMNNAME_SalesRep_ID, SalesRep_ID);
   }
 
   /**
@@ -1076,12 +1067,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Security Question.
+   * Set Salt.
    *
-   * @param SecurityQuestion Security Question
+   * @param Salt Random data added to improve password hash effectiveness
    */
-  public void setSecurityQuestion(String SecurityQuestion) {
-    set_Value(COLUMNNAME_SecurityQuestion, SecurityQuestion);
+  public void setSalt(String Salt) {
+    set_ValueNoCheck(COLUMNNAME_Salt, Salt);
   }
 
   /**
@@ -1093,19 +1084,18 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     return (String) get_Value(COLUMNNAME_SecurityQuestion);
   }
 
+  /**
+   * Set Security Question.
+   *
+   * @param SecurityQuestion Security Question
+   */
+  public void setSecurityQuestion(String SecurityQuestion) {
+    set_Value(COLUMNNAME_SecurityQuestion, SecurityQuestion);
+  }
+
   public I_AD_User getSupervisor() throws RuntimeException {
     return (I_AD_User)
         MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSupervisor_ID(), get_TrxName());
-  }
-
-  /**
-   * Set Supervisor.
-   *
-   * @param Supervisor_ID Supervisor for this user/organization - used for escalation and approval
-   */
-  public void setSupervisor_ID(int Supervisor_ID) {
-    if (Supervisor_ID < 1) set_Value(COLUMNNAME_Supervisor_ID, null);
-    else set_Value(COLUMNNAME_Supervisor_ID, Supervisor_ID);
   }
 
   /**
@@ -1120,12 +1110,13 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set Title.
+   * Set Supervisor.
    *
-   * @param Title Name this entity is referred to as
+   * @param Supervisor_ID Supervisor for this user/organization - used for escalation and approval
    */
-  public void setTitle(String Title) {
-    set_Value(COLUMNNAME_Title, Title);
+  public void setSupervisor_ID(int Supervisor_ID) {
+    if (Supervisor_ID < 1) set_Value(COLUMNNAME_Supervisor_ID, null);
+    else set_Value(COLUMNNAME_Supervisor_ID, Supervisor_ID);
   }
 
   /**
@@ -1138,12 +1129,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /**
-   * Set User PIN.
+   * Set Title.
    *
-   * @param UserPIN User PIN
+   * @param Title Name this entity is referred to as
    */
-  public void setUserPIN(String UserPIN) {
-    set_Value(COLUMNNAME_UserPIN, UserPIN);
+  public void setTitle(String Title) {
+    set_Value(COLUMNNAME_Title, Title);
   }
 
   /**
@@ -1153,6 +1144,15 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
    */
   public String getUserPIN() {
     return (String) get_Value(COLUMNNAME_UserPIN);
+  }
+
+  /**
+   * Set User PIN.
+   *
+   * @param UserPIN User PIN
+   */
+  public void setUserPIN(String UserPIN) {
+    set_Value(COLUMNNAME_UserPIN, UserPIN);
   }
 
   @Override

@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import java.sql.ResultSet;
 import java.util.Properties;
-
 import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.BasePOName;
@@ -29,6 +28,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   public X_AD_Language(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   }
+
   public X_AD_Language(Properties ctx, Row row) {
     super(ctx, row);
   }
@@ -47,21 +47,21 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set Language.
-   *
-   * @param AD_Language Language for this entity
-   */
-  public void setADLanguage(String AD_Language) {
-    set_ValueNoCheck(COLUMNNAME_AD_Language, AD_Language);
-  }
-
-  /**
    * Get Language.
    *
    * @return Language for this entity
    */
   public String getADLanguage() {
     return (String) get_Value(COLUMNNAME_AD_Language);
+  }
+
+  /**
+   * Set Language.
+   *
+   * @param AD_Language Language for this entity
+   */
+  public void setADLanguage(String AD_Language) {
+    set_ValueNoCheck(COLUMNNAME_AD_Language, AD_Language);
   }
 
   /**
@@ -110,16 +110,6 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set Print Paper.
-   *
-   * @param AD_PrintPaper_ID Printer paper definition
-   */
-  public void setAD_PrintPaper_ID(int AD_PrintPaper_ID) {
-    if (AD_PrintPaper_ID < 1) set_Value(COLUMNNAME_AD_PrintPaper_ID, null);
-    else set_Value(COLUMNNAME_AD_PrintPaper_ID, Integer.valueOf(AD_PrintPaper_ID));
-  }
-
-  /**
    * Get Print Paper.
    *
    * @return Printer paper definition
@@ -131,13 +121,13 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set ISO Country Code.
+   * Set Print Paper.
    *
-   * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
-   *     - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+   * @param AD_PrintPaper_ID Printer paper definition
    */
-  public void setCountryCode(String CountryCode) {
-    set_Value(COLUMNNAME_CountryCode, CountryCode);
+  public void setAD_PrintPaper_ID(int AD_PrintPaper_ID) {
+    if (AD_PrintPaper_ID < 1) set_Value(COLUMNNAME_AD_PrintPaper_ID, null);
+    else set_Value(COLUMNNAME_AD_PrintPaper_ID, Integer.valueOf(AD_PrintPaper_ID));
   }
 
   /**
@@ -151,12 +141,13 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set Date Pattern.
+   * Set ISO Country Code.
    *
-   * @param DatePattern Java Date Pattern
+   * @param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
+   *     - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
    */
-  public void setDatePattern(String DatePattern) {
-    set_Value(COLUMNNAME_DatePattern, DatePattern);
+  public void setCountryCode(String CountryCode) {
+    set_Value(COLUMNNAME_CountryCode, CountryCode);
   }
 
   /**
@@ -166,6 +157,15 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    */
   public String getDatePattern() {
     return (String) get_Value(COLUMNNAME_DatePattern);
+  }
+
+  /**
+   * Set Date Pattern.
+   *
+   * @param DatePattern Java Date Pattern
+   */
+  public void setDatePattern(String DatePattern) {
+    set_Value(COLUMNNAME_DatePattern, DatePattern);
   }
 
   /**
@@ -241,16 +241,6 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set ISO Language Code.
-   *
-   * @param LanguageISO Lower-case two-letter ISO-3166 code -
-   *     http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt
-   */
-  public void setLanguageISO(String LanguageISO) {
-    set_Value(COLUMNNAME_LanguageISO, LanguageISO);
-  }
-
-  /**
    * Get ISO Language Code.
    *
    * @return Lower-case two-letter ISO-3166 code -
@@ -261,12 +251,13 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set Print Text.
+   * Set ISO Language Code.
    *
-   * @param PrintName The label text to be printed on a document or correspondence.
+   * @param LanguageISO Lower-case two-letter ISO-3166 code -
+   *     http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt
    */
-  public void setPrintName(String PrintName) {
-    set_Value(COLUMNNAME_PrintName, PrintName);
+  public void setLanguageISO(String LanguageISO) {
+    set_Value(COLUMNNAME_LanguageISO, LanguageISO);
   }
 
   /**
@@ -279,12 +270,12 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set Process Now.
+   * Set Print Text.
    *
-   * @param Processing Process Now
+   * @param PrintName The label text to be printed on a document or correspondence.
    */
-  public void setProcessing(boolean Processing) {
-    set_Value(COLUMNNAME_Processing, Boolean.valueOf(Processing));
+  public void setPrintName(String PrintName) {
+    set_Value(COLUMNNAME_PrintName, PrintName);
   }
 
   /**
@@ -297,12 +288,12 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   }
 
   /**
-   * Set Time Pattern.
+   * Set Process Now.
    *
-   * @param TimePattern Java Time Pattern
+   * @param Processing Process Now
    */
-  public void setTimePattern(String TimePattern) {
-    set_Value(COLUMNNAME_TimePattern, TimePattern);
+  public void setProcessing(boolean Processing) {
+    set_Value(COLUMNNAME_Processing, Boolean.valueOf(Processing));
   }
 
   /**
@@ -312,6 +303,15 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
    */
   public String getTimePattern() {
     return (String) get_Value(COLUMNNAME_TimePattern);
+  }
+
+  /**
+   * Set Time Pattern.
+   *
+   * @param TimePattern Java Time Pattern
+   */
+  public void setTimePattern(String TimePattern) {
+    set_Value(COLUMNNAME_TimePattern, TimePattern);
   }
 
   @Override

@@ -42,16 +42,6 @@ public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor, I_Pe
   }
 
   /**
-   * Set Print Color.
-   *
-   * @param AD_PrintColor_ID Color used for printing and display
-   */
-  public void setAD_PrintColor_ID(int AD_PrintColor_ID) {
-    if (AD_PrintColor_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_PrintColor_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_AD_PrintColor_ID, Integer.valueOf(AD_PrintColor_ID));
-  }
-
-  /**
    * Get Print Color.
    *
    * @return Color used for printing and display
@@ -63,12 +53,13 @@ public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor, I_Pe
   }
 
   /**
-   * Set AD_PrintColor_UU.
+   * Set Print Color.
    *
-   * @param AD_PrintColor_UU AD_PrintColor_UU
+   * @param AD_PrintColor_ID Color used for printing and display
    */
-  public void setAD_PrintColor_UU(String AD_PrintColor_UU) {
-    set_Value(COLUMNNAME_AD_PrintColor_UU, AD_PrintColor_UU);
+  public void setAD_PrintColor_ID(int AD_PrintColor_ID) {
+    if (AD_PrintColor_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_PrintColor_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_AD_PrintColor_ID, Integer.valueOf(AD_PrintColor_ID));
   }
 
   /**
@@ -81,12 +72,12 @@ public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor, I_Pe
   }
 
   /**
-   * Set Validation code.
+   * Set AD_PrintColor_UU.
    *
-   * @param Code Validation Code
+   * @param AD_PrintColor_UU AD_PrintColor_UU
    */
-  public void setCode(String Code) {
-    set_Value(COLUMNNAME_Code, Code);
+  public void setAD_PrintColor_UU(String AD_PrintColor_UU) {
+    set_Value(COLUMNNAME_AD_PrintColor_UU, AD_PrintColor_UU);
   }
 
   /**
@@ -96,6 +87,15 @@ public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor, I_Pe
    */
   public String getCode() {
     return (String) get_Value(COLUMNNAME_Code);
+  }
+
+  /**
+   * Set Validation code.
+   *
+   * @param Code Validation Code
+   */
+  public void setCode(String Code) {
+    set_Value(COLUMNNAME_Code, Code);
   }
 
   /**

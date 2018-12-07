@@ -46,16 +46,6 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
   }
 
   /**
-   * Set Greeting.
-   *
-   * @param C_Greeting_ID Greeting to print on correspondence
-   */
-  public void setC_Greeting_ID(int C_Greeting_ID) {
-    if (C_Greeting_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Greeting_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_Greeting_ID, Integer.valueOf(C_Greeting_ID));
-  }
-
-  /**
    * Get Greeting.
    *
    * @return Greeting to print on correspondence
@@ -67,12 +57,13 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
   }
 
   /**
-   * Set C_Greeting_UU.
+   * Set Greeting.
    *
-   * @param C_Greeting_UU C_Greeting_UU
+   * @param C_Greeting_ID Greeting to print on correspondence
    */
-  public void setC_Greeting_UU(String C_Greeting_UU) {
-    set_Value(COLUMNNAME_C_Greeting_UU, C_Greeting_UU);
+  public void setC_Greeting_ID(int C_Greeting_ID) {
+    if (C_Greeting_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Greeting_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_C_Greeting_ID, Integer.valueOf(C_Greeting_ID));
   }
 
   /**
@@ -85,13 +76,12 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
   }
 
   /**
-   * Set Greeting.
+   * Set C_Greeting_UU.
    *
-   * @param Greeting For letters, e.g. "Dear {0}" or "Dear Mr. {0}" - At runtime, "{0}" is replaced
-   *     by the name
+   * @param C_Greeting_UU C_Greeting_UU
    */
-  public void setGreeting(String Greeting) {
-    set_Value(COLUMNNAME_Greeting, Greeting);
+  public void setC_Greeting_UU(String C_Greeting_UU) {
+    set_Value(COLUMNNAME_C_Greeting_UU, C_Greeting_UU);
   }
 
   /**
@@ -102,6 +92,16 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
    */
   public String getGreeting() {
     return (String) get_Value(COLUMNNAME_Greeting);
+  }
+
+  /**
+   * Set Greeting.
+   *
+   * @param Greeting For letters, e.g. "Dear {0}" or "Dear Mr. {0}" - At runtime, "{0}" is replaced
+   *     by the name
+   */
+  public void setGreeting(String Greeting) {
+    set_Value(COLUMNNAME_Greeting, Greeting);
   }
 
   /**

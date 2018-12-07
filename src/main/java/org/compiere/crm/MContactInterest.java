@@ -14,41 +14,14 @@ import org.idempiere.common.util.CLogger;
  * used.
  *
  * @author Jorg Janke
- * @version $Id: MContactInterest.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  * @author red1 FR: [ 2214883 ] Remove SQL code and Replace for Query
+ * @version $Id: MContactInterest.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
 public class MContactInterest extends X_R_ContactInterest {
   /** */
   private static final long serialVersionUID = -4720845687902863428L;
-
-  /**
-   * Get Contact Interest
-   *
-   * @param ctx context
-   * @param R_InterestArea_ID interest ares
-   * @param AD_User_ID user
-   * @param isActive create as active
-   * @param trxName transaction
-   * @return Contact Interest
-   */
-  public static MContactInterest get(
-      Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive, String trxName) {
-    final String whereClause =
-        I_R_ContactInterest.COLUMNNAME_R_InterestArea_ID
-            + "=? AND "
-            + I_R_ContactInterest.COLUMNNAME_AD_User_ID
-            + "=?";
-    MContactInterest retValue =
-        new Query(ctx, I_R_ContactInterest.Table_Name, whereClause, trxName)
-            .setParameters(R_InterestArea_ID, AD_User_ID)
-            .first();
-
-    if (retValue == null) {
-      retValue = new MContactInterest(ctx, R_InterestArea_ID, AD_User_ID, isActive, trxName);
-      if (s_log.isLoggable(Level.FINE)) s_log.fine("NOT found - " + retValue);
-    } else if (s_log.isLoggable(Level.FINE)) s_log.fine("Found - " + retValue);
-    return retValue;
-  } //	get
+  /** Static Logger */
+  private static CLogger s_log = CLogger.getCLogger(MContactInterest.class);
 
   /**
    * ************************************************************************ Persistency
@@ -91,8 +64,34 @@ public class MContactInterest extends X_R_ContactInterest {
     super(ctx, rs, trxName);
   } //	MContactInterest
 
-  /** Static Logger */
-  private static CLogger s_log = CLogger.getCLogger(MContactInterest.class);
+  /**
+   * Get Contact Interest
+   *
+   * @param ctx context
+   * @param R_InterestArea_ID interest ares
+   * @param AD_User_ID user
+   * @param isActive create as active
+   * @param trxName transaction
+   * @return Contact Interest
+   */
+  public static MContactInterest get(
+      Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive, String trxName) {
+    final String whereClause =
+        I_R_ContactInterest.COLUMNNAME_R_InterestArea_ID
+            + "=? AND "
+            + I_R_ContactInterest.COLUMNNAME_AD_User_ID
+            + "=?";
+    MContactInterest retValue =
+        new Query(ctx, I_R_ContactInterest.Table_Name, whereClause, trxName)
+            .setParameters(R_InterestArea_ID, AD_User_ID)
+            .first();
+
+    if (retValue == null) {
+      retValue = new MContactInterest(ctx, R_InterestArea_ID, AD_User_ID, isActive, trxName);
+      if (s_log.isLoggable(Level.FINE)) s_log.fine("NOT found - " + retValue);
+    } else if (s_log.isLoggable(Level.FINE)) s_log.fine("Found - " + retValue);
+    return retValue;
+  } //	get
 
   /**
    * Set OptOut Date User action only.

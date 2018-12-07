@@ -42,16 +42,6 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
   }
 
   /**
-   * Set Position Category.
-   *
-   * @param C_JobCategory_ID Job Position Category
-   */
-  public void setC_JobCategory_ID(int C_JobCategory_ID) {
-    if (C_JobCategory_ID < 1) set_ValueNoCheck(COLUMNNAME_C_JobCategory_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_JobCategory_ID, Integer.valueOf(C_JobCategory_ID));
-  }
-
-  /**
    * Get Position Category.
    *
    * @return Job Position Category
@@ -63,12 +53,13 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
   }
 
   /**
-   * Set C_JobCategory_UU.
+   * Set Position Category.
    *
-   * @param C_JobCategory_UU C_JobCategory_UU
+   * @param C_JobCategory_ID Job Position Category
    */
-  public void setC_JobCategory_UU(String C_JobCategory_UU) {
-    set_Value(COLUMNNAME_C_JobCategory_UU, C_JobCategory_UU);
+  public void setC_JobCategory_ID(int C_JobCategory_ID) {
+    if (C_JobCategory_ID < 1) set_ValueNoCheck(COLUMNNAME_C_JobCategory_ID, null);
+    else set_ValueNoCheck(COLUMNNAME_C_JobCategory_ID, Integer.valueOf(C_JobCategory_ID));
   }
 
   /**
@@ -81,12 +72,12 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
   }
 
   /**
-   * Set Description.
+   * Set C_JobCategory_UU.
    *
-   * @param Description Optional short description of the record
+   * @param C_JobCategory_UU C_JobCategory_UU
    */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
+  public void setC_JobCategory_UU(String C_JobCategory_UU) {
+    set_Value(COLUMNNAME_C_JobCategory_UU, C_JobCategory_UU);
   }
 
   /**
@@ -99,12 +90,12 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
   }
 
   /**
-   * Set Comment/Help.
+   * Set Description.
    *
-   * @param Help Comment or Hint
+   * @param Description Optional short description of the record
    */
-  public void setHelp(String Help) {
-    set_Value(COLUMNNAME_Help, Help);
+  public void setDescription(String Description) {
+    set_Value(COLUMNNAME_Description, Description);
   }
 
   /**
@@ -114,6 +105,15 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
    */
   public String getHelp() {
     return (String) get_Value(COLUMNNAME_Help);
+  }
+
+  /**
+   * Set Comment/Help.
+   *
+   * @param Help Comment or Hint
+   */
+  public void setHelp(String Help) {
+    set_Value(COLUMNNAME_Help, Help);
   }
 
   @Override
