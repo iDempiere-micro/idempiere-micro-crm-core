@@ -23,17 +23,17 @@
         <dependency>
             <groupId>com.github.iDempiere-micro</groupId>
             <artifactId>idempiere-micro-base-interfaces</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.github.iDempiere-micro</groupId>
             <artifactId>idempiere-micro-model-core</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.github.iDempiere-micro</groupId>
             <artifactId>idempiere-micro-model-interfaces</artifactId>
-            <version>0.0.3</version>
+            <version>0.0.4</version>
         </dependency>
         <dependency>
             <groupId>com.github.iDempiere-micro</groupId>
