@@ -13,11 +13,14 @@
  */
 package org.compiere.crm;
 
-import java.sql.ResultSet;
-import java.util.Properties;
 import org.compiere.model.I_C_CountryGroup;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
+
+import java.sql.ResultSet;
+import java.util.Properties;
+
+import static software.hsharp.core.util.DBKt.getSQLValue;
 
 /** Country Group Model */
 public class MCountryGroup extends X_C_CountryGroup {
@@ -29,6 +32,7 @@ public class MCountryGroup extends X_C_CountryGroup {
   /** Static Logger */
   @SuppressWarnings("unused")
   private static CLogger s_log = CLogger.getCLogger(MCountryGroup.class);
+
   /**
    * *********************************************************************** Create empty Country
    *
@@ -68,4 +72,20 @@ public class MCountryGroup extends X_C_CountryGroup {
     }
     return null;
   } //	get
+
+  public static boolean countryGroupContains(int c_CountryGroup_ID, int c_Country_ID) {
+
+    if (c_CountryGroup_ID == 0 || c_Country_ID == 0) return false;
+
+    final String sql =
+        ""
+            + "SELECT Count(*) "
+            + "FROM   c_countrygroupcountry "
+            + "WHERE  c_country_id = ? "
+            + "       AND c_countrygroup_id = ? "
+            + "       AND isactive = 'Y' ";
+    int cnt = getSQLValue(null, sql, c_Country_ID, c_CountryGroup_ID);
+
+    return cnt > 0;
+  }
 } //	MCountryGroup
