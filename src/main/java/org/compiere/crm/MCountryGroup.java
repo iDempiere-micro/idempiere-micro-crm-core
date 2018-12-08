@@ -22,79 +22,70 @@ import java.util.Properties;
 
 import static software.hsharp.core.util.DBKt.getSQLValue;
 
-/**
- * Country Group Model
- */
+/** Country Group Model */
 public class MCountryGroup extends X_C_CountryGroup {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 4986629677773273899L;
-    /**
-     * Cache
-     */
-    private static CCache<Integer, MCountryGroup> s_cache =
-            new CCache<Integer, MCountryGroup>(I_C_CountryGroup.Table_Name, 5);
-    /**
-     * Static Logger
-     */
-    @SuppressWarnings("unused")
-    private static CLogger s_log = CLogger.getCLogger(MCountryGroup.class);
+  /** */
+  private static final long serialVersionUID = 4986629677773273899L;
+  /** Cache */
+  private static CCache<Integer, MCountryGroup> s_cache =
+      new CCache<Integer, MCountryGroup>(I_C_CountryGroup.Table_Name, 5);
+  /** Static Logger */
+  @SuppressWarnings("unused")
+  private static CLogger s_log = CLogger.getCLogger(MCountryGroup.class);
 
-    /**
-     * *********************************************************************** Create empty Country
-     *
-     * @param ctx               context
-     * @param C_CountryGroup_ID ID
-     * @param trxName           transaction
-     */
-    public MCountryGroup(Properties ctx, int C_CountryGroup_ID, String trxName) {
-        super(ctx, C_CountryGroup_ID, trxName);
-    } //  MCountryGroup
+  /**
+   * *********************************************************************** Create empty Country
+   *
+   * @param ctx context
+   * @param C_CountryGroup_ID ID
+   * @param trxName transaction
+   */
+  public MCountryGroup(Properties ctx, int C_CountryGroup_ID, String trxName) {
+    super(ctx, C_CountryGroup_ID, trxName);
+  } //  MCountryGroup
 
-    /**
-     * Create Country Group from current row in ResultSet
-     *
-     * @param ctx     context
-     * @param rs      ResultSet
-     * @param trxName transaction
-     */
-    public MCountryGroup(Properties ctx, ResultSet rs, String trxName) {
-        super(ctx, rs, trxName);
-    } //	MCountryGroup
+  /**
+   * Create Country Group from current row in ResultSet
+   *
+   * @param ctx context
+   * @param rs ResultSet
+   * @param trxName transaction
+   */
+  public MCountryGroup(Properties ctx, ResultSet rs, String trxName) {
+    super(ctx, rs, trxName);
+  } //	MCountryGroup
 
-    /**
-     * Get Country Group (cached)
-     *
-     * @param ctx               context
-     * @param C_CountryGroup_ID ID
-     * @return Country Group
-     */
-    public static MCountryGroup get(Properties ctx, int C_CountryGroup_ID) {
-        MCountryGroup c = s_cache.get(C_CountryGroup_ID);
-        if (c != null) return c;
-        c = new MCountryGroup(ctx, C_CountryGroup_ID, null);
-        if (c.getC_CountryGroup_ID() == C_CountryGroup_ID) {
-            s_cache.put(C_CountryGroup_ID, c);
-            return c;
-        }
-        return null;
-    } //	get
-
-    public static boolean countryGroupContains(int c_CountryGroup_ID, int c_Country_ID) {
-
-        if (c_CountryGroup_ID == 0 || c_Country_ID == 0) return false;
-
-        final String sql =
-                ""
-                        + "SELECT Count(*) "
-                        + "FROM   c_countrygroupcountry "
-                        + "WHERE  c_country_id = ? "
-                        + "       AND c_countrygroup_id = ? "
-                        + "       AND isactive = 'Y' ";
-        int cnt = getSQLValue(null, sql, c_Country_ID, c_CountryGroup_ID);
-
-        return cnt > 0;
+  /**
+   * Get Country Group (cached)
+   *
+   * @param ctx context
+   * @param C_CountryGroup_ID ID
+   * @return Country Group
+   */
+  public static MCountryGroup get(Properties ctx, int C_CountryGroup_ID) {
+    MCountryGroup c = s_cache.get(C_CountryGroup_ID);
+    if (c != null) return c;
+    c = new MCountryGroup(ctx, C_CountryGroup_ID, null);
+    if (c.getC_CountryGroup_ID() == C_CountryGroup_ID) {
+      s_cache.put(C_CountryGroup_ID, c);
+      return c;
     }
+    return null;
+  } //	get
 
+  public static boolean countryGroupContains(int c_CountryGroup_ID, int c_Country_ID) {
+
+    if (c_CountryGroup_ID == 0 || c_Country_ID == 0) return false;
+
+    final String sql =
+        ""
+            + "SELECT Count(*) "
+            + "FROM   c_countrygroupcountry "
+            + "WHERE  c_country_id = ? "
+            + "       AND c_countrygroup_id = ? "
+            + "       AND isactive = 'Y' ";
+    int cnt = getSQLValue(null, sql, c_Country_ID, c_CountryGroup_ID);
+
+    return cnt > 0;
+  }
 } //	MCountryGroup
