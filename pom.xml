@@ -67,6 +67,12 @@
             <version>1.4.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.seratch</groupId>
+            <artifactId>kotliquery</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
