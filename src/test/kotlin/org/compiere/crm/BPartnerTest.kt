@@ -1,11 +1,9 @@
 package org.compiere.crm
 
 import company.bigger.test.support.randomString
-import kotliquery.HikariCP
 import org.compiere.model.I_C_BPartner
 import org.idempiere.common.util.Env
 import org.junit.Test
-import software.hsharp.core.orm.DummyEventManager
 import kotlin.test.assertEquals
 
 class BPartnerTest : BaseCrmTest() {

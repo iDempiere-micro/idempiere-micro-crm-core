@@ -6,7 +6,7 @@ import org.compiere.model.I_C_BPartner_Location
 import software.hsharp.core.orm.I_ZERO
 import software.hsharp.core.util.DB
 import java.sql.ResultSet
-import java.util.*
+import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner {
     constructor(ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
