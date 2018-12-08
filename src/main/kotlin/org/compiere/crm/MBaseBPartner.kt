@@ -3,6 +3,7 @@ package org.compiere.crm
 import kotliquery.Row
 import kotliquery.queryOf
 import org.compiere.model.I_C_BPartner_Location
+import software.hsharp.core.orm.I_ZERO
 import software.hsharp.core.util.DB
 import java.sql.ResultSet
 import java.util.Properties

@@ -7,7 +7,7 @@ import org.junit.Test
 import software.hsharp.core.orm.DummyEventManager
 import kotlin.test.assertNotNull
 
-class CategoryTest: BaseCrmTest() {
+class CategoryTest : BaseCrmTest() {
 
     init {
         HikariCP.default(sessionUrl, "adempiere", "adempiere")
