@@ -1,19 +1,5 @@
 package org.compiere.crm;
 
-import static software.hsharp.core.util.DBKt.getSQLValue;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.StringTokenizer;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.I_AD_User;
@@ -24,13 +10,19 @@ import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.exceptions.DBException;
-import org.idempiere.common.util.CCache;
-import org.idempiere.common.util.CLogger;
-import org.idempiere.common.util.Env;
-import org.idempiere.common.util.Secure;
-import org.idempiere.common.util.SecureEngine;
-import org.idempiere.common.util.Util;
+import org.idempiere.common.util.*;
 import software.hsharp.core.models.IUser;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.*;
+
+import static software.hsharp.core.util.DBKt.getSQLValue;
 
 /**
  * User Model
@@ -41,7 +33,7 @@ import software.hsharp.core.models.IUser;
  *         https://sourceforge.net/tracker/index.php?func=detail&aid=2788430&group_id=176962&atid=879335
  * @version $Id: MUser.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  */
-public class MUser extends X_AD_User implements IUser {
+public class MUser extends MBaseUser implements IUser {
   /** */
   private static final long serialVersionUID = 9027688865361175114L;
   /** Cache */
@@ -49,10 +41,6 @@ public class MUser extends X_AD_User implements IUser {
       new CCache<Integer, MUser>(I_AD_User.Table_Name, 30, 60);
   /** Static Logger */
   private static CLogger s_log = CLogger.getCLogger(MUser.class);
-  /** Roles of User with Org */
-  private MRole[] m_roles = null;
-  /** Roles of User with Org */
-  private int m_rolesAD_Org_ID = -1;
   /** Is Administrator */
   private Boolean m_isAdministrator = null;
   /** User Access Rights */
