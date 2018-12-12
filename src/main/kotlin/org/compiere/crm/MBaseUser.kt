@@ -7,6 +7,19 @@ import software.hsharp.core.util.DB
 import java.sql.ResultSet
 import java.util.*
 
+fun getWithRole(role: MRole): Array<MUser> {
+    val sql = """
+            SELECT * FROM AD_User u
+            WHERE u.IsActive='Y'
+            AND EXISTS (SELECT * FROM AD_User_Roles ur
+            WHERE ur.AD_User_ID=u.AD_User_ID AND ur.AD_Role_ID=? AND ur.IsActive='Y')
+        """.trimIndent()
+    val loadQuery =
+        queryOf(sql, role.aD_Role_ID)
+            .map { row -> MUser(role.ctx, row) }.asList
+
+    return DB.current.run(loadQuery).toTypedArray()}
+
 open class MBaseUser : X_AD_User {
     constructor(ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
     constructor(ctx: Properties, row: Row) : super(ctx, row)
