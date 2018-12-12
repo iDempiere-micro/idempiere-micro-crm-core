@@ -6,7 +6,7 @@ import org.compiere.model.I_C_BP_Group
 import org.idempiere.common.util.CCache
 import org.idempiere.common.util.Env
 import software.hsharp.core.util.DB
-import java.util.Properties
+import java.util.*
 
 /** Default Cache  */
 private val cacheDefaultBPGroups = CCache<Int, MBPGroup>(
@@ -33,3 +33,13 @@ fun getDefault(ctx: Properties): MBPGroup? {
     cacheDefaultBPGroups[clientId] = loaded
     return loaded
 } // 	get
+
+fun getOfBPartner(ctx: Properties, bpartnerId: Int): MBPGroup? {
+    val sql = """
+        SELECT * FROM C_BP_Group g
+        WHERE IsDefault='Y' AND AD_Client_ID=?
+         ORDER BY IsActive DESC
+    """.trimIndent()
+    val loadQuery = queryOf(sql, bpartnerId).map { row -> MBPGroup(ctx, row) }.asSingle
+    return DB.current.run(loadQuery)
+}
