@@ -157,7 +157,7 @@ open class MBaseBPartner : X_C_BPartner {
         }
     } //	setSOCreditStatus
 
-    public fun setTotalOpenBalance() {
+    fun setTotalOpenBalance() {
         val sql = """
             SELECT
             COALESCE((SELECT SUM(currencyBase(invoiceOpen(i.C_Invoice_ID,i.C_InvoicePaySchedule_ID),i.C_Currency_ID,i.DateInvoiced, i.AD_Client_ID,i.AD_Org_ID)) FROM C_Invoice_v i
@@ -177,5 +177,18 @@ open class MBaseBPartner : X_C_BPartner {
         super.setSO_CreditUsed(SO_CreditUsed)
         super.setTotalOpenBalance(TotalOpenBalance)
         setSOCreditStatus()
+    }
+
+    fun setActualLifeTimeValue() {
+        val sql = """
+            SELECT
+            COALESCE ((SELECT SUM(currencyBase(i.GrandTotal,i.C_Currency_ID,i.DateInvoiced, i.AD_Client_ID,i.AD_Org_ID)) FROM C_Invoice_v i
+            WHERE i.C_BPartner_ID=bp.C_BPartner_ID AND i.IsSOTrx='Y' AND i.DocStatus IN ('CO','CL')),0)
+            FROM C_BPartner bp
+            WHERE C_BPartner_ID=?
+        """.trimIndent()
+        val loadQuery = queryOf(sql, c_BPartner_ID).map { row -> row.bigDecimalOrNull(1)}.asSingle
+        val result = DB.current.run(loadQuery)
+        if (result != null) super.setActualLifeTimeValue(result)
     }
 }

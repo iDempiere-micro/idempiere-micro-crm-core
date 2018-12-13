@@ -15,7 +15,7 @@ private val cacheDefaultBPGroups = CCache<Int, MBPGroup>(
 private val log = KotlinLogging.logger {}
 
 fun getDefault(ctx: Properties): MBPGroup? {
-    val clientId = Env.getADClientID(ctx)
+    val clientId = Env.getClientId(ctx)
     val retValue = cacheDefaultBPGroups[clientId]
     if (retValue != null) return retValue
 
