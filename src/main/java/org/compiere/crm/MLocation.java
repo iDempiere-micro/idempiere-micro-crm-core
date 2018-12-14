@@ -1,12 +1,6 @@
 package org.compiere.crm;
 
-import static software.hsharp.core.util.DBKt.getSQLValue;
-import static software.hsharp.core.util.DBKt.getSQLValueEx;
-
-import java.sql.ResultSet;
-import java.util.Comparator;
-import java.util.Properties;
-import java.util.logging.Level;
+import kotliquery.Row;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.MColumn;
 import org.compiere.orm.MSysConfig;
@@ -17,6 +11,14 @@ import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Util;
+
+import java.sql.ResultSet;
+import java.util.Comparator;
+import java.util.Properties;
+import java.util.logging.Level;
+
+import static software.hsharp.core.util.DBKt.getSQLValue;
+import static software.hsharp.core.util.DBKt.getSQLValueEx;
 
 /**
  * Location (Address)
@@ -30,7 +32,7 @@ import org.idempiere.common.util.Util;
  *         https://sourceforge.net/tracker/?func=detail&aid=3002736&group_id=176962&atid=879332
  * @version $Id: MLocation.java,v 1.3 2006/07/30 00:54:54 jjanke Exp $
  */
-public class MLocation extends X_C_Location implements I_C_Location, Comparator<Object> {
+public class MLocation extends MBaseLocation implements I_C_Location, Comparator<Object> {
   public static final String updateBPLocName =
       "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = ? AND IsPreserveCustomName = 'N'";
   /** */
@@ -110,6 +112,9 @@ public class MLocation extends X_C_Location implements I_C_Location, Comparator<
    */
   public MLocation(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  } //	MLocation
+  public MLocation(Properties ctx, Row row) {
+    super(ctx, row);
   } //	MLocation
 
   /**

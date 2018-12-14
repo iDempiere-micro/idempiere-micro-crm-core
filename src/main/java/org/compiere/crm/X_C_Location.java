@@ -1,12 +1,14 @@
 package org.compiere.crm;
 
-import java.sql.ResultSet;
-import java.util.Properties;
+import kotliquery.Row;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.MTable;
 import org.compiere.orm.PO;
 import org.idempiere.common.util.KeyNamePair;
 import org.idempiere.orm.I_Persistent;
+
+import java.sql.ResultSet;
+import java.util.Properties;
 
 /**
  * Generated Model for C_Location
@@ -27,6 +29,9 @@ public class X_C_Location extends PO implements I_Persistent {
   /** Load Constructor */
   public X_C_Location(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  }
+  public X_C_Location(Properties ctx, Row row) {
+    super(ctx, row);
   }
 
   /**
