@@ -706,4 +706,24 @@ public class MUser extends MBaseUser implements IUser {
   public void setADClientID(int AD_Client_ID) {
     super.setADClientID(AD_Client_ID);
   }
+
+  /**
+   * Is User an Administrator?
+   *
+   * @return true id Admin
+   */
+  public boolean isAdministrator() {
+    if (m_isAdministrator == null) {
+      m_isAdministrator = Boolean.FALSE;
+      MRole[] roles = getRoles(0);
+      for (int i = 0; i < roles.length; i++) {
+        if (roles[i].getAD_Role_ID() == 0) {
+          m_isAdministrator = Boolean.TRUE;
+          break;
+        }
+      }
+    }
+    return m_isAdministrator.booleanValue();
+  } //	isAdministrator
+
 } //	MUser
