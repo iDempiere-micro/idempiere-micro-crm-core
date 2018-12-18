@@ -19,7 +19,7 @@ class CategoryTest : BaseCrmTest() {
         val ctx = Env.getCtx()
         val category = MCrmCategory(ctx, 0, null)
         val catName = "Test-${randomString(10)}"
-        category.setName(catName)
+        category.name = catName
         category.setValue(catName)
         category.save()
         val cat: MCrmCategory = getById(category.id, MCrmCategory.Table_Name)
@@ -37,7 +37,7 @@ class CategoryTest : BaseCrmTest() {
 
         val bpartnerInCategory = MCrmCustomerCategory(ctx, 0, null)
         bpartnerInCategory.bPartner = newPartner
-        bpartnerInCategory.setName(randomString(10))
+        bpartnerInCategory.name = randomString(10)
         bpartnerInCategory.category = cat
 
         bpartnerInCategory.save()

@@ -45,7 +45,7 @@ open class MBaseBPartner : X_C_BPartner {
         // 	Reset
         set_ValueNoCheck("C_BPartner_ID", I_ZERO)
         setValue("")
-        setName("")
+        name = ""
         name2 = null
         set_ValueNoCheck("C_BPartner_UU", "")
         return success
