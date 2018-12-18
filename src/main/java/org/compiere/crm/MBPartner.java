@@ -108,7 +108,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param impBP import
    */
   public MBPartner(X_I_BPartner impBP) {
-    this(impBP.getCtx(), 0, impBP.get_TrxName());
+    this(impBP.getCtx(), 0, null);
     setClientOrg(impBP);
     setUpdatedBy(impBP.getUpdatedBy());
     //

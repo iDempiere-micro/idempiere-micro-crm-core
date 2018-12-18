@@ -106,7 +106,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
   public org.compiere.model.I_AD_PrintPaper getAD_PrintPaper() throws RuntimeException {
     return (org.compiere.model.I_AD_PrintPaper)
         MTable.get(getCtx(), org.compiere.model.I_AD_PrintPaper.Table_Name)
-            .getPO(getAD_PrintPaper_ID(), get_TrxName());
+            .getPO(getAD_PrintPaper_ID(), null);
   }
 
   /**

@@ -17,17 +17,16 @@
 
 package org.compiere.bo
 
+import org.compiere.model.I_C_Opportunity
+import org.compiere.orm.BasePOUser
+import org.compiere.orm.MTable
+import org.idempiere.common.util.Env
+import org.idempiere.common.util.KeyNamePair
+import org.idempiere.orm.I_Persistent
 import java.math.BigDecimal
 import java.sql.ResultSet
 import java.sql.Timestamp
-import java.util.Properties
-
-import org.compiere.model.I_C_Opportunity
-import org.compiere.orm.MTable
-import org.compiere.orm.BasePOUser
-import org.idempiere.orm.I_Persistent
-import org.idempiere.common.util.Env
-import org.idempiere.common.util.KeyNamePair
+import java.util.*
 
 open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     override val tableId: Int
@@ -52,7 +51,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     @Throws(RuntimeException::class)
     override fun getC_BPartner(): org.compiere.model.I_C_BPartner {
         return MTable.get(ctx, org.compiere.model.I_C_BPartner.Table_Name)
-                .getPO(c_BPartner_ID, _TrxName) as org.compiere.model.I_C_BPartner
+                .getPO(c_BPartner_ID, null) as org.compiere.model.I_C_BPartner
     }
 
     /** Set Business Partner .
@@ -77,7 +76,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     override fun getC_Campaign(): org.compiere.model.I_C_Campaign? {
         if (c_Campaign_ID == 0) return null
         return MTable.get(ctx, org.compiere.model.I_C_Campaign.Table_Name)
-                .getPO(c_Campaign_ID, _TrxName) as org.compiere.model.I_C_Campaign?
+                .getPO(c_Campaign_ID, null) as org.compiere.model.I_C_Campaign?
     }
 
     /** Set Campaign.
@@ -101,7 +100,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     @Throws(RuntimeException::class)
     override fun getC_Currency(): org.compiere.model.I_C_Currency {
         return MTable.get(ctx, org.compiere.model.I_C_Currency.Table_Name)
-                .getPO(c_Currency_ID, _TrxName) as org.compiere.model.I_C_Currency
+                .getPO(c_Currency_ID, null) as org.compiere.model.I_C_Currency
     }
 
     /** Set Currency.
@@ -187,7 +186,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     override fun getC_Order(): org.compiere.model.I_C_Order? {
         if (c_Order_ID == 0) return null
         return MTable.get(ctx, org.compiere.model.I_C_Order.Table_Name)
-                .getPO(c_Order_ID, _TrxName) as org.compiere.model.I_C_Order
+                .getPO(c_Order_ID, null) as org.compiere.model.I_C_Order
     }
 
     /** Set Order.
@@ -226,7 +225,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     @Throws(RuntimeException::class)
     override fun getC_SalesStage(): org.compiere.model.I_C_SalesStage {
         return MTable.get(ctx, org.compiere.model.I_C_SalesStage.Table_Name)
-                .getPO(c_SalesStage_ID, _TrxName) as org.compiere.model.I_C_SalesStage
+                .getPO(c_SalesStage_ID, null) as org.compiere.model.I_C_SalesStage
     }
 
     /** Set Sales Stage.
@@ -332,7 +331,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     override fun getSalesRep(): org.compiere.model.I_AD_User? {
         if (salesRep_ID == 0) return null
         return MTable.get(ctx, org.compiere.model.I_AD_User.Table_Name)
-                .getPO(salesRep_ID, _TrxName) as org.compiere.model.I_AD_User
+                .getPO(salesRep_ID, null) as org.compiere.model.I_AD_User
     }
 
     /** Set Sales Representative.

@@ -294,7 +294,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
   public I_C_BP_Group getC_BP_Group() throws RuntimeException {
     return (I_C_BP_Group)
-        MTable.get(getCtx(), I_C_BP_Group.Table_Name).getPO(getC_BP_Group_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_BP_Group.Table_Name).getPO(getC_BP_Group_ID(), null);
   }
 
   /**
@@ -320,7 +320,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
   public I_C_Dunning getC_Dunning() throws RuntimeException {
     return (I_C_Dunning)
-        MTable.get(getCtx(), I_C_Dunning.Table_Name).getPO(getC_Dunning_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Dunning.Table_Name).getPO(getC_Dunning_ID(), null);
   }
 
   /**
@@ -346,7 +346,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
   public I_C_Greeting getC_Greeting() throws RuntimeException {
     return (I_C_Greeting)
-        MTable.get(getCtx(), I_C_Greeting.Table_Name).getPO(getC_Greeting_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Greeting.Table_Name).getPO(getC_Greeting_ID(), null);
   }
 
   /**
@@ -373,7 +373,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public I_C_InvoiceSchedule getC_InvoiceSchedule() throws RuntimeException {
     return (I_C_InvoiceSchedule)
         MTable.get(getCtx(), I_C_InvoiceSchedule.Table_Name)
-            .getPO(getC_InvoiceSchedule_ID(), get_TrxName());
+            .getPO(getC_InvoiceSchedule_ID(), null);
   }
 
   /**
@@ -402,7 +402,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public I_C_PaymentTerm getC_PaymentTerm() throws RuntimeException {
     return (I_C_PaymentTerm)
         MTable.get(getCtx(), I_C_PaymentTerm.Table_Name)
-            .getPO(getC_PaymentTerm_ID(), get_TrxName());
+            .getPO(getC_PaymentTerm_ID(), null);
   }
 
   /**
@@ -429,7 +429,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public org.eevolution.model.I_C_TaxGroup getC_TaxGroup() throws RuntimeException {
     return (org.eevolution.model.I_C_TaxGroup)
         MTable.get(getCtx(), org.eevolution.model.I_C_TaxGroup.Table_Name)
-            .getPO(getC_TaxGroup_ID(), get_TrxName());
+            .getPO(getC_TaxGroup_ID(), null);
   }
 
   /**
@@ -473,7 +473,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
   public I_C_1099Box getDefault1099Box() throws RuntimeException {
     return (I_C_1099Box)
-        MTable.get(getCtx(), I_C_1099Box.Table_Name).getPO(getDefault1099Box_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_1099Box.Table_Name).getPO(getDefault1099Box_ID(), null);
   }
 
   /**
@@ -669,7 +669,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public I_AD_PrintFormat getInvoice_PrintFormat() throws RuntimeException {
     return (I_AD_PrintFormat)
         MTable.get(getCtx(), I_AD_PrintFormat.Table_Name)
-            .getPO(getInvoice_PrintFormat_ID(), get_TrxName());
+            .getPO(getInvoice_PrintFormat_ID(), null);
   }
 
   /**
@@ -1014,7 +1014,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public I_M_DiscountSchema getM_DiscountSchema() throws RuntimeException {
     return (I_M_DiscountSchema)
         MTable.get(getCtx(), I_M_DiscountSchema.Table_Name)
-            .getPO(getM_DiscountSchema_ID(), get_TrxName());
+            .getPO(getM_DiscountSchema_ID(), null);
   }
 
   /**
@@ -1041,7 +1041,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
   public I_M_PriceList getM_PriceList() throws RuntimeException {
     return (I_M_PriceList)
-        MTable.get(getCtx(), I_M_PriceList.Table_Name).getPO(getM_PriceList_ID(), get_TrxName());
+        MTable.get(getCtx(), I_M_PriceList.Table_Name).getPO(getM_PriceList_ID(), null);
   }
 
   /**
@@ -1163,7 +1163,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public I_M_DiscountSchema getPO_DiscountSchema() throws RuntimeException {
     return (I_M_DiscountSchema)
         MTable.get(getCtx(), I_M_DiscountSchema.Table_Name)
-            .getPO(getPO_DiscountSchema_ID(), get_TrxName());
+            .getPO(getPO_DiscountSchema_ID(), null);
   }
 
   /**
@@ -1192,7 +1192,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   public I_C_PaymentTerm getPO_PaymentTerm() throws RuntimeException {
     return (I_C_PaymentTerm)
         MTable.get(getCtx(), I_C_PaymentTerm.Table_Name)
-            .getPO(getPO_PaymentTerm_ID(), get_TrxName());
+            .getPO(getPO_PaymentTerm_ID(), null);
   }
 
   /**
@@ -1218,7 +1218,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
   public I_M_PriceList getPO_PriceList() throws RuntimeException {
     return (I_M_PriceList)
-        MTable.get(getCtx(), I_M_PriceList.Table_Name).getPO(getPO_PriceList_ID(), get_TrxName());
+        MTable.get(getCtx(), I_M_PriceList.Table_Name).getPO(getPO_PriceList_ID(), null);
   }
 
   /**
@@ -1319,7 +1319,7 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
 
   public I_AD_User getSalesRep() throws RuntimeException {
     return (I_AD_User)
-        MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSalesRep_ID(), get_TrxName());
+        MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSalesRep_ID(), null);
   }
 
   /**

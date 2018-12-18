@@ -148,7 +148,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   public org.compiere.model.I_C_Opportunity getC_Opportunity() throws RuntimeException {
     return (org.compiere.model.I_C_Opportunity)
         MTable.get(getCtx(), org.compiere.model.I_C_Opportunity.Table_Name)
-            .getPO(getC_Opportunity_ID(), get_TrxName());
+            .getPO(getC_Opportunity_ID(), null);
   }
 
   /**
@@ -244,7 +244,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
         MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
-            .getPO(getSalesRep_ID(), get_TrxName());
+            .getPO(getSalesRep_ID(), null);
   }
 
   /**

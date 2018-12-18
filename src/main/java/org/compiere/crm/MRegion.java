@@ -1,12 +1,13 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
+import org.idempiere.common.util.CCache;
+import org.idempiere.common.util.CLogger;
+
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.text.Collator;
 import java.util.*;
-import kotliquery.Row;
-import org.idempiere.common.util.CCache;
-import org.idempiere.common.util.CLogger;
 
 /**
  * Localtion Region Model (Value Object)
@@ -56,7 +57,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
    * @param regionName Region Name
    */
   public MRegion(MCountry country, String regionName) {
-    super(country.getCtx(), 0, country.get_TrxName());
+    super(country.getCtx(), 0, null);
     setC_Country_ID(country.getC_Country_ID());
     setName(regionName);
   } //  MRegion

@@ -83,7 +83,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    * @param region optional region
    */
   public MLocation(MCountry country, MRegion region) {
-    super(country.getCtx(), 0, country.get_TrxName());
+    super(country.getCtx(), 0, null);
     setCountry(country);
     setRegion(region);
   } //	MLocation
@@ -580,7 +580,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     if (getC_City_ID() <= 0 && getCity() != null && getCity().length() > 0) {
       int city_id =
           getSQLValue(
-              get_TrxName(),
+              null,
               "SELECT C_City_ID FROM C_City WHERE C_Country_ID=? AND COALESCE(C_Region_ID,0)=? AND Name=? AND AD_Client_ID IN (0,?)",
               getC_Country_ID(),
               getC_Region_ID(),
@@ -599,7 +599,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     if (m_c != null && !m_c.isAllowCitiesOutOfList() && getC_City_ID() > 0) {
       int city_id =
           getSQLValue(
-              get_TrxName(),
+              null,
               "SELECT C_City_ID "
                   + "  FROM C_City "
                   + " WHERE C_Country_ID=? "
@@ -630,37 +630,36 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     if (!success) return success;
 
     // Update BP_Location name IDEMPIERE 417
-    if (get_TrxName().startsWith(PO.LOCAL_TRX_PREFIX)) { // saved without trx
-      int bplID =
-          getSQLValueEx(
-              get_TrxName(),
-              "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = "
-                  + getC_Location_ID());
-      if (bplID > 0) {
-        // just trigger BPLocation name change when the location change affects the name:
-        // START_VALUE_BPLOCATION_NAME
-        // 0 - City
-        // 1 - City + Address1
-        // 2 - City + Address1 + Address2
-        // 3 - City + Address1 + Address2 + Region
-        // 4 - City + Address1 + Address2 + Region + ID
-        int bplocname =
-            MSysConfig.getIntValue(
-                MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getOrgId());
-        if (bplocname < 0 || bplocname > 4) bplocname = 0;
-        if (is_ValueChanged(COLUMNNAME_City)
-            || is_ValueChanged(COLUMNNAME_C_City_ID)
-            || (bplocname >= 1 && is_ValueChanged(COLUMNNAME_Address1))
-            || (bplocname >= 2 && is_ValueChanged(COLUMNNAME_Address2))
-            || (bplocname >= 3
-                && (is_ValueChanged(COLUMNNAME_RegionName)
-                    || is_ValueChanged(COLUMNNAME_C_Region_ID)))) {
-          MBPartnerLocation bpl = new MBPartnerLocation(getCtx(), bplID, get_TrxName());
-          bpl.setName(bpl.getBPLocName(this));
-          bpl.saveEx();
-        }
+    int bplID =
+        getSQLValueEx(
+            null,
+            "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = "
+                + getC_Location_ID());
+    if (bplID > 0) {
+      // just trigger BPLocation name change when the location change affects the name:
+      // START_VALUE_BPLOCATION_NAME
+      // 0 - City
+      // 1 - City + Address1
+      // 2 - City + Address1 + Address2
+      // 3 - City + Address1 + Address2 + Region
+      // 4 - City + Address1 + Address2 + Region + ID
+      int bplocname =
+          MSysConfig.getIntValue(
+              MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getOrgId());
+      if (bplocname < 0 || bplocname > 4) bplocname = 0;
+      if (is_ValueChanged(COLUMNNAME_City)
+          || is_ValueChanged(COLUMNNAME_C_City_ID)
+          || (bplocname >= 1 && is_ValueChanged(COLUMNNAME_Address1))
+          || (bplocname >= 2 && is_ValueChanged(COLUMNNAME_Address2))
+          || (bplocname >= 3
+              && (is_ValueChanged(COLUMNNAME_RegionName)
+                  || is_ValueChanged(COLUMNNAME_C_Region_ID)))) {
+        MBPartnerLocation bpl = new MBPartnerLocation(getCtx(), bplID, null);
+        bpl.setName(bpl.getBPLocName(this));
+        bpl.saveEx();
       }
     }
+
     return success;
   } //	afterSave
 
@@ -672,7 +671,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    */
   public String getMapsLocation() {
 
-    MRegion region = new MRegion(Env.getCtx(), getC_Region_ID(), get_TrxName());
+    MRegion region = new MRegion(Env.getCtx(), getC_Region_ID(), null);
     StringBuilder address = new StringBuilder();
     address.append((getAddress1() != null ? getAddress1() + ", " : ""));
     address.append((getAddress2() != null ? getAddress2() + ", " : ""));

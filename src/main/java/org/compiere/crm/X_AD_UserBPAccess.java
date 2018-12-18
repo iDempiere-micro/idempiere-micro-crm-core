@@ -199,7 +199,7 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess, 
   public org.compiere.model.I_R_RequestType getR_RequestType() throws RuntimeException {
     return (org.compiere.model.I_R_RequestType)
         MTable.get(getCtx(), org.compiere.model.I_R_RequestType.Table_Name)
-            .getPO(getR_RequestType_ID(), get_TrxName());
+            .getPO(getR_RequestType_ID(), null);
   }
 
   /**

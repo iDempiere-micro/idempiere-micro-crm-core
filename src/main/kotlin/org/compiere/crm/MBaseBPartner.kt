@@ -100,7 +100,7 @@ open class MBaseBPartner : X_C_BPartner {
             if (c_BP_Group_ID == 0)
                 m_group = MBPGroup.getDefault(ctx)
             else
-                m_group = MBPGroup.get(ctx, c_BP_Group_ID, _TrxName)
+                m_group = MBPGroup.get(ctx, c_BP_Group_ID, null)
         }
         return m_group
     } //	getBPGroup

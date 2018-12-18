@@ -44,7 +44,7 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
   public org.compiere.model.I_C_JobCategory getC_JobCategory() throws RuntimeException {
     return (org.compiere.model.I_C_JobCategory)
         MTable.get(getCtx(), org.compiere.model.I_C_JobCategory.Table_Name)
-            .getPO(getC_JobCategory_ID(), get_TrxName());
+            .getPO(getC_JobCategory_ID(), null);
   }
 
   /**

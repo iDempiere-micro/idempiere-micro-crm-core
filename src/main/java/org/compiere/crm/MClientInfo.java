@@ -100,6 +100,6 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
   public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
     return (I_C_BPartner)
         MTable.get(getCtx(), I_C_BPartner.Table_Name)
-            .getPO(getC_BPartnerCashTrx_ID(), get_TrxName());
+            .getPO(getC_BPartnerCashTrx_ID(), null);
   }
 } //	MClientInfo

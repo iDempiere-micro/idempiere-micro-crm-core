@@ -68,7 +68,7 @@ public class MUser extends MBaseUser implements IUser {
    * @param partner partner
    */
   public MUser(I_C_BPartner partner) {
-    this(partner.getCtx(), 0, partner.get_TrxName());
+    this(partner.getCtx(), 0, null);
     setClientOrg(partner);
     setC_BPartner_ID(partner.getC_BPartner_ID());
     setName(partner.getName());
@@ -630,7 +630,7 @@ public class MUser extends MBaseUser implements IUser {
         // email with password must be unique on the same tenant
         int cnt =
             getSQLValue(
-                get_TrxName(),
+                null,
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND EMail=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 getEMail(),
                 getClientId(),
@@ -648,7 +648,7 @@ public class MUser extends MBaseUser implements IUser {
         if (Util.isEmpty(nameToValidate)) nameToValidate = getName();
         int cnt =
             getSQLValue(
-                get_TrxName(),
+                null,
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND COALESCE(LDAPUser,Name)=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 nameToValidate,
                 getClientId(),

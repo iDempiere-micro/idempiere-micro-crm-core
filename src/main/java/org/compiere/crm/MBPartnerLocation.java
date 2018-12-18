@@ -1,14 +1,15 @@
 package org.compiere.crm;
 
-import java.sql.ResultSet;
-import java.util.List;
-import java.util.Properties;
 import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
+
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * Partner Location Model
@@ -54,7 +55,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    * @param bp partner
    */
   public MBPartnerLocation(I_C_BPartner bp) {
-    this(bp.getCtx(), 0, bp.get_TrxName());
+    this(bp.getCtx(), 0, null);
     setClientOrg(bp);
     // may (still) be 0
     set_ValueNoCheck("C_BPartner_ID", new Integer(bp.getC_BPartner_ID()));
@@ -120,7 +121,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    */
   public MLocation getLocation(boolean requery) {
     if (requery || m_location == null)
-      m_location = MLocation.get(getCtx(), getC_Location_ID(), get_TrxName());
+      m_location = MLocation.get(getCtx(), getC_Location_ID(), null);
     return m_location;
   } // getLocation
 
