@@ -1,7 +1,6 @@
 package org.compiere.crm
 
 import kotliquery.queryOf
-import kotliquery.using
 import org.compiere.model.I_C_BPartner
 import org.compiere.model.I_C_BPartner_Location
 import org.compiere.orm.DefaultModelFactory
@@ -44,15 +43,13 @@ class FactoryTest : BaseCrmTest() {
                     )
                 }.asSingle
 
-            using(DB.current) { session ->
-                val row = session.run(query)
-                assertNotNull(row)
-                val result = row.first
-                val result2 = row.second
+            val row = DB.current.run(query)
+            assertNotNull(row)
+            val result = row.first
+            val result2 = row.second
 
-                assertEquals(id, result.id)
-                assertEquals(113, result2.c_BPartner_Location_ID)
-            }
+            assertEquals(id, result.id)
+            assertEquals(113, result2.c_BPartner_Location_ID)
         }
     }
 }
