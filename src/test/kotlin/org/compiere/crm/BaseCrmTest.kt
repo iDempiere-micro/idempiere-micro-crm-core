@@ -4,14 +4,16 @@ import kotliquery.HikariCP
 import org.compiere.orm.DefaultModelFactory
 import org.compiere.orm.IModelFactory
 import org.idempiere.icommon.model.IPO
+import org.slf4j.impl.SimpleLogger
 import software.hsharp.core.orm.DummyEventManager
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-internal val sessionUrl = System.getenv("SESSION_URL") ?: "jdbc:postgresql://localhost:5433/idempiere"
+internal val sessionUrl = System.getenv("SESSION_URL") ?: "jdbc:postgresql://localhost:5433/idempiere?autosave=conservative"
 
 abstract class BaseCrmTest {
     init {
+        System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE")
         HikariCP.default(sessionUrl, "adempiere", "adempiere")
         DummyEventManager()
     }
