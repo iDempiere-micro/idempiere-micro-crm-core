@@ -59,7 +59,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
    * @return client
    */
   public static MClientInfo get(Properties ctx) {
-    return get(ctx, Env.getADClientID(ctx), null);
+    return get(ctx, Env.getClientId(ctx), null);
   } //	get
 
   /**
@@ -99,7 +99,6 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
 
   public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
     return (I_C_BPartner)
-        MTable.get(getCtx(), I_C_BPartner.Table_Name)
-            .getPO(getC_BPartnerCashTrx_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartnerCashTrx_ID(), null);
   }
 } //	MClientInfo

@@ -2,6 +2,7 @@ package org.compiere.crm;
 
 import java.sql.ResultSet;
 import java.util.Properties;
+import kotliquery.Row;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.MTable;
 import org.compiere.orm.PO;
@@ -27,6 +28,10 @@ public class X_C_Location extends PO implements I_Persistent {
   /** Load Constructor */
   public X_C_Location(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
+  }
+
+  public X_C_Location(Properties ctx, Row row) {
+    super(ctx, row);
   }
 
   /**
@@ -135,7 +140,7 @@ public class X_C_Location extends PO implements I_Persistent {
   public org.compiere.model.I_C_AddressValidation getC_AddressValidation() throws RuntimeException {
     return (org.compiere.model.I_C_AddressValidation)
         MTable.get(getCtx(), org.compiere.model.I_C_AddressValidation.Table_Name)
-            .getPO(getC_AddressValidation_ID(), get_TrxName());
+            .getPO(getC_AddressValidation_ID(), null);
   }
 
   /**
@@ -164,8 +169,7 @@ public class X_C_Location extends PO implements I_Persistent {
 
   public org.compiere.model.I_C_City getC_City() throws RuntimeException {
     return (org.compiere.model.I_C_City)
-        MTable.get(getCtx(), org.compiere.model.I_C_City.Table_Name)
-            .getPO(getC_City_ID(), get_TrxName());
+        MTable.get(getCtx(), org.compiere.model.I_C_City.Table_Name).getPO(getC_City_ID(), null);
   }
 
   /**
@@ -192,7 +196,7 @@ public class X_C_Location extends PO implements I_Persistent {
   public org.compiere.model.I_C_Country getC_Country() throws RuntimeException {
     return (org.compiere.model.I_C_Country)
         MTable.get(getCtx(), org.compiere.model.I_C_Country.Table_Name)
-            .getPO(getC_Country_ID(), get_TrxName());
+            .getPO(getC_Country_ID(), null);
   }
 
   /**
@@ -303,7 +307,7 @@ public class X_C_Location extends PO implements I_Persistent {
   public org.compiere.model.I_C_Region getC_Region() throws RuntimeException {
     return (org.compiere.model.I_C_Region)
         MTable.get(getCtx(), org.compiere.model.I_C_Region.Table_Name)
-            .getPO(getC_Region_ID(), get_TrxName());
+            .getPO(getC_Region_ID(), null);
   }
 
   /**

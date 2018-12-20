@@ -221,7 +221,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_Location getBP_Location() throws RuntimeException {
     return (I_C_Location)
-        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getBP_Location_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getBP_Location_ID(), null);
   }
 
   /**
@@ -265,7 +265,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_BPartner getC_BPartner() throws RuntimeException {
     return (I_C_BPartner)
-        MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartner_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartner_ID(), null);
   }
 
   /**
@@ -292,7 +292,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   public I_C_BPartner_Location getC_BPartner_Location() throws RuntimeException {
     return (I_C_BPartner_Location)
         MTable.get(getCtx(), I_C_BPartner_Location.Table_Name)
-            .getPO(getC_BPartner_Location_ID(), get_TrxName());
+            .getPO(getC_BPartner_Location_ID(), null);
   }
 
   /**
@@ -318,7 +318,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_Campaign getC_Campaign() throws RuntimeException {
     return (I_C_Campaign)
-        MTable.get(getCtx(), I_C_Campaign.Table_Name).getPO(getC_Campaign_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Campaign.Table_Name).getPO(getC_Campaign_ID(), null);
   }
 
   /**
@@ -344,7 +344,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_Greeting getC_Greeting() throws RuntimeException {
     return (I_C_Greeting)
-        MTable.get(getCtx(), I_C_Greeting.Table_Name).getPO(getC_Greeting_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Greeting.Table_Name).getPO(getC_Greeting_ID(), null);
   }
 
   /**
@@ -369,7 +369,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   public I_C_Job getC_Job() throws RuntimeException {
-    return (I_C_Job) MTable.get(getCtx(), I_C_Job.Table_Name).getPO(getC_Job_ID(), get_TrxName());
+    return (I_C_Job) MTable.get(getCtx(), I_C_Job.Table_Name).getPO(getC_Job_ID(), null);
   }
 
   /**
@@ -395,7 +395,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_C_Location getC_Location() throws RuntimeException {
     return (I_C_Location)
-        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), null);
   }
 
   /**
@@ -1005,8 +1005,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_R_MailText getR_DefaultMailText() throws RuntimeException {
     return (I_R_MailText)
-        MTable.get(getCtx(), I_R_MailText.Table_Name)
-            .getPO(getR_DefaultMailText_ID(), get_TrxName());
+        MTable.get(getCtx(), I_R_MailText.Table_Name).getPO(getR_DefaultMailText_ID(), null);
   }
 
   /**
@@ -1032,8 +1031,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
-        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
-            .getPO(getSalesRep_ID(), get_TrxName());
+        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRep_ID(), null);
   }
 
   /**
@@ -1094,8 +1092,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   public I_AD_User getSupervisor() throws RuntimeException {
-    return (I_AD_User)
-        MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSupervisor_ID(), get_TrxName());
+    return (I_AD_User) MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSupervisor_ID(), null);
   }
 
   /**

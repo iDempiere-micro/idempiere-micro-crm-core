@@ -2,7 +2,7 @@ package org.compiere.orm
 
 import org.compiere.model.I_AD_User
 import java.sql.ResultSet
-import java.util.Properties
+import java.util.*
 
 abstract class BasePOUser : PO {
     constructor(ctx: Properties, ID: Int, trxName: String?) : super(ctx, ID, trxName)
@@ -14,7 +14,7 @@ abstract class BasePOUser : PO {
         val id = getAD_User_ID()
         if (id == 0) return null
         return MTable.get(ctx, I_AD_User.Table_Name)
-            .getPO(id, _TrxName) as I_AD_User?
+            .getPO(id, null) as I_AD_User?
     }
 
     /** Set User/Contact.

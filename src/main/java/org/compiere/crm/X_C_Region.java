@@ -49,7 +49,7 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
   public org.compiere.model.I_C_Country getC_Country() throws RuntimeException {
     return (org.compiere.model.I_C_Country)
         MTable.get(getCtx(), org.compiere.model.I_C_Country.Table_Name)
-            .getPO(getC_Country_ID(), get_TrxName());
+            .getPO(getC_Country_ID(), null);
   }
 
   /**

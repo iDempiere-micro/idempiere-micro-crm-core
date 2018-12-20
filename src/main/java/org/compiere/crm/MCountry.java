@@ -106,7 +106,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
    * @return Country
    */
   public static MCountry getDefault(Properties ctx) {
-    int clientID = Env.getADClientID(ctx);
+    int clientID = Env.getClientId(ctx);
     MCountry c = s_default.get(clientID);
     if (c != null) return c;
 

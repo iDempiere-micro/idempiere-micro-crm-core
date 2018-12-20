@@ -7,11 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.StringTokenizer;
+import java.util.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import kotliquery.Row;
@@ -24,12 +20,7 @@ import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.exceptions.DBException;
-import org.idempiere.common.util.CCache;
-import org.idempiere.common.util.CLogger;
-import org.idempiere.common.util.Env;
-import org.idempiere.common.util.Secure;
-import org.idempiere.common.util.SecureEngine;
-import org.idempiere.common.util.Util;
+import org.idempiere.common.util.*;
 import software.hsharp.core.models.IUser;
 
 /**
@@ -41,7 +32,7 @@ import software.hsharp.core.models.IUser;
  *         https://sourceforge.net/tracker/index.php?func=detail&aid=2788430&group_id=176962&atid=879335
  * @version $Id: MUser.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  */
-public class MUser extends X_AD_User implements IUser {
+public class MUser extends MBaseUser implements IUser {
   /** */
   private static final long serialVersionUID = 9027688865361175114L;
   /** Cache */
@@ -49,10 +40,6 @@ public class MUser extends X_AD_User implements IUser {
       new CCache<Integer, MUser>(I_AD_User.Table_Name, 30, 60);
   /** Static Logger */
   private static CLogger s_log = CLogger.getCLogger(MUser.class);
-  /** Roles of User with Org */
-  private MRole[] m_roles = null;
-  /** Roles of User with Org */
-  private int m_rolesAD_Org_ID = -1;
   /** Is Administrator */
   private Boolean m_isAdministrator = null;
   /** User Access Rights */
@@ -80,7 +67,7 @@ public class MUser extends X_AD_User implements IUser {
    * @param partner partner
    */
   public MUser(I_C_BPartner partner) {
-    this(partner.getCtx(), 0, partner.get_TrxName());
+    this(partner.getCtx(), 0, null);
     setClientOrg(partner);
     setC_BPartner_ID(partner.getC_BPartner_ID());
     setName(partner.getName());
@@ -642,7 +629,7 @@ public class MUser extends X_AD_User implements IUser {
         // email with password must be unique on the same tenant
         int cnt =
             getSQLValue(
-                get_TrxName(),
+                null,
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND EMail=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 getEMail(),
                 getClientId(),
@@ -660,7 +647,7 @@ public class MUser extends X_AD_User implements IUser {
         if (Util.isEmpty(nameToValidate)) nameToValidate = getName();
         int cnt =
             getSQLValue(
-                get_TrxName(),
+                null,
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND COALESCE(LDAPUser,Name)=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 nameToValidate,
                 getClientId(),
@@ -718,4 +705,23 @@ public class MUser extends X_AD_User implements IUser {
   public void setADClientID(int AD_Client_ID) {
     super.setADClientID(AD_Client_ID);
   }
+
+  /**
+   * Is User an Administrator?
+   *
+   * @return true id Admin
+   */
+  public boolean isAdministrator() {
+    if (m_isAdministrator == null) {
+      m_isAdministrator = Boolean.FALSE;
+      MRole[] roles = getRoles(0);
+      for (int i = 0; i < roles.length; i++) {
+        if (roles[i].getAD_Role_ID() == 0) {
+          m_isAdministrator = Boolean.TRUE;
+          break;
+        }
+      }
+    }
+    return m_isAdministrator.booleanValue();
+  } //	isAdministrator
 } //	MUser

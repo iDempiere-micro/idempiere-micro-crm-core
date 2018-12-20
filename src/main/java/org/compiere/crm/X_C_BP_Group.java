@@ -63,7 +63,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   public org.compiere.model.I_AD_PrintColor getAD_PrintColor() throws RuntimeException {
     return (org.compiere.model.I_AD_PrintColor)
         MTable.get(getCtx(), org.compiere.model.I_AD_PrintColor.Table_Name)
-            .getPO(getAD_PrintColor_ID(), get_TrxName());
+            .getPO(getAD_PrintColor_ID(), null);
   }
 
   /**
@@ -129,7 +129,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   public org.compiere.model.I_C_Dunning getC_Dunning() throws RuntimeException {
     return (org.compiere.model.I_C_Dunning)
         MTable.get(getCtx(), org.compiere.model.I_C_Dunning.Table_Name)
-            .getPO(getC_Dunning_ID(), get_TrxName());
+            .getPO(getC_Dunning_ID(), null);
   }
 
   /**
@@ -230,7 +230,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   public org.compiere.model.I_M_DiscountSchema getM_DiscountSchema() throws RuntimeException {
     return (org.compiere.model.I_M_DiscountSchema)
         MTable.get(getCtx(), org.compiere.model.I_M_DiscountSchema.Table_Name)
-            .getPO(getM_DiscountSchema_ID(), get_TrxName());
+            .getPO(getM_DiscountSchema_ID(), null);
   }
 
   /**
@@ -257,7 +257,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   public org.compiere.model.I_M_PriceList getM_PriceList() throws RuntimeException {
     return (org.compiere.model.I_M_PriceList)
         MTable.get(getCtx(), org.compiere.model.I_M_PriceList.Table_Name)
-            .getPO(getM_PriceList_ID(), get_TrxName());
+            .getPO(getM_PriceList_ID(), null);
   }
 
   /**
@@ -284,7 +284,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   public org.compiere.model.I_M_DiscountSchema getPO_DiscountSchema() throws RuntimeException {
     return (org.compiere.model.I_M_DiscountSchema)
         MTable.get(getCtx(), org.compiere.model.I_M_DiscountSchema.Table_Name)
-            .getPO(getPO_DiscountSchema_ID(), get_TrxName());
+            .getPO(getPO_DiscountSchema_ID(), null);
   }
 
   /**
@@ -311,7 +311,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   public org.compiere.model.I_M_PriceList getPO_PriceList() throws RuntimeException {
     return (org.compiere.model.I_M_PriceList)
         MTable.get(getCtx(), org.compiere.model.I_M_PriceList.Table_Name)
-            .getPO(getPO_PriceList_ID(), get_TrxName());
+            .getPO(getPO_PriceList_ID(), null);
   }
 
   /**

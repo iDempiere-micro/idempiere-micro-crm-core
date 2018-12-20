@@ -1,6 +1,10 @@
 package org.compiere.crm;
 
+import static software.hsharp.core.util.DBKt.close;
+import static software.hsharp.core.util.DBKt.prepareStatement;
+
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
@@ -19,8 +23,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   private static final long serialVersionUID = -803727877324075871L;
   /** Static Logger */
   private static CLogger s_log = CLogger.getCLogger(MBPartner.class);
-  /** BP Group */
-  private MBPGroup m_group = null;
   /** Prim Address */
   private Integer m_primaryC_BPartner_Location_ID = null;
   /** Prim User */
@@ -105,7 +107,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param impBP import
    */
   public MBPartner(X_I_BPartner impBP) {
-    this(impBP.getCtx(), 0, impBP.get_TrxName());
+    this(impBP.getCtx(), 0, null);
     setClientOrg(impBP);
     setUpdatedBy(impBP.getUpdatedBy());
     //
@@ -204,7 +206,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     final String whereClause = "Value=? AND AD_Client_ID=?";
     MBPartner retValue =
         new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
-            .setParameters(Value, Env.getADClientID(ctx))
+            .setParameters(Value, Env.getClientId(ctx))
             .firstOnly();
     return retValue;
   } //	get
@@ -232,7 +234,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     final String whereClause = "C_BPartner_ID=? AND AD_Client_ID=?";
     I_C_BPartner retValue =
         new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
-            .setParameters(C_BPartner_ID, Env.getADClientID(ctx))
+            .setParameters(C_BPartner_ID, Env.getClientId(ctx))
             .firstOnly();
     return retValue;
   } //	get
@@ -374,27 +376,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     m_primaryAD_User_ID = new Integer(AD_User_ID);
   } //	setPrimaryAD_User_ID
 
-  /** Set Credit Status */
-  public void setSOCreditStatus() {
-    BigDecimal creditLimit = getSO_CreditLimit();
-    //	Nothing to do
-    if (SOCREDITSTATUS_NoCreditCheck.equals(getSOCreditStatus())
-        || SOCREDITSTATUS_CreditStop.equals(getSOCreditStatus())
-        || Env.ZERO.compareTo(creditLimit) == 0) return;
-
-    //	Above Credit Limit
-    if (creditLimit.compareTo(getTotalOpenBalance()) < 0)
-      setSOCreditStatus(SOCREDITSTATUS_CreditHold);
-    else {
-      //	Above Watch Limit
-      BigDecimal watchAmt = creditLimit.multiply(getCreditWatchRatio());
-      if (watchAmt.compareTo(getTotalOpenBalance()) < 0)
-        setSOCreditStatus(SOCREDITSTATUS_CreditWatch);
-      else //	is OK
-      setSOCreditStatus(SOCREDITSTATUS_CreditOK);
-    }
-  } //	setSOCreditStatus
-
   /**
    * Get SO CreditStatus with additional amount
    *
@@ -423,15 +404,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   } //	getSOCreditStatus
 
   /**
-   * Get Credit Watch Ratio
-   *
-   * @return BP Group ratio or 0.9
-   */
-  public BigDecimal getCreditWatchRatio() {
-    return getBPGroup().getCreditWatchRatio();
-  } //	getCreditWatchRatio
-
-  /**
    * Credit Status is Stop or Hold.
    *
    * @return true if Stop/Hold
@@ -440,37 +412,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     String status = getSOCreditStatus();
     return SOCREDITSTATUS_CreditStop.equals(status) || SOCREDITSTATUS_CreditHold.equals(status);
   } //	isCreditStopHold
-
-  /**
-   * Get BP Group
-   *
-   * @return group
-   */
-  public MBPGroup getBPGroup() {
-    if (m_group == null) {
-      if (getC_BP_Group_ID() == 0) m_group = MBPGroup.getDefault(getCtx());
-      else m_group = MBPGroup.get(getCtx(), getC_BP_Group_ID(), get_TrxName());
-    }
-    return m_group;
-  } //	getBPGroup
-
-  /**
-   * Get BP Group
-   *
-   * @param group group
-   */
-  public void setBPGroup(MBPGroup group) {
-    m_group = group;
-    if (m_group == null) return;
-    setC_BP_Group_ID(m_group.getC_BP_Group_ID());
-    if (m_group.getC_Dunning_ID() != 0) setC_Dunning_ID(m_group.getC_Dunning_ID());
-    if (m_group.getM_PriceList_ID() != 0) setM_PriceList_ID(m_group.getM_PriceList_ID());
-    if (m_group.getPO_PriceList_ID() != 0) setPO_PriceList_ID(m_group.getPO_PriceList_ID());
-    if (m_group.getM_DiscountSchema_ID() != 0)
-      setM_DiscountSchema_ID(m_group.getM_DiscountSchema_ID());
-    if (m_group.getPO_DiscountSchema_ID() != 0)
-      setPO_DiscountSchema_ID(m_group.getPO_DiscountSchema_ID());
-  } //	setBPGroup
 
   /**
    * Get PriceList
@@ -581,4 +522,35 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   public int getTableId() {
     return I_C_BPartner.Table_ID;
   }
+
+  /**
+   * Get Not Invoiced Shipment Value
+   *
+   * @param C_BPartner_ID partner
+   * @return value in accounting currency
+   */
+  public static BigDecimal getNotInvoicedAmt(int C_BPartner_ID) {
+    BigDecimal retValue = null;
+    String sql =
+        "SELECT COALESCE(SUM(COALESCE("
+            + "currencyBase((ol.QtyDelivered-ol.QtyInvoiced)*ol.PriceActual,o.C_Currency_ID,o.DateOrdered, o.AD_Client_ID,o.AD_Org_ID) ,0)),0) "
+            + "FROM C_OrderLine ol"
+            + " INNER JOIN C_Order o ON (ol.C_Order_ID=o.C_Order_ID) "
+            + "WHERE o.IsSOTrx='Y' AND Bill_BPartner_ID=?";
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    try {
+      pstmt = prepareStatement(sql, null);
+      pstmt.setInt(1, C_BPartner_ID);
+      rs = pstmt.executeQuery();
+      if (rs.next()) retValue = rs.getBigDecimal(1);
+    } catch (Exception e) {
+      s_log.log(Level.SEVERE, sql, e);
+    } finally {
+      close(rs, pstmt);
+      rs = null;
+      pstmt = null;
+    }
+    return retValue;
+  } //	getNotInvoicedAmt
 } //	MBPartner

@@ -56,7 +56,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
    * @param regionName Region Name
    */
   public MRegion(MCountry country, String regionName) {
-    super(country.getCtx(), 0, country.get_TrxName());
+    super(country.getCtx(), 0, null);
     setC_Country_ID(country.getC_Country_ID());
     setName(regionName);
   } //  MRegion

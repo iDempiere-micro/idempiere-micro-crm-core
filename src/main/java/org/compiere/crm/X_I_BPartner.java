@@ -120,7 +120,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)
-            .getPO(getC_BPartner_ID(), get_TrxName());
+            .getPO(getC_BPartner_ID(), null);
   }
 
   /**
@@ -147,7 +147,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   public org.compiere.model.I_C_BPartner_Location getC_BPartner_Location() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner_Location)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner_Location.Table_Name)
-            .getPO(getC_BPartner_Location_ID(), get_TrxName());
+            .getPO(getC_BPartner_Location_ID(), null);
   }
 
   /**
@@ -174,7 +174,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   public org.compiere.model.I_C_BP_Group getC_BP_Group() throws RuntimeException {
     return (org.compiere.model.I_C_BP_Group)
         MTable.get(getCtx(), org.compiere.model.I_C_BP_Group.Table_Name)
-            .getPO(getC_BP_Group_ID(), get_TrxName());
+            .getPO(getC_BP_Group_ID(), null);
   }
 
   /**
@@ -201,7 +201,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   public org.compiere.model.I_C_Country getC_Country() throws RuntimeException {
     return (org.compiere.model.I_C_Country)
         MTable.get(getCtx(), org.compiere.model.I_C_Country.Table_Name)
-            .getPO(getC_Country_ID(), get_TrxName());
+            .getPO(getC_Country_ID(), null);
   }
 
   /**
@@ -228,7 +228,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   public org.compiere.model.I_C_Greeting getC_Greeting() throws RuntimeException {
     return (org.compiere.model.I_C_Greeting)
         MTable.get(getCtx(), org.compiere.model.I_C_Greeting.Table_Name)
-            .getPO(getC_Greeting_ID(), get_TrxName());
+            .getPO(getC_Greeting_ID(), null);
   }
 
   /**
@@ -347,7 +347,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   public org.compiere.model.I_C_Region getC_Region() throws RuntimeException {
     return (org.compiere.model.I_C_Region)
         MTable.get(getCtx(), org.compiere.model.I_C_Region.Table_Name)
-            .getPO(getC_Region_ID(), get_TrxName());
+            .getPO(getC_Region_ID(), null);
   }
 
   /**
@@ -810,7 +810,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   public org.compiere.model.I_R_InterestArea getR_InterestArea() throws RuntimeException {
     return (org.compiere.model.I_R_InterestArea)
         MTable.get(getCtx(), org.compiere.model.I_R_InterestArea.Table_Name)
-            .getPO(getR_InterestArea_ID(), get_TrxName());
+            .getPO(getR_InterestArea_ID(), null);
   }
 
   /**

@@ -182,7 +182,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   public I_C_AddressValidation getC_AddressValidation() throws RuntimeException {
     return (I_C_AddressValidation)
         MTable.get(getCtx(), I_C_AddressValidation.Table_Name)
-            .getPO(getC_AddressValidation_ID(), get_TrxName());
+            .getPO(getC_AddressValidation_ID(), null);
   }
 
   /**
@@ -235,7 +235,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
 
   public I_C_Location getC_Location() throws RuntimeException {
     return (I_C_Location)
-        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), null);
   }
 
   /**

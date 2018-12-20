@@ -96,7 +96,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
   public org.compiere.model.I_R_InterestArea getR_InterestArea() throws RuntimeException {
     return (org.compiere.model.I_R_InterestArea)
         MTable.get(getCtx(), org.compiere.model.I_R_InterestArea.Table_Name)
-            .getPO(getR_InterestArea_ID(), get_TrxName());
+            .getPO(getR_InterestArea_ID(), null);
   }
 
   /**

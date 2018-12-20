@@ -57,7 +57,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   public org.compiere.model.I_C_BPartner getC_BPartner() throws RuntimeException {
     return (org.compiere.model.I_C_BPartner)
         MTable.get(getCtx(), org.compiere.model.I_C_BPartner.Table_Name)
-            .getPO(getC_BPartner_ID(), get_TrxName());
+            .getPO(getC_BPartner_ID(), null);
   }
 
   /**
@@ -127,7 +127,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
 
   public I_C_Location getC_Location() throws RuntimeException {
     return (I_C_Location)
-        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), get_TrxName());
+        MTable.get(getCtx(), I_C_Location.Table_Name).getPO(getC_Location_ID(), null);
   }
 
   /**
@@ -154,7 +154,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
   public org.compiere.model.I_C_SalesRegion getC_SalesRegion() throws RuntimeException {
     return (org.compiere.model.I_C_SalesRegion)
         MTable.get(getCtx(), org.compiere.model.I_C_SalesRegion.Table_Name)
-            .getPO(getC_SalesRegion_ID(), get_TrxName());
+            .getPO(getC_SalesRegion_ID(), null);
   }
 
   /**
