@@ -1,15 +1,14 @@
 package org.compiere.crm;
 
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.Properties;
 import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
-
-import java.sql.ResultSet;
-import java.util.List;
-import java.util.Properties;
 
 /**
  * Partner Location Model

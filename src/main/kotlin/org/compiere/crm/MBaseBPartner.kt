@@ -103,7 +103,7 @@ open class MBaseBPartner : X_C_BPartner {
                 m_group = MBPGroup.get(ctx, c_BP_Group_ID, null)
         }
         return m_group
-    } //	getBPGroup
+    } // 	getBPGroup
 
     /**
      * Get BP Group
@@ -121,8 +121,7 @@ open class MBaseBPartner : X_C_BPartner {
             m_DiscountSchema_ID = group.m_DiscountSchema_ID
         if (group.getPO_DiscountSchema_ID() != 0)
             pO_DiscountSchema_ID = group.pO_DiscountSchema_ID
-    } //	setBPGroup
-
+    } // 	setBPGroup
 
     /**
      * Get Credit Watch Ratio
@@ -131,31 +130,31 @@ open class MBaseBPartner : X_C_BPartner {
      */
     fun getCreditWatchRatio(): BigDecimal? {
         return getBPGroup()?.getCreditWatchRatio()
-    } //	getCreditWatchRatio
+    } // 	getCreditWatchRatio
 
     /** Set Credit Status  */
     fun setSOCreditStatus() {
         val creditLimit = sO_CreditLimit
-        //	Nothing to do
-        if (X_C_BPartner.SOCREDITSTATUS_NoCreditCheck == soCreditStatus
-            || X_C_BPartner.SOCREDITSTATUS_CreditStop == soCreditStatus
-            || Env.ZERO.compareTo(creditLimit) == 0
+        // 	Nothing to do
+        if (X_C_BPartner.SOCREDITSTATUS_NoCreditCheck == soCreditStatus ||
+            X_C_BPartner.SOCREDITSTATUS_CreditStop == soCreditStatus ||
+            Env.ZERO.compareTo(creditLimit) == 0
         )
             return
 
-        //	Above Credit Limit
+        // 	Above Credit Limit
         if (creditLimit < totalOpenBalance)
             soCreditStatus = X_C_BPartner.SOCREDITSTATUS_CreditHold
         else {
-            //	Above Watch Limit
+            // 	Above Watch Limit
             val watchAmt = creditLimit.multiply(getCreditWatchRatio())
             if (watchAmt < totalOpenBalance)
                 soCreditStatus = X_C_BPartner.SOCREDITSTATUS_CreditWatch
             else
-            //	is OK
+            // 	is OK
                 soCreditStatus = X_C_BPartner.SOCREDITSTATUS_CreditOK
         }
-    } //	setSOCreditStatus
+    } // 	setSOCreditStatus
 
     fun setTotalOpenBalance() {
         val sql = """
@@ -187,7 +186,7 @@ open class MBaseBPartner : X_C_BPartner {
             FROM C_BPartner bp
             WHERE C_BPartner_ID=?
         """.trimIndent()
-        val loadQuery = queryOf(sql, c_BPartner_ID).map { row -> row.bigDecimalOrNull(1)}.asSingle
+        val loadQuery = queryOf(sql, c_BPartner_ID).map { row -> row.bigDecimalOrNull(1) }.asSingle
         val result = DB.current.run(loadQuery)
         if (result != null) super.setActualLifeTimeValue(result)
     }

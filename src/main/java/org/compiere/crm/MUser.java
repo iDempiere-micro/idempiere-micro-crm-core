@@ -1,5 +1,15 @@
 package org.compiere.crm;
 
+import static software.hsharp.core.util.DBKt.getSQLValue;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.I_AD_User;
@@ -12,17 +22,6 @@ import org.compiere.util.Msg;
 import org.idempiere.common.exceptions.DBException;
 import org.idempiere.common.util.*;
 import software.hsharp.core.models.IUser;
-
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.*;
-
-import static software.hsharp.core.util.DBKt.getSQLValue;
 
 /**
  * User Model
@@ -725,5 +724,4 @@ public class MUser extends MBaseUser implements IUser {
     }
     return m_isAdministrator.booleanValue();
   } //	isAdministrator
-
 } //	MUser

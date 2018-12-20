@@ -1,5 +1,14 @@
 package org.compiere.crm;
 
+import static software.hsharp.core.util.DBKt.close;
+import static software.hsharp.core.util.DBKt.prepareStatement;
+
+import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.Properties;
+import java.util.logging.Level;
 import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
@@ -8,16 +17,6 @@ import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
-
-import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.Properties;
-import java.util.logging.Level;
-
-import static software.hsharp.core.util.DBKt.close;
-import static software.hsharp.core.util.DBKt.prepareStatement;
 
 public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   /** */
@@ -533,11 +532,11 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   public static BigDecimal getNotInvoicedAmt(int C_BPartner_ID) {
     BigDecimal retValue = null;
     String sql =
-            "SELECT COALESCE(SUM(COALESCE("
-                    + "currencyBase((ol.QtyDelivered-ol.QtyInvoiced)*ol.PriceActual,o.C_Currency_ID,o.DateOrdered, o.AD_Client_ID,o.AD_Org_ID) ,0)),0) "
-                    + "FROM C_OrderLine ol"
-                    + " INNER JOIN C_Order o ON (ol.C_Order_ID=o.C_Order_ID) "
-                    + "WHERE o.IsSOTrx='Y' AND Bill_BPartner_ID=?";
+        "SELECT COALESCE(SUM(COALESCE("
+            + "currencyBase((ol.QtyDelivered-ol.QtyInvoiced)*ol.PriceActual,o.C_Currency_ID,o.DateOrdered, o.AD_Client_ID,o.AD_Org_ID) ,0)),0) "
+            + "FROM C_OrderLine ol"
+            + " INNER JOIN C_Order o ON (ol.C_Order_ID=o.C_Order_ID) "
+            + "WHERE o.IsSOTrx='Y' AND Bill_BPartner_ID=?";
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {

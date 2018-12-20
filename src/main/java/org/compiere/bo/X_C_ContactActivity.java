@@ -243,8 +243,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
 
   public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
-        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
-            .getPO(getSalesRep_ID(), null);
+        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRep_ID(), null);
   }
 
   /**

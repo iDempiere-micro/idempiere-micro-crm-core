@@ -1005,8 +1005,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public I_R_MailText getR_DefaultMailText() throws RuntimeException {
     return (I_R_MailText)
-        MTable.get(getCtx(), I_R_MailText.Table_Name)
-            .getPO(getR_DefaultMailText_ID(), null);
+        MTable.get(getCtx(), I_R_MailText.Table_Name).getPO(getR_DefaultMailText_ID(), null);
   }
 
   /**
@@ -1032,8 +1031,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
 
   public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
-        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name)
-            .getPO(getSalesRep_ID(), null);
+        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRep_ID(), null);
   }
 
   /**
@@ -1094,8 +1092,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   public I_AD_User getSupervisor() throws RuntimeException {
-    return (I_AD_User)
-        MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSupervisor_ID(), null);
+    return (I_AD_User) MTable.get(getCtx(), I_AD_User.Table_Name).getPO(getSupervisor_ID(), null);
   }
 
   /**

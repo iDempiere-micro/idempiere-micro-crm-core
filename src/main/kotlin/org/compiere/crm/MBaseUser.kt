@@ -18,7 +18,7 @@ fun getWithRole(role: MRole): Array<MUser> {
         queryOf(sql, role.aD_Role_ID)
             .map { row -> MUser(role.ctx, row) }.asList
 
-    return DB.current.run(loadQuery).toTypedArray()}
+    return DB.current.run(loadQuery).toTypedArray() }
 
 open class MBaseUser : X_AD_User {
     constructor(ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
@@ -29,7 +29,6 @@ open class MBaseUser : X_AD_User {
     private var m_roles: Array<MRole> = arrayOf()
     /** Roles of User with Org  */
     private var m_rolesAD_Org_ID = -1
-
 
     fun getRoles(orgId: Int): Array<MRole> {
         if (m_roles.isNotEmpty() && m_rolesAD_Org_ID == orgId) return m_roles

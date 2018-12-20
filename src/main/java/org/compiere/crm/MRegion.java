@@ -1,13 +1,12 @@
 package org.compiere.crm;
 
-import kotliquery.Row;
-import org.idempiere.common.util.CCache;
-import org.idempiere.common.util.CLogger;
-
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.text.Collator;
 import java.util.*;
+import kotliquery.Row;
+import org.idempiere.common.util.CCache;
+import org.idempiere.common.util.CLogger;
 
 /**
  * Localtion Region Model (Value Object)

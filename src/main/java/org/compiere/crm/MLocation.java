@@ -1,5 +1,12 @@
 package org.compiere.crm;
 
+import static software.hsharp.core.util.DBKt.getSQLValue;
+import static software.hsharp.core.util.DBKt.getSQLValueEx;
+
+import java.sql.ResultSet;
+import java.util.Comparator;
+import java.util.Properties;
+import java.util.logging.Level;
 import kotliquery.Row;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.MColumn;
@@ -11,14 +18,6 @@ import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Util;
-
-import java.sql.ResultSet;
-import java.util.Comparator;
-import java.util.Properties;
-import java.util.logging.Level;
-
-import static software.hsharp.core.util.DBKt.getSQLValue;
-import static software.hsharp.core.util.DBKt.getSQLValueEx;
 
 /**
  * Location (Address)
@@ -113,6 +112,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
   public MLocation(Properties ctx, ResultSet rs, String trxName) {
     super(ctx, rs, trxName);
   } //	MLocation
+
   public MLocation(Properties ctx, Row row) {
     super(ctx, row);
   } //	MLocation
