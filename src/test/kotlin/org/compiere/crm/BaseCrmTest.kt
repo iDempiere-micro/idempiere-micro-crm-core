@@ -2,6 +2,7 @@ package org.compiere.crm
 
 import org.compiere.orm.DefaultModelFactory
 import org.compiere.orm.IModelFactory
+import org.flywaydb.core.Flyway
 import org.idempiere.icommon.model.IPO
 import org.slf4j.impl.SimpleLogger
 import software.hsharp.core.orm.DummyEventManager
@@ -16,6 +17,18 @@ abstract class BaseCrmTest {
         System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE")
         HikariCPI.default(sessionUrl, "adempiere", "adempiere")
         DummyEventManager()
+
+        // Create the Flyway instance and point it to the database
+        val flyway =
+            Flyway
+            .configure()
+            .dataSource(sessionUrl, "adempiere", "adempiere")
+            .baselineOnMigrate(true)
+            .baselineVersion("0")
+            .load()
+
+        // Start the migration
+        flyway.migrate()
     }
 
     fun <T : IPO> getById(id: Int, tableName: String): T {

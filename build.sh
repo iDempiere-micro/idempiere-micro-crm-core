@@ -4,7 +4,7 @@ set -o pipefail
 
 purge()
 {
-    ( cd .. && cd $1 && mvn dependency:purge-local-repository -DreResolve=false )
+    ( cd .. && cd $1 && mvn clean )
 }
 build()
 {
