@@ -1,14 +1,5 @@
 package org.compiere.crm;
 
-import static software.hsharp.core.util.DBKt.close;
-import static software.hsharp.core.util.DBKt.prepareStatement;
-
-import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.Properties;
-import java.util.logging.Level;
 import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
@@ -17,6 +8,16 @@ import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
+
+import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.Properties;
+import java.util.logging.Level;
+
+import static software.hsharp.core.util.DBKt.close;
+import static software.hsharp.core.util.DBKt.prepareStatement;
 
 public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   /** */
@@ -487,6 +488,10 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     if (newRecord) {
       //	Trees
       insert_Tree(MTree_Base.TREETYPE_BPartner);
+      //	Accounting
+      StringBuilder msgacc = new StringBuilder("p.C_BP_Group_ID=").append(getC_BP_Group_ID());
+      insert_Accounting("C_BP_Customer_Acct", "C_BP_Group_Acct", msgacc.toString());
+      insert_Accounting("C_BP_Vendor_Acct", "C_BP_Group_Acct", msgacc.toString());
     }
     if (newRecord || is_ValueChanged(COLUMNNAME_Value)) update_Tree(MTree_Base.TREETYPE_BPartner);
 

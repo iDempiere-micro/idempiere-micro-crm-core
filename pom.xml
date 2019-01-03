@@ -43,7 +43,7 @@
         <dependency>
             <groupId>com.github.iDempiere-micro</groupId>
             <artifactId>idempiere-micro-model-core</artifactId>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </dependency>
 
         <!-- 
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>com.github.iDempiere-micro</groupId>
             <artifactId>idempiere-micro-model-interfaces</artifactId>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </dependency>
 
         <!-- 
@@ -119,6 +119,13 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.25</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.2.4</version>
             <scope>test</scope>
         </dependency>
 
