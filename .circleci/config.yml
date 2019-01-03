@@ -67,11 +67,6 @@ jobs:
             ( cd /tmp; wget https://raw.githubusercontent.com/iDempiere-micro/idempiere-micro-db/6.1/V1__iDempiere_6.1.0.sql )
             ( cd /tmp; PGPASSWORD=adempiere psql idempiere -h localhost -p 5432 -U adempiere -f ./V1__iDempiere_6.1.0.sql )
 
-      - run:
-          name: Setup CRM tables etc.
-          command: |
-            ( cd ./src/main/resources/db/migration; PGPASSWORD=adempiere psql idempiere -h localhost -p 5432 -U adempiere -f ./V1__crm.sql )
-
       # run tests!
       - run:
           name: Package code
