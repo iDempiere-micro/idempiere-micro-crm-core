@@ -76,76 +76,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     return ii;
   }
 
-  /**
-   * Set Contact Activity.
-   *
-   * @param C_ContactActivity_ID Events, tasks, communications related to a contact
-   */
-  public void setC_ContactActivity_ID(int C_ContactActivity_ID) {
-    if (C_ContactActivity_ID < 1)
-      set_ValueNoCheck(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID, null);
-    else
-      set_ValueNoCheck(
-          I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID,
-          Integer.valueOf(C_ContactActivity_ID));
-  }
-
-  /**
-   * Get C_ContactActivity_UU.
-   *
-   * @return C_ContactActivity_UU
-   */
-  public String getC_ContactActivity_UU() {
-    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_UU);
-  }
-
-  /**
-   * Set C_ContactActivity_UU.
-   *
-   * @param C_ContactActivity_UU C_ContactActivity_UU
-   */
-  public void setC_ContactActivity_UU(String C_ContactActivity_UU) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_UU, C_ContactActivity_UU);
-  }
-
-  /**
-   * Get Comments.
-   *
-   * @return Comments or additional information
-   */
-  public String getComments() {
-    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_Comments);
-  }
-
-  /**
-   * Set Comments.
-   *
-   * @param Comments Comments or additional information
-   */
-  public void setComments(String Comments) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_Comments, Comments);
-  }
-
-  /**
-   * Get Activity Type.
-   *
-   * @return Type of activity, e.g. task, email, phone call
-   */
-  public String getContactActivityType() {
-    return (String) get_Value(I_C_ContactActivity.COLUMNNAME_ContactActivityType);
-  }
-
-  /**
-   * Set Activity Type.
-   *
-   * @param ContactActivityType Type of activity, e.g. task, email, phone call
-   */
-  public void setContactActivityType(String ContactActivityType) {
-
-    set_ValueNoCheck(I_C_ContactActivity.COLUMNNAME_ContactActivityType, ContactActivityType);
-  }
-
-  public org.compiere.model.I_C_Opportunity getC_Opportunity() throws RuntimeException {
+    public org.compiere.model.I_C_Opportunity getC_Opportunity() throws RuntimeException {
     return (org.compiere.model.I_C_Opportunity)
         MTable.get(getCtx(), org.compiere.model.I_C_Opportunity.Table_Name)
             .getPO(getC_Opportunity_ID(), null);
@@ -162,18 +93,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     return ii;
   }
 
-  /**
-   * Set Sales Opportunity.
-   *
-   * @param C_Opportunity_ID Sales Opportunity
-   */
-  public void setC_Opportunity_ID(int C_Opportunity_ID) {
-    if (C_Opportunity_ID < 1) set_Value(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, null);
-    else
-      set_Value(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, Integer.valueOf(C_Opportunity_ID));
-  }
-
-  /**
+    /**
    * Get Description.
    *
    * @return Optional short description of the record
@@ -182,16 +102,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     return (String) get_Value(I_C_ContactActivity.COLUMNNAME_Description);
   }
 
-  /**
-   * Set Description.
-   *
-   * @param Description Optional short description of the record
-   */
-  public void setDescription(String Description) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_Description, Description);
-  }
-
-  /**
+    /**
    * Get Record ID/ColumnName
    *
    * @return ID/ColumnName pair
@@ -200,34 +111,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     return new KeyNamePair(getId(), getDescription());
   }
 
-  /**
-   * Get End Date.
-   *
-   * @return Last effective date (inclusive)
-   */
-  public Timestamp getEndDate() {
-    return (Timestamp) get_Value(I_C_ContactActivity.COLUMNNAME_EndDate);
-  }
-
-  /**
-   * Set End Date.
-   *
-   * @param EndDate Last effective date (inclusive)
-   */
-  public void setEndDate(Timestamp EndDate) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_EndDate, EndDate);
-  }
-
-  /**
-   * Set Complete.
-   *
-   * @param IsComplete It is complete
-   */
-  public void setIsComplete(boolean IsComplete) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_IsComplete, Boolean.valueOf(IsComplete));
-  }
-
-  /**
+    /**
    * Get Complete.
    *
    * @return It is complete
@@ -257,17 +141,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     return ii;
   }
 
-  /**
-   * Set Sales Representative.
-   *
-   * @param SalesRep_ID Sales Representative or Company Agent
-   */
-  public void setSalesRep_ID(int SalesRep_ID) {
-    if (SalesRep_ID < 1) set_Value(I_C_ContactActivity.COLUMNNAME_SalesRep_ID, null);
-    else set_Value(I_C_ContactActivity.COLUMNNAME_SalesRep_ID, Integer.valueOf(SalesRep_ID));
-  }
-
-  /**
+    /**
    * Get Start Date.
    *
    * @return First effective day (inclusive)
@@ -276,16 +150,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     return (Timestamp) get_Value(I_C_ContactActivity.COLUMNNAME_StartDate);
   }
 
-  /**
-   * Set Start Date.
-   *
-   * @param StartDate First effective day (inclusive)
-   */
-  public void setStartDate(Timestamp StartDate) {
-    set_Value(I_C_ContactActivity.COLUMNNAME_StartDate, StartDate);
-  }
-
-  @Override
+    @Override
   public int getTableId() {
     return I_C_ContactActivity.Table_ID;
   }

@@ -18,7 +18,7 @@
 package org.compiere.bo
 
 import java.sql.ResultSet
-import java.util.Properties
+import java.util.*
 
 class MOpportunity : X_C_Opportunity {
 
@@ -29,7 +29,7 @@ class MOpportunity : X_C_Opportunity {
         if (c_Order_ID > 0) {
             val order = c_Order
             if (order != null)
-                opportunityAmt = order.grandTotal
+                this.setOpportunityAmt(order.grandTotal)
         }
         return true
     }

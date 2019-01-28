@@ -20,12 +20,10 @@ package org.compiere.bo
 import org.compiere.model.I_C_Opportunity
 import org.compiere.orm.BasePOUser
 import org.compiere.orm.MTable
-import org.idempiere.common.util.Env
 import org.idempiere.common.util.KeyNamePair
 import org.idempiere.orm.I_Persistent
 import java.math.BigDecimal
 import java.sql.ResultSet
-import java.sql.Timestamp
 import java.util.*
 
 open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
@@ -54,40 +52,11 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
                 .getPO(c_BPartner_ID, null) as org.compiere.model.I_C_BPartner
     }
 
-    /** Set Business Partner .
-     * @param C_BPartner_ID
-     * Identifies a Business Partner
-     */
-    override fun setC_BPartner_ID(C_BPartner_ID: Int) {
-        if (C_BPartner_ID < 1)
-            set_Value(I_C_Opportunity.COLUMNNAME_C_BPartner_ID, null)
-        else
-            set_Value(I_C_Opportunity.COLUMNNAME_C_BPartner_ID, Integer.valueOf(C_BPartner_ID))
-    }
-
     /** Get Business Partner .
      * @return Identifies a Business Partner
      */
     override fun getC_BPartner_ID(): Int {
         return get_Value(I_C_Opportunity.COLUMNNAME_C_BPartner_ID) as Int? ?: return 0
-    }
-
-    @Throws(RuntimeException::class)
-    override fun getC_Campaign(): org.compiere.model.I_C_Campaign? {
-        if (c_Campaign_ID == 0) return null
-        return MTable.get(ctx, org.compiere.model.I_C_Campaign.Table_Name)
-                .getPO(c_Campaign_ID, null) as org.compiere.model.I_C_Campaign?
-    }
-
-    /** Set Campaign.
-     * @param C_Campaign_ID
-     * Marketing Campaign
-     */
-    override fun setC_Campaign_ID(C_Campaign_ID: Int) {
-        if (C_Campaign_ID < 1)
-            set_Value(I_C_Opportunity.COLUMNNAME_C_Campaign_ID, null)
-        else
-            set_Value(I_C_Opportunity.COLUMNNAME_C_Campaign_ID, Integer.valueOf(C_Campaign_ID))
     }
 
     /** Get Campaign.
@@ -97,89 +66,11 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
         return get_Value(I_C_Opportunity.COLUMNNAME_C_Campaign_ID) as Int? ?: return 0
     }
 
-    @Throws(RuntimeException::class)
-    override fun getC_Currency(): org.compiere.model.I_C_Currency {
-        return MTable.get(ctx, org.compiere.model.I_C_Currency.Table_Name)
-                .getPO(c_Currency_ID, null) as org.compiere.model.I_C_Currency
-    }
-
-    /** Set Currency.
-     * @param C_Currency_ID
-     * The Currency for this record
-     */
-    override fun setC_Currency_ID(C_Currency_ID: Int) {
-        if (C_Currency_ID < 1)
-            set_Value(I_C_Opportunity.COLUMNNAME_C_Currency_ID, null)
-        else
-            set_Value(I_C_Opportunity.COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID))
-    }
-
     /** Get Currency.
      * @return The Currency for this record
      */
     override fun getC_Currency_ID(): Int {
         return get_Value(I_C_Opportunity.COLUMNNAME_C_Currency_ID) as Int? ?: return 0
-    }
-
-    /** Set Close Date.
-     * @param CloseDate
-     * Close Date
-     */
-    override fun setCloseDate(CloseDate: Timestamp) {
-        set_Value(I_C_Opportunity.COLUMNNAME_CloseDate, CloseDate)
-    }
-
-    /** Get Close Date.
-     * @return Close Date
-     */
-    override fun getCloseDate(): Timestamp? {
-        return get_Value(I_C_Opportunity.COLUMNNAME_CloseDate) as Timestamp?
-    }
-
-    /** Set Comments.
-     * @param Comments
-     * Comments or additional information
-     */
-    override fun setComments(Comments: String) {
-        set_Value(I_C_Opportunity.COLUMNNAME_Comments, Comments)
-    }
-
-    /** Get Comments.
-     * @return Comments or additional information
-     */
-    override fun getComments(): String? {
-        return get_Value(I_C_Opportunity.COLUMNNAME_Comments) as String?
-    }
-
-    /** Set Sales Opportunity.
-     * @param C_Opportunity_ID Sales Opportunity
-     */
-    override fun setC_Opportunity_ID(C_Opportunity_ID: Int) {
-        if (C_Opportunity_ID < 1)
-            set_ValueNoCheck(I_C_Opportunity.COLUMNNAME_C_Opportunity_ID, null)
-        else
-            set_ValueNoCheck(I_C_Opportunity.COLUMNNAME_C_Opportunity_ID, Integer.valueOf(C_Opportunity_ID))
-    }
-
-    /** Get Sales Opportunity.
-     * @return Sales Opportunity
-     */
-    override fun getC_Opportunity_ID(): Int {
-        return get_Value(I_C_Opportunity.COLUMNNAME_C_Opportunity_ID) as Int? ?: return 0
-    }
-
-    /** Set C_Opportunity_UU.
-     * @param C_Opportunity_UU C_Opportunity_UU
-     */
-    override fun setC_Opportunity_UU(C_Opportunity_UU: String) {
-        set_Value(I_C_Opportunity.COLUMNNAME_C_Opportunity_UU, C_Opportunity_UU)
-    }
-
-    /** Get C_Opportunity_UU.
-     * @return C_Opportunity_UU
-     */
-    override fun getC_Opportunity_UU(): String {
-        return get_Value(I_C_Opportunity.COLUMNNAME_C_Opportunity_UU) as String
     }
 
     @Throws(RuntimeException::class)
@@ -189,17 +80,6 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
                 .getPO(c_Order_ID, null) as org.compiere.model.I_C_Order
     }
 
-    /** Set Order.
-     * @param C_Order_ID
-     * Order
-     */
-    override fun setC_Order_ID(C_Order_ID: Int) {
-        if (C_Order_ID < 1)
-            set_Value(I_C_Opportunity.COLUMNNAME_C_Order_ID, null)
-        else
-            set_Value(I_C_Opportunity.COLUMNNAME_C_Order_ID, Integer.valueOf(C_Order_ID))
-    }
-
     /** Get Order.
      * @return Order
      */
@@ -207,66 +87,11 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
         return (get_Value(I_C_Opportunity.COLUMNNAME_C_Order_ID) as Int?) ?: return 0
     }
 
-    /** Set Cost.
-     * @param Cost
-     * Cost information
-     */
-    override fun setCost(Cost: BigDecimal) {
-        set_Value(I_C_Opportunity.COLUMNNAME_Cost, Cost)
-    }
-
-    /** Get Cost.
-     * @return Cost information
-     */
-    override fun getCost(): BigDecimal {
-        return get_Value(I_C_Opportunity.COLUMNNAME_Cost) as BigDecimal? ?: return Env.ZERO
-    }
-
-    @Throws(RuntimeException::class)
-    override fun getC_SalesStage(): org.compiere.model.I_C_SalesStage {
-        return MTable.get(ctx, org.compiere.model.I_C_SalesStage.Table_Name)
-                .getPO(c_SalesStage_ID, null) as org.compiere.model.I_C_SalesStage
-    }
-
-    /** Set Sales Stage.
-     * @param C_SalesStage_ID
-     * Stages of the sales process
-     */
-    override fun setC_SalesStage_ID(C_SalesStage_ID: Int) {
-        if (C_SalesStage_ID < 1)
-            set_Value(I_C_Opportunity.COLUMNNAME_C_SalesStage_ID, null)
-        else
-            set_Value(I_C_Opportunity.COLUMNNAME_C_SalesStage_ID, Integer.valueOf(C_SalesStage_ID))
-    }
-
     /** Get Sales Stage.
      * @return Stages of the sales process
      */
     override fun getC_SalesStage_ID(): Int {
         return get_Value(I_C_Opportunity.COLUMNNAME_C_SalesStage_ID) as Int? ?: return 0
-    }
-
-    /** Set Description.
-     * @param Description
-     * Optional short description of the record
-     */
-    override fun setDescription(Description: String) {
-        set_Value(I_C_Opportunity.COLUMNNAME_Description, Description)
-    }
-
-    /** Get Description.
-     * @return Optional short description of the record
-     */
-    override fun getDescription(): String? {
-        return get_Value(I_C_Opportunity.COLUMNNAME_Description) as String?
-    }
-
-    /** Set Document No.
-     * @param DocumentNo
-     * Document sequence number of the document
-     */
-    override fun setDocumentNo(DocumentNo: String) {
-        set_Value(I_C_Opportunity.COLUMNNAME_DocumentNo, DocumentNo)
     }
 
     /** Get Document No.
@@ -283,66 +108,12 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
         return KeyNamePair(id, documentNo)
     }
 
-    /** Set Expected Close Date.
-     * @param ExpectedCloseDate
-     * Expected Close Date
-     */
-    override fun setExpectedCloseDate(ExpectedCloseDate: Timestamp) {
-        set_Value(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate, ExpectedCloseDate)
-    }
-
-    /** Get Expected Close Date.
-     * @return Expected Close Date
-     */
-    override fun getExpectedCloseDate(): Timestamp {
-        return get_Value(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate) as Timestamp
-    }
-
     /** Set Opportunity Amount.
      * @param OpportunityAmt
      * The estimated value of this opportunity.
      */
     override fun setOpportunityAmt(OpportunityAmt: BigDecimal) {
         set_Value(I_C_Opportunity.COLUMNNAME_OpportunityAmt, OpportunityAmt)
-    }
-
-    /** Get Opportunity Amount.
-     * @return The estimated value of this opportunity.
-     */
-    override fun getOpportunityAmt(): BigDecimal {
-        return get_Value(I_C_Opportunity.COLUMNNAME_OpportunityAmt) as BigDecimal? ?: return Env.ZERO
-    }
-
-    /** Set Probability.
-     * @param Probability Probability
-     */
-    override fun setProbability(Probability: BigDecimal) {
-        set_Value(I_C_Opportunity.COLUMNNAME_Probability, Probability)
-    }
-
-    /** Get Probability.
-     * @return Probability
-     */
-    override fun getProbability(): BigDecimal {
-        return get_Value(I_C_Opportunity.COLUMNNAME_Probability) as BigDecimal? ?: return Env.ZERO
-    }
-
-    @Throws(RuntimeException::class)
-    override fun getSalesRep(): org.compiere.model.I_AD_User? {
-        if (salesRep_ID == 0) return null
-        return MTable.get(ctx, org.compiere.model.I_AD_User.Table_Name)
-                .getPO(salesRep_ID, null) as org.compiere.model.I_AD_User
-    }
-
-    /** Set Sales Representative.
-     * @param SalesRep_ID
-     * Sales Representative or Company Agent
-     */
-    override fun setSalesRep_ID(SalesRep_ID: Int) {
-        if (SalesRep_ID < 1)
-            set_Value(I_C_Opportunity.COLUMNNAME_SalesRep_ID, null)
-        else
-            set_Value(I_C_Opportunity.COLUMNNAME_SalesRep_ID, Integer.valueOf(SalesRep_ID))
     }
 
     /** Get Sales Representative.
@@ -352,18 +123,4 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
         return get_Value(I_C_Opportunity.COLUMNNAME_SalesRep_ID) as Int? ?: return 0
     }
 
-    /** Set Weighted Amount.
-     * @param WeightedAmt
-     * The amount adjusted by the probability.
-     */
-    override fun setWeightedAmt(WeightedAmt: BigDecimal) {
-        throw IllegalArgumentException("WeightedAmt is virtual column")
-    }
-
-    /** Get Weighted Amount.
-     * @return The amount adjusted by the probability.
-     */
-    override fun getWeightedAmt(): BigDecimal {
-        return get_Value(I_C_Opportunity.COLUMNNAME_WeightedAmt) as BigDecimal? ?: return Env.ZERO
-    }
 }

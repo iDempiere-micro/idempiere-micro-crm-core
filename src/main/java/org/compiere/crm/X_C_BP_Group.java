@@ -1,14 +1,14 @@
 package org.compiere.crm;
 
-import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.util.Properties;
 import kotliquery.Row;
 import org.compiere.model.I_C_BP_Group;
 import org.compiere.orm.BasePOName;
-import org.compiere.orm.MTable;
 import org.idempiere.common.util.Env;
 import org.idempiere.orm.I_Persistent;
+
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.util.Properties;
 
 /**
  * Generated Model for C_BP_Group
@@ -60,13 +60,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return "X_C_BP_Group[" + getId() + "]";
   }
 
-  public org.compiere.model.I_AD_PrintColor getAD_PrintColor() throws RuntimeException {
-    return (org.compiere.model.I_AD_PrintColor)
-        MTable.get(getCtx(), org.compiere.model.I_AD_PrintColor.Table_Name)
-            .getPO(getAD_PrintColor_ID(), null);
-  }
-
-  /**
+    /**
    * Get Print Color.
    *
    * @return Color used for printing and display
@@ -77,17 +71,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return ii;
   }
 
-  /**
-   * Set Print Color.
-   *
-   * @param AD_PrintColor_ID Color used for printing and display
-   */
-  public void setAD_PrintColor_ID(int AD_PrintColor_ID) {
-    if (AD_PrintColor_ID < 1) set_Value(COLUMNNAME_AD_PrintColor_ID, null);
-    else set_Value(COLUMNNAME_AD_PrintColor_ID, Integer.valueOf(AD_PrintColor_ID));
-  }
-
-  /**
+    /**
    * Get Business Partner Group.
    *
    * @return Business Partner Group
@@ -98,41 +82,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return ii;
   }
 
-  /**
-   * Set Business Partner Group.
-   *
-   * @param C_BP_Group_ID Business Partner Group
-   */
-  public void setC_BP_Group_ID(int C_BP_Group_ID) {
-    if (C_BP_Group_ID < 1) set_ValueNoCheck(COLUMNNAME_C_BP_Group_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_BP_Group_ID, Integer.valueOf(C_BP_Group_ID));
-  }
-
-  /**
-   * Get C_BP_Group_UU.
-   *
-   * @return C_BP_Group_UU
-   */
-  public String getC_BP_Group_UU() {
-    return (String) get_Value(COLUMNNAME_C_BP_Group_UU);
-  }
-
-  /**
-   * Set C_BP_Group_UU.
-   *
-   * @param C_BP_Group_UU C_BP_Group_UU
-   */
-  public void setC_BP_Group_UU(String C_BP_Group_UU) {
-    set_Value(COLUMNNAME_C_BP_Group_UU, C_BP_Group_UU);
-  }
-
-  public org.compiere.model.I_C_Dunning getC_Dunning() throws RuntimeException {
-    return (org.compiere.model.I_C_Dunning)
-        MTable.get(getCtx(), org.compiere.model.I_C_Dunning.Table_Name)
-            .getPO(getC_Dunning_ID(), null);
-  }
-
-  /**
+    /**
    * Get Dunning.
    *
    * @return Dunning Rules for overdue invoices
@@ -143,17 +93,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return ii;
   }
 
-  /**
-   * Set Dunning.
-   *
-   * @param C_Dunning_ID Dunning Rules for overdue invoices
-   */
-  public void setC_Dunning_ID(int C_Dunning_ID) {
-    if (C_Dunning_ID < 1) set_Value(COLUMNNAME_C_Dunning_ID, null);
-    else set_Value(COLUMNNAME_C_Dunning_ID, Integer.valueOf(C_Dunning_ID));
-  }
-
-  /**
+    /**
    * Get Credit Watch %.
    *
    * @return Credit Watch - Percent of Credit Limit when OK switches to Watch
@@ -164,34 +104,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return bd;
   }
 
-  /**
-   * Set Credit Watch %.
-   *
-   * @param CreditWatchPercent Credit Watch - Percent of Credit Limit when OK switches to Watch
-   */
-  public void setCreditWatchPercent(BigDecimal CreditWatchPercent) {
-    set_Value(COLUMNNAME_CreditWatchPercent, CreditWatchPercent);
-  }
-
-  /**
-   * Get Description.
-   *
-   * @return Optional short description of the record
-   */
-  public String getDescription() {
-    return (String) get_Value(COLUMNNAME_Description);
-  }
-
-  /**
-   * Set Description.
-   *
-   * @param Description Optional short description of the record
-   */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
-  }
-
-  /**
+    /**
    * Set Confidential Info.
    *
    * @param IsConfidentialInfo Can enter confidential information
@@ -200,16 +113,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     set_Value(COLUMNNAME_IsConfidentialInfo, Boolean.valueOf(IsConfidentialInfo));
   }
 
-  /**
-   * Get Confidential Info.
-   *
-   * @return Can enter confidential information
-   */
-  public boolean isConfidentialInfo() {
-    return charToBoolean(get_Value(COLUMNNAME_IsConfidentialInfo));
-  }
-
-  /**
+    /**
    * Set Default.
    *
    * @param IsDefault Default value
@@ -218,22 +122,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     set_Value(COLUMNNAME_IsDefault, Boolean.valueOf(IsDefault));
   }
 
-  /**
-   * Get Default.
-   *
-   * @return Default value
-   */
-  public boolean isDefault() {
-    return charToBoolean(get_Value(COLUMNNAME_IsDefault));
-  }
-
-  public org.compiere.model.I_M_DiscountSchema getM_DiscountSchema() throws RuntimeException {
-    return (org.compiere.model.I_M_DiscountSchema)
-        MTable.get(getCtx(), org.compiere.model.I_M_DiscountSchema.Table_Name)
-            .getPO(getM_DiscountSchema_ID(), null);
-  }
-
-  /**
+    /**
    * Get Discount Schema.
    *
    * @return Schema to calculate the trade discount percentage
@@ -244,23 +133,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return ii;
   }
 
-  /**
-   * Set Discount Schema.
-   *
-   * @param M_DiscountSchema_ID Schema to calculate the trade discount percentage
-   */
-  public void setM_DiscountSchema_ID(int M_DiscountSchema_ID) {
-    if (M_DiscountSchema_ID < 1) set_Value(COLUMNNAME_M_DiscountSchema_ID, null);
-    else set_Value(COLUMNNAME_M_DiscountSchema_ID, Integer.valueOf(M_DiscountSchema_ID));
-  }
-
-  public org.compiere.model.I_M_PriceList getM_PriceList() throws RuntimeException {
-    return (org.compiere.model.I_M_PriceList)
-        MTable.get(getCtx(), org.compiere.model.I_M_PriceList.Table_Name)
-            .getPO(getM_PriceList_ID(), null);
-  }
-
-  /**
+    /**
    * Get Price List.
    *
    * @return Unique identifier of a Price List
@@ -271,23 +144,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return ii;
   }
 
-  /**
-   * Set Price List.
-   *
-   * @param M_PriceList_ID Unique identifier of a Price List
-   */
-  public void setM_PriceList_ID(int M_PriceList_ID) {
-    if (M_PriceList_ID < 1) set_Value(COLUMNNAME_M_PriceList_ID, null);
-    else set_Value(COLUMNNAME_M_PriceList_ID, Integer.valueOf(M_PriceList_ID));
-  }
-
-  public org.compiere.model.I_M_DiscountSchema getPO_DiscountSchema() throws RuntimeException {
-    return (org.compiere.model.I_M_DiscountSchema)
-        MTable.get(getCtx(), org.compiere.model.I_M_DiscountSchema.Table_Name)
-            .getPO(getPO_DiscountSchema_ID(), null);
-  }
-
-  /**
+    /**
    * Get PO Discount Schema.
    *
    * @return Schema to calculate the purchase trade discount percentage
@@ -298,23 +155,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return ii;
   }
 
-  /**
-   * Set PO Discount Schema.
-   *
-   * @param PO_DiscountSchema_ID Schema to calculate the purchase trade discount percentage
-   */
-  public void setPO_DiscountSchema_ID(int PO_DiscountSchema_ID) {
-    if (PO_DiscountSchema_ID < 1) set_Value(COLUMNNAME_PO_DiscountSchema_ID, null);
-    else set_Value(COLUMNNAME_PO_DiscountSchema_ID, PO_DiscountSchema_ID);
-  }
-
-  public org.compiere.model.I_M_PriceList getPO_PriceList() throws RuntimeException {
-    return (org.compiere.model.I_M_PriceList)
-        MTable.get(getCtx(), org.compiere.model.I_M_PriceList.Table_Name)
-            .getPO(getPO_PriceList_ID(), null);
-  }
-
-  /**
+    /**
    * Get Purchase Pricelist.
    *
    * @return Price List used by this Business Partner
@@ -325,17 +166,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return ii;
   }
 
-  /**
-   * Set Purchase Pricelist.
-   *
-   * @param PO_PriceList_ID Price List used by this Business Partner
-   */
-  public void setPO_PriceList_ID(int PO_PriceList_ID) {
-    if (PO_PriceList_ID < 1) set_Value(COLUMNNAME_PO_PriceList_ID, null);
-    else set_Value(COLUMNNAME_PO_PriceList_ID, PO_PriceList_ID);
-  }
-
-  /**
+    /**
    * Get Price Match Tolerance.
    *
    * @return PO-Invoice Match Price Tolerance in percent of the purchase price
@@ -346,16 +177,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     return bd;
   }
 
-  /**
-   * Set Price Match Tolerance.
-   *
-   * @param PriceMatchTolerance PO-Invoice Match Price Tolerance in percent of the purchase price
-   */
-  public void setPriceMatchTolerance(BigDecimal PriceMatchTolerance) {
-    set_Value(COLUMNNAME_PriceMatchTolerance, PriceMatchTolerance);
-  }
-
-  /**
+    /**
    * Get Priority Base.
    *
    * @return Base of Priority
@@ -374,16 +196,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     set_Value(COLUMNNAME_PriorityBase, PriorityBase);
   }
 
-  /**
-   * Get Search Key.
-   *
-   * @return Search key for the record in the format required - must be unique
-   */
-  public String getValue() {
-    return (String) get_Value(COLUMNNAME_Value);
-  }
-
-  /**
+    /**
    * Set Search Key.
    *
    * @param Value Search key for the record in the format required - must be unique

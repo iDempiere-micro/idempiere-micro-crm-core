@@ -1,13 +1,14 @@
 package org.compiere.crm;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.util.logging.Level;
 import org.compiere.util.DisplayType;
 import org.idempiere.common.util.KeyNamePair;
 import org.idempiere.common.util.NamePair;
 import org.idempiere.orm.Lookup;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  * Address Loaction Lookup Model.
@@ -33,22 +34,6 @@ public final class MLocationLookup extends Lookup implements Serializable {
   } //	MLocation
 
   /**
-   * Get Display for Value (not cached)
-   *
-   * @param value Location_ID
-   * @return String Value
-   */
-  public String getDisplay(Object value) {
-    if (value == null) return null;
-    MLocation loc = getLocation(value, null);
-    if (loc == null) {
-      StringBuilder msgreturn = new StringBuilder("<").append(value.toString()).append(">");
-      return msgreturn.toString();
-    }
-    return loc.toString();
-  } //	getDisplay
-
-  /**
    * Get Object of Key Value
    *
    * @param value value
@@ -60,20 +45,6 @@ public final class MLocationLookup extends Lookup implements Serializable {
     if (loc == null) return null;
     return new KeyNamePair(loc.getC_Location_ID(), loc.toString());
   } //	get
-
-  /**
-   * The Lookup contains the key
-   *
-   * @param key Location_ID
-   * @return true if key known
-   */
-  public boolean containsKey(Object key) {
-    return getLocation(key, null) != null;
-  } //  containsKey
-
-  public boolean containsKeyNoDirect(Object key) {
-    return containsKey(key);
-  }
 
   /**
    * ************************************************************************ Get Location

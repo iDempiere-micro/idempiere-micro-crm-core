@@ -9,14 +9,6 @@ abstract class BasePOUser : PO {
     constructor (ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
     constructor (ctx: Properties, rs: ResultSet, trxName: String?, a: String?) : super(ctx, rs, trxName, a)
 
-    @Throws(RuntimeException::class)
-    fun getAD_User(): I_AD_User? {
-        val id = getAD_User_ID()
-        if (id == 0) return null
-        return MTable.get(ctx, I_AD_User.Table_Name)
-            .getPO(id, null) as I_AD_User?
-    }
-
     /** Set User/Contact.
      * @param AD_User_ID
      * User within the system - Internal or Business Partner Contact

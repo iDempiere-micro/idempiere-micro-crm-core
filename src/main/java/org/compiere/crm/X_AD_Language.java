@@ -5,7 +5,6 @@ import java.util.Properties;
 import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.BasePOName;
-import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
 
 /**
@@ -85,31 +84,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
     return ii;
   }
 
-  /**
-   * Set AD_Language_UU.
-   *
-   * @param AD_Language_UU AD_Language_UU
-   */
-  public void setADLanguage_UU(String AD_Language_UU) {
-    set_Value(COLUMNNAME_AD_Language_UU, AD_Language_UU);
-  }
-
-  /**
-   * Get AD_Language_UU.
-   *
-   * @return AD_Language_UU
-   */
-  public String getAD_Language_UU() {
-    return (String) get_Value(COLUMNNAME_AD_Language_UU);
-  }
-
-  public org.compiere.model.I_AD_PrintPaper getAD_PrintPaper() throws RuntimeException {
-    return (org.compiere.model.I_AD_PrintPaper)
-        MTable.get(getCtx(), org.compiere.model.I_AD_PrintPaper.Table_Name)
-            .getPO(getAD_PrintPaper_ID(), null);
-  }
-
-  /**
+    /**
    * Get Print Paper.
    *
    * @return Printer paper definition
@@ -120,17 +95,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
     return ii;
   }
 
-  /**
-   * Set Print Paper.
-   *
-   * @param AD_PrintPaper_ID Printer paper definition
-   */
-  public void setAD_PrintPaper_ID(int AD_PrintPaper_ID) {
-    if (AD_PrintPaper_ID < 1) set_Value(COLUMNNAME_AD_PrintPaper_ID, null);
-    else set_Value(COLUMNNAME_AD_PrintPaper_ID, Integer.valueOf(AD_PrintPaper_ID));
-  }
-
-  /**
+    /**
    * Get ISO Country Code.
    *
    * @return Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 -
@@ -159,16 +124,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
     return (String) get_Value(COLUMNNAME_DatePattern);
   }
 
-  /**
-   * Set Date Pattern.
-   *
-   * @param DatePattern Java Date Pattern
-   */
-  public void setDatePattern(String DatePattern) {
-    set_Value(COLUMNNAME_DatePattern, DatePattern);
-  }
-
-  /**
+    /**
    * Set Base Language.
    *
    * @param IsBaseLanguage The system information is maintained in this language
@@ -186,43 +142,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
     return charToBoolean(get_Value(COLUMNNAME_IsBaseLanguage));
   }
 
-  /**
-   * Set Decimal Point.
-   *
-   * @param IsDecimalPoint The number notation has a decimal point (no decimal comma)
-   */
-  public void setIsDecimalPoint(boolean IsDecimalPoint) {
-    set_Value(COLUMNNAME_IsDecimalPoint, Boolean.valueOf(IsDecimalPoint));
-  }
-
-  /**
-   * Get Decimal Point.
-   *
-   * @return The number notation has a decimal point (no decimal comma)
-   */
-  public boolean isDecimalPoint() {
-    return charToBoolean(get_Value(COLUMNNAME_IsDecimalPoint));
-  }
-
-  /**
-   * Set Login Locale.
-   *
-   * @param IsLoginLocale Login Locale
-   */
-  public void setIsLoginLocale(boolean IsLoginLocale) {
-    set_Value(COLUMNNAME_IsLoginLocale, Boolean.valueOf(IsLoginLocale));
-  }
-
-  /**
-   * Get Login Locale.
-   *
-   * @return Login Locale
-   */
-  public boolean isLoginLocale() {
-    return charToBoolean(get_Value(COLUMNNAME_IsLoginLocale));
-  }
-
-  /**
+    /**
    * Set System Language.
    *
    * @param IsSystemLanguage The screens, etc. are maintained in this Language
@@ -260,61 +180,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
     set_Value(COLUMNNAME_LanguageISO, LanguageISO);
   }
 
-  /**
-   * Get Print Text.
-   *
-   * @return The label text to be printed on a document or correspondence.
-   */
-  public String getPrintName() {
-    return (String) get_Value(COLUMNNAME_PrintName);
-  }
-
-  /**
-   * Set Print Text.
-   *
-   * @param PrintName The label text to be printed on a document or correspondence.
-   */
-  public void setPrintName(String PrintName) {
-    set_Value(COLUMNNAME_PrintName, PrintName);
-  }
-
-  /**
-   * Get Process Now.
-   *
-   * @return Process Now
-   */
-  public boolean isProcessing() {
-    return charToBoolean(get_Value(COLUMNNAME_Processing));
-  }
-
-  /**
-   * Set Process Now.
-   *
-   * @param Processing Process Now
-   */
-  public void setProcessing(boolean Processing) {
-    set_Value(COLUMNNAME_Processing, Boolean.valueOf(Processing));
-  }
-
-  /**
-   * Get Time Pattern.
-   *
-   * @return Java Time Pattern
-   */
-  public String getTimePattern() {
-    return (String) get_Value(COLUMNNAME_TimePattern);
-  }
-
-  /**
-   * Set Time Pattern.
-   *
-   * @param TimePattern Java Time Pattern
-   */
-  public void setTimePattern(String TimePattern) {
-    set_Value(COLUMNNAME_TimePattern, TimePattern);
-  }
-
-  @Override
+    @Override
   public int getTableId() {
     return I_AD_Language.Table_ID;
   }
