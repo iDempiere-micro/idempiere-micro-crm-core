@@ -33,11 +33,6 @@ public final class MLocationLookup extends Lookup implements Serializable {
     m_ctx = ctx;
   } //	MLocation
 
-  @Override
-  public String getDisplay(Object key) {
-    return null;
-  }
-
   /**
    * Get Object of Key Value
    *
@@ -50,21 +45,6 @@ public final class MLocationLookup extends Lookup implements Serializable {
     if (loc == null) return null;
     return new KeyNamePair(loc.getC_Location_ID(), loc.toString());
   } //	get
-
-  /**
-   * The Lookup contains the key
-   *
-   * @param key Location_ID
-   * @return true if key known
-   */
-  public boolean containsKey(Object key) {
-    return getLocation(key, null) != null;
-  } //  containsKey
-
-  @Override
-  public boolean containsKeyNoDirect(Object key) {
-    return false;
-  }
 
   /**
    * ************************************************************************ Get Location
