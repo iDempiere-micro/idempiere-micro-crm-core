@@ -53,7 +53,7 @@
                 <idempiere-micro-base-interfaces.version>0.5.0</idempiere-micro-base-interfaces.version>
                 <idempiere-micro-test-support.version>0.0.3</idempiere-micro-test-support.version>
                 <idempiere-micro-model-core.version>0.5.1</idempiere-micro-model-core.version>
-                <idempiere-micro-model-interfaces.version>0.5.0</idempiere-micro-model-interfaces.version>
+                <idempiere-micro-model-interfaces.version>0.5.1</idempiere-micro-model-interfaces.version>
             </properties>
         </profile>
     </profiles>
