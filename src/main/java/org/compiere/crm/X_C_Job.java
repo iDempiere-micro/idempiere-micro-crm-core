@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import org.compiere.model.I_C_Job;
 import org.compiere.orm.BasePOName;
-import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
 
 /**
@@ -41,13 +40,7 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
     return "X_C_Job[" + getId() + "]";
   }
 
-  public org.compiere.model.I_C_JobCategory getC_JobCategory() throws RuntimeException {
-    return (org.compiere.model.I_C_JobCategory)
-        MTable.get(getCtx(), org.compiere.model.I_C_JobCategory.Table_Name)
-            .getPO(getC_JobCategory_ID(), null);
-  }
-
-  /**
+    /**
    * Get Position Category.
    *
    * @return Job Position Category
@@ -58,115 +51,7 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
     return ii;
   }
 
-  /**
-   * Set Position Category.
-   *
-   * @param C_JobCategory_ID Job Position Category
-   */
-  public void setC_JobCategory_ID(int C_JobCategory_ID) {
-    if (C_JobCategory_ID < 1) set_Value(COLUMNNAME_C_JobCategory_ID, null);
-    else set_Value(COLUMNNAME_C_JobCategory_ID, Integer.valueOf(C_JobCategory_ID));
-  }
-
-  /**
-   * Get Position.
-   *
-   * @return Job Position
-   */
-  public int getC_Job_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_Job_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
-
-  /**
-   * Set Position.
-   *
-   * @param C_Job_ID Job Position
-   */
-  public void setC_Job_ID(int C_Job_ID) {
-    if (C_Job_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Job_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_Job_ID, Integer.valueOf(C_Job_ID));
-  }
-
-  /**
-   * Get C_Job_UU.
-   *
-   * @return C_Job_UU
-   */
-  public String getC_Job_UU() {
-    return (String) get_Value(COLUMNNAME_C_Job_UU);
-  }
-
-  /**
-   * Set C_Job_UU.
-   *
-   * @param C_Job_UU C_Job_UU
-   */
-  public void setC_Job_UU(String C_Job_UU) {
-    set_Value(COLUMNNAME_C_Job_UU, C_Job_UU);
-  }
-
-  /**
-   * Get Description.
-   *
-   * @return Optional short description of the record
-   */
-  public String getDescription() {
-    return (String) get_Value(COLUMNNAME_Description);
-  }
-
-  /**
-   * Set Description.
-   *
-   * @param Description Optional short description of the record
-   */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
-  }
-
-  /**
-   * Get Comment/Help.
-   *
-   * @return Comment or Hint
-   */
-  public String getHelp() {
-    return (String) get_Value(COLUMNNAME_Help);
-  }
-
-  /**
-   * Set Comment/Help.
-   *
-   * @param Help Comment or Hint
-   */
-  public void setHelp(String Help) {
-    set_Value(COLUMNNAME_Help, Help);
-  }
-
-  /**
-   * Set Employee.
-   *
-   * @param IsEmployee Indicates if this Business Partner is an employee
-   */
-  public void setIsEmployee(boolean IsEmployee) {
-    set_Value(COLUMNNAME_IsEmployee, Boolean.valueOf(IsEmployee));
-  }
-
-  /**
-   * Get Employee.
-   *
-   * @return Indicates if this Business Partner is an employee
-   */
-  public boolean isEmployee() {
-    Object oo = get_Value(COLUMNNAME_IsEmployee);
-    if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-      return "Y".equals(oo);
-    }
-    return false;
-  }
-
-  @Override
+    @Override
   public int getTableId() {
     return I_C_Job.Table_ID;
   }

@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import org.compiere.model.I_AD_UserBPAccess;
 import org.compiere.orm.BasePOUser;
-import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
 
 /**
@@ -118,91 +117,7 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess, 
     return sb.toString();
   }
 
-  /**
-   * Get User BP Access.
-   *
-   * @return User/contact access to Business Partner information and resources
-   */
-  public int getAD_UserBPAccess_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_AD_UserBPAccess_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
-
-  /**
-   * Set User BP Access.
-   *
-   * @param AD_UserBPAccess_ID User/contact access to Business Partner information and resources
-   */
-  public void setAD_UserBPAccess_ID(int AD_UserBPAccess_ID) {
-    if (AD_UserBPAccess_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_UserBPAccess_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_AD_UserBPAccess_ID, Integer.valueOf(AD_UserBPAccess_ID));
-  }
-
-  /**
-   * Get AD_UserBPAccess_UU.
-   *
-   * @return AD_UserBPAccess_UU
-   */
-  public String getAD_UserBPAccess_UU() {
-    return (String) get_Value(COLUMNNAME_AD_UserBPAccess_UU);
-  }
-
-  /**
-   * Set AD_UserBPAccess_UU.
-   *
-   * @param AD_UserBPAccess_UU AD_UserBPAccess_UU
-   */
-  public void setAD_UserBPAccess_UU(String AD_UserBPAccess_UU) {
-    set_Value(COLUMNNAME_AD_UserBPAccess_UU, AD_UserBPAccess_UU);
-  }
-
-  /**
-   * Get Access Type.
-   *
-   * @return Type of Access of the user/contact to Business Partner information and resources
-   */
-  public String getBPAccessType() {
-    return (String) get_Value(COLUMNNAME_BPAccessType);
-  }
-
-  /**
-   * Set Access Type.
-   *
-   * @param BPAccessType Type of Access of the user/contact to Business Partner information and
-   *     resources
-   */
-  public void setBPAccessType(String BPAccessType) {
-
-    set_Value(COLUMNNAME_BPAccessType, BPAccessType);
-  }
-
-  /**
-   * Get Document BaseType.
-   *
-   * @return Logical type of document
-   */
-  public String getDocBaseType() {
-    return (String) get_Value(COLUMNNAME_DocBaseType);
-  }
-
-  /**
-   * Set Document BaseType.
-   *
-   * @param DocBaseType Logical type of document
-   */
-  public void setDocBaseType(String DocBaseType) {
-
-    set_Value(COLUMNNAME_DocBaseType, DocBaseType);
-  }
-
-  public org.compiere.model.I_R_RequestType getR_RequestType() throws RuntimeException {
-    return (org.compiere.model.I_R_RequestType)
-        MTable.get(getCtx(), org.compiere.model.I_R_RequestType.Table_Name)
-            .getPO(getR_RequestType_ID(), null);
-  }
-
-  /**
+    /**
    * Get Request Type.
    *
    * @return Type of request (e.g. Inquiry, Complaint, ..)
@@ -213,17 +128,7 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess, 
     return ii;
   }
 
-  /**
-   * Set Request Type.
-   *
-   * @param R_RequestType_ID Type of request (e.g. Inquiry, Complaint, ..)
-   */
-  public void setR_RequestType_ID(int R_RequestType_ID) {
-    if (R_RequestType_ID < 1) set_Value(COLUMNNAME_R_RequestType_ID, null);
-    else set_Value(COLUMNNAME_R_RequestType_ID, Integer.valueOf(R_RequestType_ID));
-  }
-
-  @Override
+    @Override
   public int getTableId() {
     return I_AD_UserBPAccess.Table_ID;
   }

@@ -46,7 +46,7 @@ open class MBaseBPartner : X_C_BPartner {
         set_ValueNoCheck("C_BPartner_ID", I_ZERO)
         setValue("")
         name = ""
-        name2 = null
+        setName2(null)
         set_ValueNoCheck("C_BPartner_UU", "")
         return success
     } // 	getTemplate

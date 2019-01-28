@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import kotliquery.Row;
 import org.compiere.model.I_C_Location;
-import org.compiere.orm.MTable;
 import org.compiere.orm.PO;
 import org.idempiere.common.util.KeyNamePair;
 import org.idempiere.orm.I_Persistent;
@@ -92,16 +91,7 @@ public class X_C_Location extends PO implements I_Persistent {
     return (String) get_Value(I_C_Location.COLUMNNAME_Address3);
   }
 
-  /**
-   * Set Address 3.
-   *
-   * @param Address3 Address Line 3 for the location
-   */
-  public void setAddress3(String Address3) {
-    set_Value(I_C_Location.COLUMNNAME_Address3, Address3);
-  }
-
-  /**
+    /**
    * Get Address 4.
    *
    * @return Address Line 4 for the location
@@ -110,16 +100,7 @@ public class X_C_Location extends PO implements I_Persistent {
     return (String) get_Value(I_C_Location.COLUMNNAME_Address4);
   }
 
-  /**
-   * Set Address 4.
-   *
-   * @param Address4 Address Line 4 for the location
-   */
-  public void setAddress4(String Address4) {
-    set_Value(I_C_Location.COLUMNNAME_Address4, Address4);
-  }
-
-  /**
+    /**
    * Get Address 5.
    *
    * @return Address Line 5 for the location
@@ -128,51 +109,18 @@ public class X_C_Location extends PO implements I_Persistent {
     return (String) get_Value(I_C_Location.COLUMNNAME_Address5);
   }
 
-  /**
-   * Set Address 5.
-   *
-   * @param Address5 Address Line 5 for the location
-   */
-  public void setAddress5(String Address5) {
-    set_Value(I_C_Location.COLUMNNAME_Address5, Address5);
-  }
-
-  public org.compiere.model.I_C_AddressValidation getC_AddressValidation() throws RuntimeException {
-    return (org.compiere.model.I_C_AddressValidation)
-        MTable.get(getCtx(), org.compiere.model.I_C_AddressValidation.Table_Name)
-            .getPO(getC_AddressValidation_ID(), null);
-  }
-
-  /**
+    /**
    * Get Address Validation.
    *
    * @return Address Validation
    */
-  public int getC_AddressValidation_ID() {
+    private int getC_AddressValidation_ID() {
     Integer ii = (Integer) get_Value(I_C_Location.COLUMNNAME_C_AddressValidation_ID);
     if (ii == null) return 0;
     return ii;
   }
 
-  /**
-   * Set Address Validation.
-   *
-   * @param C_AddressValidation_ID Address Validation
-   */
-  public void setC_AddressValidation_ID(int C_AddressValidation_ID) {
-    if (C_AddressValidation_ID < 1)
-      set_ValueNoCheck(I_C_Location.COLUMNNAME_C_AddressValidation_ID, null);
-    else
-      set_ValueNoCheck(
-          I_C_Location.COLUMNNAME_C_AddressValidation_ID, Integer.valueOf(C_AddressValidation_ID));
-  }
-
-  public org.compiere.model.I_C_City getC_City() throws RuntimeException {
-    return (org.compiere.model.I_C_City)
-        MTable.get(getCtx(), org.compiere.model.I_C_City.Table_Name).getPO(getC_City_ID(), null);
-  }
-
-  /**
+    /**
    * Get City.
    *
    * @return City
@@ -193,13 +141,7 @@ public class X_C_Location extends PO implements I_Persistent {
     else set_Value(I_C_Location.COLUMNNAME_C_City_ID, Integer.valueOf(C_City_ID));
   }
 
-  public org.compiere.model.I_C_Country getC_Country() throws RuntimeException {
-    return (org.compiere.model.I_C_Country)
-        MTable.get(getCtx(), org.compiere.model.I_C_Country.Table_Name)
-            .getPO(getC_Country_ID(), null);
-  }
-
-  /**
+    /**
    * Get Country.
    *
    * @return Country
@@ -258,35 +200,7 @@ public class X_C_Location extends PO implements I_Persistent {
     return ii;
   }
 
-  /**
-   * Set Address.
-   *
-   * @param C_Location_ID Location or Address
-   */
-  public void setC_Location_ID(int C_Location_ID) {
-    if (C_Location_ID < 1) set_ValueNoCheck(I_C_Location.COLUMNNAME_C_Location_ID, null);
-    else set_ValueNoCheck(I_C_Location.COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
-  }
-
-  /**
-   * Get C_Location_UU.
-   *
-   * @return C_Location_UU
-   */
-  public String getC_Location_UU() {
-    return (String) get_Value(I_C_Location.COLUMNNAME_C_Location_UU);
-  }
-
-  /**
-   * Set C_Location_UU.
-   *
-   * @param C_Location_UU C_Location_UU
-   */
-  public void setC_Location_UU(String C_Location_UU) {
-    set_Value(I_C_Location.COLUMNNAME_C_Location_UU, C_Location_UU);
-  }
-
-  /**
+    /**
    * Get Comments.
    *
    * @return Comments or additional information
@@ -295,22 +209,7 @@ public class X_C_Location extends PO implements I_Persistent {
     return (String) get_Value(I_C_Location.COLUMNNAME_Comments);
   }
 
-  /**
-   * Set Comments.
-   *
-   * @param Comments Comments or additional information
-   */
-  public void setComments(String Comments) {
-    set_Value(I_C_Location.COLUMNNAME_Comments, Comments);
-  }
-
-  public org.compiere.model.I_C_Region getC_Region() throws RuntimeException {
-    return (org.compiere.model.I_C_Region)
-        MTable.get(getCtx(), org.compiere.model.I_C_Region.Table_Name)
-            .getPO(getC_Region_ID(), null);
-  }
-
-  /**
+    /**
    * Get Region.
    *
    * @return Identifies a geographical Region
@@ -331,25 +230,7 @@ public class X_C_Location extends PO implements I_Persistent {
     else set_Value(I_C_Location.COLUMNNAME_C_Region_ID, Integer.valueOf(C_Region_ID));
   }
 
-  /**
-   * Set Valid.
-   *
-   * @param IsValid Element is valid
-   */
-  public void setIsValid(boolean IsValid) {
-    set_ValueNoCheck(I_C_Location.COLUMNNAME_IsValid, Boolean.valueOf(IsValid));
-  }
-
-  /**
-   * Get Valid.
-   *
-   * @return Element is valid
-   */
-  public boolean isValid() {
-    return charToBoolean(get_Value(I_C_Location.COLUMNNAME_IsValid));
-  }
-
-  /**
+    /**
    * Get ZIP.
    *
    * @return Postal code
@@ -376,16 +257,7 @@ public class X_C_Location extends PO implements I_Persistent {
     return (String) get_Value(I_C_Location.COLUMNNAME_Postal_Add);
   }
 
-  /**
-   * Set Additional Zip.
-   *
-   * @param Postal_Add Additional ZIP or Postal code
-   */
-  public void setPostal_Add(String Postal_Add) {
-    set_Value(I_C_Location.COLUMNNAME_Postal_Add, Postal_Add);
-  }
-
-  /**
+    /**
    * Get Region.
    *
    * @return Name of the Region
@@ -403,43 +275,7 @@ public class X_C_Location extends PO implements I_Persistent {
     set_Value(I_C_Location.COLUMNNAME_RegionName, RegionName);
   }
 
-  /**
-   * Get Result.
-   *
-   * @return Result of the action taken
-   */
-  public String getResult() {
-    return (String) get_Value(I_C_Location.COLUMNNAME_Result);
-  }
-
-  /**
-   * Set Result.
-   *
-   * @param Result Result of the action taken
-   */
-  public void setResult(String Result) {
-    set_ValueNoCheck(I_C_Location.COLUMNNAME_Result, Result);
-  }
-
-  /**
-   * Get Validate Address.
-   *
-   * @return Validate Address
-   */
-  public String getValidateAddress() {
-    return (String) get_Value(I_C_Location.COLUMNNAME_ValidateAddress);
-  }
-
-  /**
-   * Set Validate Address.
-   *
-   * @param ValidateAddress Validate Address
-   */
-  public void setValidateAddress(String ValidateAddress) {
-    set_Value(I_C_Location.COLUMNNAME_ValidateAddress, ValidateAddress);
-  }
-
-  @Override
+    @Override
   public int getTableId() {
     return I_C_Location.Table_ID;
   }

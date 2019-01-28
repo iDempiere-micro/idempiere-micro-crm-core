@@ -5,7 +5,6 @@ import java.util.Properties;
 import kotliquery.Row;
 import org.compiere.model.I_C_Region;
 import org.compiere.orm.BasePOName;
-import org.compiere.orm.MTable;
 import org.idempiere.orm.I_Persistent;
 
 /**
@@ -46,13 +45,7 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
     return "X_C_Region[" + getId() + "]";
   }
 
-  public org.compiere.model.I_C_Country getC_Country() throws RuntimeException {
-    return (org.compiere.model.I_C_Country)
-        MTable.get(getCtx(), org.compiere.model.I_C_Country.Table_Name)
-            .getPO(getC_Country_ID(), null);
-  }
-
-  /**
+    /**
    * Get Country.
    *
    * @return Country
@@ -84,62 +77,7 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
     return ii;
   }
 
-  /**
-   * Set Region.
-   *
-   * @param C_Region_ID Identifies a geographical Region
-   */
-  public void setC_Region_ID(int C_Region_ID) {
-    if (C_Region_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Region_ID, null);
-    else set_ValueNoCheck(COLUMNNAME_C_Region_ID, C_Region_ID);
-  }
-
-  /**
-   * Get C_Region_UU.
-   *
-   * @return C_Region_UU
-   */
-  public String getC_Region_UU() {
-    return (String) get_Value(COLUMNNAME_C_Region_UU);
-  }
-
-  /**
-   * Set C_Region_UU.
-   *
-   * @param C_Region_UU C_Region_UU
-   */
-  public void setC_Region_UU(String C_Region_UU) {
-    set_Value(COLUMNNAME_C_Region_UU, C_Region_UU);
-  }
-
-  /**
-   * Get Description.
-   *
-   * @return Optional short description of the record
-   */
-  public String getDescription() {
-    return (String) get_Value(COLUMNNAME_Description);
-  }
-
-  /**
-   * Set Description.
-   *
-   * @param Description Optional short description of the record
-   */
-  public void setDescription(String Description) {
-    set_Value(COLUMNNAME_Description, Description);
-  }
-
-  /**
-   * Set Default.
-   *
-   * @param IsDefault Default value
-   */
-  public void setIsDefault(boolean IsDefault) {
-    set_Value(COLUMNNAME_IsDefault, IsDefault);
-  }
-
-  /**
+    /**
    * Get Default.
    *
    * @return Default value
