@@ -1,13 +1,14 @@
 package org.compiere.crm;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.util.logging.Level;
 import org.compiere.util.DisplayType;
 import org.idempiere.common.util.KeyNamePair;
 import org.idempiere.common.util.NamePair;
 import org.idempiere.orm.Lookup;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  * Address Loaction Lookup Model.
@@ -32,21 +33,10 @@ public final class MLocationLookup extends Lookup implements Serializable {
     m_ctx = ctx;
   } //	MLocation
 
-  /**
-   * Get Display for Value (not cached)
-   *
-   * @param value Location_ID
-   * @return String Value
-   */
-  public String getDisplay(Object value) {
-    if (value == null) return null;
-    MLocation loc = getLocation(value, null);
-    if (loc == null) {
-      StringBuilder msgreturn = new StringBuilder("<").append(value.toString()).append(">");
-      return msgreturn.toString();
-    }
-    return loc.toString();
-  } //	getDisplay
+  @Override
+  public String getDisplay(Object key) {
+    return null;
+  }
 
   /**
    * Get Object of Key Value
@@ -71,8 +61,9 @@ public final class MLocationLookup extends Lookup implements Serializable {
     return getLocation(key, null) != null;
   } //  containsKey
 
+  @Override
   public boolean containsKeyNoDirect(Object key) {
-    return containsKey(key);
+    return false;
   }
 
   /**
