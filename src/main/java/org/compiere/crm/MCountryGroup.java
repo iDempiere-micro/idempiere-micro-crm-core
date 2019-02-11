@@ -83,7 +83,7 @@ public class MCountryGroup extends X_C_CountryGroup {
             + "WHERE  c_country_id = ? "
             + "       AND c_countrygroup_id = ? "
             + "       AND isactive = 'Y' ";
-    int cnt = getSQLValue(null, sql, c_Country_ID, c_CountryGroup_ID);
+    int cnt = getSQLValue(sql, c_Country_ID, c_CountryGroup_ID);
 
     return cnt > 0;
   }

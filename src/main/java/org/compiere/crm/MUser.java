@@ -154,7 +154,7 @@ public class MUser extends MBaseUser implements IUser {
       retValue = new MUser(ctx, AD_User_ID, null);
       if (AD_User_ID == 0) {
         String trxName = null;
-        retValue.load(trxName); // 	load System Record
+        retValue.load(); // 	load System Record
       }
       s_cache.put(key, retValue);
     }
@@ -629,7 +629,6 @@ public class MUser extends MBaseUser implements IUser {
         // email with password must be unique on the same tenant
         int cnt =
             getSQLValue(
-                null,
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND EMail=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 getEMail(),
                 getClientId(),
@@ -647,7 +646,6 @@ public class MUser extends MBaseUser implements IUser {
         if (Util.isEmpty(nameToValidate)) nameToValidate = getName();
         int cnt =
             getSQLValue(
-                null,
                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND COALESCE(LDAPUser,Name)=? AND AD_Client_ID=? AND AD_User_ID!=?",
                 nameToValidate,
                 getClientId(),

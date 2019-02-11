@@ -580,7 +580,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     if (getC_City_ID() <= 0 && getCity() != null && getCity().length() > 0) {
       int city_id =
           getSQLValue(
-              null,
               "SELECT C_City_ID FROM C_City WHERE C_Country_ID=? AND COALESCE(C_Region_ID,0)=? AND Name=? AND AD_Client_ID IN (0,?)",
               getC_Country_ID(),
               getC_Region_ID(),
@@ -599,7 +598,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     if (m_c != null && !m_c.isAllowCitiesOutOfList() && getC_City_ID() > 0) {
       int city_id =
           getSQLValue(
-              null,
               "SELECT C_City_ID "
                   + "  FROM C_City "
                   + " WHERE C_Country_ID=? "
@@ -632,7 +630,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     // Update BP_Location name IDEMPIERE 417
     int bplID =
         getSQLValueEx(
-            null,
             "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = "
                 + getC_Location_ID());
     if (bplID > 0) {

@@ -16,7 +16,6 @@ import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import static software.hsharp.core.util.DBKt.close;
 import static software.hsharp.core.util.DBKt.prepareStatement;
 
 public class MBPartner extends MBaseBPartner implements I_C_BPartner {
@@ -545,14 +544,13 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     try {
-      pstmt = prepareStatement(sql, null);
+      pstmt = prepareStatement(sql);
       pstmt.setInt(1, C_BPartner_ID);
       rs = pstmt.executeQuery();
       if (rs.next()) retValue = rs.getBigDecimal(1);
     } catch (Exception e) {
       s_log.log(Level.SEVERE, sql, e);
     } finally {
-      close(rs, pstmt);
       rs = null;
       pstmt = null;
     }

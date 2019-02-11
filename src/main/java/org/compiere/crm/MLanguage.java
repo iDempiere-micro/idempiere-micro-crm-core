@@ -213,7 +213,7 @@ public class MLanguage extends X_AD_Language {
     if (AD_Language_ID == 0) {
       String sql =
           "SELECT NVL(MAX(AD_Language_ID), 999999) FROM AD_Language WHERE AD_Language_ID > 1000";
-      AD_Language_ID = getSQLValue(null, sql);
+      AD_Language_ID = getSQLValue(sql);
       setADLanguage_ID(AD_Language_ID + 1);
     }
   } //	setADLanguage_ID
