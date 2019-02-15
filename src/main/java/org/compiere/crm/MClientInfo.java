@@ -22,8 +22,8 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
    * @param rs result set
    * @param trxName transaction
    */
-  public MClientInfo(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MClientInfo(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   public MClientInfo(Properties ctx, Row row) {
@@ -59,7 +59,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
    * @return client
    */
   public static MClientInfo get(Properties ctx) {
-    return get(ctx, Env.getClientId(ctx), null);
+    return get(ctx, Env.getClientId(ctx));
   } //	get
 
   /**
@@ -70,19 +70,8 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
    * @param trxName optional trx
    * @return Client Info
    */
-  public static MClientInfo get(Properties ctx, int AD_Client_ID, String trxName) {
-    return MBaseClientInfoKt.get(ctx, AD_Client_ID, trxName);
-  } //	get
-
-  /**
-   * Get Client Info
-   *
-   * @param ctx context
-   * @param AD_Client_ID id
-   * @return Client Info
-   */
   public static MClientInfo get(Properties ctx, int AD_Client_ID) {
-    return get(ctx, AD_Client_ID, null);
+    return MBaseClientInfoKt.get(ctx, AD_Client_ID);
   } //	get
 
   /**
@@ -99,6 +88,6 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
 
   public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
     return (I_C_BPartner)
-        MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartnerCashTrx_ID(), null);
+        MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartnerCashTrx_ID());
   }
 } //	MClientInfo

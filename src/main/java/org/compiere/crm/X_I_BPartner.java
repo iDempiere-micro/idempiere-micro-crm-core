@@ -21,13 +21,13 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_I_BPartner(Properties ctx, int I_BPartner_ID, String trxName) {
-    super(ctx, I_BPartner_ID, trxName);
+  public X_I_BPartner(Properties ctx, int I_BPartner_ID) {
+    super(ctx, I_BPartner_ID);
   }
 
   /** Load Constructor */
-  public X_I_BPartner(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_I_BPartner(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /**

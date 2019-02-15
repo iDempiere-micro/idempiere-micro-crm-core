@@ -36,8 +36,8 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    * @param C_BPartner_Location_ID id
    * @param trxName transaction
    */
-  public MBPartnerLocation(Properties ctx, int C_BPartner_Location_ID, String trxName) {
-    super(ctx, C_BPartner_Location_ID, trxName);
+  public MBPartnerLocation(Properties ctx, int C_BPartner_Location_ID) {
+    super(ctx, C_BPartner_Location_ID);
     if (C_BPartner_Location_ID == 0) {
       setName(".");
       //
@@ -54,7 +54,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    * @param bp partner
    */
   public MBPartnerLocation(I_C_BPartner bp) {
-    this(bp.getCtx(), 0, null);
+    this(bp.getCtx(), 0);
     setClientOrg(bp);
     // may (still) be 0
     set_ValueNoCheck("C_BPartner_ID", new Integer(bp.getC_BPartner_ID()));
@@ -67,8 +67,8 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    * @param rs current row of result set to be loaded
    * @param trxName transaction
    */
-  public MBPartnerLocation(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MBPartnerLocation(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } // MBPartner_Location
 
   public MBPartnerLocation(Properties ctx, Row row) {
@@ -80,25 +80,13 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    *
    * @param ctx context
    * @param C_BPartner_ID bp
-   * @return array of locations
-   * @deprecated Since 3.5.3a. Please use {@link #getForBPartner(Properties, int, String)}.
-   */
-  public static MBPartnerLocation[] getForBPartner(Properties ctx, int C_BPartner_ID) {
-    return getForBPartner(ctx, C_BPartner_ID, null);
-  }
-
-  /**
-   * Get Locations for BPartner
-   *
-   * @param ctx context
-   * @param C_BPartner_ID bp
    * @param trxName
    * @return array of locations
    */
   public static MBPartnerLocation[] getForBPartner(
-      Properties ctx, int C_BPartner_ID, String trxName) {
+      Properties ctx, int C_BPartner_ID) {
     List<MBPartnerLocation> list =
-        new Query(ctx, I_C_BPartner_Location.Table_Name, "C_BPartner_ID=?", trxName)
+        new Query(ctx, I_C_BPartner_Location.Table_Name, "C_BPartner_ID=?")
             .setParameters(C_BPartner_ID)
             .list();
     MBPartnerLocation[] retValue = new MBPartnerLocation[list.size()];
@@ -120,7 +108,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
    */
   public MLocation getLocation(boolean requery) {
     if (requery || m_location == null)
-      m_location = MLocation.get(getCtx(), getC_Location_ID(), null);
+      m_location = MLocation.get(getCtx(), getC_Location_ID());
     return m_location;
   } // getLocation
 

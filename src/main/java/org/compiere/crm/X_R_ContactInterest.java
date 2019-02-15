@@ -20,8 +20,8 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_R_ContactInterest(Properties ctx, int R_ContactInterest_ID, String trxName) {
-    super(ctx, R_ContactInterest_ID, trxName);
+  public X_R_ContactInterest(Properties ctx, int R_ContactInterest_ID) {
+    super(ctx, R_ContactInterest_ID);
     /**
      * if (R_ContactInterest_ID == 0) { setAD_User_ID (0); // @AD_User_ID@ setR_InterestArea_ID (0);
      * }
@@ -29,8 +29,8 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
   }
 
   /** Load Constructor */
-  public X_R_ContactInterest(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_R_ContactInterest(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /**

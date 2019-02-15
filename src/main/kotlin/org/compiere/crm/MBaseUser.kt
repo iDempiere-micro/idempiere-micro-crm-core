@@ -21,9 +21,9 @@ fun getWithRole(role: MRole): Array<MUser> {
     return DB.current.run(loadQuery).toTypedArray() }
 
 open class MBaseUser : X_AD_User {
-    constructor(ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
+    constructor(ctx: Properties, rs: ResultSet) : super(ctx, rs)
     constructor(ctx: Properties, row: Row) : super(ctx, row)
-    constructor(ctx: Properties, id: Int, trxName: String?) : super(ctx, id, trxName)
+    constructor(ctx: Properties, id: Int) : super(ctx, id)
 
     /** Roles of User with Org  */
     private var m_roles: Array<MRole> = arrayOf()

@@ -5,9 +5,9 @@ import java.sql.ResultSet
 import java.util.*
 
 abstract class BasePOUser : PO {
-    constructor(ctx: Properties, ID: Int, trxName: String?) : super(ctx, ID, trxName)
-    constructor (ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
-    constructor (ctx: Properties, rs: ResultSet, trxName: String?, a: String?) : super(ctx, rs, trxName, a)
+    constructor(ctx: Properties, ID: Int) : super(ctx, ID)
+    constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
+    constructor (ctx: Properties, rs: ResultSet, trxName: String?, a: String?) : super(ctx, rs, a)
 
     /** Set User/Contact.
      * @param AD_User_ID

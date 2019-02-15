@@ -50,10 +50,10 @@
             </activation>
             <properties>
                 <idempiere-micro.groupId>com.github.iDempiere-micro</idempiere-micro.groupId>
-                <idempiere-micro-base-interfaces.version>0.6.0</idempiere-micro-base-interfaces.version>
-                <idempiere-micro-test-support.version>0.0.3</idempiere-micro-test-support.version>
-                <idempiere-micro-model-core.version>0.6.0</idempiere-micro-model-core.version>
-                <idempiere-micro-model-interfaces.version>0.6.0</idempiere-micro-model-interfaces.version>
+                <idempiere-micro-base-interfaces.version>0.7.0</idempiere-micro-base-interfaces.version>
+                <idempiere-micro-test-support.version>0.7.0</idempiere-micro-test-support.version>
+                <idempiere-micro-model-core.version>0.7.0</idempiere-micro-model-core.version>
+                <idempiere-micro-model-interfaces.version>0.7.0</idempiere-micro-model-interfaces.version>
             </properties>
         </profile>
     </profiles>
@@ -220,6 +220,9 @@
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 </project>

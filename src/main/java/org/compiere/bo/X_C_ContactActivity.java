@@ -31,8 +31,8 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_C_ContactActivity(Properties ctx, int C_ContactActivity_ID, String trxName) {
-    super(ctx, C_ContactActivity_ID, trxName);
+  public X_C_ContactActivity(Properties ctx, int C_ContactActivity_ID) {
+    super(ctx, C_ContactActivity_ID);
     /**
      * if (C_ContactActivity_ID == 0) { setC_ContactActivity_ID (0); setContactActivityType (null);
      * setDescription (null); setStartDate (new Timestamp( System.currentTimeMillis() ));
@@ -41,8 +41,8 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   }
 
   /** Load Constructor */
-  public X_C_ContactActivity(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_ContactActivity(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /** Load Constructor with rename */
@@ -79,7 +79,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     public org.compiere.model.I_C_Opportunity getC_Opportunity() throws RuntimeException {
     return (org.compiere.model.I_C_Opportunity)
         MTable.get(getCtx(), org.compiere.model.I_C_Opportunity.Table_Name)
-            .getPO(getC_Opportunity_ID(), null);
+            .getPO(getC_Opportunity_ID());
   }
 
   /**
@@ -119,7 +119,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
   public boolean isComplete() {
     Object oo = get_Value(I_C_ContactActivity.COLUMNNAME_IsComplete);
     if (oo != null) {
-      if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
+      if (oo instanceof Boolean) return (Boolean) oo;
       return "Y".equals(oo);
     }
     return false;
@@ -127,7 +127,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
 
   public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
     return (org.compiere.model.I_AD_User)
-        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRep_ID(), null);
+        MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRep_ID());
   }
 
   /**

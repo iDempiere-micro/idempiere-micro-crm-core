@@ -30,8 +30,8 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     override val tableId: Int
         get() = I_C_Opportunity.Table_ID
 
-    constructor(ctx: Properties, C_Opportunity_ID: Int, trxName: String?) : super(ctx, C_Opportunity_ID, trxName)
-    constructor (ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
+    constructor(ctx: Properties, C_Opportunity_ID: Int) : super(ctx, C_Opportunity_ID)
+    constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
 
     /** AccessLevel
      * @return 3 - Client - Org
@@ -49,7 +49,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     @Throws(RuntimeException::class)
     override fun getC_BPartner(): org.compiere.model.I_C_BPartner {
         return MTable.get(ctx, org.compiere.model.I_C_BPartner.Table_Name)
-                .getPO(c_BPartner_ID, null) as org.compiere.model.I_C_BPartner
+                .getPO(c_BPartner_ID) as org.compiere.model.I_C_BPartner
     }
 
     /** Get Business Partner .
@@ -77,7 +77,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     override fun getC_Order(): org.compiere.model.I_C_Order? {
         if (c_Order_ID == 0) return null
         return MTable.get(ctx, org.compiere.model.I_C_Order.Table_Name)
-                .getPO(c_Order_ID, null) as org.compiere.model.I_C_Order
+                .getPO(c_Order_ID) as org.compiere.model.I_C_Order
     }
 
     /** Get Order.

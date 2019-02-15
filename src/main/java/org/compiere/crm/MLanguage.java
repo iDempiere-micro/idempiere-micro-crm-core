@@ -37,8 +37,8 @@ public class MLanguage extends X_AD_Language {
    * @param AD_Language_ID id
    * @param trxName transaction
    */
-  public MLanguage(Properties ctx, int AD_Language_ID, String trxName) {
-    super(ctx, AD_Language_ID, trxName);
+  public MLanguage(Properties ctx, int AD_Language_ID) {
+    super(ctx, AD_Language_ID);
   } //	MLanguage
 
   //	/**	Logger						*/
@@ -51,8 +51,8 @@ public class MLanguage extends X_AD_Language {
    * @param rs result set
    * @param trxName transaction
    */
-  public MLanguage(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MLanguage(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MLanguage
 
   public MLanguage(Properties ctx, Row row) {
@@ -76,7 +76,7 @@ public class MLanguage extends X_AD_Language {
       String CountryCode,
       String LanguageISO,
       String trxName) {
-    super(ctx, 0, trxName);
+    super(ctx, 0);
     setADLanguage(AD_Language); // 	en_US
     setIsBaseLanguage(false);
     setIsSystemLanguage(false);
@@ -105,7 +105,7 @@ public class MLanguage extends X_AD_Language {
    */
   public static I_AD_Language get(Properties ctx, String AD_Language) {
     return new Query(
-            ctx, I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_AD_Language + "=?", null)
+            ctx, I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_AD_Language + "=?")
         .setParameters(AD_Language)
         .firstOnly();
   } //	get
@@ -119,7 +119,7 @@ public class MLanguage extends X_AD_Language {
    */
   public static MLanguage[] getWithLanguage(Properties ctx, String LanguageISO) {
     List<MLanguage> list =
-        new Query(ctx, I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_LanguageISO + "=?", null)
+        new Query(ctx, I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_LanguageISO + "=?")
             .setParameters(LanguageISO)
             .list();
     return list.toArray(new MLanguage[list.size()]);

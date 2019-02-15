@@ -31,8 +31,8 @@ public class MContactInterest extends X_R_ContactInterest {
    * @param ignored ignored
    * @param trxName transaction
    */
-  public MContactInterest(Properties ctx, int ignored, String trxName) {
-    super(ctx, 0, trxName);
+  public MContactInterest(Properties ctx, int ignored) {
+    super(ctx, 0);
     if (ignored != 0) throw new IllegalArgumentException("Multi-Key");
   } //	MContactInterest
 
@@ -46,8 +46,8 @@ public class MContactInterest extends X_R_ContactInterest {
    * @param trxName transaction
    */
   public MContactInterest(
-      Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive, String trxName) {
-    super(ctx, 0, trxName);
+      Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive) {
+    super(ctx, 0);
     setR_InterestArea_ID(R_InterestArea_ID);
     setAD_User_ID(AD_User_ID);
     setIsActive(isActive);
@@ -60,8 +60,8 @@ public class MContactInterest extends X_R_ContactInterest {
    * @param rs load from current result set position (no navigation, not closed)
    * @param trxName transaction
    */
-  public MContactInterest(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MContactInterest(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MContactInterest
 
   /**
@@ -75,19 +75,19 @@ public class MContactInterest extends X_R_ContactInterest {
    * @return Contact Interest
    */
   public static MContactInterest get(
-      Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive, String trxName) {
+      Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive) {
     final String whereClause =
         I_R_ContactInterest.COLUMNNAME_R_InterestArea_ID
             + "=? AND "
             + I_R_ContactInterest.COLUMNNAME_AD_User_ID
             + "=?";
     MContactInterest retValue =
-        new Query(ctx, I_R_ContactInterest.Table_Name, whereClause, trxName)
+        new Query(ctx, I_R_ContactInterest.Table_Name, whereClause)
             .setParameters(R_InterestArea_ID, AD_User_ID)
             .first();
 
     if (retValue == null) {
-      retValue = new MContactInterest(ctx, R_InterestArea_ID, AD_User_ID, isActive, trxName);
+      retValue = new MContactInterest(ctx, R_InterestArea_ID, AD_User_ID, isActive);
       if (s_log.isLoggable(Level.FINE)) s_log.fine("NOT found - " + retValue);
     } else if (s_log.isLoggable(Level.FINE)) s_log.fine("Found - " + retValue);
     return retValue;

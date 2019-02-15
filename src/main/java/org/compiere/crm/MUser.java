@@ -53,8 +53,8 @@ public class MUser extends MBaseUser implements IUser {
    * @param AD_User_ID id
    * @param trxName transaction
    */
-  public MUser(Properties ctx, int AD_User_ID, String trxName) {
-    super(ctx, AD_User_ID, trxName); // 	0 is also System
+  public MUser(Properties ctx, int AD_User_ID) {
+    super(ctx, AD_User_ID); // 	0 is also System
     if (AD_User_ID == 0) {
       setIsFullBPAccess(true);
       setNotificationType(X_AD_User.NOTIFICATIONTYPE_EMail);
@@ -67,7 +67,7 @@ public class MUser extends MBaseUser implements IUser {
    * @param partner partner
    */
   public MUser(I_C_BPartner partner) {
-    this(partner.getCtx(), 0, null);
+    this(partner.getCtx(), 0);
     setClientOrg(partner);
     setC_BPartner_ID(partner.getC_BPartner_ID());
     setName(partner.getName());
@@ -80,8 +80,8 @@ public class MUser extends MBaseUser implements IUser {
    * @param rs current row of result set to be loaded
    * @param trxName transaction
    */
-  public MUser(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MUser(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MUser
 
   public MUser(Properties ctx, Row row) {
@@ -91,26 +91,14 @@ public class MUser extends MBaseUser implements IUser {
   /**
    * Get active Users of BPartner
    *
-   * @param ctx context
-   * @param C_BPartner_ID id
-   * @return array of users
-   * @deprecated Since 3.5.3a. Please use {@link #getOfBPartner(Properties, int, String)}.
-   */
-  public static MUser[] getOfBPartner(Properties ctx, int C_BPartner_ID) {
-    return getOfBPartner(ctx, C_BPartner_ID, null);
-  }
-
-  /**
-   * Get active Users of BPartner
-   *
    * @param ctx
    * @param C_BPartner_ID
    * @param trxName
    * @return array of users
    */
-  public static MUser[] getOfBPartner(Properties ctx, int C_BPartner_ID, String trxName) {
+  public static MUser[] getOfBPartner(Properties ctx, int C_BPartner_ID) {
     List<MUser> list =
-        new Query(ctx, I_AD_User.Table_Name, "C_BPartner_ID=?", trxName)
+        new Query(ctx, I_AD_User.Table_Name, "C_BPartner_ID=?")
             .setParameters(C_BPartner_ID)
             .setOnlyActiveRecords(true)
             .list();
@@ -128,9 +116,9 @@ public class MUser extends MBaseUser implements IUser {
    * @param trxName
    * @return array of users
    */
-  public static MUser[] getOfClient(Properties ctx, int ad_client_id, String trxName) {
+  public static MUser[] getOfClient(Properties ctx, int ad_client_id) {
     List<MUser> list =
-        new Query(ctx, I_AD_User.Table_Name, "ad_client_id=?", trxName)
+        new Query(ctx, I_AD_User.Table_Name, "ad_client_id=?")
             .setParameters(ad_client_id)
             .setOnlyActiveRecords(true)
             .list();
@@ -151,7 +139,7 @@ public class MUser extends MBaseUser implements IUser {
     Integer key = new Integer(AD_User_ID);
     MUser retValue = s_cache.get(key);
     if (retValue == null) {
-      retValue = new MUser(ctx, AD_User_ID, null);
+      retValue = new MUser(ctx, AD_User_ID);
       if (AD_User_ID == 0) {
         String trxName = null;
         retValue.load(); // 	load System Record
@@ -205,7 +193,7 @@ public class MUser extends MBaseUser implements IUser {
         .append(" AD_User.IsActive='Y'");
 
     List<MUser> users =
-        new Query(ctx, MUser.Table_Name, where.toString(), null)
+        new Query(ctx, MUser.Table_Name, where.toString())
             .setParameters(name)
             .setOrderBy("AD_Client_ID, AD_User_ID") // prefer first user on System
             .list();

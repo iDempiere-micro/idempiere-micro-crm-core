@@ -52,8 +52,8 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
    * @param C_Country_ID ID
    * @param trxName transaction
    */
-  public MCountry(Properties ctx, int C_Country_ID, String trxName) {
-    super(ctx, C_Country_ID, trxName);
+  public MCountry(Properties ctx, int C_Country_ID) {
+    super(ctx, C_Country_ID);
     if (C_Country_ID == 0) {
       //	setName (null);
       //	setCountryCode (null);
@@ -72,8 +72,8 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
    * @param rs ResultSet
    * @param trxName transaction
    */
-  public MCountry(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MCountry(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MCountry
 
   public MCountry(Properties ctx, Row row) {
@@ -91,7 +91,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
     loadAllCountriesIfNeeded(ctx);
     MCountry c = s_countries.get(C_Country_ID);
     if (c != null) return c;
-    c = new MCountry(ctx, C_Country_ID, null);
+    c = new MCountry(ctx, C_Country_ID);
     if (c.getC_Country_ID() == C_Country_ID) {
       s_countries.put(C_Country_ID, c);
       return c;
@@ -125,7 +125,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
     loadAllCountriesIfNeeded(ctx);
     MCountry[] retValue = new MCountry[s_countries.size()];
     s_countries.values().toArray(retValue);
-    Arrays.sort(retValue, new MCountry(ctx, 0, null));
+    Arrays.sort(retValue, new MCountry(ctx, 0));
     return retValue;
   } //	getCountries
 
@@ -146,7 +146,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
     //
     s_countries = new CCache<Integer, MCountry>(I_C_Country.Table_Name, 250);
     List<MCountry> countries =
-        new Query(ctx, I_C_Country.Table_Name, "", null).setOnlyActiveRecords(true).list();
+        new Query(ctx, I_C_Country.Table_Name, "").setOnlyActiveRecords(true).list();
     for (MCountry c : countries) {
       s_countries.put(c.getC_Country_ID(), c);
       //	Country code of Client Language

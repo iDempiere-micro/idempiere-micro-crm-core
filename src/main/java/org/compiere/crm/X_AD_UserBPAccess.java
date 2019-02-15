@@ -91,16 +91,16 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess, 
   /** */
   private static final long serialVersionUID = 20171031L;
   /** Standard Constructor */
-  public X_AD_UserBPAccess(Properties ctx, int AD_UserBPAccess_ID, String trxName) {
-    super(ctx, AD_UserBPAccess_ID, trxName);
+  public X_AD_UserBPAccess(Properties ctx, int AD_UserBPAccess_ID) {
+    super(ctx, AD_UserBPAccess_ID);
     /**
      * if (AD_UserBPAccess_ID == 0) { setAD_UserBPAccess_ID (0); setAD_User_ID (0); setBPAccessType
      * (null); }
      */
   }
   /** Load Constructor */
-  public X_AD_UserBPAccess(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_AD_UserBPAccess(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /**

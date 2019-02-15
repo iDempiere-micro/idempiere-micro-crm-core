@@ -21,8 +21,8 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_C_Country(Properties ctx, int C_Country_ID, String trxName) {
-    super(ctx, C_Country_ID, trxName);
+  public X_C_Country(Properties ctx, int C_Country_ID) {
+    super(ctx, C_Country_ID);
     /**
      * if (C_Country_ID == 0) { setC_Country_ID (0); setCountryCode (null); setDisplaySequence
      * (null); // @C@, @R@ @P@ setHasPostal_Add (false); setHasRegion (false);
@@ -31,8 +31,8 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
   }
 
   /** Load Constructor */
-  public X_C_Country(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_Country(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   public X_C_Country(Properties ctx, Row row) {

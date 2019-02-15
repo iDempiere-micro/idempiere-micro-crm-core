@@ -39,8 +39,8 @@ public class MCountryGroup extends X_C_CountryGroup {
    * @param C_CountryGroup_ID ID
    * @param trxName transaction
    */
-  public MCountryGroup(Properties ctx, int C_CountryGroup_ID, String trxName) {
-    super(ctx, C_CountryGroup_ID, trxName);
+  public MCountryGroup(Properties ctx, int C_CountryGroup_ID) {
+    super(ctx, C_CountryGroup_ID);
   } //  MCountryGroup
 
   /**
@@ -50,8 +50,8 @@ public class MCountryGroup extends X_C_CountryGroup {
    * @param rs ResultSet
    * @param trxName transaction
    */
-  public MCountryGroup(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MCountryGroup(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MCountryGroup
 
   /**
@@ -64,7 +64,7 @@ public class MCountryGroup extends X_C_CountryGroup {
   public static MCountryGroup get(Properties ctx, int C_CountryGroup_ID) {
     MCountryGroup c = s_cache.get(C_CountryGroup_ID);
     if (c != null) return c;
-    c = new MCountryGroup(ctx, C_CountryGroup_ID, null);
+    c = new MCountryGroup(ctx, C_CountryGroup_ID);
     if (c.getC_CountryGroup_ID() == C_CountryGroup_ID) {
       s_cache.put(C_CountryGroup_ID, c);
       return c;

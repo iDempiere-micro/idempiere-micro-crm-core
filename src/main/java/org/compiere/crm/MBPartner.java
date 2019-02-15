@@ -35,7 +35,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param ctx context
    */
   public MBPartner(Properties ctx) {
-    this(ctx, -1, null);
+    this(ctx, -1);
   } //	MBPartner
 
   /**
@@ -45,8 +45,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param rs ResultSet to load from
    * @param trxName transaction
    */
-  public MBPartner(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MBPartner(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MBPartner
 
   public MBPartner(Properties ctx, Row row) {
@@ -60,8 +60,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param C_BPartner_ID partner or 0 or -1 (load from template)
    * @param trxName transaction
    */
-  public MBPartner(Properties ctx, int C_BPartner_ID, String trxName) {
-    super(ctx, C_BPartner_ID, trxName);
+  public MBPartner(Properties ctx, int C_BPartner_ID) {
+    super(ctx, C_BPartner_ID);
     //
     if (C_BPartner_ID == -1) {
       initTemplate(Env.getContextAsInt(ctx, "AD_Client_ID"));
@@ -107,7 +107,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param impBP import
    */
   public MBPartner(X_I_BPartner impBP) {
-    this(impBP.getCtx(), 0, null);
+    this(impBP.getCtx(), 0);
     setClientOrg(impBP);
     setUpdatedBy(impBP.getUpdatedBy());
     //
@@ -137,7 +137,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    */
   public static I_C_BPartner getTemplate(Properties ctx, int AD_Client_ID) {
     I_C_BPartner template = getBPartnerCashTrx(ctx, AD_Client_ID);
-    if (template == null) template = new MBPartner(ctx, 0, null);
+    if (template == null) template = new MBPartner(ctx, 0);
     //	Reset
     if (template != null) {
       template.set_ValueNoCheck("C_BPartner_ID", new Integer(0));
@@ -183,17 +183,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
   } //	getBPartnerCashTrx
 
   /**
-   * Get BPartner with Value
-   *
-   * @param ctx context
-   * @param Value value
-   * @return BPartner or null
-   */
-  public static MBPartner get(Properties ctx, String Value) {
-    return get(ctx, Value, null);
-  }
-
-  /**
    * Get BPartner with Value in a transaction
    *
    * @param ctx context
@@ -201,28 +190,17 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param trxName transaction
    * @return BPartner or null
    */
-  public static MBPartner get(Properties ctx, String Value, String trxName) {
+  public static MBPartner get(Properties ctx, String Value) {
     if (Value == null || Value.length() == 0) return null;
     final String whereClause = "Value=? AND AD_Client_ID=?";
     MBPartner retValue =
-        new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
+        new Query(ctx, I_C_BPartner.Table_Name, whereClause)
             .setParameters(Value, Env.getClientId(ctx))
             .firstOnly();
     return retValue;
   } //	get
 
   /**
-   * Get BPartner with Value
-   *
-   * @param ctx context
-   * @param Value value
-   * @return BPartner or null
-   */
-  public static I_C_BPartner get(Properties ctx, int C_BPartner_ID) {
-    return get(ctx, C_BPartner_ID, null);
-  }
-
-  /**
    * Get BPartner with Value in a transaction
    *
    * @param ctx context
@@ -230,10 +208,10 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
    * @param trxName transaction
    * @return BPartner or null
    */
-  public static I_C_BPartner get(Properties ctx, int C_BPartner_ID, String trxName) {
+  public static I_C_BPartner get(Properties ctx, int C_BPartner_ID) {
     final String whereClause = "C_BPartner_ID=? AND AD_Client_ID=?";
     I_C_BPartner retValue =
-        new Query(ctx, I_C_BPartner.Table_Name, whereClause, trxName)
+        new Query(ctx, I_C_BPartner.Table_Name, whereClause)
             .setParameters(C_BPartner_ID, Env.getClientId(ctx))
             .firstOnly();
     return retValue;
@@ -364,7 +342,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
       m_primaryC_BPartner_Location_ID = getPrimaryC_BPartner_Location_ID();
     }
     if (m_primaryC_BPartner_Location_ID == null) return null;
-    return new MBPartnerLocation(getCtx(), m_primaryC_BPartner_Location_ID, null);
+    return new MBPartnerLocation(getCtx(), m_primaryC_BPartner_Location_ID);
   } //	getPrimaryC_BPartner_Location
 
   /**

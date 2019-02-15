@@ -19,13 +19,13 @@ public class X_C_Region extends BasePOName implements I_C_Region, I_Persistent {
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_C_Region(Properties ctx, int C_Region_ID, String trxName) {
-    super(ctx, C_Region_ID, trxName);
+  public X_C_Region(Properties ctx, int C_Region_ID) {
+    super(ctx, C_Region_ID);
   }
 
   /** Load Constructor */
-  public X_C_Region(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_Region(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   public X_C_Region(Properties ctx, Row row) {

@@ -19,13 +19,13 @@ class MCrmCustomerCategory : BasePOName, I_Persistent {
         return 3 // AccessLevel = 3 - Client - Org
     }
 
-    constructor(ctx: Properties, ID: Int, trxName: String?) : super(ctx, ID, trxName)
-    constructor (ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
-    constructor (ctx: Properties, rs: ResultSet, trxName: String?, a: String?) : super(ctx, rs, trxName, a)
+    constructor(ctx: Properties, ID: Int) : super(ctx, ID)
+    constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
+    constructor (ctx: Properties, rs: ResultSet, a: String?) : super(ctx, rs, a)
 
     var bPartner: I_C_BPartner
         get() {
-            return MBPartner(ctx, get_Value(I_C_BPartner.COLUMNNAME_C_BPartner_ID) as Int, null)
+            return MBPartner(ctx, get_Value(I_C_BPartner.COLUMNNAME_C_BPartner_ID) as Int)
         }
         set(bp) {
             set_ValueNoCheck(I_C_BPartner.COLUMNNAME_C_BPartner_ID, bp.c_BPartner_ID)
@@ -33,7 +33,7 @@ class MCrmCustomerCategory : BasePOName, I_Persistent {
 
     var category: MCrmCategory
         get() {
-            return MCrmCategory(ctx, get_Value("Crm_Category_ID") as Int, null)
+            return MCrmCategory(ctx, get_Value("Crm_Category_ID") as Int)
         }
         set(cat) {
             set_ValueNoCheck("Crm_Category_ID", cat.id)

@@ -41,7 +41,7 @@ public final class MLocationLookup extends Lookup implements Serializable {
    */
   public NamePair get(Object value) {
     if (value == null) return null;
-    MLocation loc = getLocation(value, null);
+    MLocation loc = getLocation(value);
     if (loc == null) return null;
     return new KeyNamePair(loc.getC_Location_ID(), loc.toString());
   } //	get
@@ -53,13 +53,13 @@ public final class MLocationLookup extends Lookup implements Serializable {
    * @param trxName transaction
    * @return Location
    */
-  public MLocation getLocation(Object key, String trxName) {
+  public MLocation getLocation(Object key) {
     if (key == null) return null;
     int C_Location_ID = 0;
-    if (key instanceof Integer) C_Location_ID = ((Integer) key).intValue();
-    else if (key != null) C_Location_ID = Integer.parseInt(key.toString());
+    if (key instanceof Integer) C_Location_ID = (Integer) key;
+    else C_Location_ID = Integer.parseInt(key.toString());
     //
-    return getLocation(C_Location_ID, trxName);
+    return getLocation(C_Location_ID);
   } //	getLocation
 
   /**
@@ -69,8 +69,8 @@ public final class MLocationLookup extends Lookup implements Serializable {
    * @param trxName transaction
    * @return Location
    */
-  public MLocation getLocation(int C_Location_ID, String trxName) {
-    return MLocation.get(m_ctx, C_Location_ID, trxName);
+  public MLocation getLocation(int C_Location_ID) {
+    return MLocation.get(m_ctx, C_Location_ID);
   } //	getC_Location_ID
 
   /**

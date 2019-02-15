@@ -19,8 +19,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_C_AddressTransaction(Properties ctx, int C_AddressTransaction_ID, String trxName) {
-    super(ctx, C_AddressTransaction_ID, trxName);
+  public X_C_AddressTransaction(Properties ctx, int C_AddressTransaction_ID) {
+    super(ctx, C_AddressTransaction_ID);
     /**
      * if (C_AddressTransaction_ID == 0) { setC_AddressTransaction_ID (0); setC_AddressValidation_ID
      * (0); setIsValid (false); // N setProcessed (false); // N }
@@ -28,8 +28,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
   }
 
   /** Load Constructor */
-  public X_C_AddressTransaction(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_AddressTransaction(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /**

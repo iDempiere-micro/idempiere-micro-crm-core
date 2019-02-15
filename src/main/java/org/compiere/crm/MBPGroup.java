@@ -32,8 +32,8 @@ public class MBPGroup extends X_C_BP_Group {
    * @param C_BP_Group_ID id
    * @param trxName transaction
    */
-  public MBPGroup(Properties ctx, int C_BP_Group_ID, String trxName) {
-    super(ctx, C_BP_Group_ID, trxName);
+  public MBPGroup(Properties ctx, int C_BP_Group_ID) {
+    super(ctx, C_BP_Group_ID);
     if (C_BP_Group_ID == 0) {
       //	setValue (null);
       //	setName (null);
@@ -50,8 +50,8 @@ public class MBPGroup extends X_C_BP_Group {
    * @param rs result set
    * @param trxName transaction
    */
-  public MBPGroup(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MBPGroup(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MBPGroup
 
   public MBPGroup(Properties ctx, Row row) {
@@ -66,24 +66,13 @@ public class MBPGroup extends X_C_BP_Group {
    * @return MBPGroup
    */
   public static MBPGroup get(Properties ctx, int C_BP_Group_ID) {
-    Integer key = new Integer(C_BP_Group_ID);
+    Integer key = C_BP_Group_ID;
     MBPGroup retValue = s_cache.get(key);
     if (retValue != null) return retValue;
-    retValue = new MBPGroup(ctx, C_BP_Group_ID, null);
+    retValue = new MBPGroup(ctx, C_BP_Group_ID);
     if (retValue.getId() != 0) s_cache.put(key, retValue);
     return retValue;
   } //	get
-
-  /**
-   * @param ctx
-   * @param C_BP_Group_ID
-   * @param trxName
-   * @return MBPGroup
-   */
-  public static MBPGroup get(Properties ctx, int C_BP_Group_ID, String trxName) {
-    if (Util.isEmpty(trxName, true)) return get(ctx, C_BP_Group_ID);
-    else return new MBPGroup(ctx, C_BP_Group_ID, trxName);
-  }
 
   /**
    * Get Default MBPGroup

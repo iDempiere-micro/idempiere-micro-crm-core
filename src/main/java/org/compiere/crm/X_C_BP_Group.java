@@ -30,8 +30,8 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_C_BP_Group(Properties ctx, int C_BP_Group_ID, String trxName) {
-    super(ctx, C_BP_Group_ID, trxName);
+  public X_C_BP_Group(Properties ctx, int C_BP_Group_ID) {
+    super(ctx, C_BP_Group_ID);
     /**
      * if (C_BP_Group_ID == 0) { setC_BP_Group_ID (0); setIsConfidentialInfo (false); // N
      * setIsDefault (false); setName (null); setValue (null); }
@@ -39,8 +39,8 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
   }
 
   /** Load Constructor */
-  public X_C_BP_Group(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_BP_Group(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   public X_C_BP_Group(Properties ctx, Row row) {

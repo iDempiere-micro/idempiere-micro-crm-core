@@ -18,8 +18,8 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_C_Greeting(Properties ctx, int C_Greeting_ID, String trxName) {
-    super(ctx, C_Greeting_ID, trxName);
+  public X_C_Greeting(Properties ctx, int C_Greeting_ID) {
+    super(ctx, C_Greeting_ID);
     /**
      * if (C_Greeting_ID == 0) { setC_Greeting_ID (0); setIsDefault (false); setIsFirstNameOnly
      * (false); setName (null); }
@@ -27,8 +27,8 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persiste
   }
 
   /** Load Constructor */
-  public X_C_Greeting(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_Greeting(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /**

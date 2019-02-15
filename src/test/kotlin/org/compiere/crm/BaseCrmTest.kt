@@ -33,7 +33,7 @@ abstract class BaseCrmTest {
 
     fun <T : IPO> getById(id: Int, tableName: String): T {
         val modelFactory: IModelFactory = DefaultModelFactory()
-        val result = modelFactory.getPO(tableName, id, null)
+        val result = modelFactory.getPO(tableName, id)
         println(result)
         assertNotNull(result)
         val obj = result as T

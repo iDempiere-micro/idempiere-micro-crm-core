@@ -11,9 +11,9 @@ import java.sql.ResultSet
 import java.util.*
 
 open class MBaseBPartner : X_C_BPartner {
-    constructor(ctx: Properties, rs: ResultSet, trxName: String?) : super(ctx, rs, trxName)
+    constructor(ctx: Properties, rs: ResultSet) : super(ctx, rs)
     constructor(ctx: Properties, row: Row) : super(ctx, row)
-    constructor(ctx: Properties, id: Int, trxName: String?) : super(ctx, id, trxName)
+    constructor(ctx: Properties, id: Int) : super(ctx, id)
 
     /** Users  */
     private val m_contacts: MutableList<MUser> = mutableListOf()
@@ -38,7 +38,7 @@ open class MBaseBPartner : X_C_BPartner {
         val loaded = DB.current.run(loadQuery)
 
         if (loaded == null) {
-            load(0, null)
+            load(0)
         }
 
         setStandardDefaults()
@@ -100,7 +100,7 @@ open class MBaseBPartner : X_C_BPartner {
             if (c_BP_Group_ID == 0)
                 m_group = MBPGroup.getDefault(ctx)
             else
-                m_group = MBPGroup.get(ctx, c_BP_Group_ID, null)
+                m_group = MBPGroup.get(ctx, c_BP_Group_ID)
         }
         return m_group
     } // 	getBPGroup

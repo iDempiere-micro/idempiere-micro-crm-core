@@ -29,8 +29,8 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
    * @param C_Region_ID id
    * @param trxName transaction
    */
-  public MRegion(Properties ctx, int C_Region_ID, String trxName) {
-    super(ctx, C_Region_ID, trxName);
+  public MRegion(Properties ctx, int C_Region_ID) {
+    super(ctx, C_Region_ID);
     if (C_Region_ID == 0) {}
   } //  MRegion
 
@@ -41,8 +41,8 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
    * @param rs result set
    * @param trxName transaction
    */
-  public MRegion(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MRegion(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MRegion
 
   public MRegion(Properties ctx, Row row) {
@@ -56,7 +56,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
    * @param regionName Region Name
    */
   public MRegion(MCountry country, String regionName) {
-    super(country.getCtx(), 0, null);
+    super(country.getCtx(), 0);
     setC_Country_ID(country.getC_Country_ID());
     setName(regionName);
   } //  MRegion
@@ -83,7 +83,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
     String key = String.valueOf(C_Region_ID);
     MRegion r = s_regions.get(key);
     if (r != null) return r;
-    r = new MRegion(ctx, C_Region_ID, null);
+    r = new MRegion(ctx, C_Region_ID);
     if (r.getC_Region_ID() == C_Region_ID) {
       s_regions.put(key, r);
       return r;
@@ -114,7 +114,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
     if (s_regions == null || s_regions.size() == 0) loadAllRegions(ctx);
     MRegion[] retValue = new MRegion[s_regions.size()];
     s_regions.values().toArray(retValue);
-    Arrays.sort(retValue, new MRegion(ctx, 0, null));
+    Arrays.sort(retValue, new MRegion(ctx, 0));
     return retValue;
   } //	getRegions
 
@@ -137,7 +137,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
     //  Sort it
     MRegion[] retValue = new MRegion[list.size()];
     list.toArray(retValue);
-    Arrays.sort(retValue, new MRegion(ctx, 0, null));
+    Arrays.sort(retValue, new MRegion(ctx, 0));
     return retValue;
   } //	getRegions
 

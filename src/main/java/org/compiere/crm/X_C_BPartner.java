@@ -111,8 +111,8 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
   /** */
   private static final long serialVersionUID = 20171031L;
   /** Standard Constructor */
-  public X_C_BPartner(Properties ctx, int C_BPartner_ID, String trxName) {
-    super(ctx, C_BPartner_ID, trxName);
+  public X_C_BPartner(Properties ctx, int C_BPartner_ID) {
+    super(ctx, C_BPartner_ID);
     /**
      * if (C_BPartner_ID == 0) { setC_BPartner_ID (0); setC_BP_Group_ID (0); setIs1099Vendor
      * (false); // N setIsCustomer (false); setIsEmployee (false); setIsOneTime (false);
@@ -122,8 +122,8 @@ public class X_C_BPartner extends BasePONameValue implements I_Persistent {
      */
   }
   /** Load Constructor */
-  public X_C_BPartner(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_BPartner(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   public X_C_BPartner(Properties ctx, Row row) {

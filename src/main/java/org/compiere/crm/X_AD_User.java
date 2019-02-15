@@ -69,8 +69,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_AD_User(Properties ctx, int AD_User_ID, String trxName) {
-    super(ctx, AD_User_ID, trxName);
+  public X_AD_User(Properties ctx, int AD_User_ID) {
+    super(ctx, AD_User_ID);
     /**
      * if (AD_User_ID == 0) { setAD_User_ID (0); setFailedLoginCount (0); // 0
      * setIsAddMailTextAutomatically (false); // N setIsExpired (false); // N setIsFullBPAccess
@@ -81,8 +81,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
   }
 
   /** Load Constructor */
-  public X_AD_User(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_AD_User(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   public X_AD_User(Properties ctx, Row row) {

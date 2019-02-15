@@ -18,13 +18,13 @@ public class X_C_JobCategory extends BasePOName implements I_C_JobCategory, I_Pe
   private static final long serialVersionUID = 20171031L;
 
   /** Standard Constructor */
-  public X_C_JobCategory(Properties ctx, int C_JobCategory_ID, String trxName) {
-    super(ctx, C_JobCategory_ID, trxName);
+  public X_C_JobCategory(Properties ctx, int C_JobCategory_ID) {
+    super(ctx, C_JobCategory_ID);
   }
 
   /** Load Constructor */
-  public X_C_JobCategory(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public X_C_JobCategory(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /**

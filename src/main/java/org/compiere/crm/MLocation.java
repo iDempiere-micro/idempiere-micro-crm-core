@@ -63,8 +63,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    * @param C_Location_ID id
    * @param trxName transaction
    */
-  public MLocation(Properties ctx, int C_Location_ID, String trxName) {
-    super(ctx, C_Location_ID, trxName);
+  public MLocation(Properties ctx, int C_Location_ID) {
+    super(ctx, C_Location_ID);
     if (C_Location_ID == 0) {
       MCountry defaultCountry = MCountry.getDefault(getCtx());
       setCountry(defaultCountry);
@@ -82,7 +82,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    * @param region optional region
    */
   public MLocation(MCountry country, MRegion region) {
-    super(country.getCtx(), 0, null);
+    super(country.getCtx(), 0);
     setCountry(country);
     setRegion(region);
   } //	MLocation
@@ -95,8 +95,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    * @param city city
    * @param trxName transaction
    */
-  public MLocation(Properties ctx, int C_Country_ID, int C_Region_ID, String city, String trxName) {
-    super(ctx, 0, trxName);
+  public MLocation(Properties ctx, int C_Country_ID, int C_Region_ID, String city) {
+    super(ctx, 0);
     setC_Country_ID(C_Country_ID);
     setC_Region_ID(C_Region_ID);
     setCity(city);
@@ -109,8 +109,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    * @param rs result set
    * @param trxName transaction
    */
-  public MLocation(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MLocation(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   } //	MLocation
 
   public MLocation(Properties ctx, Row row) {
@@ -125,18 +125,18 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    * @param trxName transaction
    * @return MLocation
    */
-  public static MLocation get(Properties ctx, int C_Location_ID, String trxName) {
+  public static MLocation get(Properties ctx, int C_Location_ID) {
     //	New
-    if (C_Location_ID == 0) return new MLocation(ctx, C_Location_ID, trxName);
+    if (C_Location_ID == 0) return new MLocation(ctx, C_Location_ID);
     //
-    Integer key = new Integer(C_Location_ID);
+    Integer key = C_Location_ID;
     MLocation retValue = null;
-    if (trxName == null) retValue = s_cache.get(key);
+    retValue = s_cache.get(key);
     if (retValue != null) return retValue;
-    retValue = new MLocation(ctx, C_Location_ID, trxName);
+    retValue = new MLocation(ctx, C_Location_ID);
     if (retValue.getId() != 0) // 	found
     {
-      if (trxName == null) s_cache.put(key, retValue);
+      s_cache.put(key, retValue);
       return retValue;
     }
     return null; //	not found
@@ -159,8 +159,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    * @return address transaction instance
    */
   private static MAddressTransaction createAddressTransaction(
-      Properties ctx, MLocation location, int C_AddressValidation_ID, String trxName) {
-    MAddressTransaction at = new MAddressTransaction(ctx, 0, trxName);
+      Properties ctx, MLocation location, int C_AddressValidation_ID) {
+    MAddressTransaction at = new MAddressTransaction(ctx, 0);
     at.setAD_Org_ID(location.getOrgId());
     at.setAddress1(location.getAddress1());
     at.setAddress2(location.getAddress2());
@@ -651,7 +651,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
           || (bplocname >= 3
               && (is_ValueChanged(COLUMNNAME_RegionName)
                   || is_ValueChanged(COLUMNNAME_C_Region_ID)))) {
-        MBPartnerLocation bpl = new MBPartnerLocation(getCtx(), bplID, null);
+        MBPartnerLocation bpl = new MBPartnerLocation(getCtx(), bplID);
         bpl.setName(bpl.getBPLocName(this));
         bpl.saveEx();
       }
@@ -668,7 +668,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
    */
   public String getMapsLocation() {
 
-    MRegion region = new MRegion(Env.getCtx(), getC_Region_ID(), null);
+    MRegion region = new MRegion(Env.getCtx(), getC_Region_ID());
     StringBuilder address = new StringBuilder();
     address.append((getAddress1() != null ? getAddress1() + ", " : ""));
     address.append((getAddress2() != null ? getAddress2() + ", " : ""));

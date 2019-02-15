@@ -14,12 +14,12 @@ public class MAddressTransaction extends X_C_AddressTransaction {
   /** Error Message */
   private String m_errorMessage = null;
 
-  public MAddressTransaction(Properties ctx, int C_AddressTransaction_ID, String trxName) {
-    super(ctx, C_AddressTransaction_ID, trxName);
+  public MAddressTransaction(Properties ctx, int C_AddressTransaction_ID) {
+    super(ctx, C_AddressTransaction_ID);
   }
 
-  public MAddressTransaction(Properties ctx, ResultSet rs, String trxName) {
-    super(ctx, rs, trxName);
+  public MAddressTransaction(Properties ctx, ResultSet rs) {
+    super(ctx, rs);
   }
 
   /**
