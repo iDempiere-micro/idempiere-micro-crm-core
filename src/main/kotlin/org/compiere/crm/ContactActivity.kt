@@ -14,5 +14,12 @@ data class ContactActivity(
         get() = "$Key"
 
     constructor (a: I_C_ContactActivity) :
-        this(a.c_ContactActivity_ID, a.description, a.startDate.time, a.c_Opportunity.c_BPartner.name, a.isComplete, a.salesRep.name)
+            this(
+                a.c_ContactActivity_ID,
+                a.description,
+                a.startDate.time,
+                a.c_Opportunity.c_BPartner.name,
+                a.isComplete,
+                a.salesRep.name
+            )
 }

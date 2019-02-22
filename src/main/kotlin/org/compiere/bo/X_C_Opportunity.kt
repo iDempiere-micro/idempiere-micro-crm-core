@@ -42,14 +42,14 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
 
     override fun toString(): String {
         val sb = StringBuffer("X_C_Opportunity[")
-                .append(id).append("]")
+            .append(id).append("]")
         return sb.toString()
     }
 
     @Throws(RuntimeException::class)
     override fun getC_BPartner(): org.compiere.model.I_C_BPartner {
         return MTable.get(ctx, org.compiere.model.I_C_BPartner.Table_Name)
-                .getPO(c_BPartner_ID) as org.compiere.model.I_C_BPartner
+            .getPO(c_BPartner_ID) as org.compiere.model.I_C_BPartner
     }
 
     /** Get Business Partner .
@@ -77,7 +77,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
     override fun getC_Order(): org.compiere.model.I_C_Order? {
         if (c_Order_ID == 0) return null
         return MTable.get(ctx, org.compiere.model.I_C_Order.Table_Name)
-                .getPO(c_Order_ID) as org.compiere.model.I_C_Order
+            .getPO(c_Order_ID) as org.compiere.model.I_C_Order
     }
 
     /** Get Order.

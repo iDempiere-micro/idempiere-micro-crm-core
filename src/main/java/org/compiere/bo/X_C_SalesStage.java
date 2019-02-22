@@ -1,10 +1,11 @@
 package org.compiere.bo;
 
-import java.sql.ResultSet;
-import java.util.Properties;
 import org.compiere.model.I_C_SalesStage;
 import org.compiere.orm.BasePONameValue;
 import org.idempiere.orm.I_Persistent;
+
+import java.sql.ResultSet;
+import java.util.Properties;
 
 /**
  * Generated Model for C_SalesStage
@@ -14,35 +15,41 @@ import org.idempiere.orm.I_Persistent;
  */
 public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage, I_Persistent {
 
-  /** */
-  private static final long serialVersionUID = 20171031L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 20171031L;
 
-  /** Standard Constructor */
-  public X_C_SalesStage(Properties ctx, int C_SalesStage_ID) {
-    super(ctx, C_SalesStage_ID);
-  }
+    /**
+     * Standard Constructor
+     */
+    public X_C_SalesStage(Properties ctx, int C_SalesStage_ID) {
+        super(ctx, C_SalesStage_ID);
+    }
 
-  /** Load Constructor */
-  public X_C_SalesStage(Properties ctx, ResultSet rs) {
-    super(ctx, rs);
-  }
+    /**
+     * Load Constructor
+     */
+    public X_C_SalesStage(Properties ctx, ResultSet rs) {
+        super(ctx, rs);
+    }
 
-  /**
-   * AccessLevel
-   *
-   * @return 3 - Client - Org
-   */
-  protected int getAccessLevel() {
-    return accessLevel.intValue();
-  }
+    /**
+     * AccessLevel
+     *
+     * @return 3 - Client - Org
+     */
+    protected int getAccessLevel() {
+        return accessLevel.intValue();
+    }
 
-  public String toString() {
-    StringBuffer sb = new StringBuffer("X_C_SalesStage[").append(getId()).append("]");
-    return sb.toString();
-  }
+    public String toString() {
+        StringBuffer sb = new StringBuffer("X_C_SalesStage[").append(getId()).append("]");
+        return sb.toString();
+    }
 
     @Override
-  public int getTableId() {
-    return I_C_SalesStage.Table_ID;
-  }
+    public int getTableId() {
+        return I_C_SalesStage.Table_ID;
+    }
 }

@@ -3,7 +3,6 @@ package org.compiere.crm
 import company.bigger.test.support.randomString
 import org.idempiere.common.util.Env
 import org.junit.Test
-import software.hsharp.core.orm.DummyEventManager
 import software.hsharp.core.util.DB
 import software.hsharp.core.util.HikariCPI
 import kotlin.test.assertNotNull
@@ -12,7 +11,6 @@ class CategoryTest : BaseCrmTest() {
 
     init {
         HikariCPI.default(sessionUrl, "adempiere", "adempiere")
-        DummyEventManager()
     }
 
     @Test

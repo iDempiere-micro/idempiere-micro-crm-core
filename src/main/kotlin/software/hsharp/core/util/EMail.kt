@@ -1,9 +1,9 @@
 package software.hsharp.core.util
 
-import software.hsharp.core.models.IEMail
-import javax.mail.internet.InternetAddress
 import org.apache.commons.mail.DefaultAuthenticator
 import org.apache.commons.mail.HtmlEmail
+import software.hsharp.core.models.IEMail
+import javax.mail.internet.InternetAddress
 
 open class EMail(
     override var SmtpHost: String,

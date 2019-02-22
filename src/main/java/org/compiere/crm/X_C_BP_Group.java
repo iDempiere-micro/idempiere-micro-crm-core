@@ -18,195 +18,209 @@ import java.util.Properties;
  */
 public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persistent {
 
-  /** PriorityBase AD_Reference_ID=350 */
-  public static final int PRIORITYBASE_AD_Reference_ID = 350;
-  /** Same = S */
-  public static final String PRIORITYBASE_Same = "S";
-  /** Lower = L */
-  public static final String PRIORITYBASE_Lower = "L";
-  /** Higher = H */
-  public static final String PRIORITYBASE_Higher = "H";
-  /** */
-  private static final long serialVersionUID = 20171031L;
-
-  /** Standard Constructor */
-  public X_C_BP_Group(Properties ctx, int C_BP_Group_ID) {
-    super(ctx, C_BP_Group_ID);
     /**
-     * if (C_BP_Group_ID == 0) { setC_BP_Group_ID (0); setIsConfidentialInfo (false); // N
-     * setIsDefault (false); setName (null); setValue (null); }
+     * PriorityBase AD_Reference_ID=350
      */
-  }
-
-  /** Load Constructor */
-  public X_C_BP_Group(Properties ctx, ResultSet rs) {
-    super(ctx, rs);
-  }
-
-  public X_C_BP_Group(Properties ctx, Row row) {
-    super(ctx, row);
-  } //	MBPGroup
-
-  /**
-   * AccessLevel
-   *
-   * @return 3 - Client - Org
-   */
-  protected int getAccessLevel() {
-    return accessLevel.intValue();
-  }
-
-  public String toString() {
-    return "X_C_BP_Group[" + getId() + "]";
-  }
+    public static final int PRIORITYBASE_AD_Reference_ID = 350;
+    /**
+     * Same = S
+     */
+    public static final String PRIORITYBASE_Same = "S";
+    /**
+     * Lower = L
+     */
+    public static final String PRIORITYBASE_Lower = "L";
+    /**
+     * Higher = H
+     */
+    public static final String PRIORITYBASE_Higher = "H";
+    /**
+     *
+     */
+    private static final long serialVersionUID = 20171031L;
 
     /**
-   * Get Print Color.
-   *
-   * @return Color used for printing and display
-   */
-  public int getAD_PrintColor_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_AD_PrintColor_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+     * Standard Constructor
+     */
+    public X_C_BP_Group(Properties ctx, int C_BP_Group_ID) {
+        super(ctx, C_BP_Group_ID);
+        /**
+         * if (C_BP_Group_ID == 0) { setC_BP_Group_ID (0); setIsConfidentialInfo (false); // N
+         * setIsDefault (false); setName (null); setValue (null); }
+         */
+    }
 
     /**
-   * Get Business Partner Group.
-   *
-   * @return Business Partner Group
-   */
-  public int getC_BP_Group_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_BP_Group_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+     * Load Constructor
+     */
+    public X_C_BP_Group(Properties ctx, ResultSet rs) {
+        super(ctx, rs);
+    }
+
+    public X_C_BP_Group(Properties ctx, Row row) {
+        super(ctx, row);
+    } //	MBPGroup
 
     /**
-   * Get Dunning.
-   *
-   * @return Dunning Rules for overdue invoices
-   */
-  public int getC_Dunning_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_C_Dunning_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+     * AccessLevel
+     *
+     * @return 3 - Client - Org
+     */
+    protected int getAccessLevel() {
+        return accessLevel.intValue();
+    }
+
+    public String toString() {
+        return "X_C_BP_Group[" + getId() + "]";
+    }
 
     /**
-   * Get Credit Watch %.
-   *
-   * @return Credit Watch - Percent of Credit Limit when OK switches to Watch
-   */
-  public BigDecimal getCreditWatchPercent() {
-    BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_CreditWatchPercent);
-    if (bd == null) return Env.ZERO;
-    return bd;
-  }
+     * Get Print Color.
+     *
+     * @return Color used for printing and display
+     */
+    public int getAD_PrintColor_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_AD_PrintColor_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
     /**
-   * Set Confidential Info.
-   *
-   * @param IsConfidentialInfo Can enter confidential information
-   */
-  public void setIsConfidentialInfo(boolean IsConfidentialInfo) {
-    set_Value(COLUMNNAME_IsConfidentialInfo, Boolean.valueOf(IsConfidentialInfo));
-  }
+     * Get Business Partner Group.
+     *
+     * @return Business Partner Group
+     */
+    public int getC_BP_Group_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_C_BP_Group_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
     /**
-   * Set Default.
-   *
-   * @param IsDefault Default value
-   */
-  public void setIsDefault(boolean IsDefault) {
-    set_Value(COLUMNNAME_IsDefault, Boolean.valueOf(IsDefault));
-  }
+     * Get Dunning.
+     *
+     * @return Dunning Rules for overdue invoices
+     */
+    public int getC_Dunning_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_C_Dunning_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
     /**
-   * Get Discount Schema.
-   *
-   * @return Schema to calculate the trade discount percentage
-   */
-  public int getM_DiscountSchema_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_M_DiscountSchema_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+     * Get Credit Watch %.
+     *
+     * @return Credit Watch - Percent of Credit Limit when OK switches to Watch
+     */
+    public BigDecimal getCreditWatchPercent() {
+        BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_CreditWatchPercent);
+        if (bd == null) return Env.ZERO;
+        return bd;
+    }
 
     /**
-   * Get Price List.
-   *
-   * @return Unique identifier of a Price List
-   */
-  public int getM_PriceList_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_M_PriceList_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+     * Set Confidential Info.
+     *
+     * @param IsConfidentialInfo Can enter confidential information
+     */
+    public void setIsConfidentialInfo(boolean IsConfidentialInfo) {
+        set_Value(COLUMNNAME_IsConfidentialInfo, Boolean.valueOf(IsConfidentialInfo));
+    }
 
     /**
-   * Get PO Discount Schema.
-   *
-   * @return Schema to calculate the purchase trade discount percentage
-   */
-  public int getPO_DiscountSchema_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_PO_DiscountSchema_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+     * Set Default.
+     *
+     * @param IsDefault Default value
+     */
+    public void setIsDefault(boolean IsDefault) {
+        set_Value(COLUMNNAME_IsDefault, Boolean.valueOf(IsDefault));
+    }
 
     /**
-   * Get Purchase Pricelist.
-   *
-   * @return Price List used by this Business Partner
-   */
-  public int getPO_PriceList_ID() {
-    Integer ii = (Integer) get_Value(COLUMNNAME_PO_PriceList_ID);
-    if (ii == null) return 0;
-    return ii;
-  }
+     * Get Discount Schema.
+     *
+     * @return Schema to calculate the trade discount percentage
+     */
+    public int getM_DiscountSchema_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_M_DiscountSchema_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
     /**
-   * Get Price Match Tolerance.
-   *
-   * @return PO-Invoice Match Price Tolerance in percent of the purchase price
-   */
-  public BigDecimal getPriceMatchTolerance() {
-    BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_PriceMatchTolerance);
-    if (bd == null) return Env.ZERO;
-    return bd;
-  }
+     * Get Price List.
+     *
+     * @return Unique identifier of a Price List
+     */
+    public int getM_PriceList_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_M_PriceList_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
     /**
-   * Get Priority Base.
-   *
-   * @return Base of Priority
-   */
-  public String getPriorityBase() {
-    return (String) get_Value(COLUMNNAME_PriorityBase);
-  }
-
-  /**
-   * Set Priority Base.
-   *
-   * @param PriorityBase Base of Priority
-   */
-  public void setPriorityBase(String PriorityBase) {
-
-    set_Value(COLUMNNAME_PriorityBase, PriorityBase);
-  }
+     * Get PO Discount Schema.
+     *
+     * @return Schema to calculate the purchase trade discount percentage
+     */
+    public int getPO_DiscountSchema_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_PO_DiscountSchema_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
     /**
-   * Set Search Key.
-   *
-   * @param Value Search key for the record in the format required - must be unique
-   */
-  public void setValue(String Value) {
-    set_Value(COLUMNNAME_Value, Value);
-  }
+     * Get Purchase Pricelist.
+     *
+     * @return Price List used by this Business Partner
+     */
+    public int getPO_PriceList_ID() {
+        Integer ii = (Integer) get_Value(COLUMNNAME_PO_PriceList_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
 
-  @Override
-  public int getTableId() {
-    return I_C_BP_Group.Table_ID;
-  }
+    /**
+     * Get Price Match Tolerance.
+     *
+     * @return PO-Invoice Match Price Tolerance in percent of the purchase price
+     */
+    public BigDecimal getPriceMatchTolerance() {
+        BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_PriceMatchTolerance);
+        if (bd == null) return Env.ZERO;
+        return bd;
+    }
+
+    /**
+     * Get Priority Base.
+     *
+     * @return Base of Priority
+     */
+    public String getPriorityBase() {
+        return (String) get_Value(COLUMNNAME_PriorityBase);
+    }
+
+    /**
+     * Set Priority Base.
+     *
+     * @param PriorityBase Base of Priority
+     */
+    public void setPriorityBase(String PriorityBase) {
+
+        set_Value(COLUMNNAME_PriorityBase, PriorityBase);
+    }
+
+    /**
+     * Set Search Key.
+     *
+     * @param Value Search key for the record in the format required - must be unique
+     */
+    public void setValue(String Value) {
+        set_Value(COLUMNNAME_Value, Value);
+    }
+
+    @Override
+    public int getTableId() {
+        return I_C_BP_Group.Table_ID;
+    }
 }

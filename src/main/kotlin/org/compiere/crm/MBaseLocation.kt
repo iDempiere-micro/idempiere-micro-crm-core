@@ -11,8 +11,8 @@ fun getBPLocation(ctx: Properties, bPartnerLocationId: Int): MLocation? {
     return "/sql/getBPLocation.sql".asResource { sql ->
         val loadQuery =
             queryOf(sql, listOf(bPartnerLocationId))
-            .map { MLocation(ctx, it) }
-            .asSingle
+                .map { MLocation(ctx, it) }
+                .asSingle
         DB.current.run(loadQuery)
     }
 }

@@ -3,7 +3,7 @@ package org.compiere.crm
 import org.compiere.orm.BasePONameValue
 import org.idempiere.orm.I_Persistent
 import java.sql.ResultSet
-import java.util.Properties
+import java.util.*
 
 class MCrmCategory : BasePONameValue, I_Persistent {
     override val tableId: Int

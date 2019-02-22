@@ -18,7 +18,8 @@ fun getWithRole(role: MRole): Array<MUser> {
         queryOf(sql, role.aD_Role_ID)
             .map { row -> MUser(role.ctx, row) }.asList
 
-    return DB.current.run(loadQuery).toTypedArray() }
+    return DB.current.run(loadQuery).toTypedArray()
+}
 
 open class MBaseUser : X_AD_User {
     constructor(ctx: Properties, rs: ResultSet) : super(ctx, rs)
@@ -54,7 +55,7 @@ open class MBaseUser : X_AD_User {
         """.trimIndent()
         val loadQuery =
             queryOf(sql, aD_User_ID, orgId, aD_User_ID, orgId)
-            .map { row -> MRole(ctx, row) }.asList
+                .map { row -> MRole(ctx, row) }.asList
 
         return DB.current.run(loadQuery).toTypedArray()
     }
