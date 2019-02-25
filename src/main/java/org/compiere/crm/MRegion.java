@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import kotliquery.Row;
 import org.idempiere.common.util.CCache;
-import org.idempiere.common.util.CLogger;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
@@ -34,8 +33,6 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
      */
     public MRegion(Properties ctx, int C_Region_ID) {
         super(ctx, C_Region_ID);
-        if (C_Region_ID == 0) {
-        }
     } //  MRegion
 
     /**

@@ -70,16 +70,6 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
     }
 
     /**
-     * Set Language ID.
-     *
-     * @param AD_Language_ID Language ID
-     */
-    public void setLanguageId(int AD_Language_ID) {
-        if (AD_Language_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_Language_ID, null);
-        else set_ValueNoCheck(COLUMNNAME_AD_Language_ID, Integer.valueOf(AD_Language_ID));
-    }
-
-    /**
      * Get Language ID.
      *
      * @return Language ID
@@ -88,6 +78,16 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
         Integer ii = (Integer) getValue(COLUMNNAME_AD_Language_ID);
         if (ii == null) return 0;
         return ii;
+    }
+
+    /**
+     * Set Language ID.
+     *
+     * @param AD_Language_ID Language ID
+     */
+    public void setLanguageId(int AD_Language_ID) {
+        if (AD_Language_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_Language_ID, null);
+        else set_ValueNoCheck(COLUMNNAME_AD_Language_ID, Integer.valueOf(AD_Language_ID));
     }
 
     /**

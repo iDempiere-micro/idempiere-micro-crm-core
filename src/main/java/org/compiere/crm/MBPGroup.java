@@ -3,7 +3,6 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.compiere.model.I_C_BP_Group;
 import org.idempiere.common.util.CCache;
-import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;

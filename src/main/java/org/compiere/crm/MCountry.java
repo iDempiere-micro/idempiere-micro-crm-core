@@ -15,7 +15,6 @@ import org.idempiere.common.util.Language;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.text.Collator;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;

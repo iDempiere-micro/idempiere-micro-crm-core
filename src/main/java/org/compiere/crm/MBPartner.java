@@ -434,10 +434,11 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         }
         if (newRecord || is_ValueChanged(COLUMNNAME_Value)) update_Tree(MTree_Base.TREETYPE_BPartner);
 
-        //	Value/Name change
-        if (!newRecord && (is_ValueChanged("Value") || is_ValueChanged("Name"))) {
-            StringBuilder msgacc = new StringBuilder("C_BPartner_ID=").append(getC_BPartner_ID());
-        }
+        //	TODO: Value/Name change
+        // if (!newRecord && (is_ValueChanged("Value") || is_ValueChanged("Name"))) {
+            // TODO: StringBuilder msgacc = new StringBuilder("C_BPartner_ID=").append(getC_BPartner_ID());
+            // TODO: MAccount.updateValueDescription(getCtx(), msgacc.toString(), get_TrxName());
+        // }
         return success;
     } //	afterSave
 

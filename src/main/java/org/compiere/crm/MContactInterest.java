@@ -1,7 +1,5 @@
 package org.compiere.crm;
 
-import org.compiere.model.I_R_ContactInterest;
-import org.compiere.orm.Query;
 import org.idempiere.common.util.CLogger;
 
 import java.sql.ResultSet;
