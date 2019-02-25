@@ -1,32 +1,14 @@
-/******************************************************************************
- * Product: Adempiere ERP & CRM Smart Business Solution                       *
- * Copyright (C) 1999-2006 ComPiere, Inc. All Rights Reserved.                *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms version 2 of the GNU General Public License as published   *
- * by the Free Software Foundation. This program is distributed in the hope   *
- * that it will be useful, but WITHOUT ANY WARRANTY; without even the implied *
- * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.           *
- * See the GNU General Public License for more details.                       *
- * You should have received a copy of the GNU General Public License along    *
- * with this program; if not, write to the Free Software Foundation, Inc.,    *
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.                     *
- * For the text or an alternative of this public license, you may reach us    *
- * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
- * or via info@compiere.org or http://www.idempiere.org/license.html           *
- *****************************************************************************/
-
 package org.compiere.bo
 
 import org.compiere.model.I_C_Opportunity
 import org.compiere.orm.BasePOUser
 import org.compiere.orm.MTable
 import org.idempiere.common.util.KeyNamePair
-import org.idempiere.orm.I_Persistent
 import java.math.BigDecimal
 import java.sql.ResultSet
 import java.util.*
 
-open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
+open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
     override val tableId: Int
         get() = I_C_Opportunity.Table_ID
 
@@ -56,21 +38,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
      * @return Identifies a Business Partner
      */
     override fun getC_BPartner_ID(): Int {
-        return get_Value(I_C_Opportunity.COLUMNNAME_C_BPartner_ID) as Int? ?: return 0
-    }
-
-    /** Get Campaign.
-     * @return Marketing Campaign
-     */
-    override fun getC_Campaign_ID(): Int {
-        return get_Value(I_C_Opportunity.COLUMNNAME_C_Campaign_ID) as Int? ?: return 0
-    }
-
-    /** Get Currency.
-     * @return The Currency for this record
-     */
-    override fun getC_Currency_ID(): Int {
-        return get_Value(I_C_Opportunity.COLUMNNAME_C_Currency_ID) as Int? ?: return 0
+        return getValue(I_C_Opportunity.COLUMNNAME_C_BPartner_ID) as Int? ?: return 0
     }
 
     @Throws(RuntimeException::class)
@@ -84,21 +52,14 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
      * @return Order
      */
     override fun getC_Order_ID(): Int {
-        return (get_Value(I_C_Opportunity.COLUMNNAME_C_Order_ID) as Int?) ?: return 0
-    }
-
-    /** Get Sales Stage.
-     * @return Stages of the sales process
-     */
-    override fun getC_SalesStage_ID(): Int {
-        return get_Value(I_C_Opportunity.COLUMNNAME_C_SalesStage_ID) as Int? ?: return 0
+        return (getValue(I_C_Opportunity.COLUMNNAME_C_Order_ID) as Int?) ?: return 0
     }
 
     /** Get Document No.
      * @return Document sequence number of the document
      */
     override fun getDocumentNo(): String {
-        return get_Value(I_C_Opportunity.COLUMNNAME_DocumentNo) as String
+        return getValue(I_C_Opportunity.COLUMNNAME_DocumentNo) as String
     }
 
     /** Get Record ID/ColumnName
@@ -114,13 +75,6 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity, I_Persistent {
      */
     override fun setOpportunityAmt(OpportunityAmt: BigDecimal) {
         set_Value(I_C_Opportunity.COLUMNNAME_OpportunityAmt, OpportunityAmt)
-    }
-
-    /** Get Sales Representative.
-     * @return Sales Representative or Company Agent
-     */
-    override fun getSalesRep_ID(): Int {
-        return get_Value(I_C_Opportunity.COLUMNNAME_SalesRep_ID) as Int? ?: return 0
     }
 
 }

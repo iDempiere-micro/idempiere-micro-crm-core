@@ -2,8 +2,6 @@ package org.compiere.crm;
 
 import org.compiere.model.I_C_AddressTransaction;
 import org.compiere.orm.PO;
-import org.idempiere.common.util.KeyNamePair;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -14,7 +12,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction, I_Persistent {
+public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction {
 
     /**
      *
@@ -98,17 +96,6 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     }
 
     /**
-     * Get Address Validation.
-     *
-     * @return Address Validation
-     */
-    public int getC_AddressValidation_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_AddressValidation_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
      * Set Address Validation.
      *
      * @param C_AddressValidation_ID Address Validation
@@ -124,7 +111,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @return Identifies a City
      */
     public String getCity() {
-        return (String) get_Value(COLUMNNAME_City);
+        return (String) getValue(COLUMNNAME_City);
     }
 
     /**
@@ -134,26 +121,6 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      */
     public void setCity(String City) {
         set_Value(COLUMNNAME_City, City);
-    }
-
-    /**
-     * Get Record ID/ColumnName
-     *
-     * @return ID/ColumnName pair
-     */
-    public KeyNamePair getKeyNamePair() {
-        return new KeyNamePair(getId(), getCity());
-    }
-
-    /**
-     * Get Address.
-     *
-     * @return Location or Address
-     */
-    public int getC_Location_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Location_ID);
-        if (ii == null) return 0;
-        return ii;
     }
 
     /**

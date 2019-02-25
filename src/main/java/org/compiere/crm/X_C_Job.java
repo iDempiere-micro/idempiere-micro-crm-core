@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import org.compiere.model.I_C_Job;
 import org.compiere.orm.BasePOName;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -13,7 +12,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
+public class X_C_Job extends BasePOName implements I_C_Job {
 
     /**
      *
@@ -45,17 +44,6 @@ public class X_C_Job extends BasePOName implements I_C_Job, I_Persistent {
 
     public String toString() {
         return "X_C_Job[" + getId() + "]";
-    }
-
-    /**
-     * Get Position Category.
-     *
-     * @return Job Position Category
-     */
-    public int getC_JobCategory_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_JobCategory_ID);
-        if (ii == null) return 0;
-        return ii;
     }
 
     @Override

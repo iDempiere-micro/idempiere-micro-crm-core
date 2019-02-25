@@ -2,11 +2,10 @@ package org.compiere.crm
 
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.BasePOName
-import org.idempiere.orm.I_Persistent
 import java.sql.ResultSet
 import java.util.*
 
-class MCrmCustomerCategory : BasePOName, I_Persistent {
+class MCrmCustomerCategory : BasePOName {
     companion object {
         const val Table_ID = 1000001
         const val Table_Name = "Crm_Customer_Category"
@@ -25,7 +24,7 @@ class MCrmCustomerCategory : BasePOName, I_Persistent {
 
     var bPartner: I_C_BPartner
         get() {
-            return MBPartner(ctx, get_Value(I_C_BPartner.COLUMNNAME_C_BPartner_ID) as Int)
+            return MBPartner(ctx, getValue(I_C_BPartner.COLUMNNAME_C_BPartner_ID) as Int)
         }
         set(bp) {
             set_ValueNoCheck(I_C_BPartner.COLUMNNAME_C_BPartner_ID, bp.c_BPartner_ID)
@@ -33,7 +32,7 @@ class MCrmCustomerCategory : BasePOName, I_Persistent {
 
     var category: MCrmCategory
         get() {
-            return MCrmCategory(ctx, get_Value("Crm_Category_ID") as Int)
+            return MCrmCategory(ctx, getValue("Crm_Category_ID") as Int)
         }
         set(cat) {
             set_ValueNoCheck("Crm_Category_ID", cat.id)

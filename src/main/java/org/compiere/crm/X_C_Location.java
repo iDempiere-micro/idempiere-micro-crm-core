@@ -3,8 +3,6 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.PO;
-import org.idempiere.common.util.KeyNamePair;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -15,7 +13,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_Location extends PO implements I_Persistent {
+public class X_C_Location extends PO {
 
     /**
      *
@@ -59,7 +57,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Address line 1 for this location
      */
     public String getAddress1() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Address1);
+        return (String) getValue(I_C_Location.COLUMNNAME_Address1);
     }
 
     /**
@@ -77,7 +75,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Address line 2 for this location
      */
     public String getAddress2() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Address2);
+        return (String) getValue(I_C_Location.COLUMNNAME_Address2);
     }
 
     /**
@@ -95,7 +93,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Address Line 3 for the location
      */
     public String getAddress3() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Address3);
+        return (String) getValue(I_C_Location.COLUMNNAME_Address3);
     }
 
     /**
@@ -104,7 +102,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Address Line 4 for the location
      */
     public String getAddress4() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Address4);
+        return (String) getValue(I_C_Location.COLUMNNAME_Address4);
     }
 
     /**
@@ -113,18 +111,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Address Line 5 for the location
      */
     public String getAddress5() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Address5);
-    }
-
-    /**
-     * Get Address Validation.
-     *
-     * @return Address Validation
-     */
-    private int getC_AddressValidation_ID() {
-        Integer ii = (Integer) get_Value(I_C_Location.COLUMNNAME_C_AddressValidation_ID);
-        if (ii == null) return 0;
-        return ii;
+        return (String) getValue(I_C_Location.COLUMNNAME_Address5);
     }
 
     /**
@@ -133,7 +120,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return City
      */
     public int getC_City_ID() {
-        Integer ii = (Integer) get_Value(I_C_Location.COLUMNNAME_C_City_ID);
+        Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_City_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -154,7 +141,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Country
      */
     public int getC_Country_ID() {
-        Integer ii = (Integer) get_Value(I_C_Location.COLUMNNAME_C_Country_ID);
+        Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_Country_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -175,7 +162,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Identifies a City
      */
     public String getCity() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_City);
+        return (String) getValue(I_C_Location.COLUMNNAME_City);
     }
 
     /**
@@ -188,21 +175,12 @@ public class X_C_Location extends PO implements I_Persistent {
     }
 
     /**
-     * Get Record ID/I_C_Location.COLUMNNAME
-     *
-     * @return ID/I_C_Location.COLUMNNAME pair
-     */
-    public KeyNamePair getKeyNamePair() {
-        return new KeyNamePair(getId(), getCity());
-    }
-
-    /**
      * Get Address.
      *
      * @return Location or Address
      */
     public int getC_Location_ID() {
-        Integer ii = (Integer) get_Value(I_C_Location.COLUMNNAME_C_Location_ID);
+        Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_Location_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -213,7 +191,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Comments or additional information
      */
     public String getComments() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Comments);
+        return (String) getValue(I_C_Location.COLUMNNAME_Comments);
     }
 
     /**
@@ -222,7 +200,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Identifies a geographical Region
      */
     public int getC_Region_ID() {
-        Integer ii = (Integer) get_Value(I_C_Location.COLUMNNAME_C_Region_ID);
+        Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_Region_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -243,7 +221,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Postal code
      */
     public String getPostal() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Postal);
+        return (String) getValue(I_C_Location.COLUMNNAME_Postal);
     }
 
     /**
@@ -261,7 +239,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Additional ZIP or Postal code
      */
     public String getPostal_Add() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_Postal_Add);
+        return (String) getValue(I_C_Location.COLUMNNAME_Postal_Add);
     }
 
     /**
@@ -270,7 +248,7 @@ public class X_C_Location extends PO implements I_Persistent {
      * @return Name of the Region
      */
     public String getRegionName() {
-        return (String) get_Value(I_C_Location.COLUMNNAME_RegionName);
+        return (String) getValue(I_C_Location.COLUMNNAME_RegionName);
     }
 
     /**

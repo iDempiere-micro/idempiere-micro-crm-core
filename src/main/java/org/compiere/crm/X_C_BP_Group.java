@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_BP_Group;
 import org.compiere.orm.BasePOName;
 import org.idempiere.common.util.Env;
-import org.idempiere.orm.I_Persistent;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -16,12 +15,8 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persistent {
+public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
 
-    /**
-     * PriorityBase AD_Reference_ID=350
-     */
-    public static final int PRIORITYBASE_AD_Reference_ID = 350;
     /**
      * Same = S
      */
@@ -30,10 +25,6 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * Lower = L
      */
     public static final String PRIORITYBASE_Lower = "L";
-    /**
-     * Higher = H
-     */
-    public static final String PRIORITYBASE_Higher = "H";
     /**
      *
      */
@@ -75,23 +66,12 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
     }
 
     /**
-     * Get Print Color.
-     *
-     * @return Color used for printing and display
-     */
-    public int getAD_PrintColor_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_AD_PrintColor_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
      * Get Business Partner Group.
      *
      * @return Business Partner Group
      */
     public int getC_BP_Group_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_BP_Group_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -102,7 +82,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return Dunning Rules for overdue invoices
      */
     public int getC_Dunning_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Dunning_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_C_Dunning_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -113,7 +93,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return Credit Watch - Percent of Credit Limit when OK switches to Watch
      */
     public BigDecimal getCreditWatchPercent() {
-        BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_CreditWatchPercent);
+        BigDecimal bd = (BigDecimal) getValue(COLUMNNAME_CreditWatchPercent);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -142,7 +122,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return Schema to calculate the trade discount percentage
      */
     public int getM_DiscountSchema_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_M_DiscountSchema_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_M_DiscountSchema_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -153,7 +133,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return Unique identifier of a Price List
      */
     public int getM_PriceList_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_M_PriceList_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_M_PriceList_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -164,7 +144,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return Schema to calculate the purchase trade discount percentage
      */
     public int getPO_DiscountSchema_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_PO_DiscountSchema_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_PO_DiscountSchema_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -175,7 +155,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return Price List used by this Business Partner
      */
     public int getPO_PriceList_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_PO_PriceList_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_PO_PriceList_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -186,7 +166,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return PO-Invoice Match Price Tolerance in percent of the purchase price
      */
     public BigDecimal getPriceMatchTolerance() {
-        BigDecimal bd = (BigDecimal) get_Value(COLUMNNAME_PriceMatchTolerance);
+        BigDecimal bd = (BigDecimal) getValue(COLUMNNAME_PriceMatchTolerance);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -197,7 +177,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group, I_Persiste
      * @return Base of Priority
      */
     public String getPriorityBase() {
-        return (String) get_Value(COLUMNNAME_PriorityBase);
+        return (String) getValue(COLUMNNAME_PriorityBase);
     }
 
     /**

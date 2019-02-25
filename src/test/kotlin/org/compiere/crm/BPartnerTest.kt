@@ -26,29 +26,29 @@ class BPartnerTest : BaseCrmTest() {
             val partner = MBPartner.get(Env.getCtx(), id)
 
             assertEquals(id, partner.c_BPartner_ID)
-            assertEquals("JoeBlock", partner.value)
+            assertEquals("JoeBlock", partner.searchKey)
             assertEquals("Joe Block", partner.name)
 
             val partner2: I_C_BPartner = partner as I_C_BPartner
 
             val newValue = "JoeBlock*"
-            partner2.setValue(newValue)
+            partner2.setSearchKey(newValue)
             partner2.save()
 
             val partner3 = MBPartner.get(Env.getCtx(), id)
 
             assertEquals(id, partner3.c_BPartner_ID)
-            assertEquals(newValue, partner3.value)
+            assertEquals(newValue, partner3.searchKey)
             assertEquals("Joe Block", partner3.name)
 
-            partner2.setValue("JoeBlock")
+            partner2.setSearchKey("JoeBlock")
             partner2.save()
 
             val newPartner = MBPartner.getTemplate(ctx, AD_CLIENT_ID)
             val name = "Test " + randomString(10)
             newPartner.setName(name)
             val value = "t-" + randomString(5)
-            newPartner.setValue(value)
+            newPartner.setSearchKey(value)
             newPartner.save()
 
             val defaultCountry = MCountry.getDefault(ctx)

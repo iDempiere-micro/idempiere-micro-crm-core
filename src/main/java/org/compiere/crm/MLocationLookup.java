@@ -1,8 +1,6 @@
 package org.compiere.crm;
 
 import org.compiere.util.DisplayType;
-import org.idempiere.common.util.KeyNamePair;
-import org.idempiere.common.util.NamePair;
 import org.idempiere.orm.Lookup;
 
 import java.io.Serializable;
@@ -38,35 +36,6 @@ public final class MLocationLookup extends Lookup implements Serializable {
     } //	MLocation
 
     /**
-     * Get Object of Key Value
-     *
-     * @param value value
-     * @return Object or null
-     */
-    public NamePair get(Object value) {
-        if (value == null) return null;
-        MLocation loc = getLocation(value);
-        if (loc == null) return null;
-        return new KeyNamePair(loc.getC_Location_ID(), loc.toString());
-    } //	get
-
-    /**
-     * ************************************************************************ Get Location
-     *
-     * @param key     ID as string or integer
-     * @param trxName transaction
-     * @return Location
-     */
-    public MLocation getLocation(Object key) {
-        if (key == null) return null;
-        int C_Location_ID = 0;
-        if (key instanceof Integer) C_Location_ID = (Integer) key;
-        else C_Location_ID = Integer.parseInt(key.toString());
-        //
-        return getLocation(C_Location_ID);
-    } //	getLocation
-
-    /**
      * Get Location
      *
      * @param C_Location_ID id
@@ -75,7 +44,7 @@ public final class MLocationLookup extends Lookup implements Serializable {
      */
     public MLocation getLocation(int C_Location_ID) {
         return MLocation.get(m_ctx, C_Location_ID);
-    } //	getC_Location_ID
+    } //	getLocationId
 
     /**
      * Get underlying fully qualified Table.Column Name. Used for VLookup.actionButton (Zoom)

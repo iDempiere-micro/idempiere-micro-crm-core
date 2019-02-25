@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import org.compiere.model.I_AD_PrintColor;
 import org.compiere.orm.BasePOName;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -13,7 +12,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor, I_Persistent {
+public class X_AD_PrintColor extends BasePOName implements I_AD_PrintColor {
 
     /**
      *

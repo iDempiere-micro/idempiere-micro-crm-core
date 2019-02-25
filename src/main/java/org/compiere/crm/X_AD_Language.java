@@ -3,7 +3,6 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.BasePOName;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -14,7 +13,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persistent {
+public class X_AD_Language extends BasePOName implements I_AD_Language {
 
     /**
      *
@@ -57,8 +56,8 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      *
      * @return Language for this entity
      */
-    public String getADLanguage() {
-        return (String) get_Value(COLUMNNAME_AD_Language);
+    public String getLanguage() {
+        return (String) getValue(COLUMNNAME_AD_Language);
     }
 
     /**
@@ -66,7 +65,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      *
      * @param AD_Language Language for this entity
      */
-    public void setADLanguage(String AD_Language) {
+    public void setLanguage(String AD_Language) {
         set_ValueNoCheck(COLUMNNAME_AD_Language, AD_Language);
     }
 
@@ -75,7 +74,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      *
      * @param AD_Language_ID Language ID
      */
-    public void setADLanguage_ID(int AD_Language_ID) {
+    public void setLanguageId(int AD_Language_ID) {
         if (AD_Language_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_Language_ID, null);
         else set_ValueNoCheck(COLUMNNAME_AD_Language_ID, Integer.valueOf(AD_Language_ID));
     }
@@ -85,19 +84,8 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      *
      * @return Language ID
      */
-    public int getAD_Language_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_AD_Language_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Print Paper.
-     *
-     * @return Printer paper definition
-     */
-    public int getAD_PrintPaper_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_AD_PrintPaper_ID);
+    public int getLanguageId() {
+        Integer ii = (Integer) getValue(COLUMNNAME_AD_Language_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -109,7 +97,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
      */
     public String getCountryCode() {
-        return (String) get_Value(COLUMNNAME_CountryCode);
+        return (String) getValue(COLUMNNAME_CountryCode);
     }
 
     /**
@@ -128,7 +116,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      * @return Java Date Pattern
      */
     public String getDatePattern() {
-        return (String) get_Value(COLUMNNAME_DatePattern);
+        return (String) getValue(COLUMNNAME_DatePattern);
     }
 
     /**
@@ -146,7 +134,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      * @return The system information is maintained in this language
      */
     public boolean isBaseLanguage() {
-        return charToBoolean(get_Value(COLUMNNAME_IsBaseLanguage));
+        return charToBoolean(getValue(COLUMNNAME_IsBaseLanguage));
     }
 
     /**
@@ -164,7 +152,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      * @return The screens, etc. are maintained in this Language
      */
     public boolean isSystemLanguage() {
-        return charToBoolean(get_Value(COLUMNNAME_IsSystemLanguage));
+        return charToBoolean(getValue(COLUMNNAME_IsSystemLanguage));
     }
 
     /**
@@ -174,7 +162,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language, I_Persis
      * http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt
      */
     public String getLanguageISO() {
-        return (String) get_Value(COLUMNNAME_LanguageISO);
+        return (String) getValue(COLUMNNAME_LanguageISO);
     }
 
     /**

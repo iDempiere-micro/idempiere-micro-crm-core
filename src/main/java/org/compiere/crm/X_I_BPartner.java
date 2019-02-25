@@ -4,8 +4,6 @@ import org.compiere.model.HasName;
 import org.compiere.model.HasName2;
 import org.compiere.model.I_I_BPartner;
 import org.compiere.orm.BasePOUser;
-import org.idempiere.common.util.KeyNamePair;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -16,7 +14,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persistent {
+public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
 
     /**
      *
@@ -51,56 +49,12 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
     }
 
     /**
-     * Get Business Partner .
-     *
-     * @return Identifies a Business Partner
-     */
-    public int getC_BPartner_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_BPartner_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Partner Location.
-     *
-     * @return Identifies the (ship to) address for this Business Partner
-     */
-    public int getC_BPartner_Location_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_BPartner_Location_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
      * Get Business Partner Group.
      *
      * @return Business Partner Group
      */
     public int getC_BP_Group_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_BP_Group_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Country.
-     *
-     * @return Country
-     */
-    public int getC_Country_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Country_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Greeting.
-     *
-     * @return Greeting to print on correspondence
-     */
-    public int getC_Greeting_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Greeting_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -111,18 +65,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Business Partner Contact Name
      */
     public String getContactName() {
-        return (String) get_Value(COLUMNNAME_ContactName);
-    }
-
-    /**
-     * Get Region.
-     *
-     * @return Identifies a geographical Region
-     */
-    public int getC_Region_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Region_ID);
-        if (ii == null) return 0;
-        return ii;
+        return (String) getValue(COLUMNNAME_ContactName);
     }
 
     /**
@@ -131,7 +74,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) get_Value(COLUMNNAME_Description);
+        return (String) getValue(COLUMNNAME_Description);
     }
 
     /**
@@ -140,7 +83,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Dun & Bradstreet Number
      */
     public String getDUNS() {
-        return (String) get_Value(COLUMNNAME_DUNS);
+        return (String) getValue(COLUMNNAME_DUNS);
     }
 
     /**
@@ -149,7 +92,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Electronic Mail Address
      */
     public String getEMail() {
-        return (String) get_Value(COLUMNNAME_EMail);
+        return (String) getValue(COLUMNNAME_EMail);
     }
 
     /**
@@ -158,7 +101,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Standard Industry Code or its successor NAIC - http://www.osha.gov/oshstats/sicser.html
      */
     public String getNAICS() {
-        return (String) get_Value(COLUMNNAME_NAICS);
+        return (String) getValue(COLUMNNAME_NAICS);
     }
 
     /**
@@ -167,7 +110,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Alphanumeric identifier of the entity
      */
     public String getName() {
-        return (String) get_Value(HasName.Companion.getCOLUMNNAME_Name());
+        return (String) getValue(HasName.Companion.getCOLUMNNAME_Name());
     }
 
     /**
@@ -176,18 +119,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Additional Name
      */
     public String getName2() {
-        return (String) get_Value(HasName2.Companion.getCOLUMNNAME_Name2());
-    }
-
-    /**
-     * Get Interest Area.
-     *
-     * @return Interest Area or Topic
-     */
-    public int getR_InterestArea_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_R_InterestArea_ID);
-        if (ii == null) return 0;
-        return ii;
+        return (String) getValue(HasName2.Companion.getCOLUMNNAME_Name2());
     }
 
     /**
@@ -196,7 +128,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Tax Identification
      */
     public String getTaxID() {
-        return (String) get_Value(COLUMNNAME_TaxID);
+        return (String) getValue(COLUMNNAME_TaxID);
     }
 
     /**
@@ -205,16 +137,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner, I_Persiste
      * @return Search key for the record in the format required - must be unique
      */
     public String getValue() {
-        return (String) get_Value(COLUMNNAME_Value);
-    }
-
-    /**
-     * Get Record ID/ColumnName
-     *
-     * @return ID/ColumnName pair
-     */
-    public KeyNamePair getKeyNamePair() {
-        return new KeyNamePair(getId(), getValue());
+        return (String) getValue(COLUMNNAME_Value);
     }
 
     @Override

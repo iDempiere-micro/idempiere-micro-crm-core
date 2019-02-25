@@ -3,7 +3,6 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.orm.BasePOName;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -16,7 +15,7 @@ import static org.compiere.model.I_C_BPartner_Location.COLUMNNAME_IsPreserveCust
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
+public class X_C_BPartner_Location extends BasePOName {
 
     /**
      *
@@ -30,7 +29,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
         super(ctx, C_BPartner_Location_ID);
         /**
          * if (C_BPartner_Location_ID == 0) { setC_BPartner_ID (0); setC_BPartner_Location_ID (0);
-         * setC_Location_ID (0); setIsBillTo (true); // Y setIsPayFrom (true); // Y setIsRemitTo (true);
+         * setLocationId (0); setIsBillTo (true); // Y setIsPayFrom (true); // Y setIsRemitTo (true);
          * // Y setIsShipTo (true); // Y setName (null); // . }
          */
     }
@@ -65,7 +64,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
      * @return Identifies a Business Partner
      */
     public int getC_BPartner_ID() {
-        Integer ii = (Integer) get_Value(I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID);
+        Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -76,7 +75,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
      * @return Identifies the (ship to) address for this Business Partner
      */
     public int getC_BPartner_Location_ID() {
-        Integer ii = (Integer) get_Value(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID);
+        Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -87,7 +86,7 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
      * @return Location or Address
      */
     public int getC_Location_ID() {
-        Integer ii = (Integer) get_Value(I_C_BPartner_Location.COLUMNNAME_C_Location_ID);
+        Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -103,37 +102,12 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
     }
 
     /**
-     * Get Sales Region.
-     *
-     * @return Sales coverage region
-     */
-    private int getC_SalesRegion_ID() {
-        Integer ii = (Integer) get_Value(I_C_BPartner_Location.COLUMNNAME_C_SalesRegion_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
      * Set Invoice Address.
      *
      * @param IsBillTo Business Partner Invoice/Bill Address
      */
     public void setIsBillTo(boolean IsBillTo) {
         set_Value(I_C_BPartner_Location.COLUMNNAME_IsBillTo, Boolean.valueOf(IsBillTo));
-    }
-
-    /**
-     * Get Invoice Address.
-     *
-     * @return Business Partner Invoice/Bill Address
-     */
-    public boolean isBillTo() {
-        Object oo = get_Value(I_C_BPartner_Location.COLUMNNAME_IsBillTo);
-        if (oo != null) {
-            if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
-            return "Y".equals(oo);
-        }
-        return false;
     }
 
     /**
@@ -146,21 +120,12 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
     }
 
     /**
-     * Get Pay-From Address.
-     *
-     * @return Business Partner pays from that address and we'll send dunning letters there
-     */
-    public boolean isPayFrom() {
-        return charToBoolean(get_Value(I_C_BPartner_Location.COLUMNNAME_IsPayFrom));
-    }
-
-    /**
      * Get Preserve custom name.
      *
      * @return Preserve custom name
      */
     public boolean isPreserveCustomName() {
-        return charToBoolean(get_Value(COLUMNNAME_IsPreserveCustomName));
+        return charToBoolean(getValue(COLUMNNAME_IsPreserveCustomName));
     }
 
     /**
@@ -179,15 +144,6 @@ public class X_C_BPartner_Location extends BasePOName implements I_Persistent {
      */
     public void setIsShipTo(boolean IsShipTo) {
         set_Value(I_C_BPartner_Location.COLUMNNAME_IsShipTo, Boolean.valueOf(IsShipTo));
-    }
-
-    /**
-     * Get Ship Address.
-     *
-     * @return Business Partner Shipment Address
-     */
-    public boolean isShipTo() {
-        return charToBoolean(get_Value(I_C_BPartner_Location.COLUMNNAME_IsShipTo));
     }
 
     @Override

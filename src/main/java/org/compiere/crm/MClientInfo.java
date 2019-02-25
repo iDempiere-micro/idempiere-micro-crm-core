@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.orm.MClient;
 import org.compiere.orm.MTable;
-import org.idempiere.common.util.CLogger;
-import org.idempiere.common.util.Env;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -15,10 +13,6 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
      *
      */
     private static final long serialVersionUID = 4861006368856890116L;
-    /**
-     * Logger
-     */
-    private static CLogger s_log = CLogger.getCLogger(MClientInfo.class);
 
     /**
      * Load Constructor
@@ -58,16 +52,6 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
     }
 
     /**
-     * Get optionally cached client
-     *
-     * @param ctx context
-     * @return client
-     */
-    public static MClientInfo get(Properties ctx) {
-        return get(ctx, Env.getClientId(ctx));
-    } //	get
-
-    /**
      * Get Client Info
      *
      * @param ctx          context
@@ -86,13 +70,13 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
      * @overwrite
      */
     public boolean save() {
-        if (getOrgId() != 0) setAD_Org_ID(0);
+        if (getOrgId() != 0) setOrgId(0);
         if (getCreateNew()) return super.save();
         return saveUpdate();
     } //	save
 
     public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
         return (I_C_BPartner)
-                MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getC_BPartnerCashTrx_ID());
+                MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getBPartnerCashTrxId());
     }
 } //	MClientInfo

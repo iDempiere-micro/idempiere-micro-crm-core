@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import org.compiere.model.I_C_Greeting;
 import org.compiere.orm.BasePOName;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -13,7 +12,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_Greeting extends BasePOName implements I_C_Greeting, I_Persistent {
+public class X_C_Greeting extends BasePOName implements I_C_Greeting {
 
     /**
      *

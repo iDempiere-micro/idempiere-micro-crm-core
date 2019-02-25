@@ -26,10 +26,6 @@ public class MBPGroup extends X_C_BP_Group {
      */
     private static CCache<Integer, MBPGroup> s_cache =
             new CCache<Integer, MBPGroup>(I_C_BP_Group.Table_Name, 10);
-    /**
-     * Logger
-     */
-    private static CLogger s_log = CLogger.getCLogger(MBPGroup.class);
 
     /**
      * Standard Constructor

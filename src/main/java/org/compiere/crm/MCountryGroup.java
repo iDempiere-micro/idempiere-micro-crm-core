@@ -63,24 +63,6 @@ public class MCountryGroup extends X_C_CountryGroup {
         super(ctx, rs);
     } //	MCountryGroup
 
-    /**
-     * Get Country Group (cached)
-     *
-     * @param ctx               context
-     * @param C_CountryGroup_ID ID
-     * @return Country Group
-     */
-    public static MCountryGroup get(Properties ctx, int C_CountryGroup_ID) {
-        MCountryGroup c = s_cache.get(C_CountryGroup_ID);
-        if (c != null) return c;
-        c = new MCountryGroup(ctx, C_CountryGroup_ID);
-        if (c.getC_CountryGroup_ID() == C_CountryGroup_ID) {
-            s_cache.put(C_CountryGroup_ID, c);
-            return c;
-        }
-        return null;
-    } //	get
-
     public static boolean countryGroupContains(int c_CountryGroup_ID, int c_Country_ID) {
 
         if (c_CountryGroup_ID == 0 || c_Country_ID == 0) return false;

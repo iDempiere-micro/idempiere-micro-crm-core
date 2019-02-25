@@ -31,10 +31,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * Prim Address
      */
     private Integer m_primaryC_BPartner_Location_ID = null;
-    /**
-     * Prim User
-     */
-    private Integer m_primaryAD_User_ID = null;
 
     /**
      * ************************************************************************ Constructor for new
@@ -122,7 +118,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         String value = impBP.getValue();
         if (value == null || value.length() == 0) value = impBP.getEMail();
         if (value == null || value.length() == 0) value = impBP.getContactName();
-        setValue(value);
+        setSearchKey(value);
         String name = impBP.getName();
         if (name == null || name.length() == 0) name = impBP.getContactName();
         if (name == null || name.length() == 0) name = impBP.getEMail();
@@ -150,7 +146,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         if (template != null) {
             template.set_ValueNoCheck("C_BPartner_ID", new Integer(0));
             template.set_ValueNoCheck("C_BPartner_UU", null);
-            template.setValue("");
+            template.setSearchKey("");
             template.setName("");
             template.setName2(null);
             template.setDUNS("");
@@ -265,24 +261,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     }
 
     /**
-     * Get explicit or first bill Location
-     *
-     * @param C_BPartner_Location_ID optional explicit location
-     * @return location or null
-     */
-    public I_C_BPartner_Location getLocation(int C_BPartner_Location_ID) {
-        I_C_BPartner_Location[] locations = getLocations(false);
-        if (locations.length == 0) return null;
-        I_C_BPartner_Location retValue = null;
-        for (int i = 0; i < locations.length; i++) {
-            if (locations[i].getC_BPartner_Location_ID() == C_BPartner_Location_ID) return locations[i];
-            if (retValue == null && locations[i].isBillTo()) retValue = locations[i];
-        }
-        if (retValue == null) return locations[0];
-        return retValue;
-    } //	getLocation
-
-    /**
      * ************************************************************************ String Representation
      *
      * @return info
@@ -292,7 +270,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
                 new StringBuilder("MBPartner[ID=")
                         .append(getId())
                         .append(",Value=")
-                        .append(getValue())
+                        .append(getSearchKey())
                         .append(",Name=")
                         .append(getName())
                         .append(",Open=")
@@ -371,28 +349,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     } //	setPrimaryC_BPartner_Location_ID
 
     /**
-     * Get Primary C_BPartner_Location
-     *
-     * @return C_BPartner_Location
-     */
-    public MBPartnerLocation getPrimaryC_BPartner_Location() {
-        if (m_primaryC_BPartner_Location_ID == null) {
-            m_primaryC_BPartner_Location_ID = getPrimaryC_BPartner_Location_ID();
-        }
-        if (m_primaryC_BPartner_Location_ID == null) return null;
-        return new MBPartnerLocation(getCtx(), m_primaryC_BPartner_Location_ID);
-    } //	getPrimaryC_BPartner_Location
-
-    /**
-     * Set Primary AD_User_ID
-     *
-     * @param AD_User_ID id
-     */
-    public void setPrimaryAD_User_ID(int AD_User_ID) {
-        m_primaryAD_User_ID = new Integer(AD_User_ID);
-    } //	setPrimaryAD_User_ID
-
-    /**
      * Get SO CreditStatus with additional amount
      *
      * @param additionalAmt additional amount in Accounting Currency
@@ -420,16 +376,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     } //	getSOCreditStatus
 
     /**
-     * Credit Status is Stop or Hold.
-     *
-     * @return true if Stop/Hold
-     */
-    public boolean isCreditStopHold() {
-        String status = getSOCreditStatus();
-        return SOCREDITSTATUS_CreditStop.equals(status) || SOCREDITSTATUS_CreditHold.equals(status);
-    } //	isCreditStopHold
-
-    /**
      * Get PriceList
      *
      * @return price List
@@ -450,28 +396,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         if (ii == 0) ii = getBPGroup().getPO_PriceList_ID();
         return ii;
     } //
-
-    /**
-     * Get DiscountSchema
-     *
-     * @return Discount Schema
-     */
-    public int getM_DiscountSchema_ID() {
-        int ii = super.getM_DiscountSchema_ID();
-        if (ii == 0) ii = getBPGroup().getM_DiscountSchema_ID();
-        return ii;
-    } //	getM_DiscountSchema_ID
-
-    /**
-     * Get PO DiscountSchema
-     *
-     * @return po discount
-     */
-    public int getPO_DiscountSchema_ID() {
-        int ii = super.getPO_DiscountSchema_ID();
-        if (ii == 0) ii = getBPGroup().getPO_DiscountSchema_ID();
-        return ii;
-    } //	getPO_DiscountSchema_ID
 
     /**
      * Before Save
@@ -542,4 +466,74 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     public int getTableId() {
         return I_C_BPartner.Table_ID;
     }
+
+    /**
+     * Get Sales Representative.
+     *
+     * @return Sales Representative or Company Agent
+     */
+    public int getSalesRep_ID() {
+        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_SalesRep_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
+
+    /**
+     * Get Payment Term.
+     *
+     * @return The terms of Payment (timing, discount)
+     */
+    public int getC_PaymentTerm_ID() {
+        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
+
+    /**
+     * Get Delivery Rule.
+     *
+     * @return Defines the timing of Delivery
+     */
+    public String getDeliveryRule() {
+        return (String) getValue(I_C_BPartner.COLUMNNAME_DeliveryRule);
+    }
+
+    /**
+     * Get Delivery Via.
+     *
+     * @return How the order will be delivered
+     */
+    public String getDeliveryViaRule() {
+        return (String) getValue(I_C_BPartner.COLUMNNAME_DeliveryViaRule);
+    }
+
+    /**
+     * Get Invoice Rule.
+     *
+     * @return Frequency and method of invoicing
+     */
+    public String getInvoiceRule() {
+        return (String) getValue(I_C_BPartner.COLUMNNAME_InvoiceRule);
+    }
+
+    /**
+     * Get Payment Rule.
+     *
+     * @return How you pay the invoice
+     */
+    public String getPaymentRule() {
+        return (String) getValue(I_C_BPartner.COLUMNNAME_PaymentRule);
+    }
+
+    /**
+     * Get PO Payment Term.
+     *
+     * @return Payment rules for a purchase order
+     */
+    public int getPO_PaymentTerm_ID() {
+        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID);
+        if (ii == null) return 0;
+        return ii;
+    }
+
 } //	MBPartner

@@ -2,8 +2,6 @@ package org.compiere.crm;
 
 import org.compiere.model.I_R_ContactInterest;
 import org.compiere.orm.BasePOUser;
-import org.idempiere.common.util.KeyNamePair;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -15,7 +13,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_R_ContactInterest extends BasePOUser implements I_R_ContactInterest, I_Persistent {
+public class X_R_ContactInterest extends BasePOUser implements I_R_ContactInterest {
 
     /**
      *
@@ -28,7 +26,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
     public X_R_ContactInterest(Properties ctx, int R_ContactInterest_ID) {
         super(ctx, R_ContactInterest_ID);
         /**
-         * if (R_ContactInterest_ID == 0) { setAD_User_ID (0); // @AD_User_ID@ setR_InterestArea_ID (0);
+         * if (R_ContactInterest_ID == 0) { setUserId (0); // @AD_User_ID@ setR_InterestArea_ID (0);
          * }
          */
     }
@@ -55,21 +53,12 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
     }
 
     /**
-     * Get Record ID/ColumnName
-     *
-     * @return ID/ColumnName pair
-     */
-    public KeyNamePair getKeyNamePair() {
-        return new KeyNamePair(getId(), String.valueOf(getAD_User_ID()));
-    }
-
-    /**
      * Get Opt-out Date.
      *
      * @return Date the contact opted out
      */
     public Timestamp getOptOutDate() {
-        return (Timestamp) get_Value(COLUMNNAME_OptOutDate);
+        return (Timestamp) getValue(COLUMNNAME_OptOutDate);
     }
 
     /**
@@ -87,7 +76,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
      * @return Interest Area or Topic
      */
     public int getR_InterestArea_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_R_InterestArea_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_R_InterestArea_ID);
         if (ii == null) return 0;
         return ii;
     }

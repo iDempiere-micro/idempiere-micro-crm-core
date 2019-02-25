@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.I_AD_User;
 import org.compiere.model.I_C_BPartner;
-import org.compiere.orm.MClient;
 import org.compiere.orm.MRole;
 import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
@@ -52,10 +51,6 @@ public class MUser extends MBaseUser implements IUser {
      */
     private Boolean m_isAdministrator = null;
     /**
-     * User Access Rights
-     */
-    private X_AD_UserBPAccess[] m_bpAccess = null;
-    /**
      * Password Hashed *
      */
     private boolean being_hashed = false;
@@ -83,7 +78,7 @@ public class MUser extends MBaseUser implements IUser {
     public MUser(I_C_BPartner partner) {
         this(partner.getCtx(), 0);
         setClientOrg(partner);
-        setC_BPartner_ID(partner.getC_BPartner_ID());
+        setBPartnerId(partner.getC_BPartner_ID());
         setName(partner.getName());
     } //	MUser
 
@@ -164,94 +159,15 @@ public class MUser extends MBaseUser implements IUser {
     } //	get
 
     /**
-     * Get Current User (cached)
-     *
-     * @param ctx context
-     * @return user
-     */
-    public static MUser get(Properties ctx) {
-        return get(ctx, Env.getAD_User_ID(ctx));
-    } //	get
-
-    /**
-     * Get User
-     *
-     * @param ctx      context
-     * @param name     name
-     * @param password password
-     * @return user or null
-     */
-    public static MUser get(Properties ctx, String name, String password) {
-        if (name == null || name.length() == 0 || password == null || password.length() == 0) {
-            s_log.warning("Invalid Name/Password = " + name);
-            return null;
-        }
-        boolean hash_password = MSysConfig.getBooleanValue(MSysConfig.USER_PASSWORD_HASH, false);
-        boolean email_login = MSysConfig.getBooleanValue(MSysConfig.USE_EMAIL_FOR_LOGIN, false);
-        //		ArrayList<KeyNamePair> clientList = new ArrayList<KeyNamePair>();
-        ArrayList<Integer> clientsValidated = new ArrayList<Integer>();
-        MUser retValue = null;
-
-        StringBuilder where = new StringBuilder("Password IS NOT NULL AND ");
-        if (email_login) where.append("EMail=?");
-        else where.append("COALESCE(LDAPUser,Name)=?");
-        where
-                .append(" AND")
-                .append(" EXISTS (SELECT * FROM AD_User_Roles ur")
-                .append("         INNER JOIN AD_Role r ON (ur.AD_Role_ID=r.AD_Role_ID)")
-                .append(
-                        "         WHERE ur.AD_User_ID=AD_User.AD_User_ID AND ur.IsActive='Y' AND r.IsActive='Y') AND ")
-                .append(" EXISTS (SELECT * FROM AD_Client c")
-                .append("         WHERE c.AD_Client_ID=AD_User.AD_Client_ID")
-                .append("         AND c.IsActive='Y') AND ")
-                .append(" AD_User.IsActive='Y'");
-
-        List<MUser> users =
-                new Query(ctx, MUser.Table_Name, where.toString())
-                        .setParameters(name)
-                        .setOrderBy("AD_Client_ID, AD_User_ID") // prefer first user on System
-                        .list();
-
-        if (users.size() == 0) {
-            s_log.saveError("UserPwdError", name, false);
-            return null;
-        }
-
-        for (MUser user : users) {
-            if (clientsValidated.contains(user.getClientId())) {
-                s_log.severe(
-                        "Two users with password with the same name/email combination on same tenant: " + name);
-                return null;
-            }
-
-            clientsValidated.add(user.getClientId());
-            boolean valid = false;
-            if (hash_password) {
-                valid = user.authenticateHash(password);
-            } else {
-                // password not hashed
-                valid = user.getPassword().equals(password);
-            }
-
-            if (valid) {
-                retValue = user;
-                break;
-            }
-        }
-
-        return retValue;
-    } //	get
-
-    /**
      * Get Value - 7 bit lower case alpha numerics max length 8
      *
      * @return value
      */
-    public String getValue() {
-        String s = super.getValue();
+    public String getSearchKey() {
+        String s = super.getSearchKey();
         if (s != null) return s;
-        setValue(null);
-        return super.getValue();
+        setSearchKey(null);
+        return super.getSearchKey();
     } //	getValue
 
     /**
@@ -259,7 +175,7 @@ public class MUser extends MBaseUser implements IUser {
      *
      * @param Value
      */
-    public void setValue(String Value) {
+    public void setSearchKey(String Value) {
         if (Value == null || Value.trim().length() == 0) Value = getLDAPUser();
         if (Value == null || Value.length() == 0) Value = getName();
         if (Value == null || Value.length() == 0) Value = "noname";
@@ -275,7 +191,7 @@ public class MUser extends MBaseUser implements IUser {
             } else result = cleanValue(first);
         }
         if (result.length() > 8) result = result.substring(0, 8);
-        super.setValue(result);
+        super.setSearchKey(result);
     } //	setValue
 
     /**
@@ -349,24 +265,6 @@ public class MUser extends MBaseUser implements IUser {
     }
 
     /**
-     * Get First Name
-     *
-     * @return first name
-     */
-    public String getFirstName() {
-        return getName(getName(), true);
-    } //	getFirstName
-
-    /**
-     * Get Last Name
-     *
-     * @return first name
-     */
-    public String getLastName() {
-        return getName(getName(), false);
-    } //	getLastName
-
-    /**
      * Get First/Last Name
      *
      * @param name     name
@@ -403,18 +301,6 @@ public class MUser extends MBaseUser implements IUser {
     } //	getName
 
     /**
-     * Add to Description
-     *
-     * @param description description to be added
-     */
-    public void addDescription(String description) {
-        if (description == null || description.length() == 0) return;
-        String descr = getDescription();
-        if (descr == null || descr.length() == 0) setDescription(description);
-        else setDescription(descr + " - " + description);
-    } //	addDescription
-
-    /**
      * String Representation
      *
      * @return Info
@@ -430,15 +316,6 @@ public class MUser extends MBaseUser implements IUser {
                         .append("]");
         return sb.toString();
     } //	toString
-
-    /**
-     * Is it an Online Access User
-     *
-     * @return true if it has an email and password
-     */
-    public boolean isOnline() {
-        return getEMail() != null && getPassword() != null;
-    } //	isOnline
 
     /**
      * Set EMail - reset validation
@@ -507,64 +384,14 @@ public class MUser extends MBaseUser implements IUser {
     } //	validateEmail
 
     /**
-     * Is the email valid
-     *
-     * @return return true if email is valid (artificial check)
-     */
-    public boolean isEMailValid() {
-        return validateEmail(getInternetAddress()) != null;
-    } //	isEMailValid
-
-    /**
-     * Could we send an email
-     *
-     * @return true if EMail Uwer/PW exists
-     */
-    public boolean isCanSendEMail() {
-        String s = getEMailUser();
-        if (s == null || s.length() == 0) return false;
-        // If SMTP authorization is not required, then don't check password - teo_sarca [ 1723309 ]
-        if (!MClient.get(getCtx()).isSmtpAuthorization()) return true;
-        s = getEMailUserPW();
-        return s != null && s.length() > 0;
-    } //	isCanSendEMail
-
-    /**
      * Get EMail Validation Code
      *
      * @return code
      */
     public String getEMailVerifyCode() {
-        long code = getAD_User_ID() + getName().hashCode();
+        long code = getUserId() + getName().hashCode();
         return "C" + Math.abs(code) + "C";
     } //	getEMailValidationCode
-
-    /**
-     * Check & Set EMail Validation Code.
-     *
-     * @param code code
-     * @param info info
-     * @return true if valid
-     */
-    public boolean setEMailVerifyCode(String code, String info) {
-        boolean ok = code != null && code.equals(getEMailVerifyCode());
-        if (ok) setEMailVerifyDate(new Timestamp(System.currentTimeMillis()));
-        else setEMailVerifyDate(null);
-        setEMailVerify(info);
-        return ok;
-    } //	setEMailValidationCode
-
-    /**
-     * Is EMail Verified by response
-     *
-     * @return true if verified
-     */
-    public boolean isEMailVerified() {
-        //	UPDATE AD_User SET EMailVerifyDate=SysDate, EMailVerify='Direct' WHERE AD_User_ID=1
-        return getEMailVerifyDate() != null
-                && getEMailVerify() != null
-                && getEMailVerify().length() > 0;
-    } //	isEMailVerified
 
     /**
      * Get Notification via EMail
@@ -614,8 +441,8 @@ public class MUser extends MBaseUser implements IUser {
             }
         }
 
-        if (newRecord || super.getValue() == null || is_ValueChanged("Value"))
-            setValue(super.getValue());
+        if (newRecord || super.getSearchKey() == null || is_ValueChanged("Value"))
+            setSearchKey(super.getSearchKey());
 
         if (getPassword() != null && getPassword().length() > 0) {
             boolean email_login = MSysConfig.getBooleanValue(MSysConfig.USE_EMAIL_FOR_LOGIN, false);
@@ -636,7 +463,7 @@ public class MUser extends MBaseUser implements IUser {
                                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND EMail=? AND AD_Client_ID=? AND AD_User_ID!=?",
                                 getEMail(),
                                 getClientId(),
-                                getAD_User_ID());
+                                getUserId());
                 if (cnt > 0) {
                     log.saveError(
                             "SaveError",
@@ -653,7 +480,7 @@ public class MUser extends MBaseUser implements IUser {
                                 "SELECT COUNT(*) FROM AD_User WHERE Password IS NOT NULL AND COALESCE(LDAPUser,Name)=? AND AD_Client_ID=? AND AD_User_ID!=?",
                                 nameToValidate,
                                 getClientId(),
-                                getAD_User_ID());
+                                getUserId());
                 if (cnt > 0) {
                     log.saveError(
                             "SaveError",
@@ -678,20 +505,6 @@ public class MUser extends MBaseUser implements IUser {
 
         return true;
     } //	beforeSave
-
-    /**
-     * Is Menu Auto Expand - user preference Check if the user has a preference, otherwise use the
-     * value from current role
-     *
-     * @return boolean
-     */
-    public boolean isMenuAutoExpand() {
-        boolean isMenuAutoExpand = false;
-        if (getIsMenuAutoExpand() != null)
-            isMenuAutoExpand = X_AD_User.ISMENUAUTOEXPAND_Yes.equals(getIsMenuAutoExpand());
-        else isMenuAutoExpand = MRole.getDefault().isMenuAutoExpand();
-        return isMenuAutoExpand;
-    }
 
     @Override
     public String getEMailUser() {
@@ -718,7 +531,7 @@ public class MUser extends MBaseUser implements IUser {
             m_isAdministrator = Boolean.FALSE;
             MRole[] roles = getRoles(0);
             for (int i = 0; i < roles.length; i++) {
-                if (roles[i].getAD_Role_ID() == 0) {
+                if (roles[i].getRoleId() == 0) {
                     m_isAdministrator = Boolean.TRUE;
                     break;
                 }

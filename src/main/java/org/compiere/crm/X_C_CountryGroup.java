@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import org.compiere.model.I_C_CountryGroup;
 import org.compiere.orm.BasePONameValue;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -13,7 +12,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGroup, I_Persistent {
+public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGroup {
 
     /**
      *
@@ -53,7 +52,7 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
      * @return Country Group
      */
     public int getC_CountryGroup_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_CountryGroup_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_C_CountryGroup_ID);
         if (ii == null) return 0;
         return ii;
     }

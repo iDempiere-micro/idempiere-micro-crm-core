@@ -44,7 +44,7 @@ open class MBaseBPartner : X_C_BPartner {
         setStandardDefaults()
         // 	Reset
         set_ValueNoCheck("C_BPartner_ID", I_ZERO)
-        setValue("")
+        setSearchKey("")
         name = ""
         setName2(null)
         set_ValueNoCheck("C_BPartner_UU", "")
@@ -114,13 +114,13 @@ open class MBaseBPartner : X_C_BPartner {
         m_group = group
         if (group == null) return
         c_BP_Group_ID = group.getC_BP_Group_ID()
-        if (group.c_Dunning_ID != 0) c_Dunning_ID = group.c_Dunning_ID
+        if (group.c_Dunning_ID != 0) setC_Dunning_ID(group.c_Dunning_ID)
         if (group.m_PriceList_ID != 0) m_PriceList_ID = group.m_PriceList_ID
         if (group.pO_PriceList_ID != 0) pO_PriceList_ID = group.pO_PriceList_ID
         if (group.m_DiscountSchema_ID != 0)
-            m_DiscountSchema_ID = group.m_DiscountSchema_ID
+            setM_DiscountSchema_ID(group.m_DiscountSchema_ID)
         if (group.getPO_DiscountSchema_ID() != 0)
-            pO_DiscountSchema_ID = group.pO_DiscountSchema_ID
+            setPO_DiscountSchema_ID(group.pO_DiscountSchema_ID)
     } // 	setBPGroup
 
     /**

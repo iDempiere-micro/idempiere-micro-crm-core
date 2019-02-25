@@ -2,14 +2,10 @@ package org.compiere.crm;
 
 import kotliquery.Row;
 import org.compiere.model.I_C_Location;
-import org.compiere.orm.MColumn;
 import org.compiere.orm.MSysConfig;
-import org.compiere.orm.MTable;
 import org.compiere.orm.PO;
 import org.compiere.util.Msg;
 import org.idempiere.common.util.CCache;
-import org.idempiere.common.util.CLogger;
-import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Util;
 
 import java.sql.ResultSet;
@@ -33,30 +29,15 @@ import static software.hsharp.core.util.DBKt.getSQLValueEx;
  * @version $Id: MLocation.java,v 1.3 2006/07/30 00:54:54 jjanke Exp $
  */
 public class MLocation extends MBaseLocation implements I_C_Location, Comparator<Object> {
-    public static final String updateBPLocName =
-            "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = ? AND IsPreserveCustomName = 'N'";
     /**
      *
      */
     private static final long serialVersionUID = -8462972029898383163L;
-    // http://jira.idempiere.com/browse/IDEMPIERE-147
-    public static String LOCATION_MAPS_URL_PREFIX =
-            MSysConfig.getValue(MSysConfig.LOCATION_MAPS_URL_PREFIX);
-    public static String LOCATION_MAPS_ROUTE_PREFIX =
-            MSysConfig.getValue(MSysConfig.LOCATION_MAPS_ROUTE_PREFIX);
-    public static String LOCATION_MAPS_SOURCE_ADDRESS =
-            MSysConfig.getValue(MSysConfig.LOCATION_MAPS_SOURCE_ADDRESS);
-    public static String LOCATION_MAPS_DESTINATION_ADDRESS =
-            MSysConfig.getValue(MSysConfig.LOCATION_MAPS_DESTINATION_ADDRESS);
     /**
      * Cache
      */
     private static CCache<Integer, MLocation> s_cache =
             new CCache<Integer, MLocation>(Table_Name, 100, 30);
-    /**
-     * Static Logger
-     */
-    private static CLogger s_log = CLogger.getCLogger(MLocation.class);
 
     private MCountry m_c = null;
     private MRegion m_r = null;
@@ -152,44 +133,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
         return null; //	not found
     } //	get
 
-    public static int getFieldLength(String columnName) {
-        MTable loctable = MTable.get(Env.getCtx(), Table_ID);
-        MColumn column = loctable.getColumn(columnName);
-        if (column == null) return -1;
-        else return column.getFieldLength();
-    }
-
-    /**
-     * Create address transaction instance
-     *
-     * @param ctx
-     * @param location
-     * @param C_AddressValidation_ID
-     * @param trxName
-     * @return address transaction instance
-     */
-    private static MAddressTransaction createAddressTransaction(
-            Properties ctx, MLocation location, int C_AddressValidation_ID) {
-        MAddressTransaction at = new MAddressTransaction(ctx, 0);
-        at.setAD_Org_ID(location.getOrgId());
-        at.setAddress1(location.getAddress1());
-        at.setAddress2(location.getAddress2());
-        at.setAddress3(location.getAddress3());
-        at.setAddress4(location.getAddress4());
-        at.setAddress5(location.getAddress5());
-        at.setComments(location.getComments());
-        at.setC_AddressValidation_ID(C_AddressValidation_ID);
-        at.setC_Location_ID(location.getC_Location_ID());
-        at.setCity(location.getCity());
-        if (location.getCountry() != null) at.setCountry(location.getCountry().getCountryCode());
-        at.setIsActive(location.isActive());
-        at.setPostal(location.getPostal());
-        if (location.getRegion() != null) at.setRegion(location.getRegion().getName());
-        else at.setRegion(location.getRegionName());
-        at.saveEx();
-        return at;
-    }
-
     /**
      * Set C_Country_ID
      *
@@ -235,29 +178,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     public String getCountryName() {
         return getCountry().getName();
     } //	getCountryName
-
-    /**
-     * Get Country Line
-     *
-     * @param local if true only foreign country is returned
-     * @return country or null
-     */
-    public String getCountry(boolean local) {
-        if (local && getC_Country_ID() == MCountry.getDefault(getCtx()).getC_Country_ID()) return null;
-        return getCountryName();
-    } //	getCountry
-
-    /**
-     * Get Country Line
-     *
-     * @param local if true only foreign country is returned
-     * @return country or null
-     */
-    public String getCountry(boolean local, String language) {
-        if (local && getC_Country_ID() == MCountry.getDefault(getCtx()).getC_Country_ID()) return null;
-        MCountry mc = getCountry();
-        return mc.getTrlName(language);
-    } //	getCountry
 
     /**
      * Set C_Region_ID
@@ -414,15 +334,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     } //	isAddressLinesReverse
 
     /**
-     * Get formatted City Region Postal line
-     *
-     * @return City, Region Postal
-     */
-    public String getCityRegionPostal() {
-        return parseCRP(getCountry());
-    } //	getCityRegionPostal
-
-    /**
      * Parse according City/Postal/Region according to displaySequence. @C@ - City @R@ - Region @P@ -
      * Postal @A@ - PostalAdd
      *
@@ -519,67 +430,13 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     } //	toString
 
     /**
-     * Return String representation with CR at line end
-     *
-     * @return String
-     */
-    public String toStringCR() {
-        StringBuilder retStr = new StringBuilder();
-        if (isAddressLinesReverse()) {
-            //	City, Region, Postal
-            retStr.append(parseCRP(getCountry()));
-            if (getAddress5() != null && getAddress5().length() > 0)
-                retStr.append("\n").append(getAddress5());
-            if (getAddress4() != null && getAddress4().length() > 0)
-                retStr.append("\n").append(getAddress4());
-            if (getAddress3() != null && getAddress3().length() > 0)
-                retStr.append("\n").append(getAddress3());
-            if (getAddress2() != null && getAddress2().length() > 0)
-                retStr.append("\n").append(getAddress2());
-            if (getAddress1() != null) retStr.append("\n").append(getAddress1());
-        } else {
-            if (getAddress1() != null) retStr.append(getAddress1());
-            if (getAddress2() != null && getAddress2().length() > 0)
-                retStr.append("\n").append(getAddress2());
-            if (getAddress3() != null && getAddress3().length() > 0)
-                retStr.append("\n").append(getAddress3());
-            if (getAddress4() != null && getAddress4().length() > 0)
-                retStr.append("\n").append(getAddress4());
-            if (getAddress5() != null && getAddress5().length() > 0)
-                retStr.append("\n").append(getAddress5());
-            //	City, Region, Postal
-            retStr.append("\n").append(parseCRP(getCountry()));
-            //	Add Country would come here
-        }
-        return retStr.toString();
-    } //	toStringCR
-
-    /**
-     * Return detailed String representation
-     *
-     * @return String
-     */
-    public String toStringX() {
-        StringBuilder sb = new StringBuilder("MLocation=[");
-        sb.append(getId())
-                .append(",C_Country_ID=")
-                .append(getC_Country_ID())
-                .append(",C_Region_ID=")
-                .append(getC_Region_ID())
-                .append(",Postal=")
-                .append(getPostal())
-                .append("]");
-        return sb.toString();
-    } //  toStringX
-
-    /**
      * Before Save
      *
      * @param newRecord new
      * @return true
      */
     protected boolean beforeSave(boolean newRecord) {
-        if (getOrgId() != 0) setAD_Org_ID(0);
+        if (getOrgId() != 0) setOrgId(0);
         //	Region Check
         if (getC_Region_ID() != 0) {
             if (m_c == null || m_c.getC_Country_ID() != getC_Country_ID()) getCountry();
@@ -670,41 +527,4 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
         return success;
     } //	afterSave
 
-    /**
-     * Get edited Value (MLocation) for GoogleMaps / IDEMPIERE-147
-     *
-     * @param MLocation location
-     * @return String address
-     */
-    public String getMapsLocation() {
-
-        MRegion region = new MRegion(Env.getCtx(), getC_Region_ID());
-        StringBuilder address = new StringBuilder();
-        address.append((getAddress1() != null ? getAddress1() + ", " : ""));
-        address.append((getAddress2() != null ? getAddress2() + ", " : ""));
-        address.append((getAddress3() != null ? getAddress3() + ", " : ""));
-        address.append((getCity() != null ? getCity() + ", " : ""));
-        address.append((region.getName() != null ? region.getName() + ", " : ""));
-        address.append((getCountryName() != null ? getCountryName() : ""));
-
-        return address.toString().replace(" ", "+");
-    }
-
-    /**
-     * Get error message
-     *
-     * @return error message
-     */
-    public String getErrorMessage() {
-        return m_errorMessage;
-    }
-
-    /**
-     * Set error message
-     *
-     * @param errorMessage
-     */
-    public void setErrorMessage(String errorMessage) {
-        m_errorMessage = errorMessage;
-    }
 } //	MLocation

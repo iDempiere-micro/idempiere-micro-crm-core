@@ -3,7 +3,6 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.compiere.model.I_C_Country;
 import org.compiere.orm.BasePOName;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -14,12 +13,8 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent {
+public class X_C_Country extends BasePOName implements I_C_Country {
 
-    /**
-     * AD_Language AD_Reference_ID=106
-     */
-    public static final int AD_LANGUAGE_AD_Reference_ID = 106;
     /**
      *
      */
@@ -67,7 +62,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * @return A flag to allow cities, currently not in the list, to be entered
      */
     public boolean isAllowCitiesOutOfList() {
-        Object oo = get_Value(COLUMNNAME_AllowCitiesOutOfList);
+        Object oo = getValue(COLUMNNAME_AllowCitiesOutOfList);
         if (oo != null) {
             if (oo instanceof Boolean) return ((Boolean) oo).booleanValue();
             return "Y".equals(oo);
@@ -81,18 +76,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * @return Country
      */
     public int getC_Country_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Country_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Currency.
-     *
-     * @return The Currency for this record
-     */
-    public int getC_Currency_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Currency_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_C_Country_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -104,7 +88,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
      */
     public String getCountryCode() {
-        return (String) get_Value(COLUMNNAME_CountryCode);
+        return (String) getValue(COLUMNNAME_CountryCode);
     }
 
     /**
@@ -113,7 +97,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * @return Format for printing this Address
      */
     public String getDisplaySequence() {
-        return (String) get_Value(COLUMNNAME_DisplaySequence);
+        return (String) getValue(COLUMNNAME_DisplaySequence);
     }
 
     /**
@@ -131,7 +115,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * @return Format for printing this Address locally
      */
     public String getDisplaySequenceLocal() {
-        return (String) get_Value(COLUMNNAME_DisplaySequenceLocal);
+        return (String) getValue(COLUMNNAME_DisplaySequenceLocal);
     }
 
     /**
@@ -149,7 +133,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * @return Country contains Regions
      */
     public boolean isHasRegion() {
-        return charToBoolean(get_Value(COLUMNNAME_HasRegion));
+        return charToBoolean(getValue(COLUMNNAME_HasRegion));
     }
 
     /**
@@ -176,7 +160,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * @return Print Local Address in reverse Order
      */
     public boolean isAddressLinesLocalReverse() {
-        return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesLocalReverse));
+        return charToBoolean(getValue(COLUMNNAME_IsAddressLinesLocalReverse));
     }
 
     /**
@@ -194,7 +178,7 @@ public class X_C_Country extends BasePOName implements I_C_Country, I_Persistent
      * @return Print Address in reverse Order
      */
     public boolean isAddressLinesReverse() {
-        return charToBoolean(get_Value(COLUMNNAME_IsAddressLinesReverse));
+        return charToBoolean(getValue(COLUMNNAME_IsAddressLinesReverse));
     }
 
     @Override

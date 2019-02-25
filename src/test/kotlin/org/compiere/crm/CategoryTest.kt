@@ -20,7 +20,7 @@ class CategoryTest : BaseCrmTest() {
             val category = MCrmCategory(ctx, 0)
             val catName = "Test-${randomString(10)}"
             category.name = catName
-            category.setValue(catName)
+            category.setSearchKey(catName)
             category.save()
             val cat: MCrmCategory = getById(category.id, MCrmCategory.Table_Name)
             assertNotNull(cat)
@@ -29,7 +29,7 @@ class CategoryTest : BaseCrmTest() {
             val name = "Test " + randomString(10)
             newPartner.setName(name)
             val value = "t-" + randomString(5)
-            newPartner.setValue(value)
+            newPartner.setSearchKey(value)
             newPartner.save()
 
             val bp: MBPartner = getById(newPartner.id, MBPartner.Table_Name)

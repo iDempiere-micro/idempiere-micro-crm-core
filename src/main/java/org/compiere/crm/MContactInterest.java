@@ -70,35 +70,6 @@ public class MContactInterest extends X_R_ContactInterest {
     } //	MContactInterest
 
     /**
-     * Get Contact Interest
-     *
-     * @param ctx               context
-     * @param R_InterestArea_ID interest ares
-     * @param AD_User_ID        user
-     * @param isActive          create as active
-     * @param trxName           transaction
-     * @return Contact Interest
-     */
-    public static MContactInterest get(
-            Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive) {
-        final String whereClause =
-                I_R_ContactInterest.COLUMNNAME_R_InterestArea_ID
-                        + "=? AND "
-                        + I_R_ContactInterest.COLUMNNAME_AD_User_ID
-                        + "=?";
-        MContactInterest retValue =
-                new Query(ctx, I_R_ContactInterest.Table_Name, whereClause)
-                        .setParameters(R_InterestArea_ID, AD_User_ID)
-                        .first();
-
-        if (retValue == null) {
-            retValue = new MContactInterest(ctx, R_InterestArea_ID, AD_User_ID, isActive);
-            if (s_log.isLoggable(Level.FINE)) s_log.fine("NOT found - " + retValue);
-        } else if (s_log.isLoggable(Level.FINE)) s_log.fine("Found - " + retValue);
-        return retValue;
-    } //	get
-
-    /**
      * Set OptOut Date User action only.
      *
      * @param OptOutDate date
@@ -109,22 +80,6 @@ public class MContactInterest extends X_R_ContactInterest {
         super.setOptOutDate(OptOutDate);
         setIsActive(false);
     } //	setOptOutDate
-
-    /**
-     * Unsubscribe. User action only.
-     */
-    public void unsubscribe() {
-        setOptOutDate(null);
-    } //	unsubscribe
-
-    /**
-     * Is Opted Out
-     *
-     * @return true if opted out
-     */
-    public boolean isOptOut() {
-        return getOptOutDate() != null;
-    } //	isOptOut
 
     /**
      * Set Subscribe Date User action only.
@@ -138,24 +93,6 @@ public class MContactInterest extends X_R_ContactInterest {
         super.setOptOutDate(null);
         setIsActive(true);
     } //	setSubscribeDate
-
-    /**
-     * Subscribe User action only.
-     */
-    public void subscribe() {
-        setSubscribeDate(null);
-        if (!isActive()) setIsActive(true);
-    } //	subscribe
-
-    /**
-     * Subscribe. User action only.
-     *
-     * @param subscribe subscribe
-     */
-    public void subscribe(boolean subscribe) {
-        if (subscribe) setSubscribeDate(null);
-        else setOptOutDate(null);
-    } //	subscribe
 
     /**
      * Is Subscribed. Active is set internally, the opt out date is set by the user via the web UI.

@@ -3,8 +3,6 @@ package org.compiere.bo;
 import org.compiere.model.I_C_ContactActivity;
 import org.compiere.orm.BasePOUser;
 import org.compiere.orm.MTable;
-import org.idempiere.common.util.KeyNamePair;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -16,28 +14,8 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivity, I_Persistent {
+public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivity {
 
-    /**
-     * ContactActivityType AD_Reference_ID=53423
-     */
-    public static final int CONTACTACTIVITYTYPE_AD_Reference_ID = 53423;
-    /**
-     * Email = EM
-     */
-    public static final String CONTACTACTIVITYTYPE_Email = "EM";
-    /**
-     * Phone call = PC
-     */
-    public static final String CONTACTACTIVITYTYPE_PhoneCall = "PC";
-    /**
-     * Meeting = ME
-     */
-    public static final String CONTACTACTIVITYTYPE_Meeting = "ME";
-    /**
-     * Task = TA
-     */
-    public static final String CONTACTACTIVITYTYPE_Task = "TA";
     /**
      *
      */
@@ -90,7 +68,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Events, tasks, communications related to a contact
      */
     public int getC_ContactActivity_ID() {
-        Integer ii = (Integer) get_Value(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID);
+        Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -107,7 +85,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Sales Opportunity
      */
     public int getC_Opportunity_ID() {
-        Integer ii = (Integer) get_Value(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID);
+        Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -118,16 +96,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) get_Value(I_C_ContactActivity.COLUMNNAME_Description);
-    }
-
-    /**
-     * Get Record ID/ColumnName
-     *
-     * @return ID/ColumnName pair
-     */
-    public KeyNamePair getKeyNamePair() {
-        return new KeyNamePair(getId(), getDescription());
+        return (String) getValue(I_C_ContactActivity.COLUMNNAME_Description);
     }
 
     /**
@@ -136,7 +105,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return It is complete
      */
     public boolean isComplete() {
-        Object oo = get_Value(I_C_ContactActivity.COLUMNNAME_IsComplete);
+        Object oo = getValue(I_C_ContactActivity.COLUMNNAME_IsComplete);
         if (oo != null) {
             if (oo instanceof Boolean) return (Boolean) oo;
             return "Y".equals(oo);
@@ -155,7 +124,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Sales Representative or Company Agent
      */
     public int getSalesRep_ID() {
-        Integer ii = (Integer) get_Value(I_C_ContactActivity.COLUMNNAME_SalesRep_ID);
+        Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_SalesRep_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -166,7 +135,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return First effective day (inclusive)
      */
     public Timestamp getStartDate() {
-        return (Timestamp) get_Value(I_C_ContactActivity.COLUMNNAME_StartDate);
+        return (Timestamp) getValue(I_C_ContactActivity.COLUMNNAME_StartDate);
     }
 
     @Override

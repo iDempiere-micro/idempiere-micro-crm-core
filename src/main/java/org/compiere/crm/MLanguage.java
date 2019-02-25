@@ -4,12 +4,10 @@ import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.Query;
 import org.compiere.util.Msg;
-import org.idempiere.common.util.Language;
 
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -84,24 +82,13 @@ public class MLanguage extends X_AD_Language {
             String LanguageISO,
             String trxName) {
         super(ctx, 0);
-        setADLanguage(AD_Language); // 	en_US
+        setLanguage(AD_Language); // 	en_US
         setIsBaseLanguage(false);
         setIsSystemLanguage(false);
         setName(Name);
         setCountryCode(CountryCode); // 	US
         setLanguageISO(LanguageISO); // 	en
     } //	MLanguage
-
-    /**
-     * Get Language Model from Language
-     *
-     * @param ctx  context
-     * @param lang language
-     * @return language
-     */
-    public static I_AD_Language get(Properties ctx, Language lang) {
-        return get(ctx, lang.getADLanguage());
-    } //	getMLanguage
 
     /**
      * Get Language Model from AD_Language
@@ -118,21 +105,6 @@ public class MLanguage extends X_AD_Language {
     } //	get
 
     /**
-     * Load Languages (variants) with Language
-     *
-     * @param ctx         context
-     * @param LanguageISO language (2 letter) e.g. en
-     * @return language
-     */
-    public static MLanguage[] getWithLanguage(Properties ctx, String LanguageISO) {
-        List<MLanguage> list =
-                new Query(ctx, I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_LanguageISO + "=?")
-                        .setParameters(LanguageISO)
-                        .list();
-        return list.toArray(new MLanguage[list.size()]);
-    } //	get
-
-    /**
      * String Representation
      *
      * @return info
@@ -140,7 +112,7 @@ public class MLanguage extends X_AD_Language {
     public String toString() {
         StringBuilder str =
                 new StringBuilder("MLanguage[")
-                        .append(getADLanguage())
+                        .append(getLanguage())
                         .append("-")
                         .append(getName())
                         .append(",Language=")
@@ -162,68 +134,15 @@ public class MLanguage extends X_AD_Language {
     } //	getLocale
 
     /**
-     * Get (Short) Date Format. The date format must parseable by org.compiere.grid.ed.MDocDate i.e.
-     * leading zero for date and month
-     *
-     * @return date format MM/dd/yyyy - dd.MM.yyyy
-     */
-    public SimpleDateFormat getDateFormat() {
-        if (m_dateFormat != null) return m_dateFormat;
-
-        if (getDatePattern() != null) {
-            m_dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT, getLocale());
-            try {
-                m_dateFormat.applyPattern(getDatePattern());
-            } catch (Exception e) {
-                log.severe(getDatePattern() + " - " + e);
-                m_dateFormat = null;
-            }
-        }
-
-        if (m_dateFormat == null) {
-            //	Fix Locale Date format
-            m_dateFormat = (SimpleDateFormat) DateFormat.getDateInstance(DateFormat.SHORT, getLocale());
-            String sFormat = m_dateFormat.toPattern();
-            //	some short formats have only one M and d (e.g. ths US)
-            if (sFormat.indexOf("MM") == -1 && sFormat.indexOf("dd") == -1) {
-                StringBuilder nFormat = new StringBuilder();
-                for (int i = 0; i < sFormat.length(); i++) {
-                    if (sFormat.charAt(i) == 'M') nFormat.append("MM");
-                    else if (sFormat.charAt(i) == 'd') nFormat.append("dd");
-                    else nFormat.append(sFormat.charAt(i));
-                }
-                //	System.out.println(sFormat + " => " + nFormat);
-                m_dateFormat.applyPattern(nFormat.toString());
-            }
-            //	Unknown short format => use JDBC
-            if (m_dateFormat.toPattern().length() != 8) m_dateFormat.applyPattern("yyyy-MM-dd");
-
-            //	4 digit year
-            if (m_dateFormat.toPattern().indexOf("yyyy") == -1) {
-                sFormat = m_dateFormat.toPattern();
-                StringBuilder nFormat = new StringBuilder();
-                for (int i = 0; i < sFormat.length(); i++) {
-                    if (sFormat.charAt(i) == 'y') nFormat.append("yy");
-                    else nFormat.append(sFormat.charAt(i));
-                }
-                m_dateFormat.applyPattern(nFormat.toString());
-            }
-        }
-        //
-        m_dateFormat.setLenient(true);
-        return m_dateFormat;
-    } //  getDateFormat
-
-    /**
      * Set AD_Language_ID
      */
     private void setADLanguage_ID() {
-        int AD_Language_ID = getAD_Language_ID();
+        int AD_Language_ID = getLanguageId();
         if (AD_Language_ID == 0) {
             String sql =
                     "SELECT NVL(MAX(AD_Language_ID), 999999) FROM AD_Language WHERE AD_Language_ID > 1000";
             AD_Language_ID = getSQLValue(sql);
-            setADLanguage_ID(AD_Language_ID + 1);
+            setLanguageId(AD_Language_ID + 1);
         }
     } //	setADLanguage_ID
 

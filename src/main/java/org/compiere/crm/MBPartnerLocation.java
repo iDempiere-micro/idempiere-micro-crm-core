@@ -233,4 +233,36 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         }
         return m_uniqueName;
     }
+
+    /**
+     * Get Invoice Address.
+     *
+     * @return Business Partner Invoice/Bill Address
+     */
+    public boolean isBillTo() {
+        Object oo = getValue(I_C_BPartner_Location.COLUMNNAME_IsBillTo);
+        if (oo != null) {
+            if (oo instanceof Boolean) return (Boolean) oo;
+            return "Y".equals(oo);
+        }
+        return false;
+    }
+
+    /**
+     * Get Pay-From Address.
+     *
+     * @return Business Partner pays from that address and we'll send dunning letters there
+     */
+    public boolean isPayFrom() {
+        return charToBoolean(getValue(I_C_BPartner_Location.COLUMNNAME_IsPayFrom));
+    }
+
+    /**
+     * Get Ship Address.
+     *
+     * @return Business Partner Shipment Address
+     */
+    public boolean isShipTo() {
+        return charToBoolean(getValue(I_C_BPartner_Location.COLUMNNAME_IsShipTo));
+    }
 } // MBPartnerLocation

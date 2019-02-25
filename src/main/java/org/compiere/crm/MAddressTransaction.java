@@ -26,21 +26,4 @@ public class MAddressTransaction extends X_C_AddressTransaction {
         super(ctx, rs);
     }
 
-    /**
-     * Get error message
-     *
-     * @return error message
-     */
-    public String getErrorMessage() {
-        return m_errorMessage;
-    }
-
-    /**
-     * Set error message
-     *
-     * @param errorMessage
-     */
-    public void setErrorMessage(String errorMessage) {
-        m_errorMessage = errorMessage;
-    }
 }

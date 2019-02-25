@@ -3,7 +3,6 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.compiere.model.I_AD_User;
 import org.compiere.orm.BasePONameValue;
-import org.idempiere.orm.I_Persistent;
 
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -15,88 +14,12 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persistent {
+public class X_AD_User extends BasePONameValue implements I_AD_User {
 
-    /**
-     * IsMenuAutoExpand AD_Reference_ID=319
-     */
-    public static final int ISMENUAUTOEXPAND_AD_Reference_ID = 319;
     /**
      * Yes = Y
      */
     public static final String ISMENUAUTOEXPAND_Yes = "Y";
-    /**
-     * No = N
-     */
-    public static final String ISMENUAUTOEXPAND_No = "N";
-    /**
-     * LeadSource AD_Reference_ID=53415
-     */
-    public static final int LEADSOURCE_AD_Reference_ID = 53415;
-    /**
-     * Cold Call = CC
-     */
-    public static final String LEADSOURCE_ColdCall = "CC";
-    /**
-     * Existing Customer = EC
-     */
-    public static final String LEADSOURCE_ExistingCustomer = "EC";
-    /**
-     * Employee = EM
-     */
-    public static final String LEADSOURCE_Employee = "EM";
-    /**
-     * Partner = PT
-     */
-    public static final String LEADSOURCE_Partner = "PT";
-    /**
-     * Conference = CN
-     */
-    public static final String LEADSOURCE_Conference = "CN";
-    /**
-     * Trade Show = TS
-     */
-    public static final String LEADSOURCE_TradeShow = "TS";
-    /**
-     * Web Site = WS
-     */
-    public static final String LEADSOURCE_WebSite = "WS";
-    /**
-     * Word of Mouth = WM
-     */
-    public static final String LEADSOURCE_WordOfMouth = "WM";
-    /**
-     * Email = EL
-     */
-    public static final String LEADSOURCE_Email = "EL";
-    /**
-     * LeadStatus AD_Reference_ID=53416
-     */
-    public static final int LEADSTATUS_AD_Reference_ID = 53416;
-    /**
-     * New = N
-     */
-    public static final String LEADSTATUS_New = "N";
-    /**
-     * Working = W
-     */
-    public static final String LEADSTATUS_Working = "W";
-    /**
-     * Expired = E
-     */
-    public static final String LEADSTATUS_Expired = "E";
-    /**
-     * Recycled = R
-     */
-    public static final String LEADSTATUS_Recycled = "R";
-    /**
-     * Converted = C
-     */
-    public static final String LEADSTATUS_Converted = "C";
-    /**
-     * NotificationType AD_Reference_ID=344
-     */
-    public static final int NOTIFICATIONTYPE_AD_Reference_ID = 344;
     /**
      * EMail = E
      */
@@ -105,10 +28,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * Notice = N
      */
     public static final String NOTIFICATIONTYPE_Notice = "N";
-    /**
-     * None = X
-     */
-    public static final String NOTIFICATIONTYPE_None = "X";
     /**
      * EMail+Notice = B
      */
@@ -124,7 +43,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     public X_AD_User(Properties ctx, int AD_User_ID) {
         super(ctx, AD_User_ID);
         /**
-         * if (AD_User_ID == 0) { setAD_User_ID (0); setFailedLoginCount (0); // 0
+         * if (AD_User_ID == 0) { setUserId (0); setFailedLoginCount (0); // 0
          * setIsAddMailTextAutomatically (false); // N setIsExpired (false); // N setIsFullBPAccess
          * (true); // Y setIsInPayroll (false); // N setIsLocked (false); // 'N' setIsNoPasswordReset
          * (false); // 'N' setIsSalesLead (false); // N setName (null); setNotificationType (null); // E
@@ -161,30 +80,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      *
      * @return User within the system - Internal or Business Partner Contact
      */
-    public int getAD_User_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_AD_User_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get BP Address.
-     *
-     * @return Address of the Business Partner
-     */
-    public int getBP_Location_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_BP_Location_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Business Partner .
-     *
-     * @return Identifies a Business Partner
-     */
-    public int getC_BPartner_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_BPartner_ID);
+    public int getUserId() {
+        Integer ii = (Integer) getValue(COLUMNNAME_AD_User_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -194,64 +91,9 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      *
      * @param C_BPartner_ID Identifies a Business Partner
      */
-    public void setC_BPartner_ID(int C_BPartner_ID) {
+    public void setBPartnerId(int C_BPartner_ID) {
         if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
         else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
-    }
-
-    /**
-     * Get Partner Location.
-     *
-     * @return Identifies the (ship to) address for this Business Partner
-     */
-    public int getC_BPartner_Location_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_BPartner_Location_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Campaign.
-     *
-     * @return Marketing Campaign
-     */
-    public int getC_Campaign_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Campaign_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Greeting.
-     *
-     * @return Greeting to print on correspondence
-     */
-    public int getC_Greeting_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Greeting_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Position.
-     *
-     * @return Job Position
-     */
-    public int getC_Job_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Job_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Address.
-     *
-     * @return Location or Address
-     */
-    public int getC_Location_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_C_Location_ID);
-        if (ii == null) return 0;
-        return ii;
     }
 
     /**
@@ -269,7 +111,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) get_Value(COLUMNNAME_Description);
+        return (String) getValue(COLUMNNAME_Description);
     }
 
     /**
@@ -287,7 +129,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Electronic Mail Address
      */
     public String getEMail() {
-        return (String) get_Value(COLUMNNAME_EMail);
+        return (String) getValue(COLUMNNAME_EMail);
     }
 
     /**
@@ -305,7 +147,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return User Name (ID) in the Mail System
      */
     public String getEMailUser() {
-        return (String) get_Value(COLUMNNAME_EMailUser);
+        return (String) getValue(COLUMNNAME_EMailUser);
     }
 
     /**
@@ -323,7 +165,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Password of your email user id
      */
     public String getEMailUserPW() {
-        return (String) get_Value(COLUMNNAME_EMailUserPW);
+        return (String) getValue(COLUMNNAME_EMailUserPW);
     }
 
     /**
@@ -341,7 +183,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Verification information of EMail Address
      */
     public String getEMailVerify() {
-        return (String) get_Value(COLUMNNAME_EMailVerify);
+        return (String) getValue(COLUMNNAME_EMailVerify);
     }
 
     /**
@@ -359,7 +201,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Date Email was verified
      */
     public Timestamp getEMailVerifyDate() {
-        return (Timestamp) get_Value(COLUMNNAME_EMailVerifyDate);
+        return (Timestamp) getValue(COLUMNNAME_EMailVerifyDate);
     }
 
     /**
@@ -387,7 +229,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return If ticked, the menu is automatically expanded
      */
     public String getIsMenuAutoExpand() {
-        return (String) get_Value(COLUMNNAME_IsMenuAutoExpand);
+        return (String) getValue(COLUMNNAME_IsMenuAutoExpand);
     }
 
     /**
@@ -414,7 +256,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return User Name used for authorization via LDAP (directory) services
      */
     public String getLDAPUser() {
-        return (String) get_Value(COLUMNNAME_LDAPUser);
+        return (String) getValue(COLUMNNAME_LDAPUser);
     }
 
     /**
@@ -423,7 +265,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Type of Notifications
      */
     public String getNotificationType() {
-        return (String) get_Value(COLUMNNAME_NotificationType);
+        return (String) getValue(COLUMNNAME_NotificationType);
     }
 
     /**
@@ -442,7 +284,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Password of any length (case sensitive)
      */
     public String getPassword() {
-        return (String) get_Value(COLUMNNAME_Password);
+        return (String) getValue(COLUMNNAME_Password);
     }
 
     /**
@@ -455,15 +297,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     }
 
     /**
-     * Get Phone.
-     *
-     * @return Identifies a telephone number
-     */
-    public String getPhone() {
-        return (String) get_Value(COLUMNNAME_Phone);
-    }
-
-    /**
      * Set Phone.
      *
      * @param Phone Identifies a telephone number
@@ -473,34 +306,12 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
     }
 
     /**
-     * Get Default mail template.
-     *
-     * @return Default mail template
-     */
-    public int getR_DefaultMailText_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_R_DefaultMailText_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
-     * Get Sales Representative.
-     *
-     * @return Sales Representative or Company Agent
-     */
-    public int getSalesRep_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_SalesRep_ID);
-        if (ii == null) return 0;
-        return ii;
-    }
-
-    /**
      * Get Salt.
      *
      * @return Random data added to improve password hash effectiveness
      */
     public String getSalt() {
-        return (String) get_Value(COLUMNNAME_Salt);
+        return (String) getValue(COLUMNNAME_Salt);
     }
 
     /**
@@ -518,7 +329,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User, I_Persisten
      * @return Supervisor for this user/organization - used for escalation and approval
      */
     public int getSupervisor_ID() {
-        Integer ii = (Integer) get_Value(COLUMNNAME_Supervisor_ID);
+        Integer ii = (Integer) getValue(COLUMNNAME_Supervisor_ID);
         if (ii == null) return 0;
         return ii;
     }

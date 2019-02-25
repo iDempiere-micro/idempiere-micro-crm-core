@@ -126,20 +126,6 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
         return c;
     } //	get
 
-    /**
-     * Return Countries as Array
-     *
-     * @param ctx context
-     * @return MCountry Array
-     */
-    public static MCountry[] getCountries(Properties ctx) {
-        loadAllCountriesIfNeeded(ctx);
-        MCountry[] retValue = new MCountry[s_countries.size()];
-        s_countries.values().toArray(retValue);
-        Arrays.sort(retValue, new MCountry(ctx, 0));
-        return retValue;
-    } //	getCountries
-
     private static synchronized void loadAllCountriesIfNeeded(Properties ctx) {
         if (s_countries == null || s_countries.isEmpty()) {
             loadAllCountries(ctx);

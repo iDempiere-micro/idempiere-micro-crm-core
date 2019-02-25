@@ -24,10 +24,6 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
      * Default Region
      */
     private static MRegion s_default = null;
-    /**
-     * Static Logger
-     */
-    private static CLogger s_log = CLogger.getCLogger(MRegion.class);
 
     /**
      * ************************************************************************ Create empty Region
@@ -110,21 +106,6 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
         if (s_regions == null || s_regions.size() == 0) loadAllRegions(ctx);
         return s_default;
     } //	get
-
-    /**
-     * Return Regions as Array
-     *
-     * @param ctx context
-     * @return MCountry Array
-     */
-    public static MRegion[] getRegions(Properties ctx) {
-        CCache<String, MRegion> s_regions = MBaseRegionKt.getRegionsCache();
-        if (s_regions == null || s_regions.size() == 0) loadAllRegions(ctx);
-        MRegion[] retValue = new MRegion[s_regions.size()];
-        s_regions.values().toArray(retValue);
-        Arrays.sort(retValue, new MRegion(ctx, 0));
-        return retValue;
-    } //	getRegions
 
     /**
      * Return Array of Regions of Country

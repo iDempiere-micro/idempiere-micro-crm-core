@@ -15,7 +15,7 @@ fun getWithRole(role: MRole): Array<MUser> {
             WHERE ur.AD_User_ID=u.AD_User_ID AND ur.AD_Role_ID=? AND ur.IsActive='Y')
         """.trimIndent()
     val loadQuery =
-        queryOf(sql, role.aD_Role_ID)
+        queryOf(sql, role.roleId)
             .map { row -> MUser(role.ctx, row) }.asList
 
     return DB.current.run(loadQuery).toTypedArray()
@@ -54,7 +54,7 @@ open class MBaseUser : X_AD_User {
             ORDER BY AD_Role_ID
         """.trimIndent()
         val loadQuery =
-            queryOf(sql, aD_User_ID, orgId, aD_User_ID, orgId)
+            queryOf(sql, userId, orgId, userId, orgId)
                 .map { row -> MRole(ctx, row) }.asList
 
         return DB.current.run(loadQuery).toTypedArray()
