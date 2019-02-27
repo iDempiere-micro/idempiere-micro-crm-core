@@ -64,7 +64,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         this(bp.getCtx(), 0);
         setClientOrg(bp);
         // may (still) be 0
-        set_ValueNoCheck("C_BPartner_ID", new Integer(bp.getC_BPartner_ID()));
+        setValueNoCheck("C_BPartner_ID", new Integer(bp.getBusinessPartnerId()));
     } // MBPartner_Location
 
     /**
@@ -215,13 +215,13 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         }
 
         // Check uniqueness
-        MBPartnerLocation[] locations = getForBPartner(getCtx(), getC_BPartner_ID());
+        MBPartnerLocation[] locations = getForBPartner(getCtx(), getBusinessPartnerId());
         boolean unique = locations.length == 0;
         while (!unique) {
             unique = true;
             for (int i = 0; i < locations.length; i++) {
                 MBPartnerLocation location = locations[i];
-                if (location.getC_BPartner_Location_ID() == getId()) continue;
+                if (location.getBusinessPartnerLocationId() == getId()) continue;
                 if (m_uniqueName.equals(location.getName())) {
                     // m_uniqueName = null;
                     m_unique++;

@@ -49,7 +49,7 @@ class FactoryTest : BaseCrmTest() {
             val result2 = row.second
 
             assertEquals(id, result.id)
-            assertEquals(113, result2.c_BPartner_Location_ID)
+            assertEquals(113, result2.businessPartnerLocationId)
         }
     }
 }

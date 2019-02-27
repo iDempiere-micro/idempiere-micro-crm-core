@@ -67,7 +67,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
      * @param OptOutDate Date the contact opted out
      */
     public void setOptOutDate(Timestamp OptOutDate) {
-        set_Value(COLUMNNAME_OptOutDate, OptOutDate);
+        setValue(COLUMNNAME_OptOutDate, OptOutDate);
     }
 
     /**
@@ -87,8 +87,8 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
      * @param R_InterestArea_ID Interest Area or Topic
      */
     public void setR_InterestArea_ID(int R_InterestArea_ID) {
-        if (R_InterestArea_ID < 1) set_ValueNoCheck(COLUMNNAME_R_InterestArea_ID, null);
-        else set_ValueNoCheck(COLUMNNAME_R_InterestArea_ID, R_InterestArea_ID);
+        if (R_InterestArea_ID < 1) setValueNoCheck(COLUMNNAME_R_InterestArea_ID, null);
+        else setValueNoCheck(COLUMNNAME_R_InterestArea_ID, R_InterestArea_ID);
     }
 
     /**
@@ -97,7 +97,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
      * @param SubscribeDate Date the contact actively subscribed
      */
     public void setSubscribeDate(Timestamp SubscribeDate) {
-        set_Value(COLUMNNAME_SubscribeDate, SubscribeDate);
+        setValue(COLUMNNAME_SubscribeDate, SubscribeDate);
     }
 
     @Override

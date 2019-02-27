@@ -81,7 +81,7 @@ public class MUser extends MBaseUser implements IUser {
     public MUser(I_C_BPartner partner) {
         this(partner.getCtx(), 0);
         setClientOrg(partner);
-        setBPartnerId(partner.getC_BPartner_ID());
+        setBPartnerId(partner.getBusinessPartnerId());
         setName(partner.getName());
     } //	MUser
 

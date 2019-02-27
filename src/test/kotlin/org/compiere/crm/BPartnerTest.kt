@@ -25,7 +25,7 @@ class BPartnerTest : BaseCrmTest() {
             val id = 118
             val partner = MBPartner.get(Env.getCtx(), id)
 
-            assertEquals(id, partner.c_BPartner_ID)
+            assertEquals(id, partner.businessPartnerId)
             assertEquals("JoeBlock", partner.searchKey)
             assertEquals("Joe Block", partner.name)
 
@@ -37,7 +37,7 @@ class BPartnerTest : BaseCrmTest() {
 
             val partner3 = MBPartner.get(Env.getCtx(), id)
 
-            assertEquals(id, partner3.c_BPartner_ID)
+            assertEquals(id, partner3.businessPartnerId)
             assertEquals(newValue, partner3.searchKey)
             assertEquals("Joe Block", partner3.name)
 
@@ -62,7 +62,7 @@ class BPartnerTest : BaseCrmTest() {
             partnerLocation.c_Location_ID = location.c_Location_ID
             partnerLocation.save()
 
-            val newPartner2 = MBPartner.get(Env.getCtx(), newPartner.c_BPartner_ID)
+            val newPartner2 = MBPartner.get(Env.getCtx(), newPartner.businessPartnerId)
             assertEquals(1, newPartner2.locations.count())
 
             newPartner.delete(true)

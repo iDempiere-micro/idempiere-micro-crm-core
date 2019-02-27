@@ -56,7 +56,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Address1 Address line 1 for this location
      */
     public void setAddress1(String Address1) {
-        set_Value(COLUMNNAME_Address1, Address1);
+        setValue(COLUMNNAME_Address1, Address1);
     }
 
     /**
@@ -65,7 +65,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Address2 Address line 2 for this location
      */
     public void setAddress2(String Address2) {
-        set_Value(COLUMNNAME_Address2, Address2);
+        setValue(COLUMNNAME_Address2, Address2);
     }
 
     /**
@@ -74,7 +74,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Address3 Address Line 3 for the location
      */
     public void setAddress3(String Address3) {
-        set_Value(COLUMNNAME_Address3, Address3);
+        setValue(COLUMNNAME_Address3, Address3);
     }
 
     /**
@@ -83,7 +83,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Address4 Address Line 4 for the location
      */
     public void setAddress4(String Address4) {
-        set_Value(COLUMNNAME_Address4, Address4);
+        setValue(COLUMNNAME_Address4, Address4);
     }
 
     /**
@@ -92,7 +92,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Address5 Address Line 5 for the location
      */
     public void setAddress5(String Address5) {
-        set_Value(COLUMNNAME_Address5, Address5);
+        setValue(COLUMNNAME_Address5, Address5);
     }
 
     /**
@@ -101,8 +101,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param C_AddressValidation_ID Address Validation
      */
     public void setC_AddressValidation_ID(int C_AddressValidation_ID) {
-        if (C_AddressValidation_ID < 1) set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, null);
-        else set_ValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
+        if (C_AddressValidation_ID < 1) setValueNoCheck(COLUMNNAME_C_AddressValidation_ID, null);
+        else setValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
     }
 
     /**
@@ -120,7 +120,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param City Identifies a City
      */
     public void setCity(String City) {
-        set_Value(COLUMNNAME_City, City);
+        setValue(COLUMNNAME_City, City);
     }
 
     /**
@@ -129,8 +129,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param C_Location_ID Location or Address
      */
     public void setC_Location_ID(int C_Location_ID) {
-        if (C_Location_ID < 1) set_Value(COLUMNNAME_C_Location_ID, null);
-        else set_Value(COLUMNNAME_C_Location_ID, C_Location_ID);
+        if (C_Location_ID < 1) setValue(COLUMNNAME_C_Location_ID, null);
+        else setValue(COLUMNNAME_C_Location_ID, C_Location_ID);
     }
 
     /**
@@ -139,7 +139,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Comments Comments or additional information
      */
     public void setComments(String Comments) {
-        set_Value(COLUMNNAME_Comments, Comments);
+        setValue(COLUMNNAME_Comments, Comments);
     }
 
     /**
@@ -148,7 +148,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Country Country
      */
     public void setCountry(String Country) {
-        set_ValueNoCheck(COLUMNNAME_Country, Country);
+        setValueNoCheck(COLUMNNAME_Country, Country);
     }
 
     /**
@@ -157,7 +157,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Postal Postal code
      */
     public void setPostal(String Postal) {
-        set_Value(COLUMNNAME_Postal, Postal);
+        setValue(COLUMNNAME_Postal, Postal);
     }
 
     /**
@@ -166,7 +166,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @param Region Region
      */
     public void setRegion(String Region) {
-        set_ValueNoCheck(COLUMNNAME_Region, Region);
+        setValueNoCheck(COLUMNNAME_Region, Region);
     }
 
     @Override

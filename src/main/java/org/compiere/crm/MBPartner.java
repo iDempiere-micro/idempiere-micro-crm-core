@@ -90,8 +90,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
             setIsPOTaxExempt(false);
             setIsDiscountPrinted(false);
             //
-            setSO_CreditLimit(Env.ZERO);
-            setSO_CreditUsed(Env.ZERO);
+            setSalesOrderCreditLimit(Env.ZERO);
+            setSalesOrderCreditUsed(Env.ZERO);
             setTotalOpenBalance(Env.ZERO);
             setSOCreditStatus(SOCREDITSTATUS_NoCreditCheck);
             //
@@ -144,16 +144,16 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         if (template == null) template = new MBPartner(ctx, 0);
         //	Reset
         if (template != null) {
-            template.set_ValueNoCheck("C_BPartner_ID", new Integer(0));
-            template.set_ValueNoCheck("C_BPartner_UU", null);
+            template.setValueNoCheck("C_BPartner_ID", new Integer(0));
+            template.setValueNoCheck("C_BPartner_UU", null);
             template.setSearchKey("");
             template.setName("");
             template.setName2(null);
             template.setDUNS("");
             template.setFirstSale(null);
             //
-            template.setSO_CreditLimit(Env.ZERO);
-            template.setSO_CreditUsed(Env.ZERO);
+            template.setSalesOrderCreditLimit(Env.ZERO);
+            template.setSalesOrderCreditUsed(Env.ZERO);
             template.setTotalOpenBalance(Env.ZERO);
             //	s_template.setRating(null);
             //
@@ -164,10 +164,10 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
             template.setSalesVolume(0);
             // Reset Created, Updated to current system time ( teo_sarca )
             Timestamp ts = new Timestamp(System.currentTimeMillis());
-            template.set_ValueNoCheck("Created", ts);
-            template.set_ValueNoCheck("Updated", ts);
-            template.set_ValueNoCheck("CreatedBy", Env.getAD_User_ID(ctx));
-            template.set_ValueNoCheck("UpdatedBy", Env.getAD_User_ID(ctx));
+            template.setValueNoCheck("Created", ts);
+            template.setValueNoCheck("Updated", ts);
+            template.setValueNoCheck("CreatedBy", Env.getUserId(ctx));
+            template.setValueNoCheck("UpdatedBy", Env.getUserId(ctx));
         }
         return template;
     } //	getTemplate
@@ -296,7 +296,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      */
     public void setAD_OrgBP_ID(int AD_OrgBP_ID) {
         if (AD_OrgBP_ID == 0) super.setAD_OrgBP_ID(null);
-        else super.set_Value("AD_OrgBP_ID", AD_OrgBP_ID);
+        else super.setValue("AD_OrgBP_ID", AD_OrgBP_ID);
     } //	setAD_OrgBP_ID
 
     /**
@@ -327,13 +327,13 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
             I_C_BPartner_Location[] locs = getLocations(false);
             for (int i = 0; m_primaryC_BPartner_Location_ID == null && i < locs.length; i++) {
                 if (locs[i].isBillTo()) {
-                    setPrimaryC_BPartner_Location_ID(locs[i].getC_BPartner_Location_ID());
+                    setPrimaryC_BPartner_Location_ID(locs[i].getBusinessPartnerLocationId());
                     break;
                 }
             }
             //	get first
             if (m_primaryC_BPartner_Location_ID == null && locs.length > 0)
-                setPrimaryC_BPartner_Location_ID(locs[0].getC_BPartner_Location_ID());
+                setPrimaryC_BPartner_Location_ID(locs[0].getBusinessPartnerLocationId());
         }
         if (m_primaryC_BPartner_Location_ID == null) return 0;
         return m_primaryC_BPartner_Location_ID.intValue();
@@ -357,7 +357,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     public String getSOCreditStatus(BigDecimal additionalAmt) {
         if (additionalAmt == null || additionalAmt.signum() == 0) return getSOCreditStatus();
         //
-        BigDecimal creditLimit = getSO_CreditLimit();
+        BigDecimal creditLimit = getSalesOrderCreditLimit();
         //	Nothing to do
         if (SOCREDITSTATUS_NoCreditCheck.equals(getSOCreditStatus())
                 || SOCREDITSTATUS_CreditStop.equals(getSOCreditStatus())
@@ -380,20 +380,20 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @return price List
      */
-    public int getM_PriceList_ID() {
-        int ii = super.getM_PriceList_ID();
-        if (ii == 0) ii = getBPGroup().getM_PriceList_ID();
+    public int getPriceListId() {
+        int ii = super.getPriceListId();
+        if (ii == 0) ii = getBPGroup().getPriceListId();
         return ii;
-    } //	getM_PriceList_ID
+    } //	getPriceListId
 
     /**
      * Get PO PriceList
      *
      * @return price list
      */
-    public int getPO_PriceList_ID() {
-        int ii = super.getPO_PriceList_ID();
-        if (ii == 0) ii = getBPGroup().getPO_PriceList_ID();
+    public int getPurchaseOrderPriceListId() {
+        int ii = super.getPurchaseOrderPriceListId();
+        if (ii == 0) ii = getBPGroup().getPurchaseOrderPriceListId();
         return ii;
     } //
 
@@ -436,7 +436,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
 
         //	TODO: Value/Name change
         // if (!newRecord && (is_ValueChanged("Value") || is_ValueChanged("Name"))) {
-            // TODO: StringBuilder msgacc = new StringBuilder("C_BPartner_ID=").append(getC_BPartner_ID());
+            // TODO: StringBuilder msgacc = new StringBuilder("C_BPartner_ID=").append(getBusinessPartnerId());
             // TODO: MAccount.updateValueDescription(getCtx(), msgacc.toString(), get_TrxName());
         // }
         return success;
@@ -473,7 +473,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @return Sales Representative or Company Agent
      */
-    public int getSalesRep_ID() {
+    public int getSalesRepresentativeId() {
         Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_SalesRep_ID);
         if (ii == null) return 0;
         return ii;
@@ -484,7 +484,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @return The terms of Payment (timing, discount)
      */
-    public int getC_PaymentTerm_ID() {
+    public int getPaymentTermId() {
         Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID);
         if (ii == null) return 0;
         return ii;
@@ -531,7 +531,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @return Payment rules for a purchase order
      */
-    public int getPO_PaymentTerm_ID() {
+    public int getPurchaseOrderPaymentTermId() {
         Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID);
         if (ii == null) return 0;
         return ii;

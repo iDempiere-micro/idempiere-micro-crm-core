@@ -104,7 +104,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @param IsConfidentialInfo Can enter confidential information
      */
     public void setIsConfidentialInfo(boolean IsConfidentialInfo) {
-        set_Value(COLUMNNAME_IsConfidentialInfo, Boolean.valueOf(IsConfidentialInfo));
+        setValue(COLUMNNAME_IsConfidentialInfo, Boolean.valueOf(IsConfidentialInfo));
     }
 
     /**
@@ -113,7 +113,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @param IsDefault Default value
      */
     public void setIsDefault(boolean IsDefault) {
-        set_Value(COLUMNNAME_IsDefault, Boolean.valueOf(IsDefault));
+        setValue(COLUMNNAME_IsDefault, Boolean.valueOf(IsDefault));
     }
 
     /**
@@ -132,7 +132,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      *
      * @return Unique identifier of a Price List
      */
-    public int getM_PriceList_ID() {
+    public int getPriceListId() {
         Integer ii = (Integer) getValue(COLUMNNAME_M_PriceList_ID);
         if (ii == null) return 0;
         return ii;
@@ -154,7 +154,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      *
      * @return Price List used by this Business Partner
      */
-    public int getPO_PriceList_ID() {
+    public int getPurchaseOrderPriceListId() {
         Integer ii = (Integer) getValue(COLUMNNAME_PO_PriceList_ID);
         if (ii == null) return 0;
         return ii;
@@ -187,7 +187,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      */
     public void setPriorityBase(String PriorityBase) {
 
-        set_Value(COLUMNNAME_PriorityBase, PriorityBase);
+        setValue(COLUMNNAME_PriorityBase, PriorityBase);
     }
 
     /**
@@ -196,7 +196,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @param Value Search key for the record in the format required - must be unique
      */
     public void setValue(String Value) {
-        set_Value(COLUMNNAME_Value, Value);
+        setValue(COLUMNNAME_Value, Value);
     }
 
     @Override

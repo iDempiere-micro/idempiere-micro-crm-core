@@ -52,7 +52,7 @@ public class MContactInterest extends X_R_ContactInterest {
             Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive) {
         super(ctx, 0);
         setR_InterestArea_ID(R_InterestArea_ID);
-        setAD_User_ID(AD_User_ID);
+        setUserId(AD_User_ID);
         setIsActive(isActive);
     } //	MContactInterest
 
@@ -112,7 +112,7 @@ public class MContactInterest extends X_R_ContactInterest {
                         .append("R_InterestArea_ID=")
                         .append(getR_InterestArea_ID())
                         .append(",AD_User_ID=")
-                        .append(getAD_User_ID())
+                        .append(getUserId())
                         .append(",Subscribed=")
                         .append(isSubscribed())
                         .append("]");

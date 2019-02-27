@@ -43,11 +43,11 @@ open class MBaseBPartner : X_C_BPartner {
 
         setStandardDefaults()
         // 	Reset
-        set_ValueNoCheck("C_BPartner_ID", I_ZERO)
+        setValueNoCheck("C_BPartner_ID", I_ZERO)
         setSearchKey("")
         name = ""
         setName2(null)
-        set_ValueNoCheck("C_BPartner_UU", "")
+        setValueNoCheck("C_BPartner_UU", "")
         return success
     } // 	getTemplate
 
@@ -61,7 +61,7 @@ open class MBaseBPartner : X_C_BPartner {
         if (reload || m_contacts.size == 0) {
             //
             val sql = "SELECT * FROM AD_User WHERE C_BPartner_ID=? ORDER BY AD_User_ID"
-            val loadQuery = queryOf(sql, c_BPartner_ID).map { MUser(ctx, it) }.asList
+            val loadQuery = queryOf(sql, businessPartnerId).map { MUser(ctx, it) }.asList
             val result = DB.current.run(loadQuery)
 
             m_contacts.clear()
@@ -81,7 +81,7 @@ open class MBaseBPartner : X_C_BPartner {
 
             val sql =
                 "SELECT * FROM C_BPartner_Location WHERE C_BPartner_ID=? AND IsActive='Y'" + " ORDER BY C_BPartner_Location_ID"
-            val loadQuery = queryOf(sql, c_BPartner_ID).map { row -> MBPartnerLocation(ctx, row) }.asList
+            val loadQuery = queryOf(sql, businessPartnerId).map { row -> MBPartnerLocation(ctx, row) }.asList
             val locations = DB.current.run(loadQuery)
 
             m_locations.clear()
@@ -115,8 +115,8 @@ open class MBaseBPartner : X_C_BPartner {
         if (group == null) return
         c_BP_Group_ID = group.getC_BP_Group_ID()
         if (group.c_Dunning_ID != 0) setC_Dunning_ID(group.c_Dunning_ID)
-        if (group.m_PriceList_ID != 0) m_PriceList_ID = group.m_PriceList_ID
-        if (group.pO_PriceList_ID != 0) pO_PriceList_ID = group.pO_PriceList_ID
+        if (group.priceListId != 0) priceListId = group.priceListId
+        if (group.purchaseOrderPriceListId != 0) purchaseOrderPriceListId = group.purchaseOrderPriceListId
         if (group.m_DiscountSchema_ID != 0)
             setM_DiscountSchema_ID(group.m_DiscountSchema_ID)
         if (group.getPO_DiscountSchema_ID() != 0)
@@ -134,7 +134,7 @@ open class MBaseBPartner : X_C_BPartner {
 
     /** Set Credit Status  */
     fun setSOCreditStatus() {
-        val creditLimit = sO_CreditLimit
+        val creditLimit = salesOrderCreditLimit
         // 	Nothing to do
         if (X_C_BPartner.SOCREDITSTATUS_NoCreditCheck == soCreditStatus ||
             X_C_BPartner.SOCREDITSTATUS_CreditStop == soCreditStatus ||
@@ -169,11 +169,11 @@ open class MBaseBPartner : X_C_BPartner {
             FROM C_BPartner bp
             WHERE C_BPartner_ID=?
         """.trimIndent()
-        val loadQuery = queryOf(sql, c_BPartner_ID).map { row -> Pair(row.bigDecimal(1), row.bigDecimal(2)) }.asSingle
+        val loadQuery = queryOf(sql, businessPartnerId).map { row -> Pair(row.bigDecimal(1), row.bigDecimal(2)) }.asSingle
         val result = DB.current.run(loadQuery)
         if (result == null) return
         val (SO_CreditUsed, TotalOpenBalance) = result
-        super.setSO_CreditUsed(SO_CreditUsed)
+        super.setSalesOrderCreditUsed(SO_CreditUsed)
         super.setTotalOpenBalance(TotalOpenBalance)
         setSOCreditStatus()
     }
@@ -186,7 +186,7 @@ open class MBaseBPartner : X_C_BPartner {
             FROM C_BPartner bp
             WHERE C_BPartner_ID=?
         """.trimIndent()
-        val loadQuery = queryOf(sql, c_BPartner_ID).map { row -> row.bigDecimalOrNull(1) }.asSingle
+        val loadQuery = queryOf(sql, businessPartnerId).map { row -> row.bigDecimalOrNull(1) }.asSingle
         val result = DB.current.run(loadQuery)
         if (result != null) super.setActualLifeTimeValue(result)
     }

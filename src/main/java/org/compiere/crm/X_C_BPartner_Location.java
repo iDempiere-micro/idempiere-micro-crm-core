@@ -28,7 +28,7 @@ public class X_C_BPartner_Location extends BasePOName {
     public X_C_BPartner_Location(Properties ctx, int C_BPartner_Location_ID) {
         super(ctx, C_BPartner_Location_ID);
         /**
-         * if (C_BPartner_Location_ID == 0) { setC_BPartner_ID (0); setC_BPartner_Location_ID (0);
+         * if (C_BPartner_Location_ID == 0) { setBusinessPartnerId (0); setBusinessPartnerLocationId (0);
          * setLocationId (0); setIsBillTo (true); // Y setIsPayFrom (true); // Y setIsRemitTo (true);
          * // Y setIsShipTo (true); // Y setName (null); // . }
          */
@@ -63,7 +63,7 @@ public class X_C_BPartner_Location extends BasePOName {
      *
      * @return Identifies a Business Partner
      */
-    public int getC_BPartner_ID() {
+    public int getBusinessPartnerId() {
         Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID);
         if (ii == null) return 0;
         return ii;
@@ -74,7 +74,7 @@ public class X_C_BPartner_Location extends BasePOName {
      *
      * @return Identifies the (ship to) address for this Business Partner
      */
-    public int getC_BPartner_Location_ID() {
+    public int getBusinessPartnerLocationId() {
         Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID);
         if (ii == null) return 0;
         return ii;
@@ -97,8 +97,8 @@ public class X_C_BPartner_Location extends BasePOName {
      * @param C_Location_ID Location or Address
      */
     public void setC_Location_ID(int C_Location_ID) {
-        if (C_Location_ID < 1) set_Value(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, null);
-        else set_Value(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
+        if (C_Location_ID < 1) setValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, null);
+        else setValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
     }
 
     /**
@@ -107,7 +107,7 @@ public class X_C_BPartner_Location extends BasePOName {
      * @param IsBillTo Business Partner Invoice/Bill Address
      */
     public void setIsBillTo(boolean IsBillTo) {
-        set_Value(I_C_BPartner_Location.COLUMNNAME_IsBillTo, Boolean.valueOf(IsBillTo));
+        setValue(I_C_BPartner_Location.COLUMNNAME_IsBillTo, Boolean.valueOf(IsBillTo));
     }
 
     /**
@@ -116,7 +116,7 @@ public class X_C_BPartner_Location extends BasePOName {
      * @param IsPayFrom Business Partner pays from that address and we'll send dunning letters there
      */
     public void setIsPayFrom(boolean IsPayFrom) {
-        set_Value(I_C_BPartner_Location.COLUMNNAME_IsPayFrom, Boolean.valueOf(IsPayFrom));
+        setValue(I_C_BPartner_Location.COLUMNNAME_IsPayFrom, Boolean.valueOf(IsPayFrom));
     }
 
     /**
@@ -134,7 +134,7 @@ public class X_C_BPartner_Location extends BasePOName {
      * @param IsRemitTo Business Partner payment address
      */
     public void setIsRemitTo(boolean IsRemitTo) {
-        set_Value(I_C_BPartner_Location.COLUMNNAME_IsRemitTo, Boolean.valueOf(IsRemitTo));
+        setValue(I_C_BPartner_Location.COLUMNNAME_IsRemitTo, Boolean.valueOf(IsRemitTo));
     }
 
     /**
@@ -143,7 +143,7 @@ public class X_C_BPartner_Location extends BasePOName {
      * @param IsShipTo Business Partner Shipment Address
      */
     public void setIsShipTo(boolean IsShipTo) {
-        set_Value(I_C_BPartner_Location.COLUMNNAME_IsShipTo, Boolean.valueOf(IsShipTo));
+        setValue(I_C_BPartner_Location.COLUMNNAME_IsShipTo, Boolean.valueOf(IsShipTo));
     }
 
     @Override

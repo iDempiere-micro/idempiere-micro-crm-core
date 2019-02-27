@@ -35,6 +35,7 @@ abstract class BaseCrmTest {
         val result = modelFactory.getPO(tableName, id)
         println(result)
         assertNotNull(result)
+        @Suppress("UNCHECKED_CAST")
         val obj = result as T
         assertNotNull(obj)
         assertEquals(id, obj.id)

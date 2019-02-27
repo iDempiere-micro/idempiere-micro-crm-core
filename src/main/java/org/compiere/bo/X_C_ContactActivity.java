@@ -44,8 +44,8 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * Load Constructor with rename
      */
     public X_C_ContactActivity(
-            Properties ctx, ResultSet rs, String trxName, String columnNamePrefix) {
-        super(ctx, rs, trxName, columnNamePrefix);
+            Properties ctx, ResultSet rs, String columnNamePrefix) {
+        super(ctx, rs, columnNamePrefix);
     }
 
     /**
@@ -67,16 +67,20 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      *
      * @return Events, tasks, communications related to a contact
      */
-    public int getC_ContactActivity_ID() {
+    public int getContactActivityId() {
         Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID);
         if (ii == null) return 0;
         return ii;
     }
 
-    public org.compiere.model.I_C_Opportunity getC_Opportunity() throws RuntimeException {
+    public org.compiere.model.I_C_Opportunity getOpportunity() throws RuntimeException {
         return (org.compiere.model.I_C_Opportunity)
                 MTable.get(getCtx(), org.compiere.model.I_C_Opportunity.Table_Name)
-                        .getPO(getC_Opportunity_ID());
+                        .getPO(getOpportunityId());
+    }
+
+    public void setC_Opportunity(org.compiere.model.I_C_Opportunity opportunity) {
+        setValue(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, opportunity.getId());
     }
 
     /**
@@ -84,7 +88,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      *
      * @return Sales Opportunity
      */
-    public int getC_Opportunity_ID() {
+    public int getOpportunityId() {
         Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID);
         if (ii == null) return 0;
         return ii;
@@ -113,9 +117,9 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
         return false;
     }
 
-    public org.compiere.model.I_AD_User getSalesRep() throws RuntimeException {
+    public org.compiere.model.I_AD_User getSalesRepresentative() throws RuntimeException {
         return (org.compiere.model.I_AD_User)
-                MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRep_ID());
+                MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRepresentativeId());
     }
 
     /**
@@ -123,7 +127,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      *
      * @return Sales Representative or Company Agent
      */
-    public int getSalesRep_ID() {
+    public int getSalesRepresentativeId() {
         Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_SalesRep_ID);
         if (ii == null) return 0;
         return ii;
@@ -137,9 +141,37 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     public Timestamp getStartDate() {
         return (Timestamp) getValue(I_C_ContactActivity.COLUMNNAME_StartDate);
     }
+    public void setStartDate(Timestamp value) { setValue(I_C_ContactActivity.COLUMNNAME_StartDate, value); }
 
     @Override
     public int getTableId() {
         return I_C_ContactActivity.Table_ID;
+    }
+
+    /** Set Description.
+     @param Description
+     Optional short description of the record
+     */
+    public void setDescription (String Description)
+    {
+        setValue (COLUMNNAME_Description, Description);
+    }
+
+    /** Set Activity Type.
+     @param ContactActivityType
+     Type of activity, e.g. task, email, phone call
+     */
+    public void setContactActivityType (String ContactActivityType)
+    {
+
+        setValueNoCheck (COLUMNNAME_ContactActivityType, ContactActivityType);
+    }
+
+    /** Get Activity Type.
+     @return Type of activity, e.g. task, email, phone call
+     */
+    public String getContactActivityType ()
+    {
+        return (String)getValue(COLUMNNAME_ContactActivityType);
     }
 }

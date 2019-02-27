@@ -92,8 +92,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param C_BPartner_ID Identifies a Business Partner
      */
     public void setBPartnerId(int C_BPartner_ID) {
-        if (C_BPartner_ID < 1) set_Value(COLUMNNAME_C_BPartner_ID, null);
-        else set_Value(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
+        if (C_BPartner_ID < 1) setValue(COLUMNNAME_C_BPartner_ID, null);
+        else setValue(COLUMNNAME_C_BPartner_ID, C_BPartner_ID);
     }
 
     /**
@@ -102,7 +102,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param DatePasswordChanged Date Password Changed
      */
     public void setDatePasswordChanged(Timestamp DatePasswordChanged) {
-        set_Value(COLUMNNAME_DatePasswordChanged, DatePasswordChanged);
+        setValue(COLUMNNAME_DatePasswordChanged, DatePasswordChanged);
     }
 
     /**
@@ -120,7 +120,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param Description Optional short description of the record
      */
     public void setDescription(String Description) {
-        set_Value(COLUMNNAME_Description, Description);
+        setValue(COLUMNNAME_Description, Description);
     }
 
     /**
@@ -138,7 +138,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param EMail Electronic Mail Address
      */
     public void setEMail(String EMail) {
-        set_Value(COLUMNNAME_EMail, EMail);
+        setValue(COLUMNNAME_EMail, EMail);
     }
 
     /**
@@ -156,7 +156,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param EMailUser User Name (ID) in the Mail System
      */
     public void setEMailUser(String EMailUser) {
-        set_Value(COLUMNNAME_EMailUser, EMailUser);
+        setValue(COLUMNNAME_EMailUser, EMailUser);
     }
 
     /**
@@ -174,7 +174,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param EMailUserPW Password of your email user id
      */
     public void setEMailUserPW(String EMailUserPW) {
-        set_Value(COLUMNNAME_EMailUserPW, EMailUserPW);
+        setValue(COLUMNNAME_EMailUserPW, EMailUserPW);
     }
 
     /**
@@ -192,7 +192,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param EMailVerify Verification information of EMail Address
      */
     public void setEMailVerify(String EMailVerify) {
-        set_ValueNoCheck(COLUMNNAME_EMailVerify, EMailVerify);
+        setValueNoCheck(COLUMNNAME_EMailVerify, EMailVerify);
     }
 
     /**
@@ -210,7 +210,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param EMailVerifyDate Date Email was verified
      */
     public void setEMailVerifyDate(Timestamp EMailVerifyDate) {
-        set_ValueNoCheck(COLUMNNAME_EMailVerifyDate, EMailVerifyDate);
+        setValueNoCheck(COLUMNNAME_EMailVerifyDate, EMailVerifyDate);
     }
 
     /**
@@ -220,7 +220,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      *                       resources
      */
     public void setIsFullBPAccess(boolean IsFullBPAccess) {
-        set_Value(COLUMNNAME_IsFullBPAccess, IsFullBPAccess);
+        setValue(COLUMNNAME_IsFullBPAccess, IsFullBPAccess);
     }
 
     /**
@@ -238,7 +238,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param LastContact Date this individual was last contacted
      */
     public void setLastContact(Timestamp LastContact) {
-        set_Value(COLUMNNAME_LastContact, LastContact);
+        setValue(COLUMNNAME_LastContact, LastContact);
     }
 
     /**
@@ -247,7 +247,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param LastResult Result of last contact
      */
     public void setLastResult(String LastResult) {
-        set_Value(COLUMNNAME_LastResult, LastResult);
+        setValue(COLUMNNAME_LastResult, LastResult);
     }
 
     /**
@@ -275,7 +275,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      */
     public void setNotificationType(String NotificationType) {
 
-        set_Value(COLUMNNAME_NotificationType, NotificationType);
+        setValue(COLUMNNAME_NotificationType, NotificationType);
     }
 
     /**
@@ -293,7 +293,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param Password Password of any length (case sensitive)
      */
     public void setPassword(String Password) {
-        set_Value(COLUMNNAME_Password, Password);
+        setValue(COLUMNNAME_Password, Password);
     }
 
     /**
@@ -302,7 +302,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param Phone Identifies a telephone number
      */
     public void setPhone(String Phone) {
-        set_Value(COLUMNNAME_Phone, Phone);
+        setValue(COLUMNNAME_Phone, Phone);
     }
 
     /**
@@ -320,7 +320,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      * @param Salt Random data added to improve password hash effectiveness
      */
     public void setSalt(String Salt) {
-        set_ValueNoCheck(COLUMNNAME_Salt, Salt);
+        setValueNoCheck(COLUMNNAME_Salt, Salt);
     }
 
     /**

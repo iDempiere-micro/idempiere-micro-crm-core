@@ -27,7 +27,7 @@ class MCrmCustomerCategory : BasePOName {
             return MBPartner(ctx, getValue(I_C_BPartner.COLUMNNAME_C_BPartner_ID) as Int)
         }
         set(bp) {
-            set_ValueNoCheck(I_C_BPartner.COLUMNNAME_C_BPartner_ID, bp.c_BPartner_ID)
+            setValueNoCheck(I_C_BPartner.COLUMNNAME_C_BPartner_ID, bp.businessPartnerId)
         }
 
     var category: MCrmCategory
@@ -35,6 +35,6 @@ class MCrmCustomerCategory : BasePOName {
             return MCrmCategory(ctx, getValue("Crm_Category_ID") as Int)
         }
         set(cat) {
-            set_ValueNoCheck("Crm_Category_ID", cat.id)
+            setValueNoCheck("Crm_Category_ID", cat.id)
         }
 }

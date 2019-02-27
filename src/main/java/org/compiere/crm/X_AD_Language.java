@@ -66,7 +66,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
      * @param AD_Language Language for this entity
      */
     public void setLanguage(String AD_Language) {
-        set_ValueNoCheck(COLUMNNAME_AD_Language, AD_Language);
+        setValueNoCheck(COLUMNNAME_AD_Language, AD_Language);
     }
 
     /**
@@ -86,8 +86,8 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
      * @param AD_Language_ID Language ID
      */
     public void setLanguageId(int AD_Language_ID) {
-        if (AD_Language_ID < 1) set_ValueNoCheck(COLUMNNAME_AD_Language_ID, null);
-        else set_ValueNoCheck(COLUMNNAME_AD_Language_ID, Integer.valueOf(AD_Language_ID));
+        if (AD_Language_ID < 1) setValueNoCheck(COLUMNNAME_AD_Language_ID, null);
+        else setValueNoCheck(COLUMNNAME_AD_Language_ID, Integer.valueOf(AD_Language_ID));
     }
 
     /**
@@ -107,7 +107,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
      *                    - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
      */
     public void setCountryCode(String CountryCode) {
-        set_Value(COLUMNNAME_CountryCode, CountryCode);
+        setValue(COLUMNNAME_CountryCode, CountryCode);
     }
 
     /**
@@ -125,7 +125,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
      * @param IsBaseLanguage The system information is maintained in this language
      */
     public void setIsBaseLanguage(boolean IsBaseLanguage) {
-        set_ValueNoCheck(COLUMNNAME_IsBaseLanguage, Boolean.valueOf(IsBaseLanguage));
+        setValueNoCheck(COLUMNNAME_IsBaseLanguage, Boolean.valueOf(IsBaseLanguage));
     }
 
     /**
@@ -143,7 +143,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
      * @param IsSystemLanguage The screens, etc. are maintained in this Language
      */
     public void setIsSystemLanguage(boolean IsSystemLanguage) {
-        set_Value(COLUMNNAME_IsSystemLanguage, Boolean.valueOf(IsSystemLanguage));
+        setValue(COLUMNNAME_IsSystemLanguage, Boolean.valueOf(IsSystemLanguage));
     }
 
     /**
@@ -172,7 +172,7 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
      *                    http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt
      */
     public void setLanguageISO(String LanguageISO) {
-        set_Value(COLUMNNAME_LanguageISO, LanguageISO);
+        setValue(COLUMNNAME_LanguageISO, LanguageISO);
     }
 
     @Override

@@ -68,8 +68,8 @@ public class X_C_Region extends BasePOName implements I_C_Region {
      * @param C_Country_ID Country
      */
     public void setC_Country_ID(int C_Country_ID) {
-        if (C_Country_ID < 1) set_ValueNoCheck(COLUMNNAME_C_Country_ID, null);
-        else set_ValueNoCheck(COLUMNNAME_C_Country_ID, C_Country_ID);
+        if (C_Country_ID < 1) setValueNoCheck(COLUMNNAME_C_Country_ID, null);
+        else setValueNoCheck(COLUMNNAME_C_Country_ID, C_Country_ID);
     }
 
     /**

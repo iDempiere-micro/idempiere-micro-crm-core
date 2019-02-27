@@ -9,8 +9,8 @@ class MOpportunity : X_C_Opportunity {
     constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
 
     override fun beforeSave(newRecord: Boolean): Boolean {
-        if (c_Order_ID > 0) {
-            val order = c_Order
+        if (orderId > 0) {
+            val order = order
             if (order != null)
                 this.setOpportunityAmt(order.grandTotal)
         }

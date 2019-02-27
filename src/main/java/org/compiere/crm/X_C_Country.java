@@ -106,7 +106,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
      * @param DisplaySequence Format for printing this Address
      */
     public void setDisplaySequence(String DisplaySequence) {
-        set_Value(COLUMNNAME_DisplaySequence, DisplaySequence);
+        setValue(COLUMNNAME_DisplaySequence, DisplaySequence);
     }
 
     /**
@@ -124,7 +124,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
      * @param HasPostal_Add Has Additional Postal Code
      */
     public void setHasPostal_Add(boolean HasPostal_Add) {
-        set_Value(COLUMNNAME_HasPostal_Add, Boolean.valueOf(HasPostal_Add));
+        setValue(COLUMNNAME_HasPostal_Add, Boolean.valueOf(HasPostal_Add));
     }
 
     /**
@@ -142,7 +142,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
      * @param HasRegion Country contains Regions
      */
     public void setHasRegion(boolean HasRegion) {
-        set_Value(COLUMNNAME_HasRegion, Boolean.valueOf(HasRegion));
+        setValue(COLUMNNAME_HasRegion, Boolean.valueOf(HasRegion));
     }
 
     /**
@@ -151,7 +151,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
      * @param IsAddressLinesLocalReverse Print Local Address in reverse Order
      */
     public void setIsAddressLinesLocalReverse(boolean IsAddressLinesLocalReverse) {
-        set_Value(COLUMNNAME_IsAddressLinesLocalReverse, Boolean.valueOf(IsAddressLinesLocalReverse));
+        setValue(COLUMNNAME_IsAddressLinesLocalReverse, Boolean.valueOf(IsAddressLinesLocalReverse));
     }
 
     /**
@@ -169,7 +169,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
      * @param IsAddressLinesReverse Print Address in reverse Order
      */
     public void setIsAddressLinesReverse(boolean IsAddressLinesReverse) {
-        set_Value(COLUMNNAME_IsAddressLinesReverse, Boolean.valueOf(IsAddressLinesReverse));
+        setValue(COLUMNNAME_IsAddressLinesReverse, Boolean.valueOf(IsAddressLinesReverse));
     }
 
     /**

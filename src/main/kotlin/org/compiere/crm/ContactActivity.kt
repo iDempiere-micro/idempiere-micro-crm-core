@@ -15,11 +15,11 @@ data class ContactActivity(
 
     constructor (a: I_C_ContactActivity) :
             this(
-                a.c_ContactActivity_ID,
+                a.contactActivityId,
                 a.description,
                 a.startDate.time,
-                a.c_Opportunity.c_BPartner.name,
+                a.opportunity.businessPartner.name,
                 a.isComplete,
-                a.salesRep.name
+                a.salesRepresentative.name
             )
 }
