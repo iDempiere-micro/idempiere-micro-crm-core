@@ -26,7 +26,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
     public X_C_Country(Properties ctx, int C_Country_ID) {
         super(ctx, C_Country_ID);
         /**
-         * if (C_Country_ID == 0) { setC_Country_ID (0); setCountryCode (null); setDisplaySequence
+         * if (C_Country_ID == 0) { setCountryId (0); setCountryCode (null); setDisplaySequence
          * (null); // @C@, @R@ @P@ setHasPostal_Add (false); setHasRegion (false);
          * setIsAddressLinesLocalReverse (false); setIsAddressLinesReverse (false); setName (null); }
          */
@@ -75,7 +75,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
      *
      * @return Country
      */
-    public int getC_Country_ID() {
+    public int getCountryId() {
         Integer ii = (Integer) getValue(COLUMNNAME_C_Country_ID);
         if (ii == null) return 0;
         return ii;

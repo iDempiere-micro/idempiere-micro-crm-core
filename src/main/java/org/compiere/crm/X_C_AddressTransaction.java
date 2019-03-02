@@ -128,7 +128,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      *
      * @param C_Location_ID Location or Address
      */
-    public void setC_Location_ID(int C_Location_ID) {
+    public void setLocationId(int C_Location_ID) {
         if (C_Location_ID < 1) setValue(COLUMNNAME_C_Location_ID, null);
         else setValue(COLUMNNAME_C_Location_ID, C_Location_ID);
     }

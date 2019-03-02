@@ -58,7 +58,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
      */
     public MRegion(MCountry country, String regionName) {
         super(country.getCtx(), 0);
-        setC_Country_ID(country.getC_Country_ID());
+        setCountryId(country.getCountryId());
         setName(regionName);
     } //  MRegion
 
@@ -85,7 +85,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
         MRegion r = s_regions.get(key);
         if (r != null) return r;
         r = new MRegion(ctx, C_Region_ID);
-        if (r.getC_Region_ID() == C_Region_ID) {
+        if (r.getRegionId() == C_Region_ID) {
             s_regions.put(key, r);
             return r;
         }
@@ -118,7 +118,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
         Iterator<MRegion> it = s_regions.values().iterator();
         while (it.hasNext()) {
             MRegion r = it.next();
-            if (r.getC_Country_ID() == C_Country_ID) list.add(r);
+            if (r.getCountryId() == C_Country_ID) list.add(r);
         }
         //  Sort it
         MRegion[] retValue = new MRegion[list.size()];

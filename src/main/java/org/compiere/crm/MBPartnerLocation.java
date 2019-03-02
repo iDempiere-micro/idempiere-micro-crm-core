@@ -115,7 +115,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      */
     public MLocation getLocation(boolean requery) {
         if (requery || m_location == null)
-            m_location = MLocation.get(getCtx(), getC_Location_ID());
+            m_location = MLocation.get(getCtx(), getLocationId());
         return m_location;
     } // getLocation
 
@@ -129,7 +129,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
                 new StringBuilder("MBPartner_Location[ID=")
                         .append(getId())
                         .append(",C_Location_ID=")
-                        .append(getC_Location_ID())
+                        .append(getLocationId())
                         .append(",Name=")
                         .append(getName())
                         .append("]");
@@ -144,7 +144,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      * @return save
      */
     protected boolean beforeSave(boolean newRecord) {
-        if (getC_Location_ID() == 0) return false;
+        if (getLocationId() == 0) return false;
 
         // Set New Name
         if (".".equals(getName()) && !isPreserveCustomName()) {

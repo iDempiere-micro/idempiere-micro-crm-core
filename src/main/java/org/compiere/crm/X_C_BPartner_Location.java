@@ -85,7 +85,7 @@ public class X_C_BPartner_Location extends BasePOName {
      *
      * @return Location or Address
      */
-    public int getC_Location_ID() {
+    public int getLocationId() {
         Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID);
         if (ii == null) return 0;
         return ii;
@@ -96,7 +96,7 @@ public class X_C_BPartner_Location extends BasePOName {
      *
      * @param C_Location_ID Location or Address
      */
-    public void setC_Location_ID(int C_Location_ID) {
+    public void setLocationId(int C_Location_ID) {
         if (C_Location_ID < 1) setValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, null);
         else setValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID, Integer.valueOf(C_Location_ID));
     }

@@ -10,6 +10,7 @@ import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.exceptions.DBException;
 import org.idempiere.common.util.*;
+import org.jetbrains.annotations.NotNull;
 import software.hsharp.core.models.IUser;
 
 import javax.mail.internet.AddressException;
@@ -166,11 +167,11 @@ public class MUser extends MBaseUser implements IUser {
      *
      * @return value
      */
-    public String getSearchKey() {
-        String s = super.getSearchKey();
+    protected String doGetSearchKey() {
+        String s = super.doGetSearchKey();
         if (s != null) return s;
         setSearchKey(null);
-        return super.getSearchKey();
+        return super.doGetSearchKey();
     } //	getValue
 
     /**
@@ -178,7 +179,7 @@ public class MUser extends MBaseUser implements IUser {
      *
      * @param Value
      */
-    public void setSearchKey(String Value) {
+    protected void doSetSearchKey(String Value) {
         if (Value == null || Value.trim().length() == 0) Value = getLDAPUser();
         if (Value == null || Value.length() == 0) Value = getName();
         if (Value == null || Value.length() == 0) Value = "noname";
@@ -194,7 +195,7 @@ public class MUser extends MBaseUser implements IUser {
             } else result = cleanValue(first);
         }
         if (result.length() > 8) result = result.substring(0, 8);
-        super.setSearchKey(result);
+        super.doSetSearchKey(result);
     } //	setValue
 
     /**

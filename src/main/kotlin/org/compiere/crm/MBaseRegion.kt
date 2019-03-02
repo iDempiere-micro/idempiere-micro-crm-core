@@ -16,7 +16,7 @@ internal fun loadAllRegions(ctx: Properties) {
     val sql = "SELECT * FROM C_Region WHERE IsActive='Y'"
     val loadQuery = queryOf(sql).map { row -> MRegion(ctx, row) }.asList
     val regions = DB.current.run(loadQuery)
-    regions.forEach { regionsCache[it.c_Region_ID.toString()] = it }
+    regions.forEach { regionsCache[it.regionId.toString()] = it }
     defaultRegion = regions.firstOrNull { it.isDefault }
 } // 	loadAllRegions
 

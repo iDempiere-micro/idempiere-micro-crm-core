@@ -56,7 +56,7 @@ public class X_C_Region extends BasePOName implements I_C_Region {
      *
      * @return Country
      */
-    public int getC_Country_ID() {
+    public int getCountryId() {
         Integer ii = (Integer) getValue(COLUMNNAME_C_Country_ID);
         if (ii == null) return 0;
         return ii;
@@ -67,7 +67,7 @@ public class X_C_Region extends BasePOName implements I_C_Region {
      *
      * @param C_Country_ID Country
      */
-    public void setC_Country_ID(int C_Country_ID) {
+    public void setCountryId(int C_Country_ID) {
         if (C_Country_ID < 1) setValueNoCheck(COLUMNNAME_C_Country_ID, null);
         else setValueNoCheck(COLUMNNAME_C_Country_ID, C_Country_ID);
     }
@@ -77,7 +77,7 @@ public class X_C_Region extends BasePOName implements I_C_Region {
      *
      * @return Identifies a geographical Region
      */
-    public int getC_Region_ID() {
+    public int getRegionId() {
         Integer ii = (Integer) getValue(COLUMNNAME_C_Region_ID);
         if (ii == null) return 0;
         return ii;

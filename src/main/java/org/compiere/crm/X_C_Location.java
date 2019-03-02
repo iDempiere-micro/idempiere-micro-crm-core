@@ -140,7 +140,7 @@ public class X_C_Location extends PO {
      *
      * @return Country
      */
-    public int getC_Country_ID() {
+    public int getCountryId() {
         Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_Country_ID);
         if (ii == null) return 0;
         return ii;
@@ -151,7 +151,7 @@ public class X_C_Location extends PO {
      *
      * @param C_Country_ID Country
      */
-    public void setC_Country_ID(int C_Country_ID) {
+    public void setCountryId(int C_Country_ID) {
         if (C_Country_ID < 1) setValue(I_C_Location.COLUMNNAME_C_Country_ID, null);
         else setValue(I_C_Location.COLUMNNAME_C_Country_ID, Integer.valueOf(C_Country_ID));
     }
@@ -179,7 +179,7 @@ public class X_C_Location extends PO {
      *
      * @return Location or Address
      */
-    public int getC_Location_ID() {
+    public int getLocationId() {
         Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_Location_ID);
         if (ii == null) return 0;
         return ii;
@@ -199,7 +199,7 @@ public class X_C_Location extends PO {
      *
      * @return Identifies a geographical Region
      */
-    public int getC_Region_ID() {
+    public int getRegionId() {
         Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_Region_ID);
         if (ii == null) return 0;
         return ii;
@@ -210,7 +210,7 @@ public class X_C_Location extends PO {
      *
      * @param C_Region_ID Identifies a geographical Region
      */
-    public void setC_Region_ID(int C_Region_ID) {
+    public void setRegionId(int C_Region_ID) {
         if (C_Region_ID < 1) setValue(I_C_Location.COLUMNNAME_C_Region_ID, null);
         else setValue(I_C_Location.COLUMNNAME_C_Region_ID, Integer.valueOf(C_Region_ID));
     }

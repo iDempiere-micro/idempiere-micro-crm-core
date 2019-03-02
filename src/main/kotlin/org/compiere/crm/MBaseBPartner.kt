@@ -1,11 +1,12 @@
 package org.compiere.crm
 
 import kotliquery.Row
-import kotliquery.queryOf
+import org.compiere.model.I_AD_User
 import org.compiere.model.I_C_BPartner_Location
 import org.idempiere.common.util.Env
 import software.hsharp.core.orm.I_ZERO
 import software.hsharp.core.util.DB
+import software.hsharp.core.util.queryOf
 import java.math.BigDecimal
 import java.sql.ResultSet
 import java.util.*
@@ -34,7 +35,7 @@ open class MBaseBPartner : X_C_BPartner {
         val success = true
         val sql =
             "SELECT * FROM C_BPartner " + "WHERE C_BPartner_ID IN (SELECT C_BPartnerCashTrx_ID FROM AD_ClientInfo WHERE AD_Client_ID=?)"
-        val loadQuery = queryOf(sql, AD_Client_ID).map { row -> load(row) }.asSingle
+        val loadQuery = queryOf(sql, listOf(AD_Client_ID)).map { row -> load(row) }.asSingle
         val loaded = DB.current.run(loadQuery)
 
         if (loaded == null) {
@@ -44,7 +45,7 @@ open class MBaseBPartner : X_C_BPartner {
         setStandardDefaults()
         // 	Reset
         setValueNoCheck("C_BPartner_ID", I_ZERO)
-        setSearchKey("")
+        searchKey = ""
         name = ""
         setName2(null)
         setValueNoCheck("C_BPartner_UU", "")
@@ -57,17 +58,17 @@ open class MBaseBPartner : X_C_BPartner {
      * @param reload if true users will be requeried
      * @return contacts
      */
-    fun getContacts(reload: Boolean): Array<MUser> {
+    fun getContacts(reload: Boolean): List<I_AD_User> {
         if (reload || m_contacts.size == 0) {
             //
             val sql = "SELECT * FROM AD_User WHERE C_BPartner_ID=? ORDER BY AD_User_ID"
-            val loadQuery = queryOf(sql, businessPartnerId).map { MUser(ctx, it) }.asList
+            val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { MUser(ctx, it) }.asList
             val result = DB.current.run(loadQuery)
 
             m_contacts.clear()
             m_contacts.addAll(result)
         }
-        return m_contacts.toTypedArray()
+        return m_contacts
     } // 	getContacts
 
     /**
@@ -76,18 +77,18 @@ open class MBaseBPartner : X_C_BPartner {
      * @param reload if true locations will be requeried
      * @return locations
      */
-    fun getLocations(reload: Boolean): Array<I_C_BPartner_Location> {
+    fun getLocations(reload: Boolean): List<I_C_BPartner_Location> {
         if (reload || m_locations.size == 0) {
 
             val sql =
                 "SELECT * FROM C_BPartner_Location WHERE C_BPartner_ID=? AND IsActive='Y'" + " ORDER BY C_BPartner_Location_ID"
-            val loadQuery = queryOf(sql, businessPartnerId).map { row -> MBPartnerLocation(ctx, row) }.asList
+            val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> MBPartnerLocation(ctx, row) }.asList
             val locations = DB.current.run(loadQuery)
 
             m_locations.clear()
             m_locations.addAll(locations)
         }
-        return m_locations.toTypedArray()
+        return m_locations
     } // 	getLocations
 
     /**
@@ -169,7 +170,7 @@ open class MBaseBPartner : X_C_BPartner {
             FROM C_BPartner bp
             WHERE C_BPartner_ID=?
         """.trimIndent()
-        val loadQuery = queryOf(sql, businessPartnerId).map { row -> Pair(row.bigDecimal(1), row.bigDecimal(2)) }.asSingle
+        val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> Pair(row.bigDecimal(1), row.bigDecimal(2)) }.asSingle
         val result = DB.current.run(loadQuery)
         if (result == null) return
         val (SO_CreditUsed, TotalOpenBalance) = result
@@ -186,7 +187,7 @@ open class MBaseBPartner : X_C_BPartner {
             FROM C_BPartner bp
             WHERE C_BPartner_ID=?
         """.trimIndent()
-        val loadQuery = queryOf(sql, businessPartnerId).map { row -> row.bigDecimalOrNull(1) }.asSingle
+        val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> row.bigDecimalOrNull(1) }.asSingle
         val result = DB.current.run(loadQuery)
         if (result != null) super.setActualLifeTimeValue(result)
     }

@@ -1,6 +1,7 @@
 package org.compiere.crm;
 
 import kotliquery.Row;
+import org.compiere.model.I_AD_User;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.orm.MTree_Base;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
@@ -47,7 +49,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @param ctx     context
      * @param rs      ResultSet to load from
-     * @param trxName transaction
      */
     public MBPartner(Properties ctx, ResultSet rs) {
         super(ctx, rs);
@@ -62,7 +63,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @param ctx           context
      * @param C_BPartner_ID partner or 0 or -1 (load from template)
-     * @param trxName       transaction
      */
     public MBPartner(Properties ctx, int C_BPartner_ID) {
         super(ctx, C_BPartner_ID);
@@ -191,7 +191,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @param ctx     context
      * @param Value   value
-     * @param trxName transaction
      * @return BPartner or null
      */
     public static MBPartner get(Properties ctx, String Value) {
@@ -208,8 +207,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * Get BPartner with Value in a transaction
      *
      * @param ctx     context
-     * @param Value   value
-     * @param trxName transaction
      * @return BPartner or null
      */
     public static I_C_BPartner get(Properties ctx, int C_BPartner_ID) {
@@ -251,12 +248,12 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         return retValue;
     } //	getNotInvoicedAmt
 
-    public MUser[] getContacts() {
+    public List<I_AD_User> getContacts() {
         return getContacts(false);
     }
 
     @Override
-    public I_C_BPartner_Location[] getLocations() {
+    public List<I_C_BPartner_Location> getLocations() {
         return getLocations(false);
     }
 
@@ -324,19 +321,19 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      */
     public int getPrimaryC_BPartner_Location_ID() {
         if (m_primaryC_BPartner_Location_ID == null) {
-            I_C_BPartner_Location[] locs = getLocations(false);
-            for (int i = 0; m_primaryC_BPartner_Location_ID == null && i < locs.length; i++) {
-                if (locs[i].isBillTo()) {
-                    setPrimaryC_BPartner_Location_ID(locs[i].getBusinessPartnerLocationId());
+            List<I_C_BPartner_Location> locs = getLocations(false);
+            for (int i = 0; m_primaryC_BPartner_Location_ID == null && i < locs.size(); i++) {
+                if (locs.get(i).isBillTo()) {
+                    setPrimaryC_BPartner_Location_ID(locs.get(i).getBusinessPartnerLocationId());
                     break;
                 }
             }
             //	get first
-            if (m_primaryC_BPartner_Location_ID == null && locs.length > 0)
-                setPrimaryC_BPartner_Location_ID(locs[0].getBusinessPartnerLocationId());
+            if (m_primaryC_BPartner_Location_ID == null && locs.size() > 0)
+                setPrimaryC_BPartner_Location_ID(locs.get(0).getBusinessPartnerLocationId());
         }
         if (m_primaryC_BPartner_Location_ID == null) return 0;
-        return m_primaryC_BPartner_Location_ID.intValue();
+        return m_primaryC_BPartner_Location_ID;
     } //	getPrimaryC_BPartner_Location_ID
 
     /**
@@ -345,7 +342,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @param C_BPartner_Location_ID id
      */
     public void setPrimaryC_BPartner_Location_ID(int C_BPartner_Location_ID) {
-        m_primaryC_BPartner_Location_ID = new Integer(C_BPartner_Location_ID);
+        m_primaryC_BPartner_Location_ID = C_BPartner_Location_ID;
     } //	setPrimaryC_BPartner_Location_ID
 
     /**
@@ -506,6 +503,11 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      */
     public String getDeliveryViaRule() {
         return (String) getValue(I_C_BPartner.COLUMNNAME_DeliveryViaRule);
+    }
+
+    @Override
+    public String getDUNS() {
+        return (String) getValue(I_C_BPartner.COLUMNNAME_DUNS);
     }
 
     /**

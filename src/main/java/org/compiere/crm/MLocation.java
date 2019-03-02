@@ -60,7 +60,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
             setCountry(defaultCountry);
             MRegion defaultRegion = MRegion.getDefault(getCtx());
             if (defaultRegion != null
-                    && defaultRegion.getC_Country_ID() == defaultCountry.getC_Country_ID())
+                    && defaultRegion.getCountryId() == defaultCountry.getCountryId())
                 setRegion(defaultRegion);
         }
     } //	MLocation
@@ -88,8 +88,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
      */
     public MLocation(Properties ctx, int C_Country_ID, int C_Region_ID, String city) {
         super(ctx, 0);
-        setC_Country_ID(C_Country_ID);
-        setC_Region_ID(C_Region_ID);
+        setCountryId(C_Country_ID);
+        setRegionId(C_Region_ID);
         setCity(city);
     } //	MLocation
 
@@ -138,8 +138,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
      *
      * @param C_Country_ID id
      */
-    public void setC_Country_ID(int C_Country_ID) {
-        if (getC_Country_ID() != C_Country_ID) setRegion(null);
+    public void setCountryId(int C_Country_ID) {
+        if (getCountryId() != C_Country_ID) setRegion(null);
         setCountry(MCountry.get(getCtx(), C_Country_ID));
     } //	setCountry
 
@@ -150,10 +150,10 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
      */
     public MCountry getCountry() {
         // Reset country if not match
-        if (m_c != null && m_c.getId() != getC_Country_ID()) m_c = null;
+        if (m_c != null && m_c.getId() != getCountryId()) m_c = null;
         // Load
         if (m_c == null) {
-            if (getC_Country_ID() != 0) m_c = MCountry.get(getCtx(), getC_Country_ID());
+            if (getCountryId() != 0) m_c = MCountry.get(getCtx(), getCountryId());
             else m_c = MCountry.getDefault(getCtx());
         }
         return m_c;
@@ -167,7 +167,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     public void setCountry(MCountry country) {
         if (country != null) m_c = country;
         else m_c = MCountry.getDefault(getCtx());
-        super.setC_Country_ID(m_c.getC_Country_ID());
+        super.setCountryId(m_c.getCountryId());
     } //	setCountry
 
     /**
@@ -184,15 +184,15 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
      *
      * @param C_Region_ID region
      */
-    public void setC_Region_ID(int C_Region_ID) {
+    public void setRegionId(int C_Region_ID) {
         if (C_Region_ID == 0) setRegion(null);
             //	Country defined
-        else if (getC_Country_ID() != 0) {
+        else if (getCountryId() != 0) {
             MCountry cc = getCountry();
-            if (cc.isValidRegion(C_Region_ID)) super.setC_Region_ID(C_Region_ID);
+            if (cc.isValidRegion(C_Region_ID)) super.setRegionId(C_Region_ID);
             else setRegion(null);
         } else setRegion(MRegion.get(getCtx(), C_Region_ID));
-    } //	setC_Region_ID
+    } //	setRegionId
 
     /**
      * Get Region
@@ -201,9 +201,9 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
      */
     public MRegion getRegion() {
         // Reset region if not match
-        if (m_r != null && m_r.getId() != getC_Region_ID()) m_r = null;
+        if (m_r != null && m_r.getId() != getRegionId()) m_r = null;
         //
-        if (m_r == null && getC_Region_ID() != 0) m_r = MRegion.get(getCtx(), getC_Region_ID());
+        if (m_r == null && getRegionId() != 0) m_r = MRegion.get(getCtx(), getRegionId());
         return m_r;
     } //	getRegion
 
@@ -215,21 +215,21 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     public void setRegion(MRegion region) {
         m_r = region;
         if (region == null) {
-            super.setC_Region_ID(0);
+            super.setRegionId(0);
             setRegionName(null);
         } else {
-            super.setC_Region_ID(m_r.getC_Region_ID());
+            super.setRegionId(m_r.getRegionId());
             setRegionName(m_r.getName());
-            if (m_r.getC_Country_ID() != getC_Country_ID()) {
+            if (m_r.getCountryId() != getCountryId()) {
                 if (log.isLoggable(Level.INFO))
                     log.info(
                             "Region("
                                     + region
                                     + ") C_Country_ID="
-                                    + region.getC_Country_ID()
+                                    + region.getCountryId()
                                     + " - From  C_Country_ID="
-                                    + getC_Country_ID());
-                setC_Country_ID(region.getC_Country_ID());
+                                    + getCountryId());
+                setCountryId(region.getCountryId());
             }
         }
     } //	setRegion
@@ -280,8 +280,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
             String City,
             String Address1,
             String Address2) {
-        if (C_Country_ID != 0 && getC_Country_ID() != C_Country_ID) return false;
-        if (C_Region_ID != 0 && getC_Region_ID() != C_Region_ID) return false;
+        if (C_Country_ID != 0 && getCountryId() != C_Country_ID) return false;
+        if (C_Region_ID != 0 && getRegionId() != C_Region_ID) return false;
         //	must match
         if (!equalsNull(Postal, getPostal())) return false;
         if (!equalsNull(Postal_Add, getPostal_Add())) return false;
@@ -328,7 +328,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     public boolean isAddressLinesReverse() {
         //	Local
         if (MCountry.getDefault(getCtx()) != null
-                && getC_Country_ID() == MCountry.getDefault(getCtx()).getC_Country_ID())
+                && getCountryId() == MCountry.getDefault(getCtx()).getCountryId())
             return getCountry().isAddressLinesLocalReverse();
         return getCountry().isAddressLinesReverse();
     } //	isAddressLinesReverse
@@ -345,7 +345,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
 
         boolean local =
                 MCountry.getDefault(getCtx()) != null
-                        && getC_Country_ID() == MCountry.getDefault(getCtx()).getC_Country_ID();
+                        && getCountryId() == MCountry.getDefault(getCtx()).getCountryId();
         String inStr = local ? c.getDisplaySequenceLocal() : c.getDisplaySequence();
         StringBuilder outStr = new StringBuilder();
 
@@ -438,9 +438,9 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     protected boolean beforeSave(boolean newRecord) {
         if (getOrgId() != 0) setOrgId(0);
         //	Region Check
-        if (getC_Region_ID() != 0) {
-            if (m_c == null || m_c.getC_Country_ID() != getC_Country_ID()) getCountry();
-            if (!m_c.isHasRegion()) setC_Region_ID(0);
+        if (getRegionId() != 0) {
+            if (m_c == null || m_c.getCountryId() != getCountryId()) getCountry();
+            if (!m_c.isHasRegion()) setRegionId(0);
         } else {
             setRegionName(null);
         }
@@ -448,8 +448,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
             int city_id =
                     getSQLValue(
                             "SELECT C_City_ID FROM C_City WHERE C_Country_ID=? AND COALESCE(C_Region_ID,0)=? AND Name=? AND AD_Client_ID IN (0,?)",
-                            getC_Country_ID(),
-                            getC_Region_ID(),
+                            getCountryId(),
+                            getRegionId(),
                             getCity(),
                             getClientId());
             if (city_id > 0) setC_City_ID(city_id);
@@ -470,8 +470,8 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
                                     + " WHERE C_Country_ID=? "
                                     + "   AND COALESCE(C_Region_ID,0)=? "
                                     + "   AND C_City_ID =?",
-                            getC_Country_ID(),
-                            getC_Region_ID(),
+                            getCountryId(),
+                            getRegionId(),
                             getC_City_ID());
 
             if (city_id < 0) {
@@ -498,7 +498,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
         int bplID =
                 getSQLValueEx(
                         "SELECT C_BPartner_Location_ID FROM C_BPartner_Location WHERE C_Location_ID = "
-                                + getC_Location_ID());
+                                + getLocationId());
         if (bplID > 0) {
             // just trigger BPLocation name change when the location change affects the name:
             // START_VALUE_BPLOCATION_NAME

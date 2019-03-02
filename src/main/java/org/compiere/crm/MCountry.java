@@ -102,7 +102,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
         MCountry c = s_countries.get(C_Country_ID);
         if (c != null) return c;
         c = new MCountry(ctx, C_Country_ID);
-        if (c.getC_Country_ID() == C_Country_ID) {
+        if (c.getCountryId() == C_Country_ID) {
             s_countries.put(C_Country_ID, c);
             return c;
         }
@@ -144,7 +144,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
         List<MCountry> countries =
                 new Query(ctx, I_C_Country.Table_Name, "").setOnlyActiveRecords(true).list();
         for (MCountry c : countries) {
-            s_countries.put(c.getC_Country_ID(), c);
+            s_countries.put(c.getCountryId(), c);
             //	Country code of Client Language
             if (lang != null && lang.getCountryCode().equals(c.getCountryCode()))
                 s_default.put(client.getClientId(), c);
@@ -174,7 +174,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
                 found = c;
                 break;
             }
-            if (c.getC_Country_ID() == SystemIDs.COUNTRY_US) // 	USA
+            if (c.getCountryId() == SystemIDs.COUNTRY_US) // 	USA
                 usa = c;
         }
         if (found != null) s_default.put(client.getClientId(), found);
@@ -267,10 +267,10 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
      * @return true if valid
      */
     public boolean isValidRegion(int C_Region_ID) {
-        if (C_Region_ID == 0 || getC_Country_ID() == 0 || !isHasRegion()) return false;
-        MRegion[] regions = MRegion.getRegions(getCtx(), getC_Country_ID());
+        if (C_Region_ID == 0 || getCountryId() == 0 || !isHasRegion()) return false;
+        MRegion[] regions = MRegion.getRegions(getCtx(), getCountryId());
         for (int i = 0; i < regions.length; i++) {
-            if (C_Region_ID == regions[i].getC_Region_ID()) return true;
+            if (C_Region_ID == regions[i].getRegionId()) return true;
         }
         return false;
     } //	isValidRegion
