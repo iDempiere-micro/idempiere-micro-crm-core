@@ -1,18 +1,18 @@
-package company.bigger.idempiere.service
+package org.compiere.bo
 
 import mu.KotlinLogging
-import org.compiere.bo.X_C_SalesStage
 import org.compiere.model.I_C_SalesStage
 import org.compiere.orm.Query
 import software.hsharp.core.models.EnvironmentService
+import software.hsharp.services.SalesStageService
 import java.math.BigDecimal
 
 private val logger = KotlinLogging.logger {}
 
-class SalesStageService(
+class SalesStageServiceImpl(
     private val environmentService: EnvironmentService
-) {
-    fun ensureSalesStage(name: String, probability: BigDecimal, searchKey: String): I_C_SalesStage {
+) : SalesStageService {
+    override fun ensureSalesStage(name: String, probability: BigDecimal, searchKey: String): I_C_SalesStage {
         val ctx = environmentService.context
         val salesStages: List<I_C_SalesStage> =
             Query(ctx, I_C_SalesStage.Table_Name, "AD_Client_ID=?")

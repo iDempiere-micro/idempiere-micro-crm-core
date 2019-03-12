@@ -6,7 +6,11 @@ import org.idempiere.common.util.CCache;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.text.Collator;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Properties;
 
 /**
  * Localtion Region Model (Value Object)

@@ -5,7 +5,7 @@ import software.hsharp.core.util.DB
 import software.hsharp.core.util.asResource
 import software.hsharp.core.util.queryOf
 import java.sql.ResultSet
-import java.util.*
+import java.util.Properties
 
 fun getBPLocation(ctx: Properties, bPartnerLocationId: Int): MLocation? {
     return "/sql/getBPLocation.sql".asResource { sql ->

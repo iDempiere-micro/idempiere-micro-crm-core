@@ -1,5 +1,6 @@
 package org.compiere.bo
 
+import kotliquery.Row
 import org.compiere.model.I_C_Opportunity
 import org.compiere.model.I_C_SalesStage
 import org.compiere.orm.BasePOUser
@@ -9,7 +10,7 @@ import org.idempiere.common.util.KeyNamePair
 import java.math.BigDecimal
 import java.sql.ResultSet
 import java.sql.Timestamp
-import java.util.*
+import java.util.Properties
 
 open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
     override val tableId: Int
@@ -17,6 +18,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
 
     constructor(ctx: Properties, C_Opportunity_ID: Int) : super(ctx, C_Opportunity_ID)
     constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
+    constructor (ctx: Properties, row: Row) : super(ctx, row)
 
     /** AccessLevel
      * @return 3 - Client - Org
@@ -36,6 +38,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
         return MTable.get(ctx, org.compiere.model.I_C_BPartner.Table_Name)
             .getPO(businessPartnerId) as org.compiere.model.I_C_BPartner
     }
+
     override fun setBusinessPartner(bPartner: org.compiere.model.I_C_BPartner) {
         businessPartnerId = bPartner.id
     }
@@ -46,6 +49,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
     override fun getBusinessPartnerId(): Int {
         return getValue(I_C_Opportunity.COLUMNNAME_C_BPartner_ID) as Int? ?: return 0
     }
+
     override fun setBusinessPartnerId(id: Int) {
         setValue(I_C_Opportunity.COLUMNNAME_C_BPartner_ID, id)
     }
@@ -123,7 +127,6 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
     override fun setSalesStage(stage: I_C_SalesStage?) {
         salesStageId = stage?.id ?: 0
     }
-
 
     /** Set Probability.
      * @param Probability Probability

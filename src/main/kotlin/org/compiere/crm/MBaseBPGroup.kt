@@ -6,7 +6,7 @@ import org.compiere.model.I_C_BP_Group
 import org.idempiere.common.util.CCache
 import org.idempiere.common.util.Env
 import software.hsharp.core.util.DB
-import java.util.*
+import java.util.Properties
 
 /** Default Cache  */
 private val cacheDefaultBPGroups = CCache<Int, MBPGroup>(

@@ -1,10 +1,11 @@
 package org.compiere.crm
 
+import org.compiere.model.CrmCategory
 import org.compiere.orm.BasePONameValue
 import java.sql.ResultSet
-import java.util.*
+import java.util.Properties
 
-class MCrmCategory : BasePONameValue {
+class MCrmCategory : BasePONameValue, CrmCategory {
     override val tableId: Int
         get() = Table_ID
 

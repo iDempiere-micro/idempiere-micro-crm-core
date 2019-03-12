@@ -10,7 +10,6 @@ import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.exceptions.DBException;
 import org.idempiere.common.util.*;
-import org.jetbrains.annotations.NotNull;
 import software.hsharp.core.models.IUser;
 
 import javax.mail.internet.AddressException;

@@ -1,4 +1,4 @@
-package company.bigger.idempiere.service
+package org.compiere.orm
 
 import org.compiere.crm.MUser
 import org.compiere.model.I_AD_User
@@ -9,7 +9,7 @@ class UsersService(
 ) {
     fun getUsers(): List<I_AD_User> {
         return MUser
-        .getOfClient(environmentService.context, environmentService.clientId)
-        .filter { it.description != null }
+            .getOfClient(environmentService.context, environmentService.clientId)
+            .filter { it.description != null }
     }
 }

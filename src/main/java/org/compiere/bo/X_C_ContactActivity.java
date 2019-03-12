@@ -1,5 +1,6 @@
 package org.compiere.bo;
 
+import org.compiere.model.I_AD_User;
 import org.compiere.model.I_C_ContactActivity;
 import org.compiere.orm.BasePOUser;
 import org.compiere.orm.MTable;
@@ -104,6 +105,15 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     }
 
     /**
+     * Set Description.
+     *
+     * @param Description Optional short description of the record
+     */
+    public void setDescription(String Description) {
+        setValue(COLUMNNAME_Description, Description);
+    }
+
+    /**
      * Get Complete.
      *
      * @return It is complete
@@ -122,6 +132,11 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
                 MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRepresentativeId());
     }
 
+    @Override
+    public void setSalesRepresentative(I_AD_User salesRepresentative) throws RuntimeException {
+        setSalesRepresentativeId( salesRepresentative == null ? 0 : salesRepresentative.getId() );
+    }
+
     /**
      * Get Sales Representative.
      *
@@ -133,6 +148,14 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
         return ii;
     }
 
+    @Override
+    public void setSalesRepresentativeId(int salesRepresentativeId) {
+        if (salesRepresentativeId < 1)
+            setValue (COLUMNNAME_SalesRep_ID, null);
+        else
+            setValue (COLUMNNAME_SalesRep_ID, salesRepresentativeId);
+    }
+
     /**
      * Get Start Date.
      *
@@ -141,37 +164,32 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     public Timestamp getStartDate() {
         return (Timestamp) getValue(I_C_ContactActivity.COLUMNNAME_StartDate);
     }
-    public void setStartDate(Timestamp value) { setValue(I_C_ContactActivity.COLUMNNAME_StartDate, value); }
+
+    public void setStartDate(Timestamp value) {
+        setValue(I_C_ContactActivity.COLUMNNAME_StartDate, value);
+    }
 
     @Override
     public int getTableId() {
         return I_C_ContactActivity.Table_ID;
     }
 
-    /** Set Description.
-     @param Description
-     Optional short description of the record
+    /**
+     * Get Activity Type.
+     *
+     * @return Type of activity, e.g. task, email, phone call
      */
-    public void setDescription (String Description)
-    {
-        setValue (COLUMNNAME_Description, Description);
+    public String getContactActivityType() {
+        return (String) getValue(COLUMNNAME_ContactActivityType);
     }
 
-    /** Set Activity Type.
-     @param ContactActivityType
-     Type of activity, e.g. task, email, phone call
+    /**
+     * Set Activity Type.
+     *
+     * @param ContactActivityType Type of activity, e.g. task, email, phone call
      */
-    public void setContactActivityType (String ContactActivityType)
-    {
+    public void setContactActivityType(String ContactActivityType) {
 
-        setValueNoCheck (COLUMNNAME_ContactActivityType, ContactActivityType);
-    }
-
-    /** Get Activity Type.
-     @return Type of activity, e.g. task, email, phone call
-     */
-    public String getContactActivityType ()
-    {
-        return (String)getValue(COLUMNNAME_ContactActivityType);
+        setValueNoCheck(COLUMNNAME_ContactActivityType, ContactActivityType);
     }
 }

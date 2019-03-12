@@ -1,5 +1,6 @@
 package org.compiere.bo;
 
+import kotliquery.Row;
 import org.compiere.model.I_C_SalesStage;
 import org.compiere.orm.BasePONameValue;
 import org.idempiere.common.util.Env;
@@ -36,6 +37,13 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage {
     }
 
     /**
+     * Load Constructor
+     */
+    public X_C_SalesStage(Properties ctx, Row row) {
+        super(ctx, row);
+    }
+
+    /**
      * AccessLevel
      *
      * @return 3 - Client - Org
@@ -54,20 +62,24 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage {
         return I_C_SalesStage.Table_ID;
     }
 
-    /** Set Probability.
-     @param Probability Probability	  */
-    public void setProbability (BigDecimal Probability)
-    {
-        setValue (COLUMNNAME_Probability, Probability);
-    }
-
-    /** Get Probability.
-     @return Probability	  */
-    public BigDecimal getProbability ()
-    {
-        BigDecimal bd = (BigDecimal)getValue(COLUMNNAME_Probability);
+    /**
+     * Get Probability.
+     *
+     * @return Probability
+     */
+    public BigDecimal getProbability() {
+        BigDecimal bd = (BigDecimal) getValue(COLUMNNAME_Probability);
         if (bd == null)
             return Env.ZERO;
         return bd;
+    }
+
+    /**
+     * Set Probability.
+     *
+     * @param Probability Probability
+     */
+    public void setProbability(BigDecimal Probability) {
+        setValue(COLUMNNAME_Probability, Probability);
     }
 }

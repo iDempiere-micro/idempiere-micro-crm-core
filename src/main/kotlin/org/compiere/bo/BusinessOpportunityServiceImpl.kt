@@ -1,25 +1,25 @@
-package company.bigger.idempiere.service
+package org.compiere.bo
 
-import org.compiere.bo.MOpportunity
 import org.compiere.model.I_C_BPartner
 import org.compiere.model.I_C_Currency
 import org.compiere.model.I_C_Opportunity
 import org.compiere.model.I_C_SalesStage
 import org.compiere.orm.Query
 import software.hsharp.core.models.EnvironmentService
+import software.hsharp.services.BusinessOpportunityService
 import java.math.BigDecimal
 import java.sql.Timestamp
 
-class BusinessOpportunityService(
+class BusinessOpportunityServiceImpl(
     private val environmentService: EnvironmentService
-) {
-    fun getBusinessOpportunityForBusinessPartner(
+) : BusinessOpportunityService {
+    override fun getBusinessOpportunityForBusinessPartner(
         businessPartner: I_C_BPartner,
         expectedCloseData: Timestamp,
         currency: I_C_Currency,
         salesStage: I_C_SalesStage,
-        probability : BigDecimal,
-        amount : BigDecimal
+        probability: BigDecimal,
+        amount: BigDecimal
     ): I_C_Opportunity {
         val ctx = environmentService.context
         val opportunities: List<I_C_Opportunity> =

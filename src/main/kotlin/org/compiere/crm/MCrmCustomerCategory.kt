@@ -3,7 +3,7 @@ package org.compiere.crm
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.BasePOName
 import java.sql.ResultSet
-import java.util.*
+import java.util.Properties
 
 class MCrmCustomerCategory : BasePOName {
     companion object {

@@ -9,7 +9,7 @@ import software.hsharp.core.util.DB
 import software.hsharp.core.util.queryOf
 import java.math.BigDecimal
 import java.sql.ResultSet
-import java.util.*
+import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner {
     constructor(ctx: Properties, rs: ResultSet) : super(ctx, rs)
@@ -170,7 +170,8 @@ open class MBaseBPartner : X_C_BPartner {
             FROM C_BPartner bp
             WHERE C_BPartner_ID=?
         """.trimIndent()
-        val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> Pair(row.bigDecimal(1), row.bigDecimal(2)) }.asSingle
+        val loadQuery =
+            queryOf(sql, listOf(businessPartnerId)).map { row -> Pair(row.bigDecimal(1), row.bigDecimal(2)) }.asSingle
         val result = DB.current.run(loadQuery)
         if (result == null) return
         val (SO_CreditUsed, TotalOpenBalance) = result

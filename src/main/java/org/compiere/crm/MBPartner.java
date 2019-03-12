@@ -47,8 +47,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     /**
      * Default Constructor
      *
-     * @param ctx     context
-     * @param rs      ResultSet to load from
+     * @param ctx context
+     * @param rs  ResultSet to load from
      */
     public MBPartner(Properties ctx, ResultSet rs) {
         super(ctx, rs);
@@ -189,8 +189,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     /**
      * Get BPartner with Value in a transaction
      *
-     * @param ctx     context
-     * @param Value   value
+     * @param ctx   context
+     * @param Value value
      * @return BPartner or null
      */
     public static MBPartner get(Properties ctx, String Value) {
@@ -206,7 +206,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     /**
      * Get BPartner with Value in a transaction
      *
-     * @param ctx     context
+     * @param ctx context
      * @return BPartner or null
      */
     public static I_C_BPartner get(Properties ctx, int C_BPartner_ID) {
@@ -433,8 +433,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
 
         //	TODO: Value/Name change
         // if (!newRecord && (is_ValueChanged("Value") || is_ValueChanged("Name"))) {
-            // TODO: StringBuilder msgacc = new StringBuilder("C_BPartner_ID=").append(getBusinessPartnerId());
-            // TODO: MAccount.updateValueDescription(getCtx(), msgacc.toString(), get_TrxName());
+        // TODO: StringBuilder msgacc = new StringBuilder("C_BPartner_ID=").append(getBusinessPartnerId());
+        // TODO: MAccount.updateValueDescription(getCtx(), msgacc.toString(), get_TrxName());
         // }
         return success;
     } //	afterSave

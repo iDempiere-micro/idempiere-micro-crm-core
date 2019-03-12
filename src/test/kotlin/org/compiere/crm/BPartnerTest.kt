@@ -1,20 +1,22 @@
 package org.compiere.crm
 
-import company.bigger.idempiere.service.BusinessPartnerService
 import company.bigger.test.support.randomString
 import org.compiere.model.I_C_BPartner
 import org.idempiere.common.util.Env
 import org.junit.Test
 import software.hsharp.core.models.EnvironmentService
 import software.hsharp.core.util.DB
-import java.util.*
+import java.util.Properties
 import kotlin.test.assertEquals
 
 private const val clientId = 11
 
-private class FakeEnvironmentService(override val clientId: Int, override val context: Properties) : EnvironmentService
+private class FakeEnvironmentService(override val clientId: Int, override val context: Properties) : EnvironmentService {
+    override val userId = 0
+}
+
 private val environmentService = FakeEnvironmentService(clientId, Env.getCtx())
-private val businessPartnerService = BusinessPartnerService(environmentService)
+private val businessPartnerService = BusinessPartnerServiceImpl(environmentService)
 
 class BPartnerTest : BaseCrmTest() {
     private fun login() {
@@ -27,7 +29,6 @@ class BPartnerTest : BaseCrmTest() {
         ctx.setProperty(Env.AD_USER_ID, AD_USER_ID_s)
         Env.setContext(ctx, Env.AD_USER_ID, AD_USER_ID_s)
     }
-
 
     @Test
     fun `loading saving finding business partner work`() {
@@ -87,7 +88,7 @@ class BPartnerTest : BaseCrmTest() {
     @Test
     fun `get contacts and locations of all the business partners from client 11`() {
         DB.run {
-            val businessPartners = businessPartnerService.getBusinessPartners()
+            val businessPartners = businessPartnerService.getAll()
             businessPartners.map {
                 Triple(it, it.contacts, it.locations)
             }
