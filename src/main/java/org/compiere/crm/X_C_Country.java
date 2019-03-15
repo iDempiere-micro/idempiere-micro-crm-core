@@ -35,10 +35,6 @@ public class X_C_Country extends BasePOName implements I_C_Country {
     /**
      * Load Constructor
      */
-    public X_C_Country(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_C_Country(Properties ctx, Row row) {
         super(ctx, row);
     }

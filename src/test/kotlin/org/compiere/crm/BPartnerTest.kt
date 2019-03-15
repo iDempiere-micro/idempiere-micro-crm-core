@@ -1,22 +1,35 @@
 package org.compiere.crm
 
-import company.bigger.test.support.randomString
 import org.compiere.model.I_C_BPartner
 import org.idempiere.common.util.Env
 import org.junit.Test
 import software.hsharp.core.models.EnvironmentService
 import software.hsharp.core.util.DB
 import java.util.Properties
+import java.util.Random
 import kotlin.test.assertEquals
 
-private const val clientId = 11
+/**
+ * Generate a random string (small letters)
+ */
+fun randomString(length: Int): String {
+    fun ClosedRange<Char>.randomString(length: Int) =
+        (1..length)
+            .map { (Random().nextInt(endInclusive.toInt() - start.toInt()) + start.toInt()).toChar() }
+            .joinToString("")
+    return ('a'..'z').randomString(length)
+}
 
-private class FakeEnvironmentService(override val clientId: Int, override val context: Properties) : EnvironmentService {
+internal const val clientId = 11
+
+internal class FakeEnvironmentService(override val clientId: Int, override val context: Properties) : EnvironmentService {
     override val userId = 0
 }
 
-private val environmentService = FakeEnvironmentService(clientId, Env.getCtx())
-private val businessPartnerService = BusinessPartnerServiceImpl(environmentService)
+internal val environmentService = FakeEnvironmentService(clientId, Env.getCtx())
+internal val businessPartnerService = BusinessPartnerServiceImpl(environmentService)
+internal val countryService = CountryServiceImpl(environmentService)
+internal val categoryService = CategoryServiceImpl(environmentService)
 
 class BPartnerTest : BaseCrmTest() {
     private fun login() {
@@ -46,7 +59,7 @@ class BPartnerTest : BaseCrmTest() {
             val partner2: I_C_BPartner = partner as I_C_BPartner
 
             val newValue = "JoeBlock*"
-            partner2.setSearchKey(newValue)
+            partner2.searchKey = (newValue)
             partner2.save()
 
             val partner3 = MBPartner.get(Env.getCtx(), id)
@@ -55,14 +68,14 @@ class BPartnerTest : BaseCrmTest() {
             assertEquals(newValue, partner3.searchKey)
             assertEquals("Joe Block", partner3.name)
 
-            partner2.setSearchKey("JoeBlock")
+            partner2.searchKey = ("JoeBlock")
             partner2.save()
 
             val newPartner = MBPartner.getTemplate(ctx, clientId)
             val name = "Test " + randomString(10)
-            newPartner.setName(name)
+            newPartner.name = name
             val value = "t-" + randomString(5)
-            newPartner.setSearchKey(value)
+            newPartner.searchKey = (value)
             newPartner.save()
 
             val defaultCountry = MCountry.getDefault(ctx)
@@ -92,6 +105,66 @@ class BPartnerTest : BaseCrmTest() {
             businessPartners.map {
                 Triple(it, it.contacts, it.locations)
             }
+        }
+    }
+
+    @Test
+    fun `create a business partner through service works`() {
+        val categoryName = DB.run {
+            val category = categoryService.getAll().firstOrNull()
+            category?.name ?: { categoryService.createCategory(randomString(5), randomString(5)) }.invoke().name
+        }
+        val countryId = DB.run {
+            countryService.getAll().first().countryId
+        }
+
+        val source = BusinessPartnerInput(
+            searchKey = "v-" + randomString(10),
+            legalName = "bp-" + randomString(10),
+            categoryName = categoryName,
+            dunsNumber = "dunsNumber",
+            vatNumber = "vatNumber",
+            email = "test@test.com",
+            isCustomer = true,
+            note = "note",
+            flatDiscount = 10,
+            branchName = "branchName",
+            branchPhone = "branchPhone",
+            branchStreet = "branchStreet",
+            branchCity = "branchCity",
+            branchZip = "branchZip",
+            branchCountryId = countryId,
+            ownerPhone = "ownerPhone",
+            legalStreet = "legalStreet",
+            legalCity = "legalCity",
+            legalZip = "legalZip",
+            legalCountryId = countryId,
+            orderContactName = "orderContactName",
+            orderContactPhone = "orderContactPhone",
+            orderContactEmail = "orderContactEmail@test.com",
+            decisionMakerContactName = "decisionMakerContactName",
+            decisionMakerContactPhone = "decisionMakerContactPhone",
+            decisionMakerContactEmail = "decisionMakerContactEmail@test.com",
+            invoicingContactName = "invoicingContactName",
+            invoicingContactPhone = "invoicingContactPhone",
+            invoicingContactEmail = "invoicingContactEmail@test.com",
+            description = "description",
+            salesRepresentativeId = 101
+        )
+
+        val result = DB.run {
+            businessPartnerService.createBusinessPartner(source)
+        }
+
+        DB.run {
+            assertEquals(source.searchKey, result.searchKey)
+            assertEquals(source.legalName, result.name)
+            assertEquals(source.flatDiscount?.toBigDecimal() ?: -1, result.flatDiscount)
+            assertEquals(source.description, result.description)
+            assertEquals(source.isCustomer, result.isCustomer)
+            assertEquals(3, result.contacts.count())
+            assertEquals(2, result.locations.count())
+            // TODO: Test category
         }
     }
 }

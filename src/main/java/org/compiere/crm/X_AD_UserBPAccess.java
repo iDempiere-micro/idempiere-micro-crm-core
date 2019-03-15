@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.I_AD_UserBPAccess;
 import org.compiere.orm.BasePOUser;
 
@@ -33,8 +34,8 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess {
     /**
      * Load Constructor
      */
-    public X_AD_UserBPAccess(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public X_AD_UserBPAccess(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**

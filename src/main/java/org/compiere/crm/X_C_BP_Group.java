@@ -44,10 +44,6 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
     /**
      * Load Constructor
      */
-    public X_C_BP_Group(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_C_BP_Group(Properties ctx, Row row) {
         super(ctx, row);
     } //	MBPGroup

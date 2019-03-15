@@ -6,5 +6,15 @@ import software.hsharp.core.orm.BaseDataServiceImpl
 import software.hsharp.services.CategoryService
 
 class CategoryServiceImpl(
-    environmentService: EnvironmentService
-) : BaseDataServiceImpl<CrmCategory>(environmentService, MCrmCategory.Table_Name, false), CategoryService
+    private val environmentService: EnvironmentService
+) : BaseDataServiceImpl<CrmCategory>(environmentService, MCrmCategory.Table_Name, false), CategoryService {
+    override fun createCategory(name: String, searchKey: String): CrmCategory {
+        val result = MCrmCategory(environmentService.context, 0)
+        with(result) {
+            this.name = name
+            this.searchKey = searchKey
+            save()
+        }
+        return result
+    }
+}

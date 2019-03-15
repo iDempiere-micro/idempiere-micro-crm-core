@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.idempiere.common.util.CLogger;
 
 import java.sql.ResultSet;
@@ -63,8 +64,8 @@ public class MContactInterest extends X_R_ContactInterest {
      * @param rs      load from current result set position (no navigation, not closed)
      * @param trxName transaction
      */
-    public MContactInterest(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public MContactInterest(Properties ctx, Row row) {
+        super(ctx, row);
     } //	MContactInterest
 
     /**

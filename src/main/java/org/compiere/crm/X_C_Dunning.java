@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.I_C_Dunning;
 import org.compiere.orm.BasePOName;
 
@@ -29,8 +30,8 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning {
     /**
      * Load Constructor
      */
-    public X_C_Dunning(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public X_C_Dunning(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**

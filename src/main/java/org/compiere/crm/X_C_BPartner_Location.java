@@ -37,10 +37,6 @@ public class X_C_BPartner_Location extends BasePOName {
     /**
      * Load Constructor
      */
-    public X_C_BPartner_Location(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_C_BPartner_Location(Properties ctx, Row row) {
         super(ctx, row);
     } // MBPartner_Location

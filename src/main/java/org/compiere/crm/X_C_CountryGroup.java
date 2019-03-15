@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.I_C_CountryGroup;
 import org.compiere.orm.BasePONameValue;
 
@@ -29,8 +30,8 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
     /**
      * Load Constructor
      */
-    public X_C_CountryGroup(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public X_C_CountryGroup(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**

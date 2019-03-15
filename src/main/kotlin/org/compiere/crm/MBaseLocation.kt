@@ -19,6 +19,5 @@ fun getBPLocation(ctx: Properties, bPartnerLocationId: Int): MLocation? {
 
 open class MBaseLocation : X_C_Location {
     constructor(ctx: Properties, ID: Int) : super(ctx, ID)
-    constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
     constructor(ctx: Properties, rs: Row) : super(ctx, rs)
 }

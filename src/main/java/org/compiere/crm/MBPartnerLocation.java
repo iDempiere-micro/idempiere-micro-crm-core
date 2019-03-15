@@ -64,20 +64,14 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         this(bp.getCtx(), 0);
         setClientOrg(bp);
         // may (still) be 0
-        setValueNoCheck("C_BPartner_ID", new Integer(bp.getBusinessPartnerId()));
+        setValueNoCheck("C_BPartner_ID", bp.getBusinessPartnerId());
     } // MBPartner_Location
 
     /**
      * Constructor from ResultSet row
      *
      * @param ctx     context
-     * @param rs      current row of result set to be loaded
-     * @param trxName transaction
      */
-    public MBPartnerLocation(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } // MBPartner_Location
-
     public MBPartnerLocation(Properties ctx, Row row) {
         super(ctx, row);
     } // MBPartner_Location
@@ -87,7 +81,6 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      *
      * @param ctx           context
      * @param C_BPartner_ID bp
-     * @param trxName
      * @return array of locations
      */
     public static MBPartnerLocation[] getForBPartner(
@@ -239,7 +232,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      *
      * @return Business Partner Invoice/Bill Address
      */
-    public boolean isBillTo() {
+    public boolean getIsBillTo() {
         Object oo = getValue(I_C_BPartner_Location.COLUMNNAME_IsBillTo);
         if (oo != null) {
             if (oo instanceof Boolean) return (Boolean) oo;
@@ -262,7 +255,25 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      *
      * @return Business Partner Shipment Address
      */
-    public boolean isShipTo() {
+    public boolean getIsShipTo() {
         return charToBoolean(getValue(I_C_BPartner_Location.COLUMNNAME_IsShipTo));
     }
+
+    /** Set Phone.
+     @param Phone
+     Identifies a telephone number
+     */
+    public void setPhone (String Phone)
+    {
+        setValue (I_C_BPartner_Location.COLUMNNAME_Phone, Phone);
+    }
+
+    /** Get Phone.
+     @return Identifies a telephone number
+     */
+    public String getPhone ()
+    {
+        return (String)getValue(I_C_BPartner_Location.COLUMNNAME_Phone);
+    }
+
 } // MBPartnerLocation

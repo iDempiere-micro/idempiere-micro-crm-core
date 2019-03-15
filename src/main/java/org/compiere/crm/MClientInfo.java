@@ -18,13 +18,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
      * Load Constructor
      *
      * @param ctx     context
-     * @param rs      result set
-     * @param trxName transaction
      */
-    public MClientInfo(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public MClientInfo(Properties ctx, Row row) {
         super(ctx, row);
     }

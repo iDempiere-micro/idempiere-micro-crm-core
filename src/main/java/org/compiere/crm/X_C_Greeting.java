@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.I_C_Greeting;
 import org.compiere.orm.BasePOName;
 
@@ -33,8 +34,8 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting {
     /**
      * Load Constructor
      */
-    public X_C_Greeting(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public X_C_Greeting(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**

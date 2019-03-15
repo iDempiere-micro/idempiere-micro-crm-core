@@ -54,10 +54,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
     /**
      * Load Constructor
      */
-    public X_AD_User(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_AD_User(Properties ctx, Row row) {
         super(ctx, row);
     } //	MUser
@@ -303,6 +299,14 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      */
     public void setPhone(String Phone) {
         setValue(COLUMNNAME_Phone, Phone);
+    }
+
+    /** Get Phone.
+     @return Identifies a telephone number
+     */
+    public String getPhone ()
+    {
+        return (String)getValue(COLUMNNAME_Phone);
     }
 
     /**

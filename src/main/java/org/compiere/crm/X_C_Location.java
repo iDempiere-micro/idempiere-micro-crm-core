@@ -30,10 +30,6 @@ public class X_C_Location extends PO {
     /**
      * Load Constructor
      */
-    public X_C_Location(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_C_Location(Properties ctx, Row row) {
         super(ctx, row);
     }

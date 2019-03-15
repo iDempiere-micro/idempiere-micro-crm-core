@@ -32,13 +32,6 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage {
     /**
      * Load Constructor
      */
-    public X_C_SalesStage(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
-    /**
-     * Load Constructor
-     */
     public X_C_SalesStage(Properties ctx, Row row) {
         super(ctx, row);
     }

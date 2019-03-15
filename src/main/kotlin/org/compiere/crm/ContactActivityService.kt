@@ -5,11 +5,15 @@ import org.compiere.model.I_AD_User
 import org.compiere.model.I_C_BPartner
 import org.compiere.model.I_C_ContactActivity
 import org.compiere.model.I_C_Opportunity
+import org.compiere.model.BusinessOpportunity
+import org.compiere.model.I_C_Currency
+import org.compiere.model.I_C_SalesStage
 import org.idempiere.common.util.Env.ZERO
 import software.hsharp.core.models.EnvironmentService
 import software.hsharp.services.BusinessOpportunityService
 import software.hsharp.services.CurrencyService
 import software.hsharp.services.SalesStageService
+import java.math.BigDecimal
 import java.sql.Timestamp
 import java.time.Instant
 
@@ -27,8 +31,21 @@ class ContactActivityService(
     ): I_C_ContactActivity {
         val now = Timestamp.from(Instant.now())
         val salesStage = salesStageService.ensureSalesStage("Planning", 0.toBigDecimal(), "planning")
+        val opportunityParams = object : BusinessOpportunity {
+            override val expectedCloseDate: Timestamp
+                get() = now
+            override val currency: I_C_Currency?
+                get() = currencyService.EUR
+            override val salesStage: I_C_SalesStage?
+                get() = salesStage
+            override val probability: BigDecimal
+                get() = ZERO
+            override val amount: BigDecimal
+                get() = ZERO
+        }
+
         val opportunity = businessOpportunityService.getBusinessOpportunityForBusinessPartner(
-            businessPartner, now, currencyService.EUR, salesStage, ZERO, ZERO
+            businessPartner, opportunityParams
         )
         return createContactActivity(
             opportunity, startDate, description, contactActivityType, environmentService.userId

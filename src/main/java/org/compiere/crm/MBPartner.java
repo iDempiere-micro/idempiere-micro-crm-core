@@ -9,6 +9,7 @@ import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
+import software.hsharp.core.util.DBKt;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -50,10 +51,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @param ctx context
      * @param rs  ResultSet to load from
      */
-    public MBPartner(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } //	MBPartner
-
     public MBPartner(Properties ctx, Row row) {
         super(ctx, row);
     } //	MBPartner
@@ -225,36 +222,22 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return value in accounting currency
      */
     public static BigDecimal getNotInvoicedAmt(int C_BPartner_ID) {
-        BigDecimal retValue = null;
         String sql =
                 "SELECT COALESCE(SUM(COALESCE("
                         + "currencyBase((ol.QtyDelivered-ol.QtyInvoiced)*ol.PriceActual,o.C_Currency_ID,o.DateOrdered, o.AD_Client_ID,o.AD_Org_ID) ,0)),0) "
                         + "FROM C_OrderLine ol"
                         + " INNER JOIN C_Order o ON (ol.C_Order_ID=o.C_Order_ID) "
                         + "WHERE o.IsSOTrx='Y' AND Bill_BPartner_ID=?";
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            pstmt = prepareStatement(sql);
-            pstmt.setInt(1, C_BPartner_ID);
-            rs = pstmt.executeQuery();
-            if (rs.next()) retValue = rs.getBigDecimal(1);
-        } catch (Exception e) {
-            s_log.log(Level.SEVERE, sql, e);
-        } finally {
-            rs = null;
-            pstmt = null;
-        }
-        return retValue;
+        return DBKt.getSQLValueBD(sql, C_BPartner_ID);
     } //	getNotInvoicedAmt
 
     public List<I_AD_User> getContacts() {
-        return getContacts(false);
+        return getContacts(true);
     }
 
     @Override
     public List<I_C_BPartner_Location> getLocations() {
-        return getLocations(false);
+        return getLocations(true);
     }
 
     /**
@@ -323,7 +306,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         if (m_primaryC_BPartner_Location_ID == null) {
             List<I_C_BPartner_Location> locs = getLocations(false);
             for (int i = 0; m_primaryC_BPartner_Location_ID == null && i < locs.size(); i++) {
-                if (locs.get(i).isBillTo()) {
+                if (locs.get(i).getIsBillTo()) {
                     setPrimaryC_BPartner_Location_ID(locs.get(i).getBusinessPartnerLocationId());
                     break;
                 }
@@ -475,6 +458,19 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         if (ii == null) return 0;
         return ii;
     }
+
+    /** Set Sales Representative.
+     @param SalesRep_ID
+     Sales Representative or Company Agent
+     */
+    public void setSalesRepresentativeId (int SalesRep_ID)
+    {
+        if (SalesRep_ID < 1)
+            setValue (COLUMNNAME_SalesRep_ID, null);
+        else
+            setValue (COLUMNNAME_SalesRep_ID, SalesRep_ID);
+    }
+
 
     /**
      * Get Payment Term.

@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.I_C_AddressTransaction;
 import org.compiere.orm.PO;
 
@@ -33,8 +34,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     /**
      * Load Constructor
      */
-    public X_C_AddressTransaction(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public X_C_AddressTransaction(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**

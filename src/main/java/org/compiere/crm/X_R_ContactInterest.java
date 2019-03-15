@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.I_R_ContactInterest;
 import org.compiere.orm.BasePOUser;
 
@@ -34,8 +35,8 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
     /**
      * Load Constructor
      */
-    public X_R_ContactInterest(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public X_R_ContactInterest(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**

@@ -61,10 +61,6 @@ public class X_C_BPartner extends BasePONameValue {
     /**
      * Load Constructor
      */
-    public X_C_BPartner(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_C_BPartner(Properties ctx, Row row) {
         super(ctx, row);
     }
@@ -169,7 +165,7 @@ public class X_C_BPartner extends BasePONameValue {
      */
     public void setC_BP_Group_ID(int C_BP_Group_ID) {
         if (C_BP_Group_ID < 1) setValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, null);
-        else setValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, Integer.valueOf(C_BP_Group_ID));
+        else setValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, C_BP_Group_ID);
     }
 
     /**
@@ -179,7 +175,7 @@ public class X_C_BPartner extends BasePONameValue {
      */
     public void setC_Dunning_ID(int C_Dunning_ID) {
         if (C_Dunning_ID < 1) setValue(I_C_BPartner.COLUMNNAME_C_Dunning_ID, null);
-        else setValue(I_C_BPartner.COLUMNNAME_C_Dunning_ID, Integer.valueOf(C_Dunning_ID));
+        else setValue(I_C_BPartner.COLUMNNAME_C_Dunning_ID, C_Dunning_ID);
     }
 
 
@@ -245,8 +241,24 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsCustomer Indicates if this Business Partner is a Customer
      */
     public void setIsCustomer(boolean IsCustomer) {
-        setValue(I_C_BPartner.COLUMNNAME_IsCustomer, Boolean.valueOf(IsCustomer));
+        setValue(I_C_BPartner.COLUMNNAME_IsCustomer, IsCustomer);
     }
+
+    /** Get Customer.
+     @return Indicates if this Business Partner is a Customer
+     */
+    public boolean getIsCustomer ()
+    {
+        Object oo = getValue(I_C_BPartner.COLUMNNAME_IsCustomer);
+        if (oo != null)
+        {
+            if (oo instanceof Boolean)
+                return ((Boolean)oo);
+            return "Y".equals(oo);
+        }
+        return false;
+    }
+
 
     /**
      * Set Discount Printed.
@@ -254,7 +266,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsDiscountPrinted Print Discount on Invoice and Order
      */
     public void setIsDiscountPrinted(boolean IsDiscountPrinted) {
-        setValue(I_C_BPartner.COLUMNNAME_IsDiscountPrinted, Boolean.valueOf(IsDiscountPrinted));
+        setValue(I_C_BPartner.COLUMNNAME_IsDiscountPrinted, IsDiscountPrinted);
     }
 
     /**
@@ -263,7 +275,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsEmployee Indicates if this Business Partner is an employee
      */
     public void setIsEmployee(boolean IsEmployee) {
-        setValue(I_C_BPartner.COLUMNNAME_IsEmployee, Boolean.valueOf(IsEmployee));
+        setValue(I_C_BPartner.COLUMNNAME_IsEmployee, IsEmployee);
     }
 
     /**
@@ -272,7 +284,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsOneTime One time transaction
      */
     public void setIsOneTime(boolean IsOneTime) {
-        setValue(I_C_BPartner.COLUMNNAME_IsOneTime, Boolean.valueOf(IsOneTime));
+        setValue(I_C_BPartner.COLUMNNAME_IsOneTime, IsOneTime);
     }
 
     /**
@@ -281,7 +293,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsPOTaxExempt Business partner is exempt from tax on purchases
      */
     public void setIsPOTaxExempt(boolean IsPOTaxExempt) {
-        setValue(I_C_BPartner.COLUMNNAME_IsPOTaxExempt, Boolean.valueOf(IsPOTaxExempt));
+        setValue(I_C_BPartner.COLUMNNAME_IsPOTaxExempt, IsPOTaxExempt);
     }
 
     /**
@@ -290,7 +302,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsProspect Indicates this is a Prospect
      */
     public void setIsProspect(boolean IsProspect) {
-        setValue(I_C_BPartner.COLUMNNAME_IsProspect, Boolean.valueOf(IsProspect));
+        setValue(I_C_BPartner.COLUMNNAME_IsProspect, IsProspect);
     }
 
     /**
@@ -299,7 +311,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsSalesRep Indicates if the business partner is a sales representative or company agent
      */
     public void setIsSalesRep(boolean IsSalesRep) {
-        setValue(I_C_BPartner.COLUMNNAME_IsSalesRep, Boolean.valueOf(IsSalesRep));
+        setValue(I_C_BPartner.COLUMNNAME_IsSalesRep, IsSalesRep);
     }
 
     /**
@@ -308,7 +320,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsSummary This is a summary entity
      */
     public void setIsSummary(boolean IsSummary) {
-        setValue(I_C_BPartner.COLUMNNAME_IsSummary, Boolean.valueOf(IsSummary));
+        setValue(I_C_BPartner.COLUMNNAME_IsSummary, IsSummary);
     }
 
     /**
@@ -317,7 +329,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsTaxExempt Business partner is exempt from tax on sales
      */
     public void setIsTaxExempt(boolean IsTaxExempt) {
-        setValue(I_C_BPartner.COLUMNNAME_IsTaxExempt, Boolean.valueOf(IsTaxExempt));
+        setValue(I_C_BPartner.COLUMNNAME_IsTaxExempt, IsTaxExempt);
     }
 
     /**
@@ -326,7 +338,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param IsVendor Indicates if this Business Partner is a Vendor
      */
     public void setIsVendor(boolean IsVendor) {
-        setValue(I_C_BPartner.COLUMNNAME_IsVendor, Boolean.valueOf(IsVendor));
+        setValue(I_C_BPartner.COLUMNNAME_IsVendor, IsVendor);
     }
 
     /**
@@ -337,7 +349,7 @@ public class X_C_BPartner extends BasePONameValue {
     public void setM_DiscountSchema_ID(int M_DiscountSchema_ID) {
         if (M_DiscountSchema_ID < 1) setValue(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, null);
         else
-            setValue(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, Integer.valueOf(M_DiscountSchema_ID));
+            setValue(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, M_DiscountSchema_ID);
     }
 
     /**
@@ -358,7 +370,7 @@ public class X_C_BPartner extends BasePONameValue {
      */
     public void setPriceListId(int M_PriceList_ID) {
         if (M_PriceList_ID < 1) setValue(I_C_BPartner.COLUMNNAME_M_PriceList_ID, null);
-        else setValue(I_C_BPartner.COLUMNNAME_M_PriceList_ID, Integer.valueOf(M_PriceList_ID));
+        else setValue(I_C_BPartner.COLUMNNAME_M_PriceList_ID, M_PriceList_ID);
     }
 
     /**
@@ -389,7 +401,7 @@ public class X_C_BPartner extends BasePONameValue {
         if (PO_DiscountSchema_ID < 1) setValue(I_C_BPartner.COLUMNNAME_PO_DiscountSchema_ID, null);
         else
             setValue(
-                    I_C_BPartner.COLUMNNAME_PO_DiscountSchema_ID, Integer.valueOf(PO_DiscountSchema_ID));
+                    I_C_BPartner.COLUMNNAME_PO_DiscountSchema_ID, PO_DiscountSchema_ID);
     }
 
     /**
@@ -410,7 +422,7 @@ public class X_C_BPartner extends BasePONameValue {
      */
     public void setPurchaseOrderPriceListId(int PO_PriceList_ID) {
         if (PO_PriceList_ID < 1) setValue(I_C_BPartner.COLUMNNAME_PO_PriceList_ID, null);
-        else setValue(I_C_BPartner.COLUMNNAME_PO_PriceList_ID, Integer.valueOf(PO_PriceList_ID));
+        else setValue(I_C_BPartner.COLUMNNAME_PO_PriceList_ID, PO_PriceList_ID);
     }
 
     /**
@@ -428,7 +440,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param SalesVolume Total Volume of Sales in Thousands of Currency
      */
     public void setSalesVolume(int SalesVolume) {
-        setValue(I_C_BPartner.COLUMNNAME_SalesVolume, Integer.valueOf(SalesVolume));
+        setValue(I_C_BPartner.COLUMNNAME_SalesVolume, SalesVolume);
     }
 
     /**
@@ -437,7 +449,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param SendEMail Enable sending Document EMail
      */
     public void setSendEMail(boolean SendEMail) {
-        setValue(I_C_BPartner.COLUMNNAME_SendEMail, Boolean.valueOf(SendEMail));
+        setValue(I_C_BPartner.COLUMNNAME_SendEMail, SendEMail);
     }
 
     /**
@@ -446,7 +458,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param ShareOfCustomer Share of Customer's business as a percentage
      */
     public void setShareOfCustomer(int ShareOfCustomer) {
-        setValue(I_C_BPartner.COLUMNNAME_ShareOfCustomer, Integer.valueOf(ShareOfCustomer));
+        setValue(I_C_BPartner.COLUMNNAME_ShareOfCustomer, ShareOfCustomer);
     }
 
     /**
@@ -508,6 +520,14 @@ public class X_C_BPartner extends BasePONameValue {
         setValueNoCheck(I_C_BPartner.COLUMNNAME_SO_CreditUsed, SO_CreditUsed);
     }
 
+    /** Get Tax ID.
+     @return Tax Identification
+     */
+    public String getTaxID ()
+    {
+        return (String)getValue(I_C_BPartner.COLUMNNAME_TaxID);
+    }
+
     /**
      * Set Tax ID.
      *
@@ -541,4 +561,43 @@ public class X_C_BPartner extends BasePONameValue {
     public int getTableId() {
         return I_C_BPartner.Table_ID;
     }
+
+    /** Set URL.
+     @param URL
+     Full URL address - e.g. http://www.idempiere.org
+     */
+    public void setURL (String URL)
+    {
+        setValue (I_C_BPartner.COLUMNNAME_URL, URL);
+    }
+
+    /** Get URL.
+     @return Full URL address - e.g. http://www.idempiere.org
+     */
+    public String getURL ()
+    {
+        return (String)getValue(I_C_BPartner.COLUMNNAME_URL);
+    }
+
+    /** Set Flat Discount %.
+     @param FlatDiscount
+     Flat discount percentage
+     */
+    public void setFlatDiscount (BigDecimal FlatDiscount)
+    {
+        setValue (I_C_BPartner.COLUMNNAME_FlatDiscount, FlatDiscount);
+    }
+
+    /** Get Flat Discount %.
+     @return Flat discount percentage
+     */
+    public BigDecimal getFlatDiscount ()
+    {
+        BigDecimal bd = (BigDecimal)getValue(I_C_BPartner.COLUMNNAME_FlatDiscount);
+        if (bd == null)
+            return Env.ZERO;
+        return bd;
+    }
+
+
 }

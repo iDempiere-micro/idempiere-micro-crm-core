@@ -22,7 +22,6 @@ fun getWithRole(role: MRole): Array<MUser> {
 }
 
 open class MBaseUser : X_AD_User {
-    constructor(ctx: Properties, rs: ResultSet) : super(ctx, rs)
     constructor(ctx: Properties, row: Row) : super(ctx, row)
     constructor(ctx: Properties, id: Int) : super(ctx, id)
 

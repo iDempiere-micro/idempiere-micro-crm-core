@@ -48,13 +48,7 @@ public class MBPGroup extends X_C_BP_Group {
      * Load Constructor
      *
      * @param ctx     context
-     * @param rs      result set
-     * @param trxName transaction
      */
-    public MBPGroup(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } //	MBPGroup
-
     public MBPGroup(Properties ctx, Row row) {
         super(ctx, row);
     } //	MBPGroup

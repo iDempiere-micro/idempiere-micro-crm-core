@@ -35,21 +35,6 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     }
 
     /**
-     * Load Constructor
-     */
-    public X_C_ContactActivity(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
-    /**
-     * Load Constructor with rename
-     */
-    public X_C_ContactActivity(
-            Properties ctx, ResultSet rs, String columnNamePrefix) {
-        super(ctx, rs, columnNamePrefix);
-    }
-
-    /**
      * AccessLevel
      *
      * @return 3 - Client - Org

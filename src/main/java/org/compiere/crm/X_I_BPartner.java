@@ -1,5 +1,6 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.HasName;
 import org.compiere.model.HasName2;
 import org.compiere.model.I_I_BPartner;
@@ -31,8 +32,8 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
     /**
      * Load Constructor
      */
-    public X_I_BPartner(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public X_I_BPartner(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**

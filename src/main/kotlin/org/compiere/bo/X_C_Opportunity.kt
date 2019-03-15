@@ -1,6 +1,7 @@
 package org.compiere.bo
 
 import kotliquery.Row
+import org.compiere.model.I_C_Currency
 import org.compiere.model.I_C_Opportunity
 import org.compiere.model.I_C_SalesStage
 import org.compiere.orm.BasePOUser
@@ -13,11 +14,28 @@ import java.sql.Timestamp
 import java.util.Properties
 
 open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
+    override var expectedCloseDate: Timestamp
+        get() = getValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate) as Timestamp
+        set(value) { setValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate, value) }
+    override var currency: I_C_Currency?
+        get() = MCurrency(ctx, getCurrencyId())
+        set(value) { setCurrencyId(value?.id ?: 0) }
+    override var salesStage: I_C_SalesStage?
+        get() = X_C_SalesStage(ctx, salesStageId)
+        set(value) { salesStageId = value?.id ?: 0 }
+    override var probability: BigDecimal
+        get() = getValue(I_C_Opportunity.COLUMNNAME_Probability) as BigDecimal? ?: Env.ZERO
+        set(value) { setValue(I_C_Opportunity.COLUMNNAME_Probability, value) }
+    override var amount: BigDecimal
+        get() {
+            val bd = getValue(I_C_Opportunity.COLUMNNAME_OpportunityAmt) as BigDecimal?
+            return bd ?: Env.ZERO
+        }
+        set(value) { setValue(I_C_Opportunity.COLUMNNAME_OpportunityAmt, value) }
     override val tableId: Int
         get() = I_C_Opportunity.Table_ID
 
     constructor(ctx: Properties, C_Opportunity_ID: Int) : super(ctx, C_Opportunity_ID)
-    constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
     constructor (ctx: Properties, row: Row) : super(ctx, row)
 
     /** AccessLevel
@@ -82,22 +100,6 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
         return KeyNamePair(id, documentNo)
     }
 
-    /** Set Opportunity Amount.
-     * @param OpportunityAmt
-     * The estimated value of this opportunity.
-     */
-    override fun setOpportunityAmt(OpportunityAmt: BigDecimal) {
-        setValue(I_C_Opportunity.COLUMNNAME_OpportunityAmt, OpportunityAmt)
-    }
-
-    /** Set Expected Close Date.
-     * @param ExpectedCloseDate
-     * Expected Close Date
-     */
-    fun setExpectedCloseDate(ExpectedCloseDate: Timestamp) {
-        setValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate, ExpectedCloseDate)
-    }
-
     /** Set Currency.
      * @param C_Currency_ID
      * The Currency for this record
@@ -107,6 +109,13 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
             setValue(I_C_Opportunity.COLUMNNAME_C_Currency_ID, null)
         else
             setValue(I_C_Opportunity.COLUMNNAME_C_Currency_ID, Integer.valueOf(C_Currency_ID))
+    }
+
+    /** Get Currency.
+     * @return The Currency for this record
+     */
+    fun getCurrencyId(): Int {
+        return getValue(I_C_Opportunity.COLUMNNAME_C_Currency_ID) as Int? ?: return 0
     }
 
     /** Set Sales Stage.
@@ -122,23 +131,5 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
      */
     override fun getSalesStageId(): Int {
         return getValue(I_C_Opportunity.COLUMNNAME_C_SalesStage_ID) as Int? ?: return 0
-    }
-
-    override fun setSalesStage(stage: I_C_SalesStage?) {
-        salesStageId = stage?.id ?: 0
-    }
-
-    /** Set Probability.
-     * @param Probability Probability
-     */
-    override fun setProbability(Probability: BigDecimal) {
-        setValue(I_C_Opportunity.COLUMNNAME_Probability, Probability)
-    }
-
-    /** Get Probability.
-     * @return Probability
-     */
-    override fun getProbability(): BigDecimal {
-        return getValue(I_C_Opportunity.COLUMNNAME_Probability) as BigDecimal? ?: return Env.ZERO
     }
 }

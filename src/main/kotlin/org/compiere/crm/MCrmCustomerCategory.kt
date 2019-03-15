@@ -1,8 +1,8 @@
 package org.compiere.crm
 
+import kotliquery.Row
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.BasePOName
-import java.sql.ResultSet
 import java.util.Properties
 
 class MCrmCustomerCategory : BasePOName {
@@ -19,8 +19,8 @@ class MCrmCustomerCategory : BasePOName {
     }
 
     constructor(ctx: Properties, ID: Int) : super(ctx, ID)
-    constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
-    constructor (ctx: Properties, rs: ResultSet, a: String?) : super(ctx, rs, a)
+    constructor(ctx: Properties, row: Row) : super(ctx, row)
+    constructor (ctx: Properties, a: String?) : super(ctx, a)
 
     var bPartner: I_C_BPartner
         get() {

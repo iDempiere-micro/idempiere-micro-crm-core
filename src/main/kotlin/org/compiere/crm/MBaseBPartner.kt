@@ -12,7 +12,6 @@ import java.sql.ResultSet
 import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner {
-    constructor(ctx: Properties, rs: ResultSet) : super(ctx, rs)
     constructor(ctx: Properties, row: Row) : super(ctx, row)
     constructor(ctx: Properties, id: Int) : super(ctx, id)
 

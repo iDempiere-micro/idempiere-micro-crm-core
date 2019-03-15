@@ -56,10 +56,6 @@ public class MLanguage extends X_AD_Language {
      * @param rs      result set
      * @param trxName transaction
      */
-    public MLanguage(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } //	MLanguage
-
     public MLanguage(Properties ctx, Row row) {
         super(ctx, row);
     }

@@ -97,13 +97,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
      * Load Constructor
      *
      * @param ctx     context
-     * @param rs      result set
-     * @param trxName transaction
      */
-    public MLocation(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } //	MLocation
-
     public MLocation(Properties ctx, Row row) {
         super(ctx, row);
     } //	MLocation
@@ -113,7 +107,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
      *
      * @param ctx           context
      * @param C_Location_ID id
-     * @param trxName       transaction
      * @return MLocation
      */
     public static MLocation get(Properties ctx, int C_Location_ID) {

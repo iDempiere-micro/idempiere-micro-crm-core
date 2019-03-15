@@ -82,10 +82,6 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
      * @param rs      ResultSet
      * @param trxName transaction
      */
-    public MCountry(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } //	MCountry
-
     public MCountry(Properties ctx, Row row) {
         super(ctx, row);
     }

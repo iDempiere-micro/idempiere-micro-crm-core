@@ -22,6 +22,5 @@ internal fun loadAllRegions(ctx: Properties) {
 
 open class MBaseRegion : X_C_Region {
     constructor(ctx: Properties, ID: Int) : super(ctx, ID)
-    constructor (ctx: Properties, rs: ResultSet) : super(ctx, rs)
     constructor(ctx: Properties, rs: Row) : super(ctx, rs)
 }

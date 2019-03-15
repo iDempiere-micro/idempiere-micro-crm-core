@@ -30,10 +30,6 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
     /**
      * Load Constructor
      */
-    public X_AD_Language(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_AD_Language(Properties ctx, Row row) {
         super(ctx, row);
     }

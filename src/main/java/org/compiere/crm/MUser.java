@@ -89,13 +89,7 @@ public class MUser extends MBaseUser implements IUser {
      * Load Constructor
      *
      * @param ctx     context
-     * @param rs      current row of result set to be loaded
-     * @param trxName transaction
      */
-    public MUser(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } //	MUser
-
     public MUser(Properties ctx, Row row) {
         super(ctx, row);
     } //	MUser

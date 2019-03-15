@@ -1,16 +1,27 @@
 package org.compiere.crm
 
-import company.bigger.test.support.randomString
 import org.idempiere.common.util.Env
 import org.junit.Test
 import software.hsharp.core.util.DB
 import software.hsharp.core.util.HikariCPI
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class CategoryTest : BaseCrmTest() {
 
     init {
         HikariCPI.default(sessionUrl, "adempiere", "adempiere")
+    }
+
+    @Test
+    fun `create crm category in a service`() {
+        DB.run {
+            val name = "Test-${randomString(10)}"
+            val searchKey = randomString(10)
+            val result = categoryService.createCategory(name = name, searchKey = searchKey)
+            assertEquals(name, result.name)
+            assertEquals(searchKey, result.searchKey)
+        }
     }
 
     @Test
@@ -27,9 +38,9 @@ class CategoryTest : BaseCrmTest() {
 
             val newPartner = MBPartner.getTemplate(ctx, 11)
             val name = "Test " + randomString(10)
-            newPartner.setName(name)
+            newPartner.name = name
             val value = "t-" + randomString(5)
-            newPartner.setSearchKey(value)
+            newPartner.searchKey = value
             newPartner.save()
 
             val bp: MBPartner = getById(newPartner.id, MBPartner.Table_Name)

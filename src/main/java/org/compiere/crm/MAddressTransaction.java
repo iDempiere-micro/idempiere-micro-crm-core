@@ -1,5 +1,7 @@
 package org.compiere.crm;
 
+import kotliquery.Row;
+
 import java.sql.ResultSet;
 import java.util.Properties;
 
@@ -18,8 +20,8 @@ public class MAddressTransaction extends X_C_AddressTransaction {
         super(ctx, C_AddressTransaction_ID);
     }
 
-    public MAddressTransaction(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public MAddressTransaction(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
 }

@@ -43,13 +43,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
      * Create Region from current row in ResultSet
      *
      * @param ctx     context
-     * @param rs      result set
-     * @param trxName transaction
      */
-    public MRegion(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    } //	MRegion
-
     public MRegion(Properties ctx, Row row) {
         super(ctx, row);
     } //	MRegion

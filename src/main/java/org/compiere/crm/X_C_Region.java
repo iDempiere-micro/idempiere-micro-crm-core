@@ -30,10 +30,6 @@ public class X_C_Region extends BasePOName implements I_C_Region {
     /**
      * Load Constructor
      */
-    public X_C_Region(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
-    }
-
     public X_C_Region(Properties ctx, Row row) {
         super(ctx, row);
     }

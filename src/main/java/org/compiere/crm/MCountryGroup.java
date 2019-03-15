@@ -13,6 +13,7 @@
  */
 package org.compiere.crm;
 
+import kotliquery.Row;
 import org.compiere.model.I_C_CountryGroup;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.CLogger;
@@ -59,8 +60,8 @@ public class MCountryGroup extends X_C_CountryGroup {
      * @param rs      ResultSet
      * @param trxName transaction
      */
-    public MCountryGroup(Properties ctx, ResultSet rs) {
-        super(ctx, rs);
+    public MCountryGroup(Properties ctx, Row row) {
+        super(ctx, row);
     } //	MCountryGroup
 
     public static boolean countryGroupContains(int c_CountryGroup_ID, int c_Country_ID) {
