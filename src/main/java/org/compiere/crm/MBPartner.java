@@ -270,8 +270,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @param AD_OrgBP_ID
      */
-    public void setAD_OrgBPId(int AD_OrgBP_ID) {
-        if (AD_OrgBP_ID == 0) super.setAD_OrgBPId(null);
+    public void setLinkedOrganizationId(int AD_OrgBP_ID) {
+        if (AD_OrgBP_ID == 0) super.setLinkedOrganizationId(null);
         else super.setValue("AD_OrgBP_ID", AD_OrgBP_ID);
     } //	setAD_OrgBP_ID
 
@@ -281,8 +281,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @return AD_Org_ID if BP
      */
-    public int getAD_OrgBP_ID_Int() {
-        String org = super.getAD_OrgBPId();
+    public int getLinkedOrganizationId() {
+        String org = super.getLinkedOrganizationIdAsString();
         if (org == null) return 0;
         int AD_OrgBP_ID = 0;
         try {
@@ -298,18 +298,18 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @return C_BPartner_Location_ID
      */
-    public int getPrimaryC_BPartner_LocationId() {
+    public int getPrimaryBPartnerLocationId() {
         if (m_primaryC_BPartner_Location_ID == null) {
             List<I_C_BPartner_Location> locs = getLocations(false);
             for (int i = 0; m_primaryC_BPartner_Location_ID == null && i < locs.size(); i++) {
                 if (locs.get(i).getIsBillTo()) {
-                    setPrimaryC_BPartner_LocationId(locs.get(i).getBusinessPartnerLocationId());
+                    setPrimaryBPartnerLocationId(locs.get(i).getBusinessPartnerLocationId());
                     break;
                 }
             }
             //	get first
             if (m_primaryC_BPartner_Location_ID == null && locs.size() > 0)
-                setPrimaryC_BPartner_LocationId(locs.get(0).getBusinessPartnerLocationId());
+                setPrimaryBPartnerLocationId(locs.get(0).getBusinessPartnerLocationId());
         }
         if (m_primaryC_BPartner_Location_ID == null) return 0;
         return m_primaryC_BPartner_Location_ID;
@@ -320,7 +320,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @param C_BPartner_Location_ID id
      */
-    public void setPrimaryC_BPartner_LocationId(int C_BPartner_Location_ID) {
+    public void setPrimaryBPartnerLocationId(int C_BPartner_Location_ID) {
         m_primaryC_BPartner_Location_ID = C_BPartner_Location_ID;
     } //	setPrimaryC_BPartner_Location_ID
 

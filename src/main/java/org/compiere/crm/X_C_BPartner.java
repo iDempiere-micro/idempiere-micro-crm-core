@@ -121,7 +121,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @return The Business Partner is another Organization for explicit Inter-Org transactions
      */
-    public String getAD_OrgBPId() {
+    public String getLinkedOrganizationIdAsString() {
         return (String) getValue(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID);
     }
 
@@ -131,7 +131,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param AD_OrgBP_ID The Business Partner is another Organization for explicit Inter-Org
      *                    transactions
      */
-    public void setAD_OrgBPId(String AD_OrgBP_ID) {
+    public void setLinkedOrganizationId(String AD_OrgBP_ID) {
         setValue(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID, AD_OrgBP_ID);
     }
 

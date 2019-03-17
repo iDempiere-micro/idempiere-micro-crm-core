@@ -12,6 +12,9 @@ import java.math.BigDecimal
 import java.sql.Timestamp
 import java.util.Properties
 
+/**
+ * Base functionality for the Business Opportunity
+ */
 open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
     override var expectedCloseDate: Timestamp
         get() = getValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate) as Timestamp
