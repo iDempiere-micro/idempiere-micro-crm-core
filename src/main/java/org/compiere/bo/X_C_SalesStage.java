@@ -6,7 +6,6 @@ import org.compiere.orm.BasePONameValue;
 import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**

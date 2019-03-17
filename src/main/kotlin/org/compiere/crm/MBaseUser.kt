@@ -4,7 +4,6 @@ import kotliquery.Row
 import kotliquery.queryOf
 import org.compiere.orm.MRole
 import software.hsharp.core.util.DB
-import java.sql.ResultSet
 import java.util.Properties
 
 fun getWithRole(role: MRole): Array<MUser> {

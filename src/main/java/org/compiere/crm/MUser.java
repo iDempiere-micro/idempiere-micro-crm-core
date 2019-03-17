@@ -9,7 +9,11 @@ import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 import org.idempiere.common.exceptions.DBException;
-import org.idempiere.common.util.*;
+import org.idempiere.common.util.CCache;
+import org.idempiere.common.util.CLogger;
+import org.idempiere.common.util.Secure;
+import org.idempiere.common.util.SecureEngine;
+import org.idempiere.common.util.Util;
 import software.hsharp.core.models.IUser;
 
 import javax.mail.internet.AddressException;
@@ -17,7 +21,6 @@ import javax.mail.internet.InternetAddress;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -88,7 +91,7 @@ public class MUser extends MBaseUser implements IUser {
     /**
      * Load Constructor
      *
-     * @param ctx     context
+     * @param ctx context
      */
     public MUser(Properties ctx, Row row) {
         super(ctx, row);
@@ -422,10 +425,10 @@ public class MUser extends MBaseUser implements IUser {
      */
     protected boolean beforeSave(boolean newRecord) {
         //	New Address invalidates verification
-        if (!newRecord && is_ValueChanged("EMail")) setEMailVerifyDate(null);
+        if (!newRecord && isValueChanged("EMail")) setEMailVerifyDate(null);
 
         // IDEMPIERE-1409
-        if (!Util.isEmpty(getEMail()) && (newRecord || is_ValueChanged("EMail"))) {
+        if (!Util.isEmpty(getEMail()) && (newRecord || isValueChanged("EMail"))) {
             if (!EMail.validate(getEMail())) {
                 log.saveError(
                         "SaveError",
@@ -438,7 +441,7 @@ public class MUser extends MBaseUser implements IUser {
             }
         }
 
-        if (newRecord || super.getSearchKey() == null || is_ValueChanged("Value"))
+        if (newRecord || super.getSearchKey() == null || isValueChanged("Value"))
             setSearchKey(super.getSearchKey());
 
         if (getPassword() != null && getPassword().length() > 0) {
@@ -492,7 +495,7 @@ public class MUser extends MBaseUser implements IUser {
 
         if (getPassword() != null
                 && getPassword().length() > 0
-                && (newRecord || is_ValueChanged("Password"))) {
+                && (newRecord || isValueChanged("Password"))) {
             // Hash password - IDEMPIERE-347
             boolean hash_password = MSysConfig.getBooleanValue(MSysConfig.USER_PASSWORD_HASH, false);
             if (hash_password) setPassword(getPassword());

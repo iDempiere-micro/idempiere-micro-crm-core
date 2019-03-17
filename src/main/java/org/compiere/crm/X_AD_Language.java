@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.BasePOName;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**

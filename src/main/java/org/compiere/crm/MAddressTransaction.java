@@ -2,7 +2,6 @@ package org.compiere.crm;
 
 import kotliquery.Row;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**

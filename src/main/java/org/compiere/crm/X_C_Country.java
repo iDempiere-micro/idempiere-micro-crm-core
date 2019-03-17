@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Country;
 import org.compiere.orm.BasePOName;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -27,7 +26,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
         super(ctx, C_Country_ID);
         /**
          * if (C_Country_ID == 0) { setCountryId (0); setCountryCode (null); setDisplaySequence
-         * (null); // @C@, @R@ @P@ setHasPostal_Add (false); setHasRegion (false);
+         * (null); // @C@, @R@ @P@ setAdditionalPostalCode (false); setHasRegion (false);
          * setIsAddressLinesLocalReverse (false); setIsAddressLinesReverse (false); setName (null); }
          */
     }
@@ -119,7 +118,7 @@ public class X_C_Country extends BasePOName implements I_C_Country {
      *
      * @param HasPostal_Add Has Additional Postal Code
      */
-    public void setHasPostal_Add(boolean HasPostal_Add) {
+    public void setAdditionalPostalCode(boolean HasPostal_Add) {
         setValue(COLUMNNAME_HasPostal_Add, Boolean.valueOf(HasPostal_Add));
     }
 

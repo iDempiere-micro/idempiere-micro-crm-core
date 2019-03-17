@@ -3,7 +3,6 @@ package org.compiere.bo;
 import org.compiere.model.I_C_Currency;
 import org.idempiere.common.util.CCache;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -65,7 +64,7 @@ public class MCurrency extends X_C_Currency {
             int CostingPrecision,
             String trxName) {
         super(ctx, 0);
-        setISO_Code(ISO_Code);
+        setISOCode(ISO_Code);
         setDescription(Description);
         setCurSymbol(CurSymbol);
         setStdPrecision(StdPrecision);
@@ -84,7 +83,7 @@ public class MCurrency extends X_C_Currency {
     public static MCurrency get(Properties ctx, int C_Currency_ID) {
         //	Try Cache
         Integer key = new Integer(C_Currency_ID);
-        MCurrency retValue = (MCurrency) s_currencies.get(key);
+        MCurrency retValue = s_currencies.get(key);
         if (retValue != null) return retValue;
 
         //	Create it
@@ -101,14 +100,14 @@ public class MCurrency extends X_C_Currency {
      * @param C_Currency_ID currency
      * @return ISO Code
      */
-    public static String getISO_Code(Properties ctx, int C_Currency_ID) {
+    public static String getISOCode(Properties ctx, int C_Currency_ID) {
         StringBuilder contextKey = new StringBuilder("C_Currency_").append(C_Currency_ID);
         String retValue = ctx.getProperty(contextKey.toString());
         if (retValue != null) return retValue;
 
         //	Create it
         MCurrency c = get(ctx, C_Currency_ID);
-        retValue = c.getISO_Code();
+        retValue = c.getISOCode();
         ctx.setProperty(contextKey.toString(), retValue);
         return retValue;
     } //	getISO
@@ -147,7 +146,7 @@ public class MCurrency extends X_C_Currency {
                 new StringBuilder("MCurrency[")
                         .append(getCurrencyId())
                         .append("-")
-                        .append(getISO_Code())
+                        .append(getISOCode())
                         .append("-")
                         .append(getCurSymbol())
                         .append(",")

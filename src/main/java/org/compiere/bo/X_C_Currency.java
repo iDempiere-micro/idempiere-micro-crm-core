@@ -3,7 +3,6 @@ package org.compiere.bo;
 import org.compiere.model.I_C_Currency;
 import org.compiere.orm.PO;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -26,7 +25,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
         super(ctx, C_Currency_ID);
         /**
          * if (C_Currency_ID == 0) { setCurrencyId (0); setCostingPrecision (0); // 4 setDescription
-         * (null); setIsEMUMember (false); // N setIsEuro (false); // N setISO_Code (null);
+         * (null); setIsEMUMember (false); // N setIsEuro (false); // N setISOCode (null);
          * setRoundOffFactor (Env.ZERO); // 1 setStdPrecision (0); // 2 }
          */
     }
@@ -135,7 +134,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      *
      * @return Three letter ISO 4217 Code of the Currency
      */
-    public String getISO_Code() {
+    public String getISOCode() {
         return (String) getValue(COLUMNNAME_ISO_Code);
     }
 
@@ -144,7 +143,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      *
      * @param ISO_Code Three letter ISO 4217 Code of the Currency
      */
-    public void setISO_Code(String ISO_Code) {
+    public void setISOCode(String ISO_Code) {
         setValue(COLUMNNAME_ISO_Code, ISO_Code);
     }
 

@@ -5,7 +5,6 @@ import org.compiere.model.I_C_BPartner;
 import org.compiere.orm.MClient;
 import org.compiere.orm.MTable;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 public class MClientInfo extends org.compiere.orm.MClientInfo {
@@ -17,7 +16,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
     /**
      * Load Constructor
      *
-     * @param ctx     context
+     * @param ctx context
      */
     public MClientInfo(Properties ctx, Row row) {
         super(ctx, row);
@@ -69,7 +68,7 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
         return saveUpdate();
     } //	save
 
-    public I_C_BPartner getC_BPartnerCashTrx() throws RuntimeException {
+    public I_C_BPartner getBPartnerCashTrx() throws RuntimeException {
         return (I_C_BPartner)
                 MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getBPartnerCashTrxId());
     }

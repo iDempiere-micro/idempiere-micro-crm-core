@@ -4,7 +4,6 @@ import kotliquery.Row
 import software.hsharp.core.util.DB
 import software.hsharp.core.util.asResource
 import software.hsharp.core.util.queryOf
-import java.sql.ResultSet
 import java.util.Properties
 
 fun getBPLocation(ctx: Properties, bPartnerLocationId: Int): MLocation? {

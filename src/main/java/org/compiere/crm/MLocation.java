@@ -8,7 +8,6 @@ import org.compiere.util.Msg;
 import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.Util;
 
-import java.sql.ResultSet;
 import java.util.Comparator;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -96,7 +95,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
     /**
      * Load Constructor
      *
-     * @param ctx     context
+     * @param ctx context
      */
     public MLocation(Properties ctx, Row row) {
         super(ctx, row);
@@ -437,7 +436,7 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
         } else {
             setRegionName(null);
         }
-        if (getC_City_ID() <= 0 && getCity() != null && getCity().length() > 0) {
+        if (getCityId() <= 0 && getCity() != null && getCity().length() > 0) {
             int city_id =
                     getSQLValue(
                             "SELECT C_City_ID FROM C_City WHERE C_Country_ID=? AND COALESCE(C_Region_ID,0)=? AND Name=? AND AD_Client_ID IN (0,?)",
@@ -445,17 +444,17 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
                             getRegionId(),
                             getCity(),
                             getClientId());
-            if (city_id > 0) setC_City_ID(city_id);
+            if (city_id > 0) setCityId(city_id);
         }
 
         // check city
-        if (m_c != null && !m_c.isAllowCitiesOutOfList() && getC_City_ID() <= 0) {
+        if (m_c != null && !m_c.isAllowCitiesOutOfList() && getCityId() <= 0) {
             log.saveError("CityNotFound", Msg.translate(getCtx(), "CityNotFound"));
             return false;
         }
 
         // check city id
-        if (m_c != null && !m_c.isAllowCitiesOutOfList() && getC_City_ID() > 0) {
+        if (m_c != null && !m_c.isAllowCitiesOutOfList() && getCityId() > 0) {
             int city_id =
                     getSQLValue(
                             "SELECT C_City_ID "
@@ -465,12 +464,12 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
                                     + "   AND C_City_ID =?",
                             getCountryId(),
                             getRegionId(),
-                            getC_City_ID());
+                            getCityId());
 
             if (city_id < 0) {
                 log.saveError(
                         "CityNotFound",
-                        Msg.translate(getCtx(), "CityNotFound") + " C_City_ID[" + getC_City_ID() + "]");
+                        Msg.translate(getCtx(), "CityNotFound") + " C_City_ID[" + getCityId() + "]");
                 return false;
             }
         }
@@ -504,13 +503,13 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
                     MSysConfig.getIntValue(
                             MSysConfig.START_VALUE_BPLOCATION_NAME, 0, getClientId(), getOrgId());
             if (bplocname < 0 || bplocname > 4) bplocname = 0;
-            if (is_ValueChanged(COLUMNNAME_City)
-                    || is_ValueChanged(COLUMNNAME_C_City_ID)
-                    || (bplocname >= 1 && is_ValueChanged(COLUMNNAME_Address1))
-                    || (bplocname >= 2 && is_ValueChanged(COLUMNNAME_Address2))
+            if (isValueChanged(COLUMNNAME_City)
+                    || isValueChanged(COLUMNNAME_C_City_ID)
+                    || (bplocname >= 1 && isValueChanged(COLUMNNAME_Address1))
+                    || (bplocname >= 2 && isValueChanged(COLUMNNAME_Address2))
                     || (bplocname >= 3
-                    && (is_ValueChanged(COLUMNNAME_RegionName)
-                    || is_ValueChanged(COLUMNNAME_C_Region_ID)))) {
+                    && (isValueChanged(COLUMNNAME_RegionName)
+                    || isValueChanged(COLUMNNAME_C_Region_ID)))) {
                 MBPartnerLocation bpl = new MBPartnerLocation(getCtx(), bplID);
                 bpl.setName(bpl.getBPLocName(this));
                 bpl.saveEx();

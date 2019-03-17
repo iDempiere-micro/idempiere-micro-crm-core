@@ -12,14 +12,10 @@ import org.idempiere.common.util.Env;
 import software.hsharp.core.util.DBKt;
 
 import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
-
-import static software.hsharp.core.util.DBKt.prepareStatement;
 
 public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     /**
@@ -126,7 +122,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         setDUNS(impBP.getDUNS());
         setTaxID(impBP.getTaxID());
         setNAICS(impBP.getNAICS());
-        setC_BP_Group_ID(impBP.getC_BP_Group_ID());
+        setBPGroupId(impBP.getBPGroupId());
     } //	MBPartner
 
     /**
@@ -177,7 +173,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return Cash Trx Business Partner or null
      */
     public static I_C_BPartner getBPartnerCashTrx(Properties ctx, int AD_Client_ID) {
-        I_C_BPartner retValue = MClientInfo.get(ctx, AD_Client_ID).getC_BPartnerCashTrx();
+        I_C_BPartner retValue = MClientInfo.get(ctx, AD_Client_ID).getBPartnerCashTrx();
         if (retValue == null) s_log.log(Level.SEVERE, "Not found for AD_Client_ID=" + AD_Client_ID);
 
         return retValue;
@@ -274,8 +270,8 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @param AD_OrgBP_ID
      */
-    public void setAD_OrgBP_ID(int AD_OrgBP_ID) {
-        if (AD_OrgBP_ID == 0) super.setAD_OrgBP_ID(null);
+    public void setAD_OrgBPId(int AD_OrgBP_ID) {
+        if (AD_OrgBP_ID == 0) super.setAD_OrgBPId(null);
         else super.setValue("AD_OrgBP_ID", AD_OrgBP_ID);
     } //	setAD_OrgBP_ID
 
@@ -286,7 +282,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return AD_Org_ID if BP
      */
     public int getAD_OrgBP_ID_Int() {
-        String org = super.getAD_OrgBP_ID();
+        String org = super.getAD_OrgBPId();
         if (org == null) return 0;
         int AD_OrgBP_ID = 0;
         try {
@@ -302,18 +298,18 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @return C_BPartner_Location_ID
      */
-    public int getPrimaryC_BPartner_Location_ID() {
+    public int getPrimaryC_BPartner_LocationId() {
         if (m_primaryC_BPartner_Location_ID == null) {
             List<I_C_BPartner_Location> locs = getLocations(false);
             for (int i = 0; m_primaryC_BPartner_Location_ID == null && i < locs.size(); i++) {
                 if (locs.get(i).getIsBillTo()) {
-                    setPrimaryC_BPartner_Location_ID(locs.get(i).getBusinessPartnerLocationId());
+                    setPrimaryC_BPartner_LocationId(locs.get(i).getBusinessPartnerLocationId());
                     break;
                 }
             }
             //	get first
             if (m_primaryC_BPartner_Location_ID == null && locs.size() > 0)
-                setPrimaryC_BPartner_Location_ID(locs.get(0).getBusinessPartnerLocationId());
+                setPrimaryC_BPartner_LocationId(locs.get(0).getBusinessPartnerLocationId());
         }
         if (m_primaryC_BPartner_Location_ID == null) return 0;
         return m_primaryC_BPartner_Location_ID;
@@ -324,7 +320,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      * @param C_BPartner_Location_ID id
      */
-    public void setPrimaryC_BPartner_Location_ID(int C_BPartner_Location_ID) {
+    public void setPrimaryC_BPartner_LocationId(int C_BPartner_Location_ID) {
         m_primaryC_BPartner_Location_ID = C_BPartner_Location_ID;
     } //	setPrimaryC_BPartner_Location_ID
 
@@ -384,7 +380,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return true
      */
     protected boolean beforeSave(boolean newRecord) {
-        if (newRecord || is_ValueChanged("C_BP_Group_ID")) {
+        if (newRecord || isValueChanged("C_BP_Group_ID")) {
             MBPGroup grp = getBPGroup();
             if (grp == null) {
                 log.saveError("Error", Msg.parseTranslation(getCtx(), "@NotFound@:  @C_BP_Group_ID@"));
@@ -408,14 +404,14 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
             //	Trees
             insert_Tree(MTree_Base.TREETYPE_BPartner);
             //	Accounting
-            StringBuilder msgacc = new StringBuilder("p.C_BP_Group_ID=").append(getC_BP_Group_ID());
+            StringBuilder msgacc = new StringBuilder("p.C_BP_Group_ID=").append(getBPGroupId());
             insert_Accounting("C_BP_Customer_Acct", "C_BP_Group_Acct", msgacc.toString());
             insert_Accounting("C_BP_Vendor_Acct", "C_BP_Group_Acct", msgacc.toString());
         }
-        if (newRecord || is_ValueChanged(COLUMNNAME_Value)) update_Tree(MTree_Base.TREETYPE_BPartner);
+        if (newRecord || isValueChanged(COLUMNNAME_Value)) update_Tree(MTree_Base.TREETYPE_BPartner);
 
         //	TODO: Value/Name change
-        // if (!newRecord && (is_ValueChanged("Value") || is_ValueChanged("Name"))) {
+        // if (!newRecord && (isValueChanged("Value") || isValueChanged("Name"))) {
         // TODO: StringBuilder msgacc = new StringBuilder("C_BPartner_ID=").append(getBusinessPartnerId());
         // TODO: MAccount.updateValueDescription(getCtx(), msgacc.toString(), get_TrxName());
         // }
@@ -459,16 +455,16 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         return ii;
     }
 
-    /** Set Sales Representative.
-     @param SalesRep_ID
-     Sales Representative or Company Agent
+    /**
+     * Set Sales Representative.
+     *
+     * @param SalesRep_ID Sales Representative or Company Agent
      */
-    public void setSalesRepresentativeId (int SalesRep_ID)
-    {
+    public void setSalesRepresentativeId(int SalesRep_ID) {
         if (SalesRep_ID < 1)
-            setValue (COLUMNNAME_SalesRep_ID, null);
+            setValue(COLUMNNAME_SalesRep_ID, null);
         else
-            setValue (COLUMNNAME_SalesRep_ID, SalesRep_ID);
+            setValue(COLUMNNAME_SalesRep_ID, SalesRep_ID);
     }
 
 

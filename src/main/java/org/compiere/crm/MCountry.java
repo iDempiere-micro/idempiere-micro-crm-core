@@ -13,7 +13,6 @@ import org.idempiere.common.util.Env;
 import org.idempiere.common.util.Language;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
@@ -69,7 +68,7 @@ public class MCountry extends X_C_Country implements Comparator<Object>, Seriali
             //	setCountryCode (null);
             setDisplaySequence(DISPLAYSEQUENCE);
             setHasRegion(false);
-            setHasPostal_Add(false);
+            setAdditionalPostalCode(false);
             setIsAddressLinesLocalReverse(false);
             setIsAddressLinesReverse(false);
         }

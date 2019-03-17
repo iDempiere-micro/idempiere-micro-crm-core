@@ -5,7 +5,6 @@ import org.compiere.model.I_C_ContactActivity;
 import org.compiere.orm.BasePOUser;
 import org.compiere.orm.MTable;
 
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
@@ -28,7 +27,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     public X_C_ContactActivity(Properties ctx, int C_ContactActivity_ID) {
         super(ctx, C_ContactActivity_ID);
         /**
-         * if (C_ContactActivity_ID == 0) { setC_ContactActivity_ID (0); setContactActivityType (null);
+         * if (C_ContactActivity_ID == 0) { setContactActivity_ID (0); setContactActivityType (null);
          * setDescription (null); setStartDate (new Timestamp( System.currentTimeMillis() ));
          * // @SQL=SELECT SYSDATE AS DefaultValue FROM DUAL }
          */
@@ -65,7 +64,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
                         .getPO(getOpportunityId());
     }
 
-    public void setC_Opportunity(org.compiere.model.I_C_Opportunity opportunity) {
+    public void setOpportunity(org.compiere.model.I_C_Opportunity opportunity) {
         setValue(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, opportunity.getId());
     }
 
@@ -119,7 +118,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
 
     @Override
     public void setSalesRepresentative(I_AD_User salesRepresentative) throws RuntimeException {
-        setSalesRepresentativeId( salesRepresentative == null ? 0 : salesRepresentative.getId() );
+        setSalesRepresentativeId(salesRepresentative == null ? 0 : salesRepresentative.getId());
     }
 
     /**
@@ -136,9 +135,9 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     @Override
     public void setSalesRepresentativeId(int salesRepresentativeId) {
         if (salesRepresentativeId < 1)
-            setValue (COLUMNNAME_SalesRep_ID, null);
+            setValue(COLUMNNAME_SalesRep_ID, null);
         else
-            setValue (COLUMNNAME_SalesRep_ID, salesRepresentativeId);
+            setValue(COLUMNNAME_SalesRep_ID, salesRepresentativeId);
     }
 
     /**

@@ -7,7 +7,6 @@ import org.compiere.model.I_C_Location;
 import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
@@ -70,7 +69,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
     /**
      * Constructor from ResultSet row
      *
-     * @param ctx     context
+     * @param ctx context
      */
     public MBPartnerLocation(Properties ctx, Row row) {
         super(ctx, row);
@@ -259,21 +258,22 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         return charToBoolean(getValue(I_C_BPartner_Location.COLUMNNAME_IsShipTo));
     }
 
-    /** Set Phone.
-     @param Phone
-     Identifies a telephone number
+    /**
+     * Get Phone.
+     *
+     * @return Identifies a telephone number
      */
-    public void setPhone (String Phone)
-    {
-        setValue (I_C_BPartner_Location.COLUMNNAME_Phone, Phone);
+    public String getPhone() {
+        return (String) getValue(I_C_BPartner_Location.COLUMNNAME_Phone);
     }
 
-    /** Get Phone.
-     @return Identifies a telephone number
+    /**
+     * Set Phone.
+     *
+     * @param Phone Identifies a telephone number
      */
-    public String getPhone ()
-    {
-        return (String)getValue(I_C_BPartner_Location.COLUMNNAME_Phone);
+    public void setPhone(String Phone) {
+        setValue(I_C_BPartner_Location.COLUMNNAME_Phone, Phone);
     }
 
 } // MBPartnerLocation

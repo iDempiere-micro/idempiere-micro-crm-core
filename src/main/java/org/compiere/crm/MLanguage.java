@@ -5,7 +5,6 @@ import org.compiere.model.I_AD_Language;
 import org.compiere.orm.Query;
 import org.compiere.util.Msg;
 
-import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -132,7 +131,7 @@ public class MLanguage extends X_AD_Language {
     /**
      * Set AD_Language_ID
      */
-    private void setADLanguage_ID() {
+    private void setADLanguageId() {
         int AD_Language_ID = getLanguageId();
         if (AD_Language_ID == 0) {
             String sql =
@@ -150,7 +149,7 @@ public class MLanguage extends X_AD_Language {
      */
     protected boolean beforeSave(boolean newRecord) {
         String dp = getDatePattern();
-        if (is_ValueChanged("DatePattern") && dp != null && dp.length() > 0) {
+        if (isValueChanged("DatePattern") && dp != null && dp.length() > 0) {
             if (dp.indexOf("MM") == -1) {
                 log.saveError(
                         "Error", Msg.parseTranslation(getCtx(), "@Error@ @DatePattern@ - No Month (MM)"));
@@ -177,7 +176,7 @@ public class MLanguage extends X_AD_Language {
                 return false;
             }
         }
-        if (newRecord) setADLanguage_ID();
+        if (newRecord) setADLanguageId();
         return true;
     } //	beforeSae
 

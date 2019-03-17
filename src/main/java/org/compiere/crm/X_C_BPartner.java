@@ -7,7 +7,6 @@ import org.compiere.orm.BasePONameValue;
 import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
@@ -50,7 +49,7 @@ public class X_C_BPartner extends BasePONameValue {
     public X_C_BPartner(Properties ctx, int C_BPartner_ID) {
         super(ctx, C_BPartner_ID);
         /**
-         * if (C_BPartner_ID == 0) { setBusinessPartnerId (0); setC_BP_Group_ID (0); setIs1099Vendor
+         * if (C_BPartner_ID == 0) { setBusinessPartnerId (0); setBPGroupId (0); setIs1099Vendor
          * (false); // N setIsCustomer (false); setIsEmployee (false); setIsOneTime (false);
          * setIsPOTaxExempt (false); // N setIsProspect (false); // N setIsSalesRep (false);
          * setIsSummary (false); setIsVendor (false); setName (null); setSendEMail (false);
@@ -122,7 +121,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @return The Business Partner is another Organization for explicit Inter-Org transactions
      */
-    public String getAD_OrgBP_ID() {
+    public String getAD_OrgBPId() {
         return (String) getValue(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID);
     }
 
@@ -132,7 +131,7 @@ public class X_C_BPartner extends BasePONameValue {
      * @param AD_OrgBP_ID The Business Partner is another Organization for explicit Inter-Org
      *                    transactions
      */
-    public void setAD_OrgBP_ID(String AD_OrgBP_ID) {
+    public void setAD_OrgBPId(String AD_OrgBP_ID) {
         setValue(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID, AD_OrgBP_ID);
     }
 
@@ -152,7 +151,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @return Business Partner Group
      */
-    public int getC_BP_Group_ID() {
+    public int getBPGroupId() {
         Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
@@ -163,7 +162,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @param C_BP_Group_ID Business Partner Group
      */
-    public void setC_BP_Group_ID(int C_BP_Group_ID) {
+    public void setBPGroupId(int C_BP_Group_ID) {
         if (C_BP_Group_ID < 1) setValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, null);
         else setValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID, C_BP_Group_ID);
     }
@@ -173,7 +172,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @param C_Dunning_ID Dunning Rules for overdue invoices
      */
-    public void setC_Dunning_ID(int C_Dunning_ID) {
+    public void setDunningId(int C_Dunning_ID) {
         if (C_Dunning_ID < 1) setValue(I_C_BPartner.COLUMNNAME_C_Dunning_ID, null);
         else setValue(I_C_BPartner.COLUMNNAME_C_Dunning_ID, C_Dunning_ID);
     }
@@ -184,7 +183,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @return Schedule for generating Invoices
      */
-    public int getC_InvoiceSchedule_ID() {
+    public int getInvoiceScheduleId() {
         Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_InvoiceSchedule_ID);
         if (ii == null) return 0;
         return ii;
@@ -236,6 +235,21 @@ public class X_C_BPartner extends BasePONameValue {
     }
 
     /**
+     * Get Customer.
+     *
+     * @return Indicates if this Business Partner is a Customer
+     */
+    public boolean getIsCustomer() {
+        Object oo = getValue(I_C_BPartner.COLUMNNAME_IsCustomer);
+        if (oo != null) {
+            if (oo instanceof Boolean)
+                return ((Boolean) oo);
+            return "Y".equals(oo);
+        }
+        return false;
+    }
+
+    /**
      * Set Customer.
      *
      * @param IsCustomer Indicates if this Business Partner is a Customer
@@ -243,22 +257,6 @@ public class X_C_BPartner extends BasePONameValue {
     public void setIsCustomer(boolean IsCustomer) {
         setValue(I_C_BPartner.COLUMNNAME_IsCustomer, IsCustomer);
     }
-
-    /** Get Customer.
-     @return Indicates if this Business Partner is a Customer
-     */
-    public boolean getIsCustomer ()
-    {
-        Object oo = getValue(I_C_BPartner.COLUMNNAME_IsCustomer);
-        if (oo != null)
-        {
-            if (oo instanceof Boolean)
-                return ((Boolean)oo);
-            return "Y".equals(oo);
-        }
-        return false;
-    }
-
 
     /**
      * Set Discount Printed.
@@ -346,7 +344,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @param M_DiscountSchema_ID Schema to calculate the trade discount percentage
      */
-    public void setM_DiscountSchema_ID(int M_DiscountSchema_ID) {
+    public void setDiscountSchemaId(int M_DiscountSchema_ID) {
         if (M_DiscountSchema_ID < 1) setValue(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, null);
         else
             setValue(I_C_BPartner.COLUMNNAME_M_DiscountSchema_ID, M_DiscountSchema_ID);
@@ -397,7 +395,7 @@ public class X_C_BPartner extends BasePONameValue {
      *
      * @param PO_DiscountSchema_ID Schema to calculate the purchase trade discount percentage
      */
-    public void setPO_DiscountSchema_ID(int PO_DiscountSchema_ID) {
+    public void setPODiscountSchemaId(int PO_DiscountSchema_ID) {
         if (PO_DiscountSchema_ID < 1) setValue(I_C_BPartner.COLUMNNAME_PO_DiscountSchema_ID, null);
         else
             setValue(
@@ -520,12 +518,13 @@ public class X_C_BPartner extends BasePONameValue {
         setValueNoCheck(I_C_BPartner.COLUMNNAME_SO_CreditUsed, SO_CreditUsed);
     }
 
-    /** Get Tax ID.
-     @return Tax Identification
+    /**
+     * Get Tax ID.
+     *
+     * @return Tax Identification
      */
-    public String getTaxID ()
-    {
-        return (String)getValue(I_C_BPartner.COLUMNNAME_TaxID);
+    public String getTaxID() {
+        return (String) getValue(I_C_BPartner.COLUMNNAME_TaxID);
     }
 
     /**
@@ -562,41 +561,43 @@ public class X_C_BPartner extends BasePONameValue {
         return I_C_BPartner.Table_ID;
     }
 
-    /** Set URL.
-     @param URL
-     Full URL address - e.g. http://www.idempiere.org
+    /**
+     * Get URL.
+     *
+     * @return Full URL address - e.g. http://www.idempiere.org
      */
-    public void setURL (String URL)
-    {
-        setValue (I_C_BPartner.COLUMNNAME_URL, URL);
+    public String getURL() {
+        return (String) getValue(I_C_BPartner.COLUMNNAME_URL);
     }
 
-    /** Get URL.
-     @return Full URL address - e.g. http://www.idempiere.org
+    /**
+     * Set URL.
+     *
+     * @param URL Full URL address - e.g. http://www.idempiere.org
      */
-    public String getURL ()
-    {
-        return (String)getValue(I_C_BPartner.COLUMNNAME_URL);
+    public void setURL(String URL) {
+        setValue(I_C_BPartner.COLUMNNAME_URL, URL);
     }
 
-    /** Set Flat Discount %.
-     @param FlatDiscount
-     Flat discount percentage
+    /**
+     * Get Flat Discount %.
+     *
+     * @return Flat discount percentage
      */
-    public void setFlatDiscount (BigDecimal FlatDiscount)
-    {
-        setValue (I_C_BPartner.COLUMNNAME_FlatDiscount, FlatDiscount);
-    }
-
-    /** Get Flat Discount %.
-     @return Flat discount percentage
-     */
-    public BigDecimal getFlatDiscount ()
-    {
-        BigDecimal bd = (BigDecimal)getValue(I_C_BPartner.COLUMNNAME_FlatDiscount);
+    public BigDecimal getFlatDiscount() {
+        BigDecimal bd = (BigDecimal) getValue(I_C_BPartner.COLUMNNAME_FlatDiscount);
         if (bd == null)
             return Env.ZERO;
         return bd;
+    }
+
+    /**
+     * Set Flat Discount %.
+     *
+     * @param FlatDiscount Flat discount percentage
+     */
+    public void setFlatDiscount(BigDecimal FlatDiscount) {
+        setValue(I_C_BPartner.COLUMNNAME_FlatDiscount, FlatDiscount);
     }
 
 

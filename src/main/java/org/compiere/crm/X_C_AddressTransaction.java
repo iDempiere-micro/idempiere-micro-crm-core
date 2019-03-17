@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_AddressTransaction;
 import org.compiere.orm.PO;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -26,7 +25,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     public X_C_AddressTransaction(Properties ctx, int C_AddressTransaction_ID) {
         super(ctx, C_AddressTransaction_ID);
         /**
-         * if (C_AddressTransaction_ID == 0) { setC_AddressTransaction_ID (0); setC_AddressValidation_ID
+         * if (C_AddressTransaction_ID == 0) { setAddressTransaction_ID (0); setAddressValidationId
          * (0); setIsValid (false); // N setProcessed (false); // N }
          */
     }
@@ -101,7 +100,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      *
      * @param C_AddressValidation_ID Address Validation
      */
-    public void setC_AddressValidation_ID(int C_AddressValidation_ID) {
+    public void setAddressValidationId(int C_AddressValidation_ID) {
         if (C_AddressValidation_ID < 1) setValueNoCheck(COLUMNNAME_C_AddressValidation_ID, null);
         else setValueNoCheck(COLUMNNAME_C_AddressValidation_ID, C_AddressValidation_ID);
     }

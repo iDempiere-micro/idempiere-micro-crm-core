@@ -6,7 +6,6 @@ import org.compiere.orm.BasePOName;
 import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -36,7 +35,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
     public X_C_BP_Group(Properties ctx, int C_BP_Group_ID) {
         super(ctx, C_BP_Group_ID);
         /**
-         * if (C_BP_Group_ID == 0) { setC_BP_Group_ID (0); setIsConfidentialInfo (false); // N
+         * if (C_BP_Group_ID == 0) { setBPGroupId (0); setIsConfidentialInfo (false); // N
          * setIsDefault (false); setName (null); setValue (null); }
          */
     }
@@ -66,7 +65,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      *
      * @return Business Partner Group
      */
-    public int getC_BP_Group_ID() {
+    public int getBPGroupId() {
         Integer ii = (Integer) getValue(COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
@@ -77,7 +76,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      *
      * @return Dunning Rules for overdue invoices
      */
-    public int getC_Dunning_ID() {
+    public int getDunningId() {
         Integer ii = (Integer) getValue(COLUMNNAME_C_Dunning_ID);
         if (ii == null) return 0;
         return ii;
@@ -117,7 +116,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      *
      * @return Schema to calculate the trade discount percentage
      */
-    public int getM_DiscountSchema_ID() {
+    public int getDiscountSchemaId() {
         Integer ii = (Integer) getValue(COLUMNNAME_M_DiscountSchema_ID);
         if (ii == null) return 0;
         return ii;
@@ -139,7 +138,7 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      *
      * @return Schema to calculate the purchase trade discount percentage
      */
-    public int getPO_DiscountSchema_ID() {
+    public int getPODiscountSchemaId() {
         Integer ii = (Integer) getValue(COLUMNNAME_PO_DiscountSchema_ID);
         if (ii == null) return 0;
         return ii;

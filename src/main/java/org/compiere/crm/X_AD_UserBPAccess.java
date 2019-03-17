@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_AD_UserBPAccess;
 import org.compiere.orm.BasePOUser;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**

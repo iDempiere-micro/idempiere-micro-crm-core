@@ -6,7 +6,6 @@ import org.idempiere.common.util.CCache;
 import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -47,7 +46,7 @@ public class MBPGroup extends X_C_BP_Group {
     /**
      * Load Constructor
      *
-     * @param ctx     context
+     * @param ctx context
      */
     public MBPGroup(Properties ctx, Row row) {
         super(ctx, row);

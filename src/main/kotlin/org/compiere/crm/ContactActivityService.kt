@@ -61,7 +61,7 @@ class ContactActivityService(
     ): I_C_ContactActivity {
         val activity = X_C_ContactActivity(environmentService.context, 0)
         with(activity) {
-            setC_Opportunity(opportunity)
+            setOpportunity(opportunity)
             this.startDate = startDate
             this.description = description
             this.contactActivityType = contactActivityType

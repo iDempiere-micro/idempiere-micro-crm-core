@@ -3,7 +3,6 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.idempiere.common.util.CLogger;
 
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -52,7 +51,7 @@ public class MContactInterest extends X_R_ContactInterest {
     public MContactInterest(
             Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive) {
         super(ctx, 0);
-        setR_InterestArea_ID(R_InterestArea_ID);
+        setInterestAreaId(R_InterestArea_ID);
         setUserId(AD_User_ID);
         setIsActive(isActive);
     } //	MContactInterest
@@ -111,7 +110,7 @@ public class MContactInterest extends X_R_ContactInterest {
         StringBuilder sb =
                 new StringBuilder("MContactInterest[")
                         .append("R_InterestArea_ID=")
-                        .append(getR_InterestArea_ID())
+                        .append(getInterestAreaId())
                         .append(",AD_User_ID=")
                         .append(getUserId())
                         .append(",Subscribed=")

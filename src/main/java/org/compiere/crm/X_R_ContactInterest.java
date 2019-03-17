@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_R_ContactInterest;
 import org.compiere.orm.BasePOUser;
 
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
@@ -76,7 +75,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
      *
      * @return Interest Area or Topic
      */
-    public int getR_InterestArea_ID() {
+    public int getInterestAreaId() {
         Integer ii = (Integer) getValue(COLUMNNAME_R_InterestArea_ID);
         if (ii == null) return 0;
         return ii;
@@ -87,7 +86,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
      *
      * @param R_InterestArea_ID Interest Area or Topic
      */
-    public void setR_InterestArea_ID(int R_InterestArea_ID) {
+    public void setInterestAreaId(int R_InterestArea_ID) {
         if (R_InterestArea_ID < 1) setValueNoCheck(COLUMNNAME_R_InterestArea_ID, null);
         else setValueNoCheck(COLUMNNAME_R_InterestArea_ID, R_InterestArea_ID);
     }

@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.idempiere.common.util.CCache;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +41,7 @@ public class MRegion extends MBaseRegion implements Comparator<Object>, Serializ
     /**
      * Create Region from current row in ResultSet
      *
-     * @param ctx     context
+     * @param ctx context
      */
     public MRegion(Properties ctx, Row row) {
         super(ctx, row);

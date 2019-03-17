@@ -5,7 +5,6 @@ import kotliquery.queryOf
 import org.compiere.model.I_C_Region
 import org.idempiere.common.util.CCache
 import software.hsharp.core.util.DB
-import java.sql.ResultSet
 import java.util.Properties
 
 internal val regionsCache = CCache<String, MRegion>(I_C_Region.Table_Name, 100)

@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_AD_User;
 import org.compiere.orm.BasePONameValue;
 
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
@@ -293,20 +292,21 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
     }
 
     /**
+     * Get Phone.
+     *
+     * @return Identifies a telephone number
+     */
+    public String getPhone() {
+        return (String) getValue(COLUMNNAME_Phone);
+    }
+
+    /**
      * Set Phone.
      *
      * @param Phone Identifies a telephone number
      */
     public void setPhone(String Phone) {
         setValue(COLUMNNAME_Phone, Phone);
-    }
-
-    /** Get Phone.
-     @return Identifies a telephone number
-     */
-    public String getPhone ()
-    {
-        return (String)getValue(COLUMNNAME_Phone);
     }
 
     /**
@@ -332,7 +332,7 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
      *
      * @return Supervisor for this user/organization - used for escalation and approval
      */
-    public int getSupervisor_ID() {
+    public int getSupervisorId() {
         Integer ii = (Integer) getValue(COLUMNNAME_Supervisor_ID);
         if (ii == null) return 0;
         return ii;

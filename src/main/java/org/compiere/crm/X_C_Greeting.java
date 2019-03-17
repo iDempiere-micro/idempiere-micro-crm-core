@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Greeting;
 import org.compiere.orm.BasePOName;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -26,7 +25,7 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting {
     public X_C_Greeting(Properties ctx, int C_Greeting_ID) {
         super(ctx, C_Greeting_ID);
         /**
-         * if (C_Greeting_ID == 0) { setC_Greeting_ID (0); setIsDefault (false); setIsFirstNameOnly
+         * if (C_Greeting_ID == 0) { setGreeting_ID (0); setIsDefault (false); setIsFirstNameOnly
          * (false); setName (null); }
          */
     }

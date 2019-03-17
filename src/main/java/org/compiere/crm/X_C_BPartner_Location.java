@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.orm.BasePOName;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 import static org.compiere.model.I_C_BPartner_Location.COLUMNNAME_IsPreserveCustomName;

@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_CountryGroup;
 import org.compiere.orm.BasePONameValue;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -52,7 +51,7 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
      *
      * @return Country Group
      */
-    public int getC_CountryGroup_ID() {
+    public int getCountryGroupId() {
         Integer ii = (Integer) getValue(COLUMNNAME_C_CountryGroup_ID);
         if (ii == null) return 0;
         return ii;

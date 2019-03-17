@@ -8,7 +8,6 @@ import software.hsharp.core.orm.I_ZERO
 import software.hsharp.core.util.DB
 import software.hsharp.core.util.queryOf
 import java.math.BigDecimal
-import java.sql.ResultSet
 import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner {
@@ -97,10 +96,10 @@ open class MBaseBPartner : X_C_BPartner {
      */
     fun getBPGroup(): MBPGroup? {
         if (m_group == null) {
-            if (c_BP_Group_ID == 0)
+            if (bpGroupId == 0)
                 m_group = MBPGroup.getDefault(ctx)
             else
-                m_group = MBPGroup.get(ctx, c_BP_Group_ID)
+                m_group = MBPGroup.get(ctx, bpGroupId)
         }
         return m_group
     } // 	getBPGroup
@@ -113,14 +112,14 @@ open class MBaseBPartner : X_C_BPartner {
     fun setBPGroup(group: MBPGroup?) {
         m_group = group
         if (group == null) return
-        c_BP_Group_ID = group.getC_BP_Group_ID()
-        if (group.c_Dunning_ID != 0) setC_Dunning_ID(group.c_Dunning_ID)
+        bpGroupId = group.bpGroupId
+        if (group.dunningId != 0) setDunningId(group.dunningId)
         if (group.priceListId != 0) priceListId = group.priceListId
         if (group.purchaseOrderPriceListId != 0) purchaseOrderPriceListId = group.purchaseOrderPriceListId
-        if (group.m_DiscountSchema_ID != 0)
-            setM_DiscountSchema_ID(group.m_DiscountSchema_ID)
-        if (group.getPO_DiscountSchema_ID() != 0)
-            setPO_DiscountSchema_ID(group.pO_DiscountSchema_ID)
+        if (group.discountSchemaId != 0)
+            setDiscountSchemaId(group.discountSchemaId)
+        if (group.poDiscountSchemaId != 0)
+            setPODiscountSchemaId(group.poDiscountSchemaId)
     } // 	setBPGroup
 
     /**

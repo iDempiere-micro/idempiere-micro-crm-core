@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.PO;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -115,7 +114,7 @@ public class X_C_Location extends PO {
      *
      * @return City
      */
-    public int getC_City_ID() {
+    public int getCityId() {
         Integer ii = (Integer) getValue(I_C_Location.COLUMNNAME_C_City_ID);
         if (ii == null) return 0;
         return ii;
@@ -126,7 +125,7 @@ public class X_C_Location extends PO {
      *
      * @param C_City_ID City
      */
-    public void setC_City_ID(int C_City_ID) {
+    public void setCityId(int C_City_ID) {
         if (C_City_ID < 1) setValue(I_C_Location.COLUMNNAME_C_City_ID, null);
         else setValue(I_C_Location.COLUMNNAME_C_City_ID, Integer.valueOf(C_City_ID));
     }

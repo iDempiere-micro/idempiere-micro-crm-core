@@ -9,11 +9,10 @@ import org.compiere.orm.MTable
 import org.idempiere.common.util.Env
 import org.idempiere.common.util.KeyNamePair
 import java.math.BigDecimal
-import java.sql.ResultSet
 import java.sql.Timestamp
 import java.util.Properties
 
-open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
+open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
     override var expectedCloseDate: Timestamp
         get() = getValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate) as Timestamp
         set(value) { setValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate, value) }
@@ -46,7 +45,7 @@ open class X_C_Opportunity : BasePOUser, I_C_Opportunity {
     }
 
     override fun toString(): String {
-        val sb = StringBuffer("X_C_Opportunity[")
+        val sb = StringBuffer("MBaseOpportunity[")
             .append(id).append("]")
         return sb.toString()
     }

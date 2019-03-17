@@ -1,10 +1,9 @@
 package org.compiere.bo
 
 import kotliquery.Row
-import java.sql.ResultSet
 import java.util.Properties
 
-class MOpportunity : X_C_Opportunity {
+class MOpportunity : MBaseOpportunity {
 
     constructor(ctx: Properties, C_Opportunity_ID: Int) : super(ctx, C_Opportunity_ID)
     constructor (ctx: Properties, row: Row) : super(ctx, row)

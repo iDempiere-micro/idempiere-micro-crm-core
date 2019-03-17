@@ -6,7 +6,6 @@ import org.compiere.model.HasName2;
 import org.compiere.model.I_I_BPartner;
 import org.compiere.orm.BasePOUser;
 
-import java.sql.ResultSet;
 import java.util.Properties;
 
 /**
@@ -54,7 +53,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      *
      * @return Business Partner Group
      */
-    public int getC_BP_Group_ID() {
+    public int getBPGroupId() {
         Integer ii = (Integer) getValue(COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
