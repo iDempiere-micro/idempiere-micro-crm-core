@@ -21,11 +21,6 @@ public class MCurrency extends X_C_Currency {
      */
     private static CCache<Integer, MCurrency> s_currencies =
             new CCache<Integer, MCurrency>(I_C_Currency.Table_Name, 50);
-    /**
-     * Cache System Currencies by using ISO code as key *
-     */
-    private static CCache<String, MCurrency> s_currenciesISO =
-            new CCache<String, MCurrency>(I_C_Currency.Table_Name, "C_CurrencyISO", 50);
 
     /**
      * Currency Constructor

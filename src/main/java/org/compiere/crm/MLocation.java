@@ -40,10 +40,6 @@ public class MLocation extends MBaseLocation implements I_C_Location, Comparator
 
     private MCountry m_c = null;
     private MRegion m_r = null;
-    /**
-     * Error Message
-     */
-    private String m_errorMessage = null;
 
     /**
      * ************************************************************************ Standard Constructor

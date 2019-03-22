@@ -21,10 +21,6 @@ public class MContactInterest extends X_R_ContactInterest {
      *
      */
     private static final long serialVersionUID = -4720845687902863428L;
-    /**
-     * Static Logger
-     */
-    private static CLogger s_log = CLogger.getCLogger(MContactInterest.class);
 
     /**
      * ************************************************************************ Persistency

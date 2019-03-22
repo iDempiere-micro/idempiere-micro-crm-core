@@ -31,11 +31,6 @@ public class MCountryGroup extends X_C_CountryGroup {
      */
     private static final long serialVersionUID = 4986629677773273899L;
     /**
-     * Cache
-     */
-    private static CCache<Integer, MCountryGroup> s_cache =
-            new CCache<Integer, MCountryGroup>(I_C_CountryGroup.Table_Name, 5);
-    /**
      * Static Logger
      */
     @SuppressWarnings("unused")

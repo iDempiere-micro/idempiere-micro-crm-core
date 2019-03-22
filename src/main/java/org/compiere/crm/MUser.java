@@ -49,10 +49,6 @@ public class MUser extends MBaseUser implements IUser {
     private static CCache<Integer, MUser> s_cache =
             new CCache<Integer, MUser>(I_AD_User.Table_Name, 30, 60);
     /**
-     * Static Logger
-     */
-    private static CLogger s_log = CLogger.getCLogger(MUser.class);
-    /**
      * Is Administrator
      */
     private Boolean m_isAdministrator = null;
@@ -150,7 +146,7 @@ public class MUser extends MBaseUser implements IUser {
         if (retValue == null) {
             retValue = new MUser(ctx, AD_User_ID);
             if (AD_User_ID == 0) {
-                String trxName = null;
+
                 retValue.load(); // 	load System Record
             }
             s_cache.put(key, retValue);
@@ -344,44 +340,6 @@ public class MUser extends MBaseUser implements IUser {
         }
         return null;
     } //	getInternetAddress
-
-    /**
-     * Validate Email (does not work). Check DNS MX record
-     *
-     * @param ia email
-     * @return error message or ""
-     */
-    private String validateEmail(InternetAddress ia) {
-        if (ia == null) return "NoEmail";
-        else return ia.getAddress();
-    /*
-                   if (true)
-    		return null;
-
-    	Hashtable<String,String> env = new Hashtable<String,String>();
-    	env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.dns.DnsContextFactory");
-    //	env.put(Context.PROVIDER_URL, "dns://admin.adempiere.org");
-    	try
-    	{
-    		DirContext ctx = new InitialDirContext(env);
-    	//	Attributes atts = ctx.getAttributes("admin");
-    		Attributes atts = ctx.getAttributes("dns://admin.adempiere.org", new String[] {"MX"});
-    		NamingEnumeration en = atts.getAll();
-    //		NamingEnumeration en = ctx.list("adempiere.org");
-    		while (en.hasMore())
-    		{
-    			System.out.println(en.next());
-    		}
-
-    	}
-    	catch (Exception e)
-    	{
-    		e.printStackTrace();
-    		return e.getLocalizedMessage();
-    	}
-    	return null;
-                   */
-    } //	validateEmail
 
     /**
      * Get EMail Validation Code
