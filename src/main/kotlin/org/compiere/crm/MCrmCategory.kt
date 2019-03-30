@@ -1,7 +1,7 @@
 package org.compiere.crm
 
 import kotliquery.Row
-import org.compiere.model.CrmCategory
+import software.hsharp.models.CrmCategory
 import org.compiere.orm.BasePONameValue
 import java.util.Properties
 

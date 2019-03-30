@@ -55,6 +55,10 @@ class CategoryTest : BaseCrmTest() {
 
             val bpInCat: MCrmCustomerCategory = getById(bpartnerInCategory.id, MCrmCustomerCategory.Table_Name)
             assertNotNull(bpInCat)
+
+            val bpWithCategories: MBPartner = getById(newPartner.id, MBPartner.Table_Name)
+            assertNotNull(bpWithCategories)
+            assertEquals(1, bpWithCategories.categories.size)
         }
     }
 }

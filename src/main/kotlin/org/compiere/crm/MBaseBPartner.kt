@@ -6,11 +6,14 @@ import org.compiere.model.I_C_BPartner_Location
 import org.idempiere.common.util.Env
 import software.hsharp.core.orm.I_ZERO
 import software.hsharp.core.util.DB
+import software.hsharp.core.util.asResource
 import software.hsharp.core.util.queryOf
+import software.hsharp.models.CrmCategory
+import software.hsharp.models.IHasCategories
 import java.math.BigDecimal
 import java.util.Properties
 
-open class MBaseBPartner : X_C_BPartner {
+open class MBaseBPartner : X_C_BPartner, IHasCategories {
     constructor(ctx: Properties, row: Row) : super(ctx, row)
     constructor(ctx: Properties, id: Int) : super(ctx, id)
 
@@ -170,8 +173,7 @@ open class MBaseBPartner : X_C_BPartner {
         """.trimIndent()
         val loadQuery =
             queryOf(sql, listOf(businessPartnerId)).map { row -> Pair(row.bigDecimal(1), row.bigDecimal(2)) }.asSingle
-        val result = DB.current.run(loadQuery)
-        if (result == null) return
+        val result = DB.current.run(loadQuery) ?: return
         val (SO_CreditUsed, TotalOpenBalance) = result
         super.setSalesOrderCreditUsed(SO_CreditUsed)
         super.setTotalOpenBalance(TotalOpenBalance)
@@ -190,4 +192,13 @@ open class MBaseBPartner : X_C_BPartner {
         val result = DB.current.run(loadQuery)
         if (result != null) super.setActualLifeTimeValue(result)
     }
+
+    override val categories: List<CrmCategory>
+        get() {
+            return "/sql/getBusinessPartnerCategories.sql".asResource { sql ->
+                val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> MCrmCategory(ctx, row) }.asList
+                DB.current.run(loadQuery)
+            }
+        }
+
 }

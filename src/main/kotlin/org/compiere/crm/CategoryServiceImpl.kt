@@ -1,6 +1,6 @@
 package org.compiere.crm
 
-import org.compiere.model.CrmCategory
+import software.hsharp.models.CrmCategory
 import software.hsharp.core.models.EnvironmentService
 import software.hsharp.core.orm.BaseDataServiceImpl
 import software.hsharp.services.CategoryService

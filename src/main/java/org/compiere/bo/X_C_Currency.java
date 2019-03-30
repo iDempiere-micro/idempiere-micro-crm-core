@@ -1,5 +1,6 @@
 package org.compiere.bo;
 
+import kotliquery.Row;
 import org.compiere.model.I_C_Currency;
 import org.compiere.orm.PO;
 
@@ -23,11 +24,9 @@ public class X_C_Currency extends PO implements I_C_Currency {
      */
     public X_C_Currency(Properties ctx, int C_Currency_ID) {
         super(ctx, C_Currency_ID);
-        /**
-         * if (C_Currency_ID == 0) { setCurrencyId (0); setCostingPrecision (0); // 4 setDescription
-         * (null); setIsEMUMember (false); // N setIsEuro (false); // N setISOCode (null);
-         * setRoundOffFactor (Env.ZERO); // 1 setStdPrecision (0); // 2 }
-         */
+    }
+    public X_C_Currency(Properties ctx, Row row) {
+        super(ctx, row);
     }
 
     /**
@@ -40,8 +39,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
     }
 
     public String toString() {
-        StringBuffer sb = new StringBuffer("X_C_Currency[").append(getId()).append("]");
-        return sb.toString();
+        return "X_C_Currency[" + getId() + "]";
     }
 
     /**
@@ -72,7 +70,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @param CostingPrecision Rounding used costing calculations
      */
     public void setCostingPrecision(int CostingPrecision) {
-        setValue(COLUMNNAME_CostingPrecision, Integer.valueOf(CostingPrecision));
+        setValue(COLUMNNAME_CostingPrecision, CostingPrecision);
     }
 
     /**
@@ -80,7 +78,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      *
      * @return Symbol of the currency (opt used for printing only)
      */
-    public String getCurSymbol() {
+    public String getCurrencySymbol() {
         return (String) getValue(COLUMNNAME_CurSymbol);
     }
 
@@ -89,7 +87,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      *
      * @param CurSymbol Symbol of the currency (opt used for printing only)
      */
-    public void setCurSymbol(String CurSymbol) {
+    public void setCurrencySymbol(String CurSymbol) {
         setValue(COLUMNNAME_CurSymbol, CurSymbol);
     }
 
@@ -117,7 +115,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @param IsEMUMember This currency is member if the European Monetary Union
      */
     public void setIsEMUMember(boolean IsEMUMember) {
-        setValue(COLUMNNAME_IsEMUMember, Boolean.valueOf(IsEMUMember));
+        setValue(COLUMNNAME_IsEMUMember, IsEMUMember);
     }
 
     /**
@@ -126,7 +124,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @param IsEuro This currency is the Euro
      */
     public void setIsEuro(boolean IsEuro) {
-        setValue(COLUMNNAME_IsEuro, Boolean.valueOf(IsEuro));
+        setValue(COLUMNNAME_IsEuro, IsEuro);
     }
 
     /**
@@ -164,7 +162,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @param StdPrecision Rule for rounding calculated amounts
      */
     public void setStdPrecision(int StdPrecision) {
-        setValue(COLUMNNAME_StdPrecision, Integer.valueOf(StdPrecision));
+        setValue(COLUMNNAME_StdPrecision, StdPrecision);
     }
 
     @Override
