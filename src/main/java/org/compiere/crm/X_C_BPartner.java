@@ -8,7 +8,6 @@ import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Properties;
 
 /**
  * Generated Model for C_BPartner
@@ -16,7 +15,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_BPartner extends BasePONameValue {
+public class X_C_BPartner extends BasePONameValue implements HasName2 {
 
     /**
      * Credit Stop = S
@@ -46,22 +45,15 @@ public class X_C_BPartner extends BasePONameValue {
     /**
      * Standard Constructor
      */
-    public X_C_BPartner(Properties ctx, int C_BPartner_ID) {
-        super(ctx, C_BPartner_ID);
-        /**
-         * if (C_BPartner_ID == 0) { setBusinessPartnerId (0); setBPGroupId (0); setIs1099Vendor
-         * (false); // N setIsCustomer (false); setIsEmployee (false); setIsOneTime (false);
-         * setIsPOTaxExempt (false); // N setIsProspect (false); // N setIsSalesRep (false);
-         * setIsSummary (false); setIsVendor (false); setName (null); setSendEMail (false);
-         * setSalesOrderCreditLimit (Env.ZERO); setSalesOrderCreditUsed (Env.ZERO); setValue (null); }
-         */
+    public X_C_BPartner(int C_BPartner_ID) {
+        super(C_BPartner_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_BPartner(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_BPartner(Row row) {
+        super(row);
     }
 
     /**
@@ -382,12 +374,19 @@ public class X_C_BPartner extends BasePONameValue {
     }
 
     /**
+     * Get Name 2.
+     */
+    public String getName2() {
+        return (String) getValue(HasName2.COLUMNNAME_Name2);
+    }
+
+    /**
      * Set Name 2.
      *
      * @param Name2 Additional Name
      */
     public void setName2(String Name2) {
-        setValue(HasName2.Companion.getCOLUMNNAME_Name2(), Name2);
+        setValue(HasName2.COLUMNNAME_Name2, Name2);
     }
 
     /**

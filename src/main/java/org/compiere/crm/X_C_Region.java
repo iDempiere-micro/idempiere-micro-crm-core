@@ -4,7 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Region;
 import org.compiere.orm.BasePOName;
 
-import java.util.Properties;
 
 /**
  * Generated Model for C_Region
@@ -22,15 +21,15 @@ public class X_C_Region extends BasePOName implements I_C_Region {
     /**
      * Standard Constructor
      */
-    public X_C_Region(Properties ctx, int C_Region_ID) {
-        super(ctx, C_Region_ID);
+    public X_C_Region(int C_Region_ID) {
+        super(C_Region_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_Region(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_Region(Row row) {
+        super(row);
     }
 
     /**

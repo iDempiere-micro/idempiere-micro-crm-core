@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Currency;
 import org.compiere.orm.PO;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_Currency
  *
@@ -22,11 +20,12 @@ public class X_C_Currency extends PO implements I_C_Currency {
     /**
      * Standard Constructor
      */
-    public X_C_Currency(Properties ctx, int C_Currency_ID) {
-        super(ctx, C_Currency_ID);
+    public X_C_Currency(int C_Currency_ID) {
+        super(C_Currency_ID);
     }
-    public X_C_Currency(Properties ctx, Row row) {
-        super(ctx, row);
+
+    public X_C_Currency(Row row) {
+        super(row);
     }
 
     /**

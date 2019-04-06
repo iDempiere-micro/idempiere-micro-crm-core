@@ -6,8 +6,6 @@ import org.compiere.model.HasName2;
 import org.compiere.model.I_I_BPartner;
 import org.compiere.orm.BasePOUser;
 
-import java.util.Properties;
-
 /**
  * Generated Model for I_BPartner
  *
@@ -24,15 +22,15 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
     /**
      * Standard Constructor
      */
-    public X_I_BPartner(Properties ctx, int I_BPartner_ID) {
-        super(ctx, I_BPartner_ID);
+    public X_I_BPartner(int I_BPartner_ID) {
+        super(I_BPartner_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_I_BPartner(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_I_BPartner(Row row) {
+        super(row);
     }
 
     /**
@@ -110,7 +108,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Alphanumeric identifier of the entity
      */
     public String getName() {
-        return (String) getValue(HasName.Companion.getCOLUMNNAME_Name());
+        return (String) getValue(HasName.COLUMNNAME_Name);
     }
 
     /**
@@ -119,7 +117,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Additional Name
      */
     public String getName2() {
-        return (String) getValue(HasName2.Companion.getCOLUMNNAME_Name2());
+        return (String) getValue(HasName2.COLUMNNAME_Name2);
     }
 
     /**

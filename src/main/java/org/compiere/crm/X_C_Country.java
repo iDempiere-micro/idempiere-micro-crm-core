@@ -4,15 +4,13 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Country;
 import org.compiere.orm.BasePOName;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_Country
  *
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_Country extends BasePOName implements I_C_Country {
+public abstract class X_C_Country extends BasePOName implements I_C_Country {
 
     /**
      *
@@ -22,20 +20,15 @@ public class X_C_Country extends BasePOName implements I_C_Country {
     /**
      * Standard Constructor
      */
-    public X_C_Country(Properties ctx, int C_Country_ID) {
-        super(ctx, C_Country_ID);
-        /**
-         * if (C_Country_ID == 0) { setCountryId (0); setCountryCode (null); setDisplaySequence
-         * (null); // @C@, @R@ @P@ setAdditionalPostalCode (false); setHasRegion (false);
-         * setIsAddressLinesLocalReverse (false); setIsAddressLinesReverse (false); setName (null); }
-         */
+    public X_C_Country(int C_Country_ID) {
+        super(C_Country_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_Country(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_Country(Row row) {
+        super(row);
     }
 
     /**

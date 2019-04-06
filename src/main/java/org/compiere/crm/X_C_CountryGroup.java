@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_CountryGroup;
 import org.compiere.orm.BasePONameValue;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_CountryGroup
  *
@@ -22,15 +20,15 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
     /**
      * Standard Constructor
      */
-    public X_C_CountryGroup(Properties ctx, int C_CountryGroup_ID) {
-        super(ctx, C_CountryGroup_ID);
+    public X_C_CountryGroup(int C_CountryGroup_ID) {
+        super(C_CountryGroup_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_CountryGroup(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_CountryGroup(Row row) {
+        super(row);
     }
 
     /**

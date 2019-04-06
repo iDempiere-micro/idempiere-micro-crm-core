@@ -6,7 +6,6 @@ import org.compiere.orm.BasePONameValue;
 import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;
-import java.util.Properties;
 
 /**
  * Generated Model for C_SalesStage
@@ -24,15 +23,15 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage {
     /**
      * Standard Constructor
      */
-    public X_C_SalesStage(Properties ctx, int C_SalesStage_ID) {
-        super(ctx, C_SalesStage_ID);
+    public X_C_SalesStage(int C_SalesStage_ID) {
+        super(C_SalesStage_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_SalesStage(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_SalesStage(Row row) {
+        super(row);
     }
 
     /**

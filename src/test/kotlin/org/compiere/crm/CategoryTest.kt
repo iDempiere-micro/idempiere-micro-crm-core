@@ -1,8 +1,8 @@
 package org.compiere.crm
 
-import org.idempiere.common.util.Env
 import org.junit.Test
 import software.hsharp.core.util.DB
+import software.hsharp.core.util.Environment
 import software.hsharp.core.util.HikariCPI
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -15,50 +15,53 @@ class CategoryTest : BaseCrmTest() {
 
     @Test
     fun `create crm category in a service`() {
-        DB.run {
-            val name = "Test-${randomString(10)}"
-            val searchKey = randomString(10)
-            val result = categoryService.createCategory(name = name, searchKey = searchKey)
-            assertEquals(name, result.name)
-            assertEquals(searchKey, result.searchKey)
+        Environment.run(baseModule) {
+            DB.run {
+                val name = "Test-${randomString(10)}"
+                val searchKey = randomString(10)
+                val result = categoryService.createCategory(name = name, searchKey = searchKey)
+                assertEquals(name, result.name)
+                assertEquals(searchKey, result.searchKey)
+            }
         }
     }
 
     @Test
     fun `create crm category, business partner and assign them`() {
-        DB.run {
-            val ctx = Env.getCtx()
-            val category = MCrmCategory(ctx, 0)
-            val catName = "Test-${randomString(10)}"
-            category.name = catName
-            category.searchKey = catName
-            category.save()
-            val cat: MCrmCategory = getById(category.id, MCrmCategory.Table_Name)
-            assertNotNull(cat)
+        Environment.run(baseModule) {
+            DB.run {
+                val category = MCrmCategory(0)
+                val catName = "Test-${randomString(10)}"
+                category.name = catName
+                category.searchKey = catName
+                category.save()
+                val cat: MCrmCategory = getById(category.id, MCrmCategory.Table_Name)
+                assertNotNull(cat)
 
-            val newPartner = MBPartner.getTemplate(ctx, 11)
-            val name = "Test " + randomString(10)
-            newPartner.name = name
-            val value = "t-" + randomString(5)
-            newPartner.searchKey = value
-            newPartner.save()
+                val newPartner = MBPartner.getTemplate(11)
+                val name = "Test " + randomString(10)
+                newPartner.name = name
+                val value = "t-" + randomString(5)
+                newPartner.searchKey = value
+                newPartner.save()
 
-            val bp: MBPartner = getById(newPartner.id, MBPartner.Table_Name)
-            assertNotNull(bp)
+                val bp: MBPartner = getById(newPartner.id, MBPartner.Table_Name)
+                assertNotNull(bp)
 
-            val bpartnerInCategory = MCrmCustomerCategory(ctx, 0)
-            bpartnerInCategory.bPartner = newPartner
-            bpartnerInCategory.name = randomString(10)
-            bpartnerInCategory.category = cat
+                val bpartnerInCategory = MCrmCustomerCategory(0)
+                bpartnerInCategory.bPartner = newPartner
+                bpartnerInCategory.name = randomString(10)
+                bpartnerInCategory.category = cat
 
-            bpartnerInCategory.save()
+                bpartnerInCategory.save()
 
-            val bpInCat: MCrmCustomerCategory = getById(bpartnerInCategory.id, MCrmCustomerCategory.Table_Name)
-            assertNotNull(bpInCat)
+                val bpInCat: MCrmCustomerCategory = getById(bpartnerInCategory.id, MCrmCustomerCategory.Table_Name)
+                assertNotNull(bpInCat)
 
-            val bpWithCategories: MBPartner = getById(newPartner.id, MBPartner.Table_Name)
-            assertNotNull(bpWithCategories)
-            assertEquals(1, bpWithCategories.categories.size)
+                val bpWithCategories: MBPartner = getById(newPartner.id, MBPartner.Table_Name)
+                assertNotNull(bpWithCategories)
+                assertEquals(1, bpWithCategories.categories.size)
+            }
         }
     }
 }

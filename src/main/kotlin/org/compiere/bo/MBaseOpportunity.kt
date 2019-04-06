@@ -10,7 +10,6 @@ import org.idempiere.common.util.Env
 import org.idempiere.common.util.KeyNamePair
 import java.math.BigDecimal
 import java.sql.Timestamp
-import java.util.Properties
 
 /**
  * Base functionality for the Business Opportunity
@@ -20,10 +19,10 @@ open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
         get() = getValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate) as Timestamp
         set(value) { setValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate, value) }
     override var currency: I_C_Currency?
-        get() = MCurrency(ctx, getCurrencyId())
+        get() = MCurrency(getCurrencyId())
         set(value) { setCurrencyId(value?.id ?: 0) }
     override var salesStage: I_C_SalesStage?
-        get() = X_C_SalesStage(ctx, salesStageId)
+        get() = X_C_SalesStage(salesStageId)
         set(value) { salesStageId = value?.id ?: 0 }
     override var probability: BigDecimal
         get() = getValue(I_C_Opportunity.COLUMNNAME_Probability) as BigDecimal? ?: Env.ZERO
@@ -37,8 +36,8 @@ open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
     override val tableId: Int
         get() = I_C_Opportunity.Table_ID
 
-    constructor(ctx: Properties, C_Opportunity_ID: Int) : super(ctx, C_Opportunity_ID)
-    constructor (ctx: Properties, row: Row) : super(ctx, row)
+    constructor(C_Opportunity_ID: Int) : super(C_Opportunity_ID)
+    constructor (row: Row) : super(row)
 
     /** AccessLevel
      * @return 3 - Client - Org
@@ -55,7 +54,7 @@ open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
 
     @Throws(RuntimeException::class)
     override fun getBusinessPartner(): org.compiere.model.I_C_BPartner {
-        return MTable.get(ctx, org.compiere.model.I_C_BPartner.Table_Name)
+        return MTable.get(org.compiere.model.I_C_BPartner.Table_Name)
             .getPO(businessPartnerId) as org.compiere.model.I_C_BPartner
     }
 
@@ -77,7 +76,7 @@ open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
     @Throws(RuntimeException::class)
     override fun getOrder(): org.compiere.model.I_C_Order? {
         if (orderId == 0) return null
-        return MTable.get(ctx, org.compiere.model.I_C_Order.Table_Name)
+        return MTable.get(org.compiere.model.I_C_Order.Table_Name)
             .getPO(orderId) as org.compiere.model.I_C_Order
     }
 

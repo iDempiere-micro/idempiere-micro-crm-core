@@ -5,7 +5,6 @@ import org.compiere.model.I_AD_User;
 import org.compiere.orm.BasePONameValue;
 
 import java.sql.Timestamp;
-import java.util.Properties;
 
 /**
  * Generated Model for AD_User
@@ -39,8 +38,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
     /**
      * Standard Constructor
      */
-    public X_AD_User(Properties ctx, int AD_User_ID) {
-        super(ctx, AD_User_ID);
+    public X_AD_User(int AD_User_ID) {
+        super(AD_User_ID);
         /**
          * if (AD_User_ID == 0) { setUserId (0); setFailedLoginCount (0); // 0
          * setIsAddMailTextAutomatically (false); // N setIsExpired (false); // N setIsFullBPAccess
@@ -53,8 +52,8 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
     /**
      * Load Constructor
      */
-    public X_AD_User(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_AD_User(Row row) {
+        super(row);
     } //	MUser
 
     /**

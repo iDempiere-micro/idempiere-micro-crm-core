@@ -1,10 +1,8 @@
 package org.compiere.crm;
 
 import kotliquery.Row;
-import org.idempiere.common.util.CLogger;
 
 import java.sql.Timestamp;
-import java.util.Properties;
 import java.util.logging.Level;
 
 /**
@@ -30,8 +28,8 @@ public class MContactInterest extends X_R_ContactInterest {
      * @param ignored ignored
      * @param trxName transaction
      */
-    public MContactInterest(Properties ctx, int ignored) {
-        super(ctx, 0);
+    public MContactInterest(int ignored) {
+        super(0);
         if (ignored != 0) throw new IllegalArgumentException("Multi-Key");
     } //	MContactInterest
 
@@ -45,8 +43,8 @@ public class MContactInterest extends X_R_ContactInterest {
      * @param trxName           transaction
      */
     public MContactInterest(
-            Properties ctx, int R_InterestArea_ID, int AD_User_ID, boolean isActive) {
-        super(ctx, 0);
+            int R_InterestArea_ID, int AD_User_ID, boolean isActive) {
+        super(0);
         setInterestAreaId(R_InterestArea_ID);
         setUserId(AD_User_ID);
         setIsActive(isActive);
@@ -59,8 +57,8 @@ public class MContactInterest extends X_R_ContactInterest {
      * @param rs      load from current result set position (no navigation, not closed)
      * @param trxName transaction
      */
-    public MContactInterest(Properties ctx, Row row) {
-        super(ctx, row);
+    public MContactInterest(Row row) {
+        super(row);
     } //	MContactInterest
 
     /**

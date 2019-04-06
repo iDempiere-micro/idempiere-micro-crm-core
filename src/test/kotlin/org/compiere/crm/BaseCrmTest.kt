@@ -32,13 +32,10 @@ abstract class BaseCrmTest {
 
     fun <T : IPO> getById(id: Int, tableName: String): T {
         val modelFactory: IModelFactory = DefaultModelFactory()
-        val result = modelFactory.getPO(tableName, id)
+        val result: T = modelFactory.getPO(tableName, id)
         println(result)
         assertNotNull(result)
-        @Suppress("UNCHECKED_CAST")
-        val obj = result as T
-        assertNotNull(obj)
-        assertEquals(id, obj.id)
-        return obj
+        assertEquals(id, result.id)
+        return result
     }
 }

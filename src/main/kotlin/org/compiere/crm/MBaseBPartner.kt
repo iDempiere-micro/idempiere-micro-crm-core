@@ -2,6 +2,7 @@ package org.compiere.crm
 
 import kotliquery.Row
 import org.compiere.model.I_AD_User
+import org.compiere.model.I_C_BP_Group
 import org.compiere.model.I_C_BPartner_Location
 import org.idempiere.common.util.Env
 import software.hsharp.core.orm.I_ZERO
@@ -11,18 +12,17 @@ import software.hsharp.core.util.queryOf
 import software.hsharp.models.CrmCategory
 import software.hsharp.models.IHasCategories
 import java.math.BigDecimal
-import java.util.Properties
 
 open class MBaseBPartner : X_C_BPartner, IHasCategories {
-    constructor(ctx: Properties, row: Row) : super(ctx, row)
-    constructor(ctx: Properties, id: Int) : super(ctx, id)
+    constructor(row: Row) : super(row)
+    constructor(Id: Int) : super(Id)
 
     /** Users  */
     private val m_contacts: MutableList<MUser> = mutableListOf()
     /** Addressed  */
     private val m_locations: MutableList<I_C_BPartner_Location> = mutableListOf()
     /** BP Group  */
-    private var m_group: MBPGroup? = null
+    private var m_group: I_C_BP_Group? = null
 
     /**
      * Load Default BPartner
@@ -48,7 +48,7 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
         setValueNoCheck("C_BPartner_ID", I_ZERO)
         searchKey = ""
         name = ""
-        setName2(null)
+        name2 = null
         setValueNoCheck("C_BPartner_UU", "")
         return success
     } // 	getTemplate
@@ -63,7 +63,7 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
         if (reload || m_contacts.size == 0) {
             //
             val sql = "SELECT * FROM AD_User WHERE C_BPartner_ID=? ORDER BY AD_User_ID"
-            val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { MUser(ctx, it) }.asList
+            val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { MUser(it) }.asList
             val result = DB.current.run(loadQuery)
 
             m_contacts.clear()
@@ -83,7 +83,7 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
 
             val sql =
                 "SELECT * FROM C_BPartner_Location WHERE C_BPartner_ID=? AND IsActive='Y'" + " ORDER BY C_BPartner_Location_ID"
-            val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> MBPartnerLocation(ctx, row) }.asList
+            val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> MBPartnerLocation(row) }.asList
             val locations = DB.current.run(loadQuery)
 
             m_locations.clear()
@@ -97,14 +97,17 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
      *
      * @return group
      */
-    fun getBPGroup(): MBPGroup? {
-        if (m_group == null) {
-            if (bpGroupId == 0)
-                m_group = MBPGroup.getDefault(ctx)
-            else
-                m_group = MBPGroup.get(ctx, bpGroupId)
-        }
-        return m_group
+    fun getBPGroup(): I_C_BP_Group {
+        val cachedGroup = m_group
+        val group =
+            if (cachedGroup == null) {
+                if (bpGroupId == 0)
+                    getDefaultBusinessPartnerGroup()
+                else
+                    getBusinessPartnerGroup(bpGroupId)
+            } else cachedGroup
+        m_group = group
+        return group
     } // 	getBPGroup
 
     /**
@@ -112,7 +115,7 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
      *
      * @param group group
      */
-    fun setBPGroup(group: MBPGroup?) {
+    fun setBPGroup(group: I_C_BP_Group?) {
         m_group = group
         if (group == null) return
         bpGroupId = group.bpGroupId
@@ -131,7 +134,7 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
      * @return BP Group ratio or 0.9
      */
     fun getCreditWatchRatio(): BigDecimal? {
-        return getBPGroup()?.getCreditWatchRatio()
+        return getBPGroup().creditWatchRatio
     } // 	getCreditWatchRatio
 
     /** Set Credit Status  */
@@ -196,9 +199,8 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
     override val categories: List<CrmCategory>
         get() {
             return "/sql/getBusinessPartnerCategories.sql".asResource { sql ->
-                val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> MCrmCategory(ctx, row) }.asList
+                val loadQuery = queryOf(sql, listOf(businessPartnerId)).map { row -> MCrmCategory(row) }.asList
                 DB.current.run(loadQuery)
             }
         }
-
 }

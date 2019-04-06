@@ -3,7 +3,6 @@ package org.compiere.crm
 import kotliquery.Row
 import software.hsharp.models.CrmCategory
 import org.compiere.orm.BasePONameValue
-import java.util.Properties
 
 class MCrmCategory : BasePONameValue, CrmCategory {
     override val tableId: Int
@@ -18,7 +17,6 @@ class MCrmCategory : BasePONameValue, CrmCategory {
         return 3 // AccessLevel = 3 - Client - Org
     }
 
-    constructor(ctx: Properties, row: Row) : super(ctx, row)
-    constructor(ctx: Properties, ID: Int) : super(ctx, ID)
-    constructor (ctx: Properties, a: String?) : super(ctx, a)
+    constructor(row: Row) : super(row)
+    constructor(Id: Int) : super(Id)
 }

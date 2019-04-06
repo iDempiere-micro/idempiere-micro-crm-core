@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Job;
 import org.compiere.orm.BasePOName;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_Job
  *
@@ -22,15 +20,15 @@ public class X_C_Job extends BasePOName implements I_C_Job {
     /**
      * Standard Constructor
      */
-    public X_C_Job(Properties ctx, int C_Job_ID) {
-        super(ctx, C_Job_ID);
+    public X_C_Job(int C_Job_ID) {
+        super(C_Job_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_Job(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_Job(Row row) {
+        super(row);
     }
 
     /**

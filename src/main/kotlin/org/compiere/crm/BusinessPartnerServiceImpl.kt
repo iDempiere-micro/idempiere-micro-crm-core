@@ -4,7 +4,7 @@ import org.compiere.model.I_C_BPartner
 import org.compiere.model.CreateBusinessPartnerInput
 import org.compiere.model.I_C_BPartner_Location
 import org.idempiere.common.util.Env.ZERO
-import software.hsharp.core.models.EnvironmentService
+import software.hsharp.core.services.EnvironmentService
 import software.hsharp.core.orm.BaseDataServiceImpl
 import software.hsharp.services.BusinessPartnerService
 
@@ -54,8 +54,7 @@ class BusinessPartnerServiceImpl(
         }
 
         return with(businessPartner) {
-            val ctx = environmentService.context
-            val result = MBPartner.getTemplate(ctx, environmentService.clientId)
+            val result = MBPartner.getTemplate(environmentService.clientId)
             result.name = legalName
             result.searchKey = searchKey
 

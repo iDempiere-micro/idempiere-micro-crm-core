@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_AddressTransaction;
 import org.compiere.orm.PO;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_AddressTransaction
  *
@@ -22,8 +20,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     /**
      * Standard Constructor
      */
-    public X_C_AddressTransaction(Properties ctx, int C_AddressTransaction_ID) {
-        super(ctx, C_AddressTransaction_ID);
+    public X_C_AddressTransaction(int C_AddressTransaction_ID) {
+        super(C_AddressTransaction_ID);
         /**
          * if (C_AddressTransaction_ID == 0) { setAddressTransaction_ID (0); setAddressValidationId
          * (0); setIsValid (false); // N setProcessed (false); // N }
@@ -33,8 +31,8 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
     /**
      * Load Constructor
      */
-    public X_C_AddressTransaction(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_AddressTransaction(Row row) {
+        super(row);
     }
 
     /**

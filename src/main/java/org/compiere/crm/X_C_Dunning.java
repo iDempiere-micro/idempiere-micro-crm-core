@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Dunning;
 import org.compiere.orm.BasePOName;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_Dunning
  *
@@ -22,15 +20,15 @@ public class X_C_Dunning extends BasePOName implements I_C_Dunning {
     /**
      * Standard Constructor
      */
-    public X_C_Dunning(Properties ctx, int C_Dunning_ID) {
-        super(ctx, C_Dunning_ID);
+    public X_C_Dunning(int C_Dunning_ID) {
+        super(C_Dunning_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_Dunning(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_Dunning(Row row) {
+        super(row);
     }
 
     /**

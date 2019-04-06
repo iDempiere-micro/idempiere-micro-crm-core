@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.BasePOName;
 
-import java.util.Properties;
-
 /**
  * Generated Model for AD_Language
  *
@@ -22,15 +20,15 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
     /**
      * Standard Constructor
      */
-    public X_AD_Language(Properties ctx, int AD_Language_ID) {
-        super(ctx, AD_Language_ID);
+    public X_AD_Language(int AD_Language_ID) {
+        super(AD_Language_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_AD_Language(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_AD_Language(Row row) {
+        super(row);
     }
 
     /**

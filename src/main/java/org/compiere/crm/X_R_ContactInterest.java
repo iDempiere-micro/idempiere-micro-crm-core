@@ -5,7 +5,6 @@ import org.compiere.model.I_R_ContactInterest;
 import org.compiere.orm.BasePOUser;
 
 import java.sql.Timestamp;
-import java.util.Properties;
 
 /**
  * Generated Model for R_ContactInterest
@@ -23,8 +22,8 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
     /**
      * Standard Constructor
      */
-    public X_R_ContactInterest(Properties ctx, int R_ContactInterest_ID) {
-        super(ctx, R_ContactInterest_ID);
+    public X_R_ContactInterest(int R_ContactInterest_ID) {
+        super(R_ContactInterest_ID);
         /**
          * if (R_ContactInterest_ID == 0) { setUserId (0); // @AD_User_ID@ setR_InterestArea_ID (0);
          * }
@@ -34,8 +33,8 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
     /**
      * Load Constructor
      */
-    public X_R_ContactInterest(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_R_ContactInterest(Row row) {
+        super(row);
     }
 
     /**

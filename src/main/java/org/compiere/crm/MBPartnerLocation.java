@@ -8,7 +8,6 @@ import org.compiere.orm.MSysConfig;
 import org.compiere.orm.Query;
 
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Partner Location Model
@@ -38,12 +37,10 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
     /**
      * ************************************************************************ Default Constructor
      *
-     * @param ctx                    context
      * @param C_BPartner_Location_ID id
-     * @param trxName                transaction
      */
-    public MBPartnerLocation(Properties ctx, int C_BPartner_Location_ID) {
-        super(ctx, C_BPartner_Location_ID);
+    public MBPartnerLocation(int C_BPartner_Location_ID) {
+        super(C_BPartner_Location_ID);
         if (C_BPartner_Location_ID == 0) {
             setName(".");
             //
@@ -60,7 +57,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      * @param bp partner
      */
     public MBPartnerLocation(I_C_BPartner bp) {
-        this(bp.getCtx(), 0);
+        this(0);
         setClientOrg(bp);
         // may (still) be 0
         setValueNoCheck("C_BPartner_ID", bp.getBusinessPartnerId());
@@ -71,21 +68,20 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      *
      * @param ctx context
      */
-    public MBPartnerLocation(Properties ctx, Row row) {
-        super(ctx, row);
+    public MBPartnerLocation(Row row) {
+        super(row);
     } // MBPartner_Location
 
     /**
      * Get Locations for BPartner
      *
-     * @param ctx           context
      * @param C_BPartner_ID bp
      * @return array of locations
      */
     public static MBPartnerLocation[] getForBPartner(
-            Properties ctx, int C_BPartner_ID) {
+            int C_BPartner_ID) {
         List<MBPartnerLocation> list =
-                new Query(ctx, I_C_BPartner_Location.Table_Name, "C_BPartner_ID=?")
+                new Query(I_C_BPartner_Location.Table_Name, "C_BPartner_ID=?")
                         .setParameters(C_BPartner_ID)
                         .list();
         MBPartnerLocation[] retValue = new MBPartnerLocation[list.size()];
@@ -107,7 +103,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      */
     public MLocation getLocation(boolean requery) {
         if (requery || m_location == null)
-            m_location = MLocation.get(getCtx(), getLocationId());
+            m_location = MLocationKt.getLocation(getLocationId());
         return m_location;
     } // getLocation
 
@@ -207,7 +203,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         }
 
         // Check uniqueness
-        MBPartnerLocation[] locations = getForBPartner(getCtx(), getBusinessPartnerId());
+        MBPartnerLocation[] locations = getForBPartner(getBusinessPartnerId());
         boolean unique = locations.length == 0;
         while (!unique) {
             unique = true;

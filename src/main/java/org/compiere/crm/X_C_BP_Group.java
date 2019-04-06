@@ -6,7 +6,6 @@ import org.compiere.orm.BasePOName;
 import org.idempiere.common.util.Env;
 
 import java.math.BigDecimal;
-import java.util.Properties;
 
 /**
  * Generated Model for C_BP_Group
@@ -14,7 +13,7 @@ import java.util.Properties;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
+public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
 
     /**
      * Same = S
@@ -32,19 +31,15 @@ public class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
     /**
      * Standard Constructor
      */
-    public X_C_BP_Group(Properties ctx, int C_BP_Group_ID) {
-        super(ctx, C_BP_Group_ID);
-        /**
-         * if (C_BP_Group_ID == 0) { setBPGroupId (0); setIsConfidentialInfo (false); // N
-         * setIsDefault (false); setName (null); setValue (null); }
-         */
+    public X_C_BP_Group(int C_BP_Group_ID) {
+        super(C_BP_Group_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_BP_Group(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_BP_Group(Row row) {
+        super(row);
     } //	MBPGroup
 
     /**

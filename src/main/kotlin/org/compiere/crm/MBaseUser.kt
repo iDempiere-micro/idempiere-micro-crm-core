@@ -4,7 +4,6 @@ import kotliquery.Row
 import kotliquery.queryOf
 import org.compiere.orm.MRole
 import software.hsharp.core.util.DB
-import java.util.Properties
 
 fun getWithRole(role: MRole): Array<MUser> {
     val sql = """
@@ -15,14 +14,14 @@ fun getWithRole(role: MRole): Array<MUser> {
         """.trimIndent()
     val loadQuery =
         queryOf(sql, role.roleId)
-            .map { row -> MUser(role.ctx, row) }.asList
+            .map { row -> MUser(row) }.asList
 
     return DB.current.run(loadQuery).toTypedArray()
 }
 
 open class MBaseUser : X_AD_User {
-    constructor(ctx: Properties, row: Row) : super(ctx, row)
-    constructor(ctx: Properties, id: Int) : super(ctx, id)
+    constructor(row: Row) : super(row)
+    constructor(Id: Int) : super(Id)
 
     /** Roles of User with Org  */
     private var m_roles: Array<MRole> = arrayOf()
@@ -53,7 +52,7 @@ open class MBaseUser : X_AD_User {
         """.trimIndent()
         val loadQuery =
             queryOf(sql, userId, orgId, userId, orgId)
-                .map { row -> MRole(ctx, row) }.asList
+                .map { row -> MRole(row) }.asList
 
         return DB.current.run(loadQuery).toTypedArray()
     }

@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_AD_UserBPAccess;
 import org.compiere.orm.BasePOUser;
 
-import java.util.Properties;
-
 /**
  * Generated Model for AD_UserBPAccess
  *
@@ -22,8 +20,8 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess {
     /**
      * Standard Constructor
      */
-    public X_AD_UserBPAccess(Properties ctx, int AD_UserBPAccess_ID) {
-        super(ctx, AD_UserBPAccess_ID);
+    public X_AD_UserBPAccess(int AD_UserBPAccess_ID) {
+        super(AD_UserBPAccess_ID);
         /**
          * if (AD_UserBPAccess_ID == 0) { setAD_UserBPAccess_ID (0); setUserId (0); setBPAccessType
          * (null); }
@@ -33,8 +31,8 @@ public class X_AD_UserBPAccess extends BasePOUser implements I_AD_UserBPAccess {
     /**
      * Load Constructor
      */
-    public X_AD_UserBPAccess(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_AD_UserBPAccess(Row row) {
+        super(row);
     }
 
     /**

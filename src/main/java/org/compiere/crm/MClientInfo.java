@@ -5,8 +5,6 @@ import org.compiere.model.I_C_BPartner;
 import org.compiere.orm.MClient;
 import org.compiere.orm.MTable;
 
-import java.util.Properties;
-
 public class MClientInfo extends org.compiere.orm.MClientInfo {
     /**
      *
@@ -18,8 +16,8 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
      *
      * @param ctx context
      */
-    public MClientInfo(Properties ctx, Row row) {
-        super(ctx, row);
+    public MClientInfo(Row row) {
+        super(row);
     }
 
     public MClientInfo(
@@ -40,8 +38,8 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
                 AD_Tree_SalesRegion_ID,
                 AD_Tree_Product_ID,
                 AD_Tree_Campaign_ID,
-                AD_Tree_Activity_ID,
-                trxName);
+                AD_Tree_Activity_ID
+        );
     }
 
     /**
@@ -52,8 +50,8 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
      * @param trxName      optional trx
      * @return Client Info
      */
-    public static MClientInfo get(Properties ctx, int AD_Client_ID) {
-        return MBaseClientInfoKt.get(ctx, AD_Client_ID);
+    public static MClientInfo get(int AD_Client_ID) {
+        return MBaseClientInfoKt.get(AD_Client_ID);
     } //	get
 
     /**
@@ -70,6 +68,6 @@ public class MClientInfo extends org.compiere.orm.MClientInfo {
 
     public I_C_BPartner getBPartnerCashTrx() throws RuntimeException {
         return (I_C_BPartner)
-                MTable.get(getCtx(), I_C_BPartner.Table_Name).getPO(getBPartnerCashTrxId());
+                MTable.get(I_C_BPartner.Table_Name).getPO(getBPartnerCashTrxId());
     }
 } //	MClientInfo

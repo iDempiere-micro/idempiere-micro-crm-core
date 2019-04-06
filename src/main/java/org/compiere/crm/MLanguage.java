@@ -8,7 +8,6 @@ import org.compiere.util.Msg;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import java.util.Properties;
 
 import static software.hsharp.core.util.DBKt.getSQLValue;
 
@@ -37,12 +36,10 @@ public class MLanguage extends X_AD_Language {
     /**
      * ************************************************************************ Standard Constructor
      *
-     * @param ctx            context
      * @param AD_Language_ID id
-     * @param trxName        transaction
      */
-    public MLanguage(Properties ctx, int AD_Language_ID) {
-        super(ctx, AD_Language_ID);
+    public MLanguage(int AD_Language_ID) {
+        super(AD_Language_ID);
     } //	MLanguage
 
     //	/**	Logger						*/
@@ -50,33 +47,25 @@ public class MLanguage extends X_AD_Language {
 
     /**
      * Load Constructor
-     *
-     * @param ctx     context
-     * @param rs      result set
-     * @param trxName transaction
      */
-    public MLanguage(Properties ctx, Row row) {
-        super(ctx, row);
+    public MLanguage(Row row) {
+        super(row);
     }
 
     /**
      * Create Language
      *
-     * @param ctx         context
      * @param AD_Language language code
      * @param Name        name
      * @param CountryCode country code
      * @param LanguageISO language code
-     * @param trxName     transaction
      */
     private MLanguage(
-            Properties ctx,
             String AD_Language,
             String Name,
             String CountryCode,
-            String LanguageISO,
-            String trxName) {
-        super(ctx, 0);
+            String LanguageISO) {
+        super(0);
         setLanguage(AD_Language); // 	en_US
         setIsBaseLanguage(false);
         setIsSystemLanguage(false);
@@ -88,13 +77,12 @@ public class MLanguage extends X_AD_Language {
     /**
      * Get Language Model from AD_Language
      *
-     * @param ctx         context
      * @param AD_Language language e.g. en_US
      * @return language or null
      */
-    public static I_AD_Language get(Properties ctx, String AD_Language) {
+    public static I_AD_Language get(String AD_Language) {
         return new Query(
-                ctx, I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_AD_Language + "=?")
+                I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_AD_Language + "=?")
                 .setParameters(AD_Language)
                 .firstOnly();
     } //	get
@@ -105,17 +93,15 @@ public class MLanguage extends X_AD_Language {
      * @return info
      */
     public String toString() {
-        StringBuilder str =
-                new StringBuilder("MLanguage[")
-                        .append(getLanguage())
-                        .append("-")
-                        .append(getName())
-                        .append(",Language=")
-                        .append(getLanguageISO())
-                        .append(",Country=")
-                        .append(getCountryCode())
-                        .append("]");
-        return str.toString();
+        return "MLanguage[" +
+                getLanguage() +
+                "-" +
+                getName() +
+                ",Language=" +
+                getLanguageISO() +
+                ",Country=" +
+                getCountryCode() +
+                "]";
     } //	toString
 
     /**
@@ -150,19 +136,19 @@ public class MLanguage extends X_AD_Language {
     protected boolean beforeSave(boolean newRecord) {
         String dp = getDatePattern();
         if (isValueChanged("DatePattern") && dp != null && dp.length() > 0) {
-            if (dp.indexOf("MM") == -1) {
+            if (!dp.contains("MM")) {
                 log.saveError(
-                        "Error", Msg.parseTranslation(getCtx(), "@Error@ @DatePattern@ - No Month (MM)"));
+                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - No Month (MM)"));
                 return false;
             }
-            if (dp.indexOf("dd") == -1) {
+            if (!dp.contains("dd")) {
                 log.saveError(
-                        "Error", Msg.parseTranslation(getCtx(), "@Error@ @DatePattern@ - No Day (dd)"));
+                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - No Day (dd)"));
                 return false;
             }
-            if (dp.indexOf("yy") == -1) {
+            if (!dp.contains("yy")) {
                 log.saveError(
-                        "Error", Msg.parseTranslation(getCtx(), "@Error@ @DatePattern@ - No Year (yy)"));
+                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - No Year (yy)"));
                 return false;
             }
 
@@ -171,7 +157,7 @@ public class MLanguage extends X_AD_Language {
                 m_dateFormat.applyPattern(dp);
             } catch (Exception e) {
                 log.saveError(
-                        "Error", Msg.parseTranslation(getCtx(), "@Error@ @DatePattern@ - " + e.getMessage()));
+                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - " + e.getMessage()));
                 m_dateFormat = null;
                 return false;
             }

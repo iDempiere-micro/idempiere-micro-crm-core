@@ -1,12 +1,12 @@
 package org.compiere.bo;
 
+import kotliquery.Row;
 import org.compiere.model.I_AD_User;
 import org.compiere.model.I_C_ContactActivity;
 import org.compiere.orm.BasePOUser;
 import org.compiere.orm.MTable;
 
 import java.sql.Timestamp;
-import java.util.Properties;
 
 /**
  * Generated Model for C_ContactActivity
@@ -24,13 +24,12 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     /**
      * Standard Constructor
      */
-    public X_C_ContactActivity(Properties ctx, int C_ContactActivity_ID) {
-        super(ctx, C_ContactActivity_ID);
-        /**
-         * if (C_ContactActivity_ID == 0) { setContactActivity_ID (0); setContactActivityType (null);
-         * setDescription (null); setStartDate (new Timestamp( System.currentTimeMillis() ));
-         * // @SQL=SELECT SYSDATE AS DefaultValue FROM DUAL }
-         */
+    public X_C_ContactActivity(int C_ContactActivity_ID) {
+        super(C_ContactActivity_ID);
+    }
+
+    public X_C_ContactActivity(Row row) {
+        super(row);
     }
 
     /**
@@ -43,8 +42,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
     }
 
     public String toString() {
-        StringBuffer sb = new StringBuffer("X_C_ContactActivity[").append(getId()).append("]");
-        return sb.toString();
+        return "X_C_ContactActivity[" + getId() + "]";
     }
 
     /**
@@ -60,7 +58,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
 
     public org.compiere.model.I_C_Opportunity getOpportunity() throws RuntimeException {
         return (org.compiere.model.I_C_Opportunity)
-                MTable.get(getCtx(), org.compiere.model.I_C_Opportunity.Table_Name)
+                MTable.get(org.compiere.model.I_C_Opportunity.Table_Name)
                         .getPO(getOpportunityId());
     }
 
@@ -113,7 +111,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
 
     public org.compiere.model.I_AD_User getSalesRepresentative() throws RuntimeException {
         return (org.compiere.model.I_AD_User)
-                MTable.get(getCtx(), org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRepresentativeId());
+                MTable.get(org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRepresentativeId());
     }
 
     @Override

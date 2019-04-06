@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.orm.BasePOName;
 
-import java.util.Properties;
-
 import static org.compiere.model.I_C_BPartner_Location.COLUMNNAME_IsPreserveCustomName;
 
 /**
@@ -24,8 +22,8 @@ public class X_C_BPartner_Location extends BasePOName {
     /**
      * Standard Constructor
      */
-    public X_C_BPartner_Location(Properties ctx, int C_BPartner_Location_ID) {
-        super(ctx, C_BPartner_Location_ID);
+    public X_C_BPartner_Location(int C_BPartner_Location_ID) {
+        super(C_BPartner_Location_ID);
         /**
          * if (C_BPartner_Location_ID == 0) { setBusinessPartnerId (0); setBusinessPartnerLocationId (0);
          * setLocationId (0); setIsBillTo (true); // Y setIsPayFrom (true); // Y setIsRemitTo (true);
@@ -36,8 +34,8 @@ public class X_C_BPartner_Location extends BasePOName {
     /**
      * Load Constructor
      */
-    public X_C_BPartner_Location(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_BPartner_Location(Row row) {
+        super(row);
     } // MBPartner_Location
 
     /**

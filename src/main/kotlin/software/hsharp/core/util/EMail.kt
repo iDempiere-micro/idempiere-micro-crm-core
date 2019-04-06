@@ -6,14 +6,14 @@ import software.hsharp.core.models.IEMail
 import javax.mail.internet.InternetAddress
 
 open class EMail(
-    override var SmtpHost: String,
-    override var SmtpPort: Int,
-    override var From: InternetAddress,
-    override var ReplyTo: InternetAddress,
-    override var Subject: String,
-    override var UserName: String,
-    override var Password: String,
-    override var MessageHTML: String
+    override var smtpHost: String,
+    override var smtpPort: Int,
+    override var from: InternetAddress,
+    override var replyTo: InternetAddress,
+    override var subject: String,
+    override var userName: String,
+    override var password: String,
+    override var messageInHTML: String
 ) : IEMail {
 
     companion object {
@@ -75,16 +75,16 @@ open class EMail(
 
     override fun send(): String {
         val email = HtmlEmail()
-        email.hostName = SmtpHost
-        email.setSmtpPort(SmtpPort)
-        email.setAuthenticator(DefaultAuthenticator(UserName, Password))
+        email.hostName = smtpHost
+        email.setSmtpPort(smtpPort)
+        email.setAuthenticator(DefaultAuthenticator(userName, password))
         email.isSSLOnConnect = true
-        email.setFrom(From.address)
+        email.setFrom(from.address)
         m_to.forEach { email.addTo(it.address) }
-        email.subject = Subject
+        email.subject = subject
         // val kotlinLogoURL = URL("https://kotlinlang.org/assets/images/twitter-card/kotlin_800x320.png")
         // val cid = email.embed(kotlinLogoURL, "Kotlin logo")
-        email.setHtmlMsg(MessageHTML)
+        email.setHtmlMsg(messageInHTML)
         email.send()
 
         return "Success"

@@ -9,21 +9,22 @@ import org.compiere.model.BusinessOpportunity
 import org.compiere.model.I_C_Currency
 import org.compiere.model.I_C_SalesStage
 import org.idempiere.common.util.Env.ZERO
-import software.hsharp.core.models.EnvironmentService
+import software.hsharp.core.services.EnvironmentService
 import software.hsharp.services.BusinessOpportunityService
+import software.hsharp.services.ContactActivityService
 import software.hsharp.services.CurrencyService
 import software.hsharp.services.SalesStageService
 import java.math.BigDecimal
 import java.sql.Timestamp
 import java.time.Instant
 
-class ContactActivityService(
+class ContactActivityServiceImpl(
     private val environmentService: EnvironmentService,
     private val businessOpportunityService: BusinessOpportunityService,
     private val salesStageService: SalesStageService,
     private val currencyService: CurrencyService
-) {
-    fun createContactActivity(
+) : ContactActivityService {
+    override fun createContactActivity(
         businessPartner: I_C_BPartner,
         startDate: Timestamp,
         description: String,
@@ -59,7 +60,7 @@ class ContactActivityService(
         contactActivityType: String,
         salesRepresentativeId: Int?
     ): I_C_ContactActivity {
-        val activity = X_C_ContactActivity(environmentService.context, 0)
+        val activity = X_C_ContactActivity(0)
         with(activity) {
             setOpportunity(opportunity)
             this.startDate = startDate

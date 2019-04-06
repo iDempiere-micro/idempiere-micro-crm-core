@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Greeting;
 import org.compiere.orm.BasePOName;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_Greeting
  *
@@ -22,8 +20,8 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting {
     /**
      * Standard Constructor
      */
-    public X_C_Greeting(Properties ctx, int C_Greeting_ID) {
-        super(ctx, C_Greeting_ID);
+    public X_C_Greeting(int C_Greeting_ID) {
+        super(C_Greeting_ID);
         /**
          * if (C_Greeting_ID == 0) { setGreeting_ID (0); setIsDefault (false); setIsFirstNameOnly
          * (false); setName (null); }
@@ -33,8 +31,8 @@ public class X_C_Greeting extends BasePOName implements I_C_Greeting {
     /**
      * Load Constructor
      */
-    public X_C_Greeting(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_Greeting(Row row) {
+        super(row);
     }
 
     /**

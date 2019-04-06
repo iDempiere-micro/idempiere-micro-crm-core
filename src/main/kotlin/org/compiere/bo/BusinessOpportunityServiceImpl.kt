@@ -4,7 +4,7 @@ import org.compiere.model.I_C_BPartner
 import org.compiere.model.I_C_Opportunity
 import org.compiere.model.BusinessOpportunity
 import org.compiere.orm.Query
-import software.hsharp.core.models.EnvironmentService
+import software.hsharp.core.services.EnvironmentService
 import software.hsharp.services.BusinessOpportunityService
 
 class BusinessOpportunityServiceImpl(
@@ -14,13 +14,12 @@ class BusinessOpportunityServiceImpl(
         forBusinessPartner: I_C_BPartner,
         newBusinessOpportunity: BusinessOpportunity
     ): I_C_Opportunity {
-        val ctx = environmentService.context
         val opportunities: List<I_C_Opportunity> =
-            Query(ctx, I_C_Opportunity.Table_Name, "AD_Client_ID=? AND C_BPartner_ID=?")
+            Query(I_C_Opportunity.Table_Name, "AD_Client_ID=? AND C_BPartner_ID=?")
                 .setParameters(environmentService.clientId, forBusinessPartner.businessPartnerId)
                 .list()
         return if (opportunities.isEmpty()) {
-            val opportunity = MOpportunity(ctx, 0)
+            val opportunity = MOpportunity(0)
             with(opportunity) {
                 businessPartner = forBusinessPartner
                 expectedCloseDate = newBusinessOpportunity.expectedCloseDate

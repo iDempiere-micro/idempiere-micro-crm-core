@@ -1,7 +1,7 @@
 package org.compiere.crm
 
 import org.compiere.model.I_C_Country
-import software.hsharp.core.models.EnvironmentService
+import software.hsharp.core.services.EnvironmentService
 import software.hsharp.core.orm.BaseDataServiceImpl
 import software.hsharp.services.CountryService
 

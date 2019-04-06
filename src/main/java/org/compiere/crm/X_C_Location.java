@@ -4,8 +4,6 @@ import kotliquery.Row;
 import org.compiere.model.I_C_Location;
 import org.compiere.orm.PO;
 
-import java.util.Properties;
-
 /**
  * Generated Model for C_Location
  *
@@ -22,15 +20,15 @@ public class X_C_Location extends PO {
     /**
      * Standard Constructor
      */
-    public X_C_Location(Properties ctx, int C_Location_ID) {
-        super(ctx, C_Location_ID);
+    public X_C_Location(int C_Location_ID) {
+        super(C_Location_ID);
     }
 
     /**
      * Load Constructor
      */
-    public X_C_Location(Properties ctx, Row row) {
-        super(ctx, row);
+    public X_C_Location(Row row) {
+        super(row);
     }
 
     /**
