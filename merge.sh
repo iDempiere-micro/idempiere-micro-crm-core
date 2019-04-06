@@ -11,7 +11,7 @@ merge()
     ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.22.0' . | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.22.0/IDEMPIERE_MICRO_VERSION: 0.22.0/g' || true ) && \
     ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.22.0' . | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.22.0/IDEMPIERE_MICRO_VERSION: 0.22.0/g' || true ) && \
     (git add -A && git commit -m "version bump" || true ) && \
-    git merge --squash master --allow-unrelated-histories && (git commit -m "merged" || true ) && (git tag -a v0.22.0 -m "0.22.0" || true ) )
+    git merge --squash master --allow-unrelated-histories && (git commit -m "merged" || true ) && (git tag -a 0.22.0 -m "0.22.0" || true ) )
 }
 
 merge idempiere-micro-session-core
