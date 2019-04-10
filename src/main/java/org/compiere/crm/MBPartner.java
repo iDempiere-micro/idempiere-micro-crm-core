@@ -7,7 +7,6 @@ import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
 import org.compiere.orm.MTree_Base;
 import org.compiere.orm.Query;
-import org.idempiere.common.util.CLogger;
 import org.idempiere.common.util.Env;
 import software.hsharp.core.util.DBKt;
 import software.hsharp.core.util.Environment;
@@ -22,10 +21,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      *
      */
     private static final long serialVersionUID = -803727877324075871L;
-    /**
-     * Static Logger
-     */
-    private static CLogger s_log = CLogger.getCLogger(MBPartner.class);
     /**
      * Prim Address
      */
@@ -126,7 +121,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         I_C_BPartner template = getBPartnerCashTrx(AD_Client_ID);
         if (template == null) template = new MBPartner(0);
         //	Reset
-        template.setValueNoCheck("C_BPartner_ID", new Integer(0));
+        template.setValueNoCheck("C_BPartner_ID", 0);
         template.setValueNoCheck("C_BPartner_UU", null);
         template.setSearchKey("");
         template.setName("");
@@ -156,47 +151,37 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
     /**
      * Get Cash Trx Business Partner
      *
-     * @param ctx          context
      * @param AD_Client_ID client
      * @return Cash Trx Business Partner or null
      */
     public static I_C_BPartner getBPartnerCashTrx(int AD_Client_ID) {
-        I_C_BPartner retValue = MClientInfo.get(AD_Client_ID).getBPartnerCashTrx();
-        if (retValue == null) s_log.log(Level.SEVERE, "Not found for AD_Client_ID=" + AD_Client_ID);
-
-        return retValue;
+        return MClientInfoKt.getClientInfo(AD_Client_ID).getBPartnerCashTrx();
     } //	getBPartnerCashTrx
 
     /**
      * Get BPartner with Value in a transaction
      *
-     * @param ctx   context
      * @param Value value
      * @return BPartner or null
      */
     public static MBPartner get(String Value) {
         if (Value == null || Value.length() == 0) return null;
         final String whereClause = "Value=? AND AD_Client_ID=?";
-        MBPartner retValue =
-                new Query(I_C_BPartner.Table_Name, whereClause)
-                        .setParameters(Value, Env.getClientId())
-                        .firstOnly();
-        return retValue;
+        return new Query(I_C_BPartner.Table_Name, whereClause)
+                .setParameters(Value, Env.getClientId())
+                .firstOnly();
     } //	get
 
     /**
      * Get BPartner with Value in a transaction
      *
-     * @param ctx context
      * @return BPartner or null
      */
     public static I_C_BPartner get(int C_BPartner_ID) {
         final String whereClause = "C_BPartner_ID=? AND AD_Client_ID=?";
-        I_C_BPartner retValue =
-                new Query(I_C_BPartner.Table_Name, whereClause)
-                        .setParameters(C_BPartner_ID, Env.getClientId())
-                        .firstOnly();
-        return retValue;
+        return new Query(I_C_BPartner.Table_Name, whereClause)
+                .setParameters(C_BPartner_ID, Env.getClientId())
+                .firstOnly();
     } //	get
 
     /**
@@ -230,17 +215,15 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return info
      */
     public String toString() {
-        StringBuilder sb =
-                new StringBuilder("MBPartner[ID=")
-                        .append(getId())
-                        .append(",Value=")
-                        .append(getSearchKey())
-                        .append(",Name=")
-                        .append(getName())
-                        .append(",Open=")
-                        .append(getTotalOpenBalance())
-                        .append("]");
-        return sb.toString();
+        return "MBPartner[ID=" +
+                getId() +
+                ",Value=" +
+                getSearchKey() +
+                ",Name=" +
+                getName() +
+                ",Open=" +
+                getTotalOpenBalance() +
+                "]";
     } //	toString
 
     /**

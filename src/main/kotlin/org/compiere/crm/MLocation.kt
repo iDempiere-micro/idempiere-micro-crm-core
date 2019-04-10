@@ -6,7 +6,7 @@ import org.compiere.model.I_C_Location
 import org.compiere.model.I_C_Region
 import org.compiere.orm.MSysConfig
 import org.compiere.orm.PO
-import org.compiere.util.Msg
+import org.compiere.util.translate
 import org.idempiere.common.exceptions.AdempiereException
 import org.idempiere.common.util.Util
 import org.idempiere.common.util.factory
@@ -423,7 +423,7 @@ class MLocation : MBaseLocation, I_C_Location, Comparator<Any> {
 
         // check city
         if (m_c != null && !m_c!!.isAllowCitiesOutOfList && cityId <= 0) {
-            log.saveError("CityNotFound", Msg.translate("CityNotFound"))
+            log.saveError("CityNotFound", translate("CityNotFound"))
             return false
         }
 
@@ -443,7 +443,7 @@ class MLocation : MBaseLocation, I_C_Location, Comparator<Any> {
             if (city_id < 0) {
                 log.saveError(
                     "CityNotFound",
-                    Msg.translate("CityNotFound") + " C_City_ID[" + cityId + "]"
+                    translate("CityNotFound") + " C_City_ID[" + cityId + "]"
                 )
                 return false
             }

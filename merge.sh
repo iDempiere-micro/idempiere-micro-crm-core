@@ -5,14 +5,15 @@ set -o pipefail
 
 merge()
 {
-    ( cd .. && cd $1 && pwd && \
-    (grep -rl '<idempiere-micro.version>0.22.0' . | xargs -r sed -i 's/<idempiere-micro.version>0.22.0/<idempiere-micro.version>0.22.0/g' || true) && \
-    ( grep -rl '<idempiere-micro.version>0.22.0' . | xargs -r sed -i 's/<idempiere-micro.version>0.22.0/<idempiere-micro.version>0.22.0/g' || true ) && \
-    ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.22.0' . | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.22.0/IDEMPIERE_MICRO_VERSION: 0.22.0/g' || true ) && \
-    ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.22.0' . | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.22.0/IDEMPIERE_MICRO_VERSION: 0.22.0/g' || true ) && \
-    (git add -A && git commit -m "version bump" || true ) && \
-    git merge --squash master --allow-unrelated-histories && (git commit -m "merged" || true ) && (git tag -a 0.22.0 -m "0.22.0" || true ) )
+    (cd .. && cd $1 && pwd && (git add -A && git commit -m "version bump" || true ) && git checkout master-github && git merge --squash master --allow-unrelated-histories && (git commit -m "merged" || true ) )
 }
+
+
+# ( cd .. && \ 
+# (grep -rl '<idempiere-micro.version>0.21.0' ./**/pom.xml | xargs -r sed -i 's/<idempiere-micro.version>0.21.0/<idempiere-micro.version>0.23.0/g' || true) && \
+# ( grep -rl '<idempiere-micro.version>0.22.0' ./**/pom.xml | xargs -r sed -i 's/<idempiere-micro.version>0.22.0/<idempiere-micro.version>0.23.0/g' || true ) && \
+# ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.21.0' ./**/.circleci/config.yml | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.21.0/IDEMPIERE_MICRO_VERSION: 0.23.0/g' || true ) && \
+# ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.22.0' ./**/.circleci/config.yml | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.22.0/IDEMPIERE_MICRO_VERSION: 0.23.0/g' || true ) )
 
 merge idempiere-micro-session-core
 merge idempiere-micro-base-interfaces

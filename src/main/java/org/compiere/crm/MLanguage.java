@@ -3,7 +3,7 @@ package org.compiere.crm;
 import kotliquery.Row;
 import org.compiere.model.I_AD_Language;
 import org.compiere.orm.Query;
-import org.compiere.util.Msg;
+import org.compiere.util.MsgKt;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -138,17 +138,17 @@ public class MLanguage extends X_AD_Language {
         if (isValueChanged("DatePattern") && dp != null && dp.length() > 0) {
             if (!dp.contains("MM")) {
                 log.saveError(
-                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - No Month (MM)"));
+                        "Error", MsgKt.parseTranslation("@Error@ @DatePattern@ - No Month (MM)"));
                 return false;
             }
             if (!dp.contains("dd")) {
                 log.saveError(
-                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - No Day (dd)"));
+                        "Error", MsgKt.parseTranslation("@Error@ @DatePattern@ - No Day (dd)"));
                 return false;
             }
             if (!dp.contains("yy")) {
                 log.saveError(
-                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - No Year (yy)"));
+                        "Error", MsgKt.parseTranslation("@Error@ @DatePattern@ - No Year (yy)"));
                 return false;
             }
 
@@ -157,7 +157,7 @@ public class MLanguage extends X_AD_Language {
                 m_dateFormat.applyPattern(dp);
             } catch (Exception e) {
                 log.saveError(
-                        "Error", Msg.parseTranslation("@Error@ @DatePattern@ - " + e.getMessage()));
+                        "Error", MsgKt.parseTranslation("@Error@ @DatePattern@ - " + e.getMessage()));
                 m_dateFormat = null;
                 return false;
             }

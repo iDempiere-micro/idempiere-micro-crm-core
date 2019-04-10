@@ -6,7 +6,8 @@ import org.compiere.model.I_AD_User
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.MSysConfig
 import org.compiere.orm.Query
-import org.compiere.util.Msg
+import org.compiere.util.getElementTranslation
+import org.compiere.util.getMsg
 import org.idempiere.common.exceptions.DBException
 import org.idempiere.common.util.Secure
 import org.idempiere.common.util.SecureEngine
@@ -370,8 +371,8 @@ class MUser : MBaseUser, IUser {
             if (!EMail.validate(eMail)) {
                 log.saveError(
                     "SaveError",
-                    Msg.getMsg("InvalidEMailFormat") +
-                            Msg.getElement(I_AD_User.COLUMNNAME_EMail) +
+                    getMsg("InvalidEMailFormat") +
+                            getElementTranslation(I_AD_User.COLUMNNAME_EMail) +
                             " - [" +
                             eMail +
                             "]"
@@ -390,8 +391,8 @@ class MUser : MBaseUser, IUser {
                 if (eMail == null || eMail.length == 0) {
                     log.saveError(
                         "SaveError",
-                        Msg.getMsg("FillMandatory") +
-                                Msg.getElement(I_AD_User.COLUMNNAME_EMail) +
+                        getMsg("FillMandatory") +
+                                getElementTranslation(I_AD_User.COLUMNNAME_EMail) +
                                 " - " +
                                 toString()
                     )
@@ -407,10 +408,10 @@ class MUser : MBaseUser, IUser {
                 if (cnt > 0) {
                     log.saveError(
                         "SaveError",
-                        Msg.getMsg(
+                        getMsg(
                             DBException.SAVE_ERROR_NOT_UNIQUE_MSG,
                             true
-                        ) + Msg.getElement(I_AD_User.COLUMNNAME_EMail)
+                        ) + getElementTranslation(I_AD_User.COLUMNNAME_EMail)
                     )
                     return false
                 }
@@ -427,10 +428,10 @@ class MUser : MBaseUser, IUser {
                 if (cnt > 0) {
                     log.saveError(
                         "SaveError",
-                        Msg.getMsg(DBException.SAVE_ERROR_NOT_UNIQUE_MSG, true) +
-                                Msg.getElement(HasName.COLUMNNAME_Name) +
+                        getMsg(DBException.SAVE_ERROR_NOT_UNIQUE_MSG, true) +
+                                getElementTranslation(HasName.COLUMNNAME_Name) +
                                 " / " +
-                                Msg.getElement(I_AD_User.COLUMNNAME_LDAPUser)
+                                getElementTranslation(I_AD_User.COLUMNNAME_LDAPUser)
                     )
                     return false
                 }
