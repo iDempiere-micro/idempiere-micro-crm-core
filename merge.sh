@@ -10,10 +10,10 @@ merge()
 
 
 # ( cd .. && \ 
-# (grep -rl '<idempiere-micro.version>0.22.0' ./**/pom.xml | xargs -r sed -i 's/<idempiere-micro.version>0.22.0/<idempiere-micro.version>0.24.0/g' || true) && \
-# ( grep -rl '<idempiere-micro.version>0.23.0' ./**/pom.xml | xargs -r sed -i 's/<idempiere-micro.version>0.23.0/<idempiere-micro.version>0.24.0/g' || true ) && \
-# ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.22.0' ./**/.circleci/config.yml | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.22.0/IDEMPIERE_MICRO_VERSION: 0.24.0/g' || true ) && \
-# ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.23.0' ./**/.circleci/config.yml | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.23.0/IDEMPIERE_MICRO_VERSION: 0.24.0/g' || true ) )
+# (grep -rl '<idempiere-micro.version>0.23.0' ./**/pom.xml | xargs -r sed -i 's/<idempiere-micro.version>0.23.0/<idempiere-micro.version>0.25.0/g' || true) && \
+# ( grep -rl '<idempiere-micro.version>0.24.0' ./**/pom.xml | xargs -r sed -i 's/<idempiere-micro.version>0.24.0/<idempiere-micro.version>0.25.0/g' || true ) && \
+# ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.23.0' ./**/.circleci/config.yml | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.23.0/IDEMPIERE_MICRO_VERSION: 0.25.0/g' || true ) && \
+# ( grep -rl 'IDEMPIERE_MICRO_VERSION: 0.24.0' ./**/.circleci/config.yml | xargs -r sed -i 's/IDEMPIERE_MICRO_VERSION: 0.24.0/IDEMPIERE_MICRO_VERSION: 0.25.0/g' || true ) )
 
 merge idempiere-micro-session-core
 merge idempiere-micro-base-interfaces

@@ -94,7 +94,7 @@ class MUser : MBaseUser, IUser {
             if (email == null || email.length == 0) return null
             try {
                 val ia = InternetAddress(email, true)
-                ia?.validate()
+                ia.validate()
                 return ia
             } catch (ex: AddressException) {
                 log.warning(email + " - " + ex.localizedMessage)
@@ -381,7 +381,7 @@ class MUser : MBaseUser, IUser {
             }
         }
 
-        if (newRecord || super.searchKey == null || isValueChanged("Value"))
+        if (newRecord || isValueChanged("Value"))
             searchKey = super.searchKey
 
         if (password != null && password.length > 0) {
