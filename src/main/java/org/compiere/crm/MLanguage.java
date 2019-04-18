@@ -81,7 +81,7 @@ public class MLanguage extends X_AD_Language {
      * @return language or null
      */
     public static I_AD_Language get(String AD_Language) {
-        return new Query(
+        return new Query<I_AD_Language>(
                 I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_AD_Language + "=?")
                 .setParameters(AD_Language)
                 .firstOnly();

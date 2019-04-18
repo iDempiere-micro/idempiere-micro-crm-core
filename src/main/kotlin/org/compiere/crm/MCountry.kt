@@ -13,7 +13,7 @@ import java.text.Collator
 import java.util.Comparator
 import software.hsharp.core.util.toNullIfEmpty
 
-private fun loadAllCountries(): List<I_C_Country> = Query(I_C_Country.Table_Name, "IsActive='Y'").list()
+private fun loadAllCountries() = Query<I_C_Country>(I_C_Country.Table_Name, "IsActive='Y'").list()
 
 private val countryFactory = factory(loadAllCountries()) { MCountry(it) }
 

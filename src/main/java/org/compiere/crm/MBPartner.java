@@ -164,10 +164,10 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @param Value value
      * @return BPartner or null
      */
-    public static MBPartner get(String Value) {
+    public static I_C_BPartner get(String Value) {
         if (Value == null || Value.length() == 0) return null;
         final String whereClause = "Value=? AND AD_Client_ID=?";
-        return new Query(I_C_BPartner.Table_Name, whereClause)
+        return new Query<I_C_BPartner>(I_C_BPartner.Table_Name, whereClause)
                 .setParameters(Value, Env.getClientId())
                 .firstOnly();
     } //	get
@@ -179,7 +179,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      */
     public static I_C_BPartner get(int C_BPartner_ID) {
         final String whereClause = "C_BPartner_ID=? AND AD_Client_ID=?";
-        return new Query(I_C_BPartner.Table_Name, whereClause)
+        return new Query<I_C_BPartner>(I_C_BPartner.Table_Name, whereClause)
                 .setParameters(C_BPartner_ID, Env.getClientId())
                 .firstOnly();
     } //	get
@@ -225,16 +225,6 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
                 getTotalOpenBalance() +
                 "]";
     } //	toString
-
-    /**
-     * Set Client/Org
-     *
-     * @param AD_Client_ID client
-     * @param AD_Org_ID    org
-     */
-    public void setClientOrg(int AD_Client_ID, int AD_Org_ID) {
-        super.setClientOrg(AD_Client_ID, AD_Org_ID);
-    } //	setClientOrg
 
     /**
      * Get Linked Organization. (is Button) The Business Partner is another Organization for explicit

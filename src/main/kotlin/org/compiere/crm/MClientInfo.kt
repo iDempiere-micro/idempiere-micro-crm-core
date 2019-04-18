@@ -9,6 +9,7 @@ import org.compiere.orm.MTable
 import org.idempiere.common.util.AdempiereSystemError
 import org.idempiere.common.util.factory
 import org.idempiere.common.util.loadUsing
+import software.hsharp.core.orm.getTable
 import software.hsharp.core.util.DB
 
 private fun doLoadClientInfo(clientId: Int): MClientInfo {
@@ -30,7 +31,7 @@ fun getClientInfo(id: Int) = id loadUsing clientInfoFactory
 class MClientInfo : org.compiere.orm.MClientInfo {
 
     val bPartnerCashTrx: I_C_BPartner?
-        get() = MTable.get(I_C_BPartner.Table_Name).getPO(bPartnerCashTrxId) as I_C_BPartner?
+        get() = getTable(I_C_BPartner.Table_Name).getPO(bPartnerCashTrxId)
 
     /**
      * Load Constructor

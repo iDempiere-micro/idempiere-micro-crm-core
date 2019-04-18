@@ -7,10 +7,10 @@ import org.compiere.model.I_C_Opportunity
 import org.compiere.model.I_C_Order
 import org.compiere.model.I_C_SalesStage
 import org.compiere.orm.BasePOUser
-import org.compiere.orm.MTable
 import org.idempiere.common.exceptions.AdempiereException
 import org.idempiere.common.util.Env
 import org.idempiere.common.util.KeyNamePair
+import software.hsharp.core.orm.getTable
 import java.math.BigDecimal
 import java.sql.Timestamp
 
@@ -57,7 +57,7 @@ open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
 
     @Throws(RuntimeException::class)
     override fun getBusinessPartner(): I_C_BPartner {
-        return MTable.get(I_C_BPartner.Table_Name)
+        return getTable(I_C_BPartner.Table_Name)
             .getPO(businessPartnerId) ?: throw AdempiereException("Business Partner not set")
     }
 
@@ -79,7 +79,7 @@ open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
     @Throws(RuntimeException::class)
     override fun getOrder(): I_C_Order? {
         if (orderId == 0) return null
-        return MTable.get(I_C_Order.Table_Name)
+        return getTable(I_C_Order.Table_Name)
             .getPO(orderId)
     }
 

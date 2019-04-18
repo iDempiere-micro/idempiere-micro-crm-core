@@ -40,11 +40,11 @@ fun getUser(id: Int) = id loadUsing userFactory
  * @param businessPartnerId
  * @return array of users
  */
-fun getBusinessPartnerUsers(businessPartnerId: Int): Array<MUser> {
-    val list = Query(I_AD_User.Table_Name, "C_BPartner_ID=?")
+fun getBusinessPartnerUsers(businessPartnerId: Int): Array<I_AD_User> {
+    val list = Query<I_AD_User>(I_AD_User.Table_Name, "C_BPartner_ID=?")
         .setParameters(businessPartnerId)
         .setOnlyActiveRecords(true)
-        .list<MUser>()
+        .list()
 
     return list.toTypedArray()
 } // 	getOfBPartner
@@ -55,11 +55,11 @@ fun getBusinessPartnerUsers(businessPartnerId: Int): Array<MUser> {
  * @param clientId
  * @return array of users
  */
-fun getClientUsers(clientId: Int): Array<MUser> {
-    val list = Query(I_AD_User.Table_Name, "ad_client_id=?")
+fun getClientUsers(clientId: Int): Array<I_AD_User> {
+    val list = Query<I_AD_User>(I_AD_User.Table_Name, "ad_client_id=?")
         .setParameters(clientId)
         .setOnlyActiveRecords(true)
-        .list<MUser>()
+        .list()
 
     return list.toTypedArray()
 } // 	getOfBPartner

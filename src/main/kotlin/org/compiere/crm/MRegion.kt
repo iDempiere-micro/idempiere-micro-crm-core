@@ -11,7 +11,7 @@ import java.io.Serializable
 import java.text.Collator
 import java.util.Comparator
 
-private fun loadAllRegions(): List<I_C_Region> = Query(I_C_Region.Table_Name, "IsActive='Y'").list()
+private fun loadAllRegions() = Query<I_C_Region>(I_C_Region.Table_Name, "IsActive='Y'").list()
 
 private val regionFactory = factory(loadAllRegions()) { MRegion(it) }
 

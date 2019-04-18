@@ -3,8 +3,9 @@ package org.compiere.bo;
 import kotliquery.Row;
 import org.compiere.model.I_AD_User;
 import org.compiere.model.I_C_ContactActivity;
+import org.compiere.model.I_C_Opportunity;
 import org.compiere.orm.BasePOUser;
-import org.compiere.orm.MTable;
+import software.hsharp.core.orm.MBaseTableKt;
 
 import java.sql.Timestamp;
 
@@ -56,13 +57,13 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
         return ii;
     }
 
-    public org.compiere.model.I_C_Opportunity getOpportunity() throws RuntimeException {
-        return (org.compiere.model.I_C_Opportunity)
-                MTable.get(org.compiere.model.I_C_Opportunity.Table_Name)
+    public I_C_Opportunity getOpportunity() throws RuntimeException {
+        return (I_C_Opportunity)
+                MBaseTableKt.getTable(I_C_Opportunity.Table_Name)
                         .getPO(getOpportunityId());
     }
 
-    public void setOpportunity(org.compiere.model.I_C_Opportunity opportunity) {
+    public void setOpportunity(I_C_Opportunity opportunity) {
         setValue(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID, opportunity.getId());
     }
 
@@ -111,7 +112,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
 
     public org.compiere.model.I_AD_User getSalesRepresentative() throws RuntimeException {
         return (org.compiere.model.I_AD_User)
-                MTable.get(org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRepresentativeId());
+                MBaseTableKt.getTable(org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRepresentativeId());
     }
 
     @Override

@@ -13,8 +13,8 @@ class SalesStageServiceImpl(
     private val environmentService: EnvironmentService
 ) : SalesStageService {
     override fun ensureSalesStage(name: String, probability: BigDecimal, searchKey: String): I_C_SalesStage {
-        val salesStages: List<I_C_SalesStage> =
-            Query(I_C_SalesStage.Table_Name, "AD_Client_ID=?")
+        val salesStages =
+            Query<I_C_SalesStage>(I_C_SalesStage.Table_Name, "AD_Client_ID=?")
                 .setParameters(environmentService.clientId)
                 .list()
         return if (salesStages.isEmpty()) {

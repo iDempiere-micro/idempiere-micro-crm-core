@@ -45,7 +45,7 @@
             </activation>
             <properties>
                 <idempiere-micro.groupId>com.github.iDempiere-micro</idempiere-micro.groupId>
-                <idempiere-micro.version>0.25.0</idempiere-micro.version>
+                <idempiere-micro.version>0.26.0</idempiere-micro.version>
             </properties>
         </profile>
     </profiles>
@@ -64,6 +64,11 @@
         <dependency>
             <groupId>${idempiere-micro.groupId}</groupId>
             <artifactId>idempiere-micro-model-interfaces</artifactId>
+            <version>${idempiere-micro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${idempiere-micro.groupId}</groupId>
+            <artifactId>idempiere-micro-process-core</artifactId>
             <version>${idempiere-micro.version}</version>
         </dependency>
 

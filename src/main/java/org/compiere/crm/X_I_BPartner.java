@@ -6,6 +6,10 @@ import org.compiere.model.HasName2;
 import org.compiere.model.I_I_BPartner;
 import org.compiere.orm.BasePOUser;
 
+import static org.compiere.model.I_C_BPartner.COLUMNNAME_IsCustomer;
+import static org.compiere.model.I_C_BPartner.COLUMNNAME_IsEmployee;
+import static org.compiere.model.I_C_BPartner.COLUMNNAME_IsVendor;
+
 /**
  * Generated Model for I_BPartner
  *
@@ -141,5 +145,47 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
     @Override
     public int getTableId() {
         return I_I_BPartner.Table_ID;
+    }
+
+    /**
+     * Get Vendor.
+     *
+     * @return Indicates if this Business Partner is a Vendor
+     */
+    public boolean isVendor() {
+        Object oo = getValue(COLUMNNAME_IsVendor);
+        if (oo != null) {
+            if (oo instanceof Boolean) return (Boolean) oo;
+            return "Y".equals(oo);
+        }
+        return false;
+    }
+
+    /**
+     * Get Employee.
+     *
+     * @return Indicates if this Business Partner is an employee
+     */
+    public boolean isEmployee() {
+        Object oo = getValue(COLUMNNAME_IsEmployee);
+        if (oo != null) {
+            if (oo instanceof Boolean) return (Boolean) oo;
+            return "Y".equals(oo);
+        }
+        return false;
+    }
+
+    /**
+     * Get Customer.
+     *
+     * @return Indicates if this Business Partner is a Customer
+     */
+    public boolean isCustomer() {
+        Object oo = getValue(COLUMNNAME_IsCustomer);
+        if (oo != null) {
+            if (oo instanceof Boolean) return (Boolean) oo;
+            return "Y".equals(oo);
+        }
+        return false;
     }
 }
