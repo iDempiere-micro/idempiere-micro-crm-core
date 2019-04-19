@@ -8,6 +8,7 @@ import org.compiere.model.I_C_Order
 import org.compiere.model.I_C_SalesStage
 import org.compiere.orm.BasePOUser
 import org.idempiere.common.exceptions.AdempiereException
+import org.idempiere.common.util.AdempiereSystemError
 import org.idempiere.common.util.Env
 import org.idempiere.common.util.KeyNamePair
 import software.hsharp.core.orm.getTable
@@ -19,7 +20,7 @@ import java.sql.Timestamp
  */
 open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
     override var expectedCloseDate: Timestamp
-        get() = getValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate) as Timestamp
+        get() = getValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate) ?: throw AdempiereException("expectedCloseDate must be set")
         set(value) { setValue(I_C_Opportunity.COLUMNNAME_ExpectedCloseDate, value) }
     override var currency: I_C_Currency?
         get() = MCurrency(getCurrencyId())
@@ -94,7 +95,7 @@ open class MBaseOpportunity : BasePOUser, I_C_Opportunity {
      * @return Document sequence number of the document
      */
     override fun getDocumentNo(): String {
-        return getValue(I_C_Opportunity.COLUMNNAME_DocumentNo) as String
+        return getValue(I_C_Opportunity.COLUMNNAME_DocumentNo) ?: throw AdempiereSystemError("Must have document number")
     }
 
     /** Get Record ID/ColumnName

@@ -1,7 +1,7 @@
 package org.compiere.bo;
 
 import kotliquery.Row;
-import org.compiere.model.I_AD_User;
+import org.compiere.model.User;
 import org.compiere.model.I_C_ContactActivity;
 import org.compiere.model.I_C_Opportunity;
 import org.compiere.orm.BasePOUser;
@@ -110,13 +110,13 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
         return false;
     }
 
-    public org.compiere.model.I_AD_User getSalesRepresentative() throws RuntimeException {
-        return (org.compiere.model.I_AD_User)
-                MBaseTableKt.getTable(org.compiere.model.I_AD_User.Table_Name).getPO(getSalesRepresentativeId());
+    public User getSalesRepresentative() throws RuntimeException {
+        return (User)
+                MBaseTableKt.getTable(User.Table_Name).getPO(getSalesRepresentativeId());
     }
 
     @Override
-    public void setSalesRepresentative(I_AD_User salesRepresentative) throws RuntimeException {
+    public void setSalesRepresentative(User salesRepresentative) throws RuntimeException {
         setSalesRepresentativeId(salesRepresentative == null ? 0 : salesRepresentative.getId());
     }
 

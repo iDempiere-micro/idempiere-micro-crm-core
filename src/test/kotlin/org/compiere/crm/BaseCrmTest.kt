@@ -1,9 +1,9 @@
 package org.compiere.crm
 
 import org.compiere.orm.DefaultModelFactory
-import org.compiere.orm.IModelFactory
+import org.compiere.orm.ModelFactory
 import org.flywaydb.core.Flyway
-import org.idempiere.icommon.model.IPO
+import org.idempiere.icommon.model.PersistentObject
 import org.slf4j.impl.SimpleLogger
 import software.hsharp.core.util.HikariCPI
 import kotlin.test.assertEquals
@@ -30,8 +30,8 @@ abstract class BaseCrmTest {
         flyway.migrate()
     }
 
-    fun <T : IPO> getById(id: Int, tableName: String): T {
-        val modelFactory: IModelFactory = DefaultModelFactory()
+    fun <T : PersistentObject> getById(id: Int, tableName: String): T {
+        val modelFactory: ModelFactory = DefaultModelFactory()
         val result: T = modelFactory.getPO(tableName, id)
         println(result)
         assertNotNull(result)

@@ -2,7 +2,7 @@ package software.hsharp.core.util
 
 import org.apache.commons.mail.DefaultAuthenticator
 import org.apache.commons.mail.HtmlEmail
-import software.hsharp.core.models.IEMail
+import software.hsharp.core.models.Email
 import javax.mail.internet.InternetAddress
 
 open class EMail(
@@ -14,7 +14,7 @@ open class EMail(
     override var userName: String,
     override var password: String,
     override var messageInHTML: String
-) : IEMail {
+) : Email {
 
     companion object {
         fun convert(s: String, email: EMail): InternetAddress? {

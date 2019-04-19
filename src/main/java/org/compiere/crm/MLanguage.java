@@ -1,7 +1,7 @@
 package org.compiere.crm;
 
 import kotliquery.Row;
-import org.compiere.model.I_AD_Language;
+import org.compiere.model.Language;
 import org.compiere.orm.Query;
 import org.compiere.util.MsgKt;
 
@@ -80,9 +80,9 @@ public class MLanguage extends X_AD_Language {
      * @param AD_Language language e.g. en_US
      * @return language or null
      */
-    public static I_AD_Language get(String AD_Language) {
-        return new Query<I_AD_Language>(
-                I_AD_Language.Table_Name, I_AD_Language.COLUMNNAME_AD_Language + "=?")
+    public static Language get(String AD_Language) {
+        return new Query<Language>(
+                Language.Table_Name, Language.COLUMNNAME_AD_Language + "=?")
                 .setParameters(AD_Language)
                 .firstOnly();
     } //	get

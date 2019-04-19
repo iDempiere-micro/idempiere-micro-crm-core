@@ -1,7 +1,7 @@
 package org.compiere.crm;
 
 import kotliquery.Row;
-import org.compiere.model.I_AD_User;
+import org.compiere.model.User;
 import org.compiere.model.I_C_BP_Group;
 import org.compiere.model.I_C_BPartner;
 import org.compiere.model.I_C_BPartner_Location;
@@ -200,7 +200,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         return DBKt.getSQLValueBD(sql, C_BPartner_ID);
     } //	getNotInvoicedAmt
 
-    public List<I_AD_User> getContacts() {
+    public List<User> getContacts() {
         return getContacts(true);
     }
 

@@ -3,6 +3,7 @@ package org.compiere.crm
 import kotliquery.Row
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.BasePOName
+import org.idempiere.common.util.AdempiereSystemError
 
 class MCrmCustomerCategory : BasePOName {
     companion object {
@@ -22,7 +23,7 @@ class MCrmCustomerCategory : BasePOName {
 
     var bPartner: I_C_BPartner
         get() {
-            return MBPartner(getValue(I_C_BPartner.COLUMNNAME_C_BPartner_ID) as Int)
+            return MBPartner(getValue<Int>(I_C_BPartner.COLUMNNAME_C_BPartner_ID) ?: throw AdempiereSystemError("Must have business Partner"))
         }
         set(bp) {
             setValueNoCheck(I_C_BPartner.COLUMNNAME_C_BPartner_ID, bp.businessPartnerId)
@@ -30,7 +31,7 @@ class MCrmCustomerCategory : BasePOName {
 
     var category: MCrmCategory
         get() {
-            return MCrmCategory(getValue("Crm_Category_ID") as Int)
+            return MCrmCategory(getValue<Int>("Crm_Category_ID") ?: throw AdempiereSystemError("Must have Category"))
         }
         set(cat) {
             setValueNoCheck("Crm_Category_ID", cat.id)

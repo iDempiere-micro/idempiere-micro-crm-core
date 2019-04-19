@@ -66,7 +66,6 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
     /**
      * Constructor from ResultSet row
      *
-     * @param ctx context
      */
     public MBPartnerLocation(Row row) {
         super(row);
@@ -78,13 +77,13 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      * @param C_BPartner_ID bp
      * @return array of locations
      */
-    public static MBPartnerLocation[] getForBPartner(
+    public static I_C_BPartner_Location[] getForBPartner(
             int C_BPartner_ID) {
-        List<MBPartnerLocation> list =
-                new Query(I_C_BPartner_Location.Table_Name, "C_BPartner_ID=?")
+        List<I_C_BPartner_Location> list =
+                new Query<I_C_BPartner_Location>(I_C_BPartner_Location.Table_Name, "C_BPartner_ID=?")
                         .setParameters(C_BPartner_ID)
                         .list();
-        MBPartnerLocation[] retValue = new MBPartnerLocation[list.size()];
+        I_C_BPartner_Location[] retValue = new I_C_BPartner_Location[list.size()];
         list.toArray(retValue);
         return retValue;
     } // getForBPartner
@@ -113,15 +112,13 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      * @return info
      */
     public String toString() {
-        StringBuilder sb =
-                new StringBuilder("MBPartner_Location[ID=")
-                        .append(getId())
-                        .append(",C_Location_ID=")
-                        .append(getLocationId())
-                        .append(",Name=")
-                        .append(getName())
-                        .append("]");
-        return sb.toString();
+        return "MBPartner_Location[ID=" +
+                getId() +
+                ",C_Location_ID=" +
+                getLocationId() +
+                ",Name=" +
+                getName() +
+                "]";
     } // toString
 
     /**
@@ -151,7 +148,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         m_uniqueName = "";
 
         // 0 - City
-        if (m_unique >= 0 || m_uniqueName.length() == 0) {
+        {
             String xx = address.getCity();
             if (xx != null && xx.length() > 0) m_uniqueName = xx;
         }
@@ -174,7 +171,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         // 3 - Region
         if (m_unique >= 3 || m_uniqueName.length() == 0) {
             String xx = address.getRegionName(true);
-            if (xx != null && xx.length() > 0) {
+            if (xx.length() > 0) {
                 if (m_uniqueName.length() > 0) m_uniqueName += " ";
                 m_uniqueName += xx;
             }
@@ -203,12 +200,11 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
         }
 
         // Check uniqueness
-        MBPartnerLocation[] locations = getForBPartner(getBusinessPartnerId());
+        I_C_BPartner_Location[] locations = getForBPartner(getBusinessPartnerId());
         boolean unique = locations.length == 0;
         while (!unique) {
             unique = true;
-            for (int i = 0; i < locations.length; i++) {
-                MBPartnerLocation location = locations[i];
+            for (I_C_BPartner_Location location : locations) {
                 if (location.getBusinessPartnerLocationId() == getId()) continue;
                 if (m_uniqueName.equals(location.getName())) {
                     // m_uniqueName = null;

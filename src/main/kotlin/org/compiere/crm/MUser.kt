@@ -2,7 +2,7 @@ package org.compiere.crm
 
 import kotliquery.Row
 import org.compiere.model.HasName
-import org.compiere.model.I_AD_User
+import org.compiere.model.User
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.MSysConfig
 import org.compiere.orm.Query
@@ -40,8 +40,8 @@ fun getUser(id: Int) = id loadUsing userFactory
  * @param businessPartnerId
  * @return array of users
  */
-fun getBusinessPartnerUsers(businessPartnerId: Int): Array<I_AD_User> {
-    val list = Query<I_AD_User>(I_AD_User.Table_Name, "C_BPartner_ID=?")
+fun getBusinessPartnerUsers(businessPartnerId: Int): Array<User> {
+    val list = Query<User>(User.Table_Name, "C_BPartner_ID=?")
         .setParameters(businessPartnerId)
         .setOnlyActiveRecords(true)
         .list()
@@ -55,8 +55,8 @@ fun getBusinessPartnerUsers(businessPartnerId: Int): Array<I_AD_User> {
  * @param clientId
  * @return array of users
  */
-fun getClientUsers(clientId: Int): Array<I_AD_User> {
-    val list = Query<I_AD_User>(I_AD_User.Table_Name, "ad_client_id=?")
+fun getClientUsers(clientId: Int): Array<User> {
+    val list = Query<User>(User.Table_Name, "ad_client_id=?")
         .setParameters(clientId)
         .setOnlyActiveRecords(true)
         .list()
@@ -372,7 +372,7 @@ class MUser : MBaseUser, IUser {
                 log.saveError(
                     "SaveError",
                     getMsg("InvalidEMailFormat") +
-                            getElementTranslation(I_AD_User.COLUMNNAME_EMail) +
+                            getElementTranslation(User.COLUMNNAME_EMail) +
                             " - [" +
                             eMail +
                             "]"
@@ -392,7 +392,7 @@ class MUser : MBaseUser, IUser {
                     log.saveError(
                         "SaveError",
                         getMsg("FillMandatory") +
-                                getElementTranslation(I_AD_User.COLUMNNAME_EMail) +
+                                getElementTranslation(User.COLUMNNAME_EMail) +
                                 " - " +
                                 toString()
                     )
@@ -411,7 +411,7 @@ class MUser : MBaseUser, IUser {
                         getMsg(
                             DBException.SAVE_ERROR_NOT_UNIQUE_MSG,
                             true
-                        ) + getElementTranslation(I_AD_User.COLUMNNAME_EMail)
+                        ) + getElementTranslation(User.COLUMNNAME_EMail)
                     )
                     return false
                 }
@@ -431,7 +431,7 @@ class MUser : MBaseUser, IUser {
                         getMsg(DBException.SAVE_ERROR_NOT_UNIQUE_MSG, true) +
                                 getElementTranslation(HasName.COLUMNNAME_Name) +
                                 " / " +
-                                getElementTranslation(I_AD_User.COLUMNNAME_LDAPUser)
+                                getElementTranslation(User.COLUMNNAME_LDAPUser)
                     )
                     return false
                 }

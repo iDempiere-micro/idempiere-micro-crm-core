@@ -1,7 +1,7 @@
 package org.compiere.crm;
 
 import kotliquery.Row;
-import org.compiere.model.I_AD_User;
+import org.compiere.model.User;
 import org.compiere.orm.BasePONameValue;
 
 import java.sql.Timestamp;
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_AD_User extends BasePONameValue implements I_AD_User {
+public class X_AD_User extends BasePONameValue implements User {
 
     /**
      * Yes = Y
@@ -339,6 +339,6 @@ public class X_AD_User extends BasePONameValue implements I_AD_User {
 
     @Override
     public int getTableId() {
-        return I_AD_User.Table_ID;
+        return User.Table_ID;
     }
 }

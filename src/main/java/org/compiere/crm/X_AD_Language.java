@@ -1,7 +1,7 @@
 package org.compiere.crm;
 
 import kotliquery.Row;
-import org.compiere.model.I_AD_Language;
+import org.compiere.model.Language;
 import org.compiere.orm.BasePOName;
 
 /**
@@ -10,7 +10,7 @@ import org.compiere.orm.BasePOName;
  * @author iDempiere (generated)
  * @version Release 5.1 - $Id$
  */
-public class X_AD_Language extends BasePOName implements I_AD_Language {
+public class X_AD_Language extends BasePOName implements Language {
 
     /**
      *
@@ -170,6 +170,6 @@ public class X_AD_Language extends BasePOName implements I_AD_Language {
 
     @Override
     public int getTableId() {
-        return I_AD_Language.Table_ID;
+        return Language.Table_ID;
     }
 }

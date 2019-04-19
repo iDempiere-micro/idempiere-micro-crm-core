@@ -1,7 +1,7 @@
 package org.compiere.crm
 
 import org.compiere.bo.X_C_ContactActivity
-import org.compiere.model.I_AD_User
+import org.compiere.model.User
 import org.compiere.model.I_C_BPartner
 import org.compiere.model.I_C_ContactActivity
 import org.compiere.model.I_C_Opportunity
@@ -78,7 +78,7 @@ class ContactActivityServiceImpl(
         startDate: Timestamp,
         description: String,
         contactActivityType: String,
-        salesRepresentative: I_AD_User?
+        salesRepresentative: User?
     ): I_C_ContactActivity {
         return createContactActivity(opportunity, startDate, description, contactActivityType, salesRepresentative?.userId)
     }

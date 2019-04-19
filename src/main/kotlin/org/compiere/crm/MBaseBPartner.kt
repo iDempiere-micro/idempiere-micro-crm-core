@@ -1,7 +1,7 @@
 package org.compiere.crm
 
 import kotliquery.Row
-import org.compiere.model.I_AD_User
+import org.compiere.model.User
 import org.compiere.model.I_C_BP_Group
 import org.compiere.model.I_C_BPartner_Location
 import org.idempiere.common.util.Env
@@ -10,10 +10,10 @@ import software.hsharp.core.util.DB
 import software.hsharp.core.util.asResource
 import software.hsharp.core.util.queryOf
 import software.hsharp.models.CrmCategory
-import software.hsharp.models.IHasCategories
+import software.hsharp.models.HasCategories
 import java.math.BigDecimal
 
-open class MBaseBPartner : X_C_BPartner, IHasCategories {
+open class MBaseBPartner : X_C_BPartner, HasCategories {
     constructor(row: Row) : super(row)
     constructor(Id: Int) : super(Id)
 
@@ -59,7 +59,7 @@ open class MBaseBPartner : X_C_BPartner, IHasCategories {
      * @param reload if true users will be requeried
      * @return contacts
      */
-    fun getContacts(reload: Boolean): List<I_AD_User> {
+    fun getContacts(reload: Boolean): List<User> {
         if (reload || m_contacts.size == 0) {
             //
             val sql = "SELECT * FROM AD_User WHERE C_BPartner_ID=? ORDER BY AD_User_ID"
