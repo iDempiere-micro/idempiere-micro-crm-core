@@ -4,7 +4,6 @@ import kotliquery.Row
 import kotliquery.queryOf
 import org.compiere.model.I_C_BPartner
 import org.compiere.orm.MClient
-import org.compiere.orm.MTable
 
 import org.idempiere.common.util.AdempiereSystemError
 import org.idempiere.common.util.factory

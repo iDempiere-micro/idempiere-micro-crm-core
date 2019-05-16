@@ -75,7 +75,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return User within the system - Internal or Business Partner Contact
      */
     public int getUserId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_AD_User_ID);
+        Integer ii = getValue(COLUMNNAME_AD_User_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -105,7 +105,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) getValue(COLUMNNAME_Description);
+        return getValue(COLUMNNAME_Description);
     }
 
     /**
@@ -123,7 +123,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Electronic Mail Address
      */
     public String getEMail() {
-        return (String) getValue(COLUMNNAME_EMail);
+        return getValue(COLUMNNAME_EMail);
     }
 
     /**
@@ -141,7 +141,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return User Name (ID) in the Mail System
      */
     public String getEMailUser() {
-        return (String) getValue(COLUMNNAME_EMailUser);
+        return getValue(COLUMNNAME_EMailUser);
     }
 
     /**
@@ -159,7 +159,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Password of your email user id
      */
     public String getEMailUserPW() {
-        return (String) getValue(COLUMNNAME_EMailUserPW);
+        return getValue(COLUMNNAME_EMailUserPW);
     }
 
     /**
@@ -177,7 +177,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Verification information of EMail Address
      */
     public String getEMailVerify() {
-        return (String) getValue(COLUMNNAME_EMailVerify);
+        return getValue(COLUMNNAME_EMailVerify);
     }
 
     /**
@@ -223,7 +223,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return If ticked, the menu is automatically expanded
      */
     public String getIsMenuAutoExpand() {
-        return (String) getValue(COLUMNNAME_IsMenuAutoExpand);
+        return getValue(COLUMNNAME_IsMenuAutoExpand);
     }
 
     /**
@@ -250,7 +250,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return User Name used for authorization via LDAP (directory) services
      */
     public String getLDAPUser() {
-        return (String) getValue(COLUMNNAME_LDAPUser);
+        return getValue(COLUMNNAME_LDAPUser);
     }
 
     /**
@@ -259,7 +259,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Type of Notifications
      */
     public String getNotificationType() {
-        return (String) getValue(COLUMNNAME_NotificationType);
+        return getValue(COLUMNNAME_NotificationType);
     }
 
     /**
@@ -278,7 +278,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Password of any length (case sensitive)
      */
     public String getPassword() {
-        return (String) getValue(COLUMNNAME_Password);
+        return getValue(COLUMNNAME_Password);
     }
 
     /**
@@ -296,7 +296,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Identifies a telephone number
      */
     public String getPhone() {
-        return (String) getValue(COLUMNNAME_Phone);
+        return getValue(COLUMNNAME_Phone);
     }
 
     /**
@@ -314,7 +314,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Random data added to improve password hash effectiveness
      */
     public String getSalt() {
-        return (String) getValue(COLUMNNAME_Salt);
+        return getValue(COLUMNNAME_Salt);
     }
 
     /**
@@ -332,7 +332,7 @@ public class X_AD_User extends BasePONameValue implements User {
      * @return Supervisor for this user/organization - used for escalation and approval
      */
     public int getSupervisorId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_Supervisor_ID);
+        Integer ii = getValue(COLUMNNAME_Supervisor_ID);
         if (ii == null) return 0;
         return ii;
     }

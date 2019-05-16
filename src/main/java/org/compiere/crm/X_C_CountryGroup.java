@@ -50,7 +50,7 @@ public class X_C_CountryGroup extends BasePONameValue implements I_C_CountryGrou
      * @return Country Group
      */
     public int getCountryGroupId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_CountryGroup_ID);
+        Integer ii = getValue(COLUMNNAME_C_CountryGroup_ID);
         if (ii == null) return 0;
         return ii;
     }

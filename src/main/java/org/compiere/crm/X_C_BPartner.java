@@ -85,7 +85,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Actual Life Time Revenue
      */
     public BigDecimal getActualLifeTimeValue() {
-        BigDecimal bd = (BigDecimal) getValue(I_C_BPartner.COLUMNNAME_ActualLifeTimeValue);
+        BigDecimal bd = getValue(I_C_BPartner.COLUMNNAME_ActualLifeTimeValue);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -105,7 +105,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Language for this entity
      */
     public String getADLanguage() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_AD_Language);
+        return getValue(I_C_BPartner.COLUMNNAME_AD_Language);
     }
 
     /**
@@ -114,7 +114,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return The Business Partner is another Organization for explicit Inter-Org transactions
      */
     public String getLinkedOrganizationIdAsString() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID);
+        return getValue(I_C_BPartner.COLUMNNAME_AD_OrgBP_ID);
     }
 
     /**
@@ -133,7 +133,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Identifies a Business Partner
      */
     public int getBusinessPartnerId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_BPartner_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_C_BPartner_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -144,7 +144,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Business Partner Group
      */
     public int getBPGroupId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -176,7 +176,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Schedule for generating Invoices
      */
     public int getInvoiceScheduleId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_InvoiceSchedule_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_C_InvoiceSchedule_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -187,7 +187,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_Description);
+        return getValue(I_C_BPartner.COLUMNNAME_Description);
     }
 
     /**
@@ -348,7 +348,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Unique identifier of a Price List
      */
     public int getPriceListId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_M_PriceList_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_M_PriceList_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -377,7 +377,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * Get Name 2.
      */
     public String getName2() {
-        return (String) getValue(HasName2.COLUMNNAME_Name2);
+        return getValue(HasName2.COLUMNNAME_Name2);
     }
 
     /**
@@ -407,7 +407,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Price List used by this Business Partner
      */
     public int getPurchaseOrderPriceListId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_PO_PriceList_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_PO_PriceList_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -464,7 +464,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Total outstanding invoice amounts allowed
      */
     public BigDecimal getSalesOrderCreditLimit() {
-        BigDecimal bd = (BigDecimal) getValue(I_C_BPartner.COLUMNNAME_SO_CreditLimit);
+        BigDecimal bd = getValue(I_C_BPartner.COLUMNNAME_SO_CreditLimit);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -484,7 +484,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Business Partner Credit Status
      */
     public String getSOCreditStatus() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_SOCreditStatus);
+        return getValue(I_C_BPartner.COLUMNNAME_SOCreditStatus);
     }
 
     /**
@@ -503,7 +503,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Current open balance
      */
     public BigDecimal getSalesOrderCreditUsed() {
-        BigDecimal bd = (BigDecimal) getValue(I_C_BPartner.COLUMNNAME_SO_CreditUsed);
+        BigDecimal bd = getValue(I_C_BPartner.COLUMNNAME_SO_CreditUsed);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -523,7 +523,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Tax Identification
      */
     public String getTaxID() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_TaxID);
+        return getValue(I_C_BPartner.COLUMNNAME_TaxID);
     }
 
     /**
@@ -541,7 +541,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Total Open Balance Amount in primary Accounting Currency
      */
     public BigDecimal getTotalOpenBalance() {
-        BigDecimal bd = (BigDecimal) getValue(I_C_BPartner.COLUMNNAME_TotalOpenBalance);
+        BigDecimal bd = getValue(I_C_BPartner.COLUMNNAME_TotalOpenBalance);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -566,7 +566,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Full URL address - e.g. http://www.idempiere.org
      */
     public String getURL() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_URL);
+        return getValue(I_C_BPartner.COLUMNNAME_URL);
     }
 
     /**
@@ -584,7 +584,7 @@ public class X_C_BPartner extends BasePONameValue implements HasName2 {
      * @return Flat discount percentage
      */
     public BigDecimal getFlatDiscount() {
-        BigDecimal bd = (BigDecimal) getValue(I_C_BPartner.COLUMNNAME_FlatDiscount);
+        BigDecimal bd = getValue(I_C_BPartner.COLUMNNAME_FlatDiscount);
         if (bd == null)
             return Env.ZERO;
         return bd;

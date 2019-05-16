@@ -47,7 +47,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @return The Currency for this record
      */
     public int getCurrencyId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_Currency_ID);
+        Integer ii = getValue(COLUMNNAME_C_Currency_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -58,7 +58,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @return Rounding used costing calculations
      */
     public int getCostingPrecision() {
-        Integer ii = (Integer) getValue(COLUMNNAME_CostingPrecision);
+        Integer ii = getValue(COLUMNNAME_CostingPrecision);
         if (ii == null) return 0;
         return ii;
     }
@@ -78,7 +78,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @return Symbol of the currency (opt used for printing only)
      */
     public String getCurrencySymbol() {
-        return (String) getValue(COLUMNNAME_CurSymbol);
+        return getValue(COLUMNNAME_CurSymbol);
     }
 
     /**
@@ -96,7 +96,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) getValue(COLUMNNAME_Description);
+        return getValue(COLUMNNAME_Description);
     }
 
     /**
@@ -132,7 +132,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @return Three letter ISO 4217 Code of the Currency
      */
     public String getISOCode() {
-        return (String) getValue(COLUMNNAME_ISO_Code);
+        return getValue(COLUMNNAME_ISO_Code);
     }
 
     /**
@@ -150,7 +150,7 @@ public class X_C_Currency extends PO implements I_C_Currency {
      * @return Rule for rounding calculated amounts
      */
     public int getStdPrecision() {
-        Integer ii = (Integer) getValue(COLUMNNAME_StdPrecision);
+        Integer ii = getValue(COLUMNNAME_StdPrecision);
         if (ii == null) return 0;
         return ii;
     }

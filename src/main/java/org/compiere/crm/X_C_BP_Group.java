@@ -61,7 +61,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Business Partner Group
      */
     public int getBPGroupId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_BP_Group_ID);
+        Integer ii = getValue(COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -72,7 +72,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Dunning Rules for overdue invoices
      */
     public int getDunningId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_Dunning_ID);
+        Integer ii = getValue(COLUMNNAME_C_Dunning_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -83,7 +83,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Credit Watch - Percent of Credit Limit when OK switches to Watch
      */
     public BigDecimal getCreditWatchPercent() {
-        BigDecimal bd = (BigDecimal) getValue(COLUMNNAME_CreditWatchPercent);
+        BigDecimal bd = getValue(COLUMNNAME_CreditWatchPercent);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -112,7 +112,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Schema to calculate the trade discount percentage
      */
     public int getDiscountSchemaId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_M_DiscountSchema_ID);
+        Integer ii = getValue(COLUMNNAME_M_DiscountSchema_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -123,7 +123,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Unique identifier of a Price List
      */
     public int getPriceListId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_M_PriceList_ID);
+        Integer ii = getValue(COLUMNNAME_M_PriceList_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -134,7 +134,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Schema to calculate the purchase trade discount percentage
      */
     public int getPODiscountSchemaId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_PO_DiscountSchema_ID);
+        Integer ii = getValue(COLUMNNAME_PO_DiscountSchema_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -145,7 +145,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Price List used by this Business Partner
      */
     public int getPurchaseOrderPriceListId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_PO_PriceList_ID);
+        Integer ii = getValue(COLUMNNAME_PO_PriceList_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -156,7 +156,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return PO-Invoice Match Price Tolerance in percent of the purchase price
      */
     public BigDecimal getPriceMatchTolerance() {
-        BigDecimal bd = (BigDecimal) getValue(COLUMNNAME_PriceMatchTolerance);
+        BigDecimal bd = getValue(COLUMNNAME_PriceMatchTolerance);
         if (bd == null) return Env.ZERO;
         return bd;
     }
@@ -167,7 +167,7 @@ public abstract class X_C_BP_Group extends BasePOName implements I_C_BP_Group {
      * @return Base of Priority
      */
     public String getPriorityBase() {
-        return (String) getValue(COLUMNNAME_PriorityBase);
+        return getValue(COLUMNNAME_PriorityBase);
     }
 
     /**

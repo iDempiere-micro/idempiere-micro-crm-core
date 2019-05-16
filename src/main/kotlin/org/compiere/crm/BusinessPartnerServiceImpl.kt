@@ -6,11 +6,19 @@ import org.compiere.model.I_C_BPartner_Location
 import org.idempiere.common.util.Env.ZERO
 import software.hsharp.core.services.EnvironmentService
 import software.hsharp.core.orm.BaseDataServiceImpl
+import software.hsharp.core.util.Environment
 import software.hsharp.services.BusinessPartnerService
 
 class BusinessPartnerServiceImpl(
     private val environmentService: EnvironmentService
 ) : BaseDataServiceImpl<I_C_BPartner>(environmentService, I_C_BPartner.Table_Name, false), BusinessPartnerService {
+    override fun getEmpty(): I_C_BPartner {
+        return MBPartner(0)
+    }
+
+    override fun getTemplate(): I_C_BPartner {
+        return MBPartner.getTemplate(Environment.current.clientId)
+    }
 
     override fun createBusinessPartner(businessPartner: CreateBusinessPartnerInput): I_C_BPartner {
         fun setLocParams(location: I_C_BPartner_Location) {

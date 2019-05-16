@@ -50,7 +50,7 @@ public class X_AD_Language extends BasePOName implements Language {
      * @return Language for this entity
      */
     public String getLanguage() {
-        return (String) getValue(COLUMNNAME_AD_Language);
+        return getValue(COLUMNNAME_AD_Language);
     }
 
     /**
@@ -68,7 +68,7 @@ public class X_AD_Language extends BasePOName implements Language {
      * @return Language ID
      */
     public int getLanguageId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_AD_Language_ID);
+        Integer ii = getValue(COLUMNNAME_AD_Language_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -90,7 +90,7 @@ public class X_AD_Language extends BasePOName implements Language {
      * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
      */
     public String getCountryCode() {
-        return (String) getValue(COLUMNNAME_CountryCode);
+        return getValue(COLUMNNAME_CountryCode);
     }
 
     /**
@@ -109,7 +109,7 @@ public class X_AD_Language extends BasePOName implements Language {
      * @return Java Date Pattern
      */
     public String getDatePattern() {
-        return (String) getValue(COLUMNNAME_DatePattern);
+        return getValue(COLUMNNAME_DatePattern);
     }
 
     /**
@@ -155,7 +155,7 @@ public class X_AD_Language extends BasePOName implements Language {
      * http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt
      */
     public String getLanguageISO() {
-        return (String) getValue(COLUMNNAME_LanguageISO);
+        return getValue(COLUMNNAME_LanguageISO);
     }
 
     /**

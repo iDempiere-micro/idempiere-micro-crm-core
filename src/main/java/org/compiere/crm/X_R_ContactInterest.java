@@ -75,7 +75,7 @@ public class X_R_ContactInterest extends BasePOUser implements I_R_ContactIntere
      * @return Interest Area or Topic
      */
     public int getInterestAreaId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_R_InterestArea_ID);
+        Integer ii = getValue(COLUMNNAME_R_InterestArea_ID);
         if (ii == null) return 0;
         return ii;
     }

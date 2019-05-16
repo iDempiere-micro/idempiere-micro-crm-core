@@ -1,10 +1,9 @@
 package org.compiere.crm
 
 import org.compiere.model.I_C_BPartner
-import org.compiere.orm.DefaultModelFactory
 import org.idempiere.common.util.EnvironmentServiceImpl
 import org.junit.Test
-import software.hsharp.core.modules.BaseModuleImpl
+import software.hsharp.core.orm.BaseSimpleModelFactory
 import software.hsharp.core.util.DB
 import software.hsharp.core.util.Environment
 import java.util.Random
@@ -29,12 +28,20 @@ internal val environmentService = EnvironmentServiceImpl(clientId, orgId, userId
 internal val businessPartnerService = BusinessPartnerServiceImpl(environmentService)
 internal val countryService = CountryServiceImpl(environmentService)
 internal val categoryService = CategoryServiceImpl(environmentService)
-internal val baseModule = BaseModuleImpl(environmentService = environmentService, modelFactory = DefaultModelFactory())
+internal val baseModule =
+    CrmModuleImpl(
+        environmentService = environmentService,
+        modelFactory = BaseSimpleModelFactory(
+            simpleMapperId, simpleMapperRow
+        ),
+        businessPartnerService = businessPartnerService
+    )
+internal val environment = Environment(baseModule)
 
 class BPartnerTest : BaseCrmTest() {
     @Test
     fun `loading saving finding business partner work`() {
-        Environment.run(baseModule) {
+        environment.run {
             DB.run {
                 val id = 118
                 val partner = MBPartner.get(id)
@@ -58,7 +65,7 @@ class BPartnerTest : BaseCrmTest() {
                 partner2.searchKey = ("JoeBlock")
                 partner2.save()
 
-                val newPartner = MBPartner.getTemplate(clientId)
+                val newPartner = environment.module.businessPartnerService.getTemplate()
                 val name = "Test " + randomString(10)
                 newPartner.name = name
                 val value = "t-" + randomString(5)
@@ -87,7 +94,7 @@ class BPartnerTest : BaseCrmTest() {
 
     @Test
     fun `get contacts and locations of all the business partners from client 11`() {
-        Environment.run(baseModule) {
+        environment.run {
             DB.run {
                 val businessPartners = businessPartnerService.getAll()
                 businessPartners.map {
@@ -99,7 +106,7 @@ class BPartnerTest : BaseCrmTest() {
 
     @Test
     fun `create a business partner through service works`() {
-        Environment.run(baseModule) {
+        environment.run {
             val categoryName = DB.run {
                 val category = categoryService.getAll().firstOrNull()
                 category?.name ?: { categoryService.createCategory(randomString(5), randomString(5)) }.invoke().name

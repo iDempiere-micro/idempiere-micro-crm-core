@@ -109,7 +109,7 @@ public class X_C_AddressTransaction extends PO implements I_C_AddressTransaction
      * @return Identifies a City
      */
     public String getCity() {
-        return (String) getValue(COLUMNNAME_City);
+        return getValue(COLUMNNAME_City);
     }
 
     /**

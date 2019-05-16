@@ -2,7 +2,6 @@ package org.compiere.crm
 
 import org.junit.Test
 import software.hsharp.core.util.DB
-import software.hsharp.core.util.Environment
 import software.hsharp.core.util.HikariCPI
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -15,7 +14,7 @@ class CategoryTest : BaseCrmTest() {
 
     @Test
     fun `create crm category in a service`() {
-        Environment.run(baseModule) {
+        environment.run {
             DB.run {
                 val name = "Test-${randomString(10)}"
                 val searchKey = randomString(10)
@@ -28,7 +27,7 @@ class CategoryTest : BaseCrmTest() {
 
     @Test
     fun `create crm category, business partner and assign them`() {
-        Environment.run(baseModule) {
+        environment.run {
             DB.run {
                 val category = MCrmCategory(0)
                 val catName = "Test-${randomString(10)}"

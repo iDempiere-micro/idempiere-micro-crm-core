@@ -57,7 +57,7 @@ public class X_C_BPartner_Location extends BasePOName {
      * @return Identifies a Business Partner
      */
     public int getBusinessPartnerId() {
-        Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID);
+        Integer ii = getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -68,7 +68,7 @@ public class X_C_BPartner_Location extends BasePOName {
      * @return Identifies the (ship to) address for this Business Partner
      */
     public int getBusinessPartnerLocationId() {
-        Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID);
+        Integer ii = getValue(I_C_BPartner_Location.COLUMNNAME_C_BPartner_Location_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -79,7 +79,7 @@ public class X_C_BPartner_Location extends BasePOName {
      * @return Location or Address
      */
     public int getLocationId() {
-        Integer ii = (Integer) getValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID);
+        Integer ii = getValue(I_C_BPartner_Location.COLUMNNAME_C_Location_ID);
         if (ii == null) return 0;
         return ii;
     }
