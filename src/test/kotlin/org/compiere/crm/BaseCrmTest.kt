@@ -1,10 +1,10 @@
 package org.compiere.crm
 
-import org.compiere.orm.DefaultModelFactory
 import org.compiere.orm.ModelFactory
 import org.flywaydb.core.Flyway
 import org.idempiere.icommon.model.PersistentObject
 import org.slf4j.impl.SimpleLogger
+import software.hsharp.core.orm.BaseSimpleModelFactory
 import software.hsharp.core.util.HikariCPI
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -31,7 +31,7 @@ abstract class BaseCrmTest {
     }
 
     fun <T : PersistentObject> getById(id: Int, tableName: String): T {
-        val modelFactory: ModelFactory = DefaultModelFactory()
+        val modelFactory: ModelFactory = BaseSimpleModelFactory(simpleMapperId, simpleMapperRow)
         val result: T = modelFactory.getPO(tableName, id)
         println(result)
         assertNotNull(result)

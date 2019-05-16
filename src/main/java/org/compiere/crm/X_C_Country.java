@@ -64,7 +64,7 @@ public abstract class X_C_Country extends BasePOName implements I_C_Country {
      * @return Country
      */
     public int getCountryId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_Country_ID);
+        Integer ii = getValue(COLUMNNAME_C_Country_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -76,7 +76,7 @@ public abstract class X_C_Country extends BasePOName implements I_C_Country {
      * http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
      */
     public String getCountryCode() {
-        return (String) getValue(COLUMNNAME_CountryCode);
+        return getValue(COLUMNNAME_CountryCode);
     }
 
     /**
@@ -85,7 +85,7 @@ public abstract class X_C_Country extends BasePOName implements I_C_Country {
      * @return Format for printing this Address
      */
     public String getDisplaySequence() {
-        return (String) getValue(COLUMNNAME_DisplaySequence);
+        return getValue(COLUMNNAME_DisplaySequence);
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class X_C_Country extends BasePOName implements I_C_Country {
      * @return Format for printing this Address locally
      */
     public String getDisplaySequenceLocal() {
-        return (String) getValue(COLUMNNAME_DisplaySequenceLocal);
+        return getValue(COLUMNNAME_DisplaySequenceLocal);
     }
 
     /**

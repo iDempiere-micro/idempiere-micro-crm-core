@@ -52,7 +52,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Events, tasks, communications related to a contact
      */
     public int getContactActivityId() {
-        Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID);
+        Integer ii = getValue(I_C_ContactActivity.COLUMNNAME_C_ContactActivity_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -73,7 +73,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Sales Opportunity
      */
     public int getOpportunityId() {
-        Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID);
+        Integer ii = getValue(I_C_ContactActivity.COLUMNNAME_C_Opportunity_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -84,7 +84,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) getValue(I_C_ContactActivity.COLUMNNAME_Description);
+        return getValue(I_C_ContactActivity.COLUMNNAME_Description);
     }
 
     /**
@@ -126,7 +126,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Sales Representative or Company Agent
      */
     public int getSalesRepresentativeId() {
-        Integer ii = (Integer) getValue(I_C_ContactActivity.COLUMNNAME_SalesRep_ID);
+        Integer ii = getValue(I_C_ContactActivity.COLUMNNAME_SalesRep_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -163,7 +163,7 @@ public class X_C_ContactActivity extends BasePOUser implements I_C_ContactActivi
      * @return Type of activity, e.g. task, email, phone call
      */
     public String getContactActivityType() {
-        return (String) getValue(COLUMNNAME_ContactActivityType);
+        return getValue(COLUMNNAME_ContactActivityType);
     }
 
     /**

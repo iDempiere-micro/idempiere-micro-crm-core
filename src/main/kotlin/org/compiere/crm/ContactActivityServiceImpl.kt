@@ -9,6 +9,7 @@ import org.compiere.model.BusinessOpportunity
 import org.compiere.model.I_C_Currency
 import org.compiere.model.I_C_SalesStage
 import org.idempiere.common.util.Env.ZERO
+import software.hsharp.core.orm.BaseDataServiceImpl
 import software.hsharp.core.services.EnvironmentService
 import software.hsharp.services.BusinessOpportunityService
 import software.hsharp.services.ContactActivityService
@@ -23,7 +24,7 @@ class ContactActivityServiceImpl(
     private val businessOpportunityService: BusinessOpportunityService,
     private val salesStageService: SalesStageService,
     private val currencyService: CurrencyService
-) : ContactActivityService {
+) : BaseDataServiceImpl<I_C_ContactActivity>(environmentService, I_C_ContactActivity.Table_Name, false), ContactActivityService {
     override fun createContactActivity(
         businessPartner: I_C_BPartner,
         startDate: Timestamp,

@@ -51,7 +51,7 @@ public class X_C_Region extends BasePOName implements I_C_Region {
      * @return Country
      */
     public int getCountryId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_Country_ID);
+        Integer ii = getValue(COLUMNNAME_C_Country_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -72,7 +72,7 @@ public class X_C_Region extends BasePOName implements I_C_Region {
      * @return Identifies a geographical Region
      */
     public int getRegionId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_Region_ID);
+        Integer ii = getValue(COLUMNNAME_C_Region_ID);
         if (ii == null) return 0;
         return ii;
     }

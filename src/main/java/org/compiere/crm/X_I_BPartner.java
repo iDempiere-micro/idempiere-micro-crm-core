@@ -56,7 +56,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Business Partner Group
      */
     public int getBPGroupId() {
-        Integer ii = (Integer) getValue(COLUMNNAME_C_BP_Group_ID);
+        Integer ii = getValue(COLUMNNAME_C_BP_Group_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -67,7 +67,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Business Partner Contact Name
      */
     public String getContactName() {
-        return (String) getValue(COLUMNNAME_ContactName);
+        return getValue(COLUMNNAME_ContactName);
     }
 
     /**
@@ -76,7 +76,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Optional short description of the record
      */
     public String getDescription() {
-        return (String) getValue(COLUMNNAME_Description);
+        return getValue(COLUMNNAME_Description);
     }
 
     /**
@@ -85,7 +85,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Dun & Bradstreet Number
      */
     public String getDUNS() {
-        return (String) getValue(COLUMNNAME_DUNS);
+        return getValue(COLUMNNAME_DUNS);
     }
 
     /**
@@ -94,7 +94,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Electronic Mail Address
      */
     public String getEMail() {
-        return (String) getValue(COLUMNNAME_EMail);
+        return getValue(COLUMNNAME_EMail);
     }
 
     /**
@@ -103,7 +103,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Standard Industry Code or its successor NAIC - http://www.osha.gov/oshstats/sicser.html
      */
     public String getNAICS() {
-        return (String) getValue(COLUMNNAME_NAICS);
+        return getValue(COLUMNNAME_NAICS);
     }
 
     /**
@@ -112,7 +112,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Alphanumeric identifier of the entity
      */
     public String getName() {
-        return (String) getValue(HasName.COLUMNNAME_Name);
+        return getValue(HasName.COLUMNNAME_Name);
     }
 
     /**
@@ -121,7 +121,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Additional Name
      */
     public String getName2() {
-        return (String) getValue(HasName2.COLUMNNAME_Name2);
+        return getValue(HasName2.COLUMNNAME_Name2);
     }
 
     /**
@@ -130,7 +130,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Tax Identification
      */
     public String getTaxID() {
-        return (String) getValue(COLUMNNAME_TaxID);
+        return getValue(COLUMNNAME_TaxID);
     }
 
     /**
@@ -139,7 +139,7 @@ public class X_I_BPartner extends BasePOUser implements I_I_BPartner {
      * @return Search key for the record in the format required - must be unique
      */
     public String getValue() {
-        return (String) getValue(COLUMNNAME_Value);
+        return getValue(COLUMNNAME_Value);
     }
 
     @Override

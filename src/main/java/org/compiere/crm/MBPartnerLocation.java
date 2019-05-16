@@ -256,7 +256,7 @@ public class MBPartnerLocation extends X_C_BPartner_Location implements I_C_BPar
      * @return Identifies a telephone number
      */
     public String getPhone() {
-        return (String) getValue(I_C_BPartner_Location.COLUMNNAME_Phone);
+        return getValue(I_C_BPartner_Location.COLUMNNAME_Phone);
     }
 
     /**

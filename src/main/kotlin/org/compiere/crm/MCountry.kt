@@ -85,7 +85,7 @@ class MCountry : X_C_Country, Comparator<Any>, Serializable {
      * @return name
      */
     fun getTrlName(language: String): String {
-        return get_Translation(HasName.COLUMNNAME_Name, language)
+        return getTranslation(HasName.COLUMNNAME_Name, language)
     } // 	getTrlName
 
     /**

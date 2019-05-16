@@ -359,13 +359,13 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
         if (!success) return success;
         if (newRecord) {
             //	Trees
-            insert_Tree(MTree_Base.TREETYPE_BPartner);
+            insertTree(MTree_Base.TREETYPE_BPartner);
             //	Accounting
             StringBuilder msgacc = new StringBuilder("p.C_BP_Group_ID=").append(getBPGroupId());
-            insert_Accounting("C_BP_Customer_Acct", "C_BP_Group_Acct", msgacc.toString());
-            insert_Accounting("C_BP_Vendor_Acct", "C_BP_Group_Acct", msgacc.toString());
+            insertAccounting("C_BP_Customer_Acct", "C_BP_Group_Acct", msgacc.toString());
+            insertAccounting("C_BP_Vendor_Acct", "C_BP_Group_Acct", msgacc.toString());
         }
-        if (newRecord || isValueChanged(COLUMNNAME_Value)) update_Tree(MTree_Base.TREETYPE_BPartner);
+        if (newRecord || isValueChanged(COLUMNNAME_Value)) updateTree(MTree_Base.TREETYPE_BPartner);
 
         //	TODO: Value/Name change
         // if (!newRecord && (isValueChanged("Value") || isValueChanged("Name"))) {
@@ -382,7 +382,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return deleted
      */
     protected boolean afterDelete(boolean success) {
-        if (success) delete_Tree(MTree_Base.TREETYPE_BPartner);
+        if (success) deleteTree(MTree_Base.TREETYPE_BPartner);
         return success;
     } //	afterDelete
 
@@ -407,7 +407,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return Sales Representative or Company Agent
      */
     public int getSalesRepresentativeId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_SalesRep_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_SalesRep_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -431,7 +431,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return The terms of Payment (timing, discount)
      */
     public int getPaymentTermId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_C_PaymentTerm_ID);
         if (ii == null) return 0;
         return ii;
     }
@@ -442,7 +442,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return Defines the timing of Delivery
      */
     public String getDeliveryRule() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_DeliveryRule);
+        return getValue(I_C_BPartner.COLUMNNAME_DeliveryRule);
     }
 
     /**
@@ -451,12 +451,12 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return How the order will be delivered
      */
     public String getDeliveryViaRule() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_DeliveryViaRule);
+        return getValue(I_C_BPartner.COLUMNNAME_DeliveryViaRule);
     }
 
     @Override
     public String getDUNS() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_DUNS);
+        return getValue(I_C_BPartner.COLUMNNAME_DUNS);
     }
 
     /**
@@ -465,7 +465,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return Frequency and method of invoicing
      */
     public String getInvoiceRule() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_InvoiceRule);
+        return getValue(I_C_BPartner.COLUMNNAME_InvoiceRule);
     }
 
     /**
@@ -474,7 +474,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return How you pay the invoice
      */
     public String getPaymentRule() {
-        return (String) getValue(I_C_BPartner.COLUMNNAME_PaymentRule);
+        return getValue(I_C_BPartner.COLUMNNAME_PaymentRule);
     }
 
     /**
@@ -483,7 +483,7 @@ public class MBPartner extends MBaseBPartner implements I_C_BPartner {
      * @return Payment rules for a purchase order
      */
     public int getPurchaseOrderPaymentTermId() {
-        Integer ii = (Integer) getValue(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID);
+        Integer ii = getValue(I_C_BPartner.COLUMNNAME_PO_PaymentTerm_ID);
         if (ii == null) return 0;
         return ii;
     }

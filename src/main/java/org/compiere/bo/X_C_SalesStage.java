@@ -59,7 +59,7 @@ public class X_C_SalesStage extends BasePONameValue implements I_C_SalesStage {
      * @return Probability
      */
     public BigDecimal getProbability() {
-        BigDecimal bd = (BigDecimal) getValue(COLUMNNAME_Probability);
+        BigDecimal bd = getValue(COLUMNNAME_Probability);
         if (bd == null)
             return Env.ZERO;
         return bd;
