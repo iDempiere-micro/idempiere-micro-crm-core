@@ -9,8 +9,6 @@ import org.idempiere.common.util.loadUsing
 import software.hsharp.core.util.DB
 import software.hsharp.core.util.Environment
 
-private val log = KotlinLogging.logger {}
-
 private fun doGetDefaultBusinessPartnerGroup(clientId: Int): I_C_BP_Group {
     val sql = """
         SELECT * FROM C_BP_Group g
@@ -27,8 +25,14 @@ private fun doGetDefaultBusinessPartnerGroup(clientId: Int): I_C_BP_Group {
 
 private val businessPartnerGroupFactory = factory { doGetDefaultBusinessPartnerGroup(it) }
 
+/**
+ * get Default Business Partner Group
+ */
 fun getDefaultBusinessPartnerGroup(): I_C_BP_Group = Environment.current.clientId loadUsing businessPartnerGroupFactory
 
+/**
+ * Get Business Partner Business Group
+ */
 fun getOfBPartner(bpartnerId: Int): MBPGroup? {
     val sql = """
         SELECT * FROM C_BP_Group g

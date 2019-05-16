@@ -260,7 +260,7 @@ class MLocation : MBaseLocation, I_C_Location, Comparator<Any> {
         if (C_Region_ID != 0 && regionId != C_Region_ID) return false
         // 	must match
         if (!equalsNull(Postal, postal)) return false
-        if (!equalsNull(Postal_Add, postal_Add)) return false
+        if (!equalsNull(Postal_Add, additionalZIP)) return false
         if (!equalsNull(City, city)) return false
         return if (!equalsNull(Address1, address1)) false else equalsNull(Address2, address2)
     } // 	equals
@@ -333,7 +333,7 @@ class MLocation : MBaseLocation, I_C_Location, Comparator<Any> {
                     outStr.append(super.getRegionName()) // 	local region name
                 "P" -> if (postal != null) outStr.append(postal)
                 "A" -> {
-                    val add = postal_Add
+                    val add = additionalZIP
                     if (add != null && add.length > 0) outStr.append("-").append(add)
                 }
                 else -> outStr.append("@").append(token).append("@")

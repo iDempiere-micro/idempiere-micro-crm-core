@@ -125,7 +125,7 @@ public class X_C_Location extends PO {
      */
     public void setCityId(int C_City_ID) {
         if (C_City_ID < 1) setValue(I_C_Location.COLUMNNAME_C_City_ID, null);
-        else setValue(I_C_Location.COLUMNNAME_C_City_ID, Integer.valueOf(C_City_ID));
+        else setValue(I_C_Location.COLUMNNAME_C_City_ID, C_City_ID);
     }
 
     /**
@@ -146,7 +146,7 @@ public class X_C_Location extends PO {
      */
     public void setCountryId(int C_Country_ID) {
         if (C_Country_ID < 1) setValue(I_C_Location.COLUMNNAME_C_Country_ID, null);
-        else setValue(I_C_Location.COLUMNNAME_C_Country_ID, Integer.valueOf(C_Country_ID));
+        else setValue(I_C_Location.COLUMNNAME_C_Country_ID, C_Country_ID);
     }
 
     /**
@@ -205,7 +205,7 @@ public class X_C_Location extends PO {
      */
     public void setRegionId(int C_Region_ID) {
         if (C_Region_ID < 1) setValue(I_C_Location.COLUMNNAME_C_Region_ID, null);
-        else setValue(I_C_Location.COLUMNNAME_C_Region_ID, Integer.valueOf(C_Region_ID));
+        else setValue(I_C_Location.COLUMNNAME_C_Region_ID, C_Region_ID);
     }
 
     /**
@@ -231,7 +231,7 @@ public class X_C_Location extends PO {
      *
      * @return Additional ZIP or Postal code
      */
-    public String getPostal_Add() {
+    public String getAdditionalZIP() {
         return getValue(I_C_Location.COLUMNNAME_Postal_Add);
     }
 

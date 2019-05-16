@@ -9,6 +9,9 @@ import software.hsharp.core.orm.BaseDataServiceImpl
 import software.hsharp.core.util.Environment
 import software.hsharp.services.BusinessPartnerService
 
+/**
+ * Business Partner Service Implementation
+ */
 class BusinessPartnerServiceImpl(
     private val environmentService: EnvironmentService
 ) : BaseDataServiceImpl<I_C_BPartner>(environmentService, I_C_BPartner.Table_Name, false), BusinessPartnerService {
